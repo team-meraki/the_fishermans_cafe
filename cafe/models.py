@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MinValueValidator, RegexValidator
-
 from decimal import Decimal
 
 # Create your models here.
@@ -41,6 +40,5 @@ class CafeInfo(models.Model):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery/')
-
 
     
