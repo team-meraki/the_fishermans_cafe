@@ -2,12 +2,16 @@ import React from 'react'
 
 function Footer(){
     return(
-        <div class="mainfooter">
-            <div class="topfooter">
-                <div class="column1">
+        <div className="mainfooter">
+            <div className="topfooter">
+                <div className="column1">
                     <h3>Map</h3>
+                    <iframe className="map" allowFullScreen 
+                    title="Map of The Fisherman's Cafe"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA6KFP8N5jSy6JfjxYXPL2t5iZCqSqx2yw&q=place_id:ChIJYxm5QKGJqDMRLdh_A0crcdI&zoom=17&region=ph">
+                    </iframe>
                 </div>
-                <div class="column2">
+                <div className="column2">
                     <h3>Cafe Hours</h3>
                     <h5>Mondays to Sundays.</h5>
                     <p>9:00 AM - 7:00 PM</p>
@@ -15,7 +19,7 @@ function Footer(){
                     <p>St. Peter and Paul Parish, Binaobao,</p>
                     <p>Bantayan Island</p>
                 </div>
-                <div class="Column3">
+                <div className="Column3">
                     <h3>Contact</h3>
                     <a className="navigation-link" href="#facebook">facebook.com/thefishermanscafe</a><br/><br/>
                     <a className="navigation-link" href="#messenger">m.me/thefishermanscafe</a>
@@ -24,7 +28,7 @@ function Footer(){
                     <a className="navigation-link" href="#partners">For Partners</a>
                 </div>
             </div>
-            <div class="bottomfooter">
+            <div className="bottomfooter">
                 <h5>Copyright 2021 The FisherMan's Cafe All Rights Reserved</h5>
             </div>
         </div>

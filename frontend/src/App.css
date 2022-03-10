@@ -23,3 +23,9 @@ h3{
   padding: 3px 0px;
   color: white;
 }
+
+.map {
+  width: 400px;
+  height: 250px;
+  border: 1px solid black;
+}
