@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     
-    path('cafe/', include('cafe.urls')),
+    path('api/', include('cafe.urls')),
 ] 
 
 if settings.DEBUG:
