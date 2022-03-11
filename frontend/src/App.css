@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .brand-name {
     font-weight: bold;
 }
@@ -15,41 +14,3 @@
 .brand-logo {
     margin-right: 15px;
 }
-=======
-a{
-  color: black;
-  text-decoration: none;
-}
-
-h3{
-  color: orange;
-}
-
-.footer{
-  max-width: 1400px;
-  margin: auto;
-  text-align: center;
-}
-
-.topfooter{
-	display: flex;
-	flex-direction: row;
-}
-
-.column{
-  padding: 4px 20px;
-  width: 33%;
-}
-
-.bottomfooter {
-  background-color: #008000e8;
-  padding: 3px 0px;
-  color: white;
-}
-
-.map {
-  width: 400px;
-  height: 250px;
-  border: 1px solid black;
-}
->>>>>>> 6aec07578aa7a1d7265d0aa2d4596a8633e77ef4
