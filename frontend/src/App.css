@@ -7,15 +7,20 @@ h3{
   color: orange;
 }
 
-.mainfooter{
+.footer{
+  max-width: 1400px;
+  margin: auto;
   text-align: center;
 }
 
-.topfooter div{
-  padding: 3px;
-  right: 10px;
-  width: 30%;
-  display: inline-block;
+.topfooter{
+	display: flex;
+	flex-direction: row;
+}
+
+.column{
+  padding: 4px 20px;
+  width: 33%;
 }
 
 .bottomfooter {
