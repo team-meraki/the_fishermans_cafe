@@ -9,12 +9,18 @@ export default function NavBar() {
                 <Navbar.Brand href="#home" className="brand-name">
                 <img
                     alt=""
-                    src="/images/tfcafe_logo.png"
-                    width="40"
-                    height="40"
+                    src="/images/brand-logo.svg"
+                    width="60"
+                    height="60"
                     className="brand-logo"
+                    />
+                <img
+                    alt=""
+                    src="/images/brand-name.svg"
+                    width="100%"
+                    className="brand-name"
                     />{' '}
-                    The Fisherman's Cafe
+                
                 </Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
