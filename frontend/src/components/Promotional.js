@@ -3,7 +3,7 @@ import {Carousel} from 'react-bootstrap'
 
 const Promotional = () => {
     return (
-        <Carousel variant='dark'>
+        <Carousel className= 'carousel' variant='dark'>
             <Carousel.Item interval={2000}>
                 <img
                     className="d-block w-100"

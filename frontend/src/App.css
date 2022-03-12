@@ -14,3 +14,9 @@
 .brand-logo {
     margin-right: 15px;
 }
+
+.carousel{
+    position:absolute;
+    width:100%;
+    top: 100px;
+}
