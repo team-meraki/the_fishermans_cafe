@@ -15,8 +15,8 @@
     margin-right: 15px;
 }
 
-.carousel{
-    position:absolute;
+.slider{
+    display: block;
     width:100%;
     top: 100px;
 }
