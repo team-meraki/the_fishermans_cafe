@@ -4,29 +4,6 @@ import '../styles/Promotional.scss';
 
 const Promotional = () => {
     return (
-<<<<<<< HEAD
-        <Carousel className='slider' variant='dark' fade indicators={false}>
-            <Carousel.Item interval={5000}>
-                <img
-                    className="d-block w-100"
-                    src="/images/1.jpeg"
-                    alt="First slide"
-                />
-            </Carousel.Item>
-            <Carousel.Item interval={5000}>
-                <img
-                    className="d-block w-100"
-                    src="/images/2.jpg"
-                    alt="Second slide"
-                />
-            </Carousel.Item>
-            <Carousel.Item interval={5000}>
-                <img
-                    className="d-block w-100"
-                    src="/images/3.jpg"
-                    alt="Third slide"
-                />
-=======
         <Carousel indicators={false} className= 'd-block carousel' variant='dark'>
             <Carousel.Item interval={5000}>
                 <Container fluid className="recom-section">
@@ -74,7 +51,6 @@ const Promotional = () => {
                         </Col>
                     </Row>
                 </Container>
->>>>>>> e453ecae735672926ad68cd702109652f91baa18
             </Carousel.Item>
         </Carousel>
     )
