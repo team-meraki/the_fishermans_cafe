@@ -1,0 +1,33 @@
+@import "./variables.scss";
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+h3 {
+    color: orange;
+}
+
+.mainfooter {
+    text-align: center;
+}
+
+.topfooter div {
+    padding: 3px;
+    right: 10px;
+    width: 30%;
+    display: inline-block;
+}
+
+.bottomfooter {
+    background-color: #008000e8;
+    padding: 3px 0px;
+    color: white;
+}
+
+.map {
+    width: 400px;
+    height: 250px;
+    border: 1px solid black;
+}

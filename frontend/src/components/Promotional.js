@@ -4,7 +4,7 @@ import '../styles/Promotional.scss';
 
 const Promotional = () => {
     return (
-        <Carousel className= 'd-block carousel' variant='dark'>
+        <Carousel indicators={false} className= 'd-block carousel' variant='dark'>
             <Carousel.Item interval={5000}>
                 <Container fluid className="recom-section">
                     <Row>
@@ -51,30 +51,6 @@ const Promotional = () => {
                         </Col>
                     </Row>
                 </Container>
-            </Carousel.Item>
-
-            <Carousel.Item interval={5000}>
-                <Container fluid className="recom-section">
-                    <Row>
-                        <Col className="recom-section-img">
-                        <img
-                            alt=""
-                            src="/images/recommended_product.png"
-                            className="recom-product"
-                            />
-                        </Col>
-                        <Col className="recom-section-content">
-                            <h1>Classic... Addictive!</h1>
-                            <h5>Masapodrida</h5>
-                            <br/>
-                            <p>
-                            These scrumptious, dulce de leche-filled cookies were inspired by Lola Onyang/'s (Apolonia Villarino Ilano) heirloom recipe. . 
-                            </p>
-                            <br/>
-                            <Button href='#product' className='recom-btn .btn-primary'>View product</Button>
-                        </Col>
-                    </Row>
-                    </Container>
             </Carousel.Item>
         </Carousel>
     )
