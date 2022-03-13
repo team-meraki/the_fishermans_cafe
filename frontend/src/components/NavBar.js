@@ -1,5 +1,6 @@
 import React from 'react'
 import {Navbar, Nav, Container} from 'react-bootstrap'
+import '../styles/NavBar.scss';
 
 export default function NavBar() {
   return (
@@ -10,8 +11,6 @@ export default function NavBar() {
                 <img
                     alt=""
                     src="/images/brand-logo.svg"
-                    width="60"
-                    height="60"
                     className="brand-logo"
                     />
                 <img

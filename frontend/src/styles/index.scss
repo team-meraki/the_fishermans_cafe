@@ -1,0 +1,13 @@
+@import "./variables.scss";
+
+body {
+    margin: 0;
+    font-family: $Inter;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: $colorWhite;
+}
+
+code {
+    font-family: $Code;
+}
