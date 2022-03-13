@@ -1,0 +1,21 @@
+@import "./variables.scss";
+
+.brand-name {
+    font-weight: bold;
+}
+
+.brand-logo {
+    margin-right: 10px;
+    height: 60px;
+    width: 60px;
+}
+
+.navigation-menu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: $colorCream;
+}
+
+.navigation-link {
+    margin: 0 15px;
+}
