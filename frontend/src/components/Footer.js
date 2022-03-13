@@ -37,7 +37,7 @@ function Footer(){
                 </Col>
                 
                 
-                <Col className="footer-col">
+                <Col className="footer-col-map">
                     <iframe className="map" allowFullScreen 
                     title="Map of The Fisherman's Cafe"
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA6KFP8N5jSy6JfjxYXPL2t5iZCqSqx2yw&q=place_id:ChIJYxm5QKGJqDMRLdh_A0crcdI&zoom=17&region=ph">
