@@ -6,6 +6,10 @@
     display: block;
     position: relative;
 
+    @media screen and (max-width: 997px) {
+        margin-top: 90px;
+    }
+
     @media screen and (max-width: 480px) {
         display: flex;
     }

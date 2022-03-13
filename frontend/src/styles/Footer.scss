@@ -26,6 +26,7 @@ p {
 
 .topfooter .cafe_name {
     padding: 0;
+
     img {
         height: 80px;
         width: auto;
@@ -33,7 +34,8 @@ p {
 }
 
 .topfooter .cafe_info {
-    margin: 20px 0;
+    padding-left: 20px;
+    margin-top: 20px;
 }
 
 .bottomfooter {
@@ -50,11 +52,11 @@ p {
 .footer-col-map {
     display: flex;
     justify-content: center;
-}
 
-.map {
-    width: 400px;
-    height: 250px;
+    .map {
+        width: 400px;
+        height: 250px;
+    }
 }
 
 .column3 .links {
