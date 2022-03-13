@@ -1,58 +1,33 @@
 @import "./variables.scss";
 
 a {
-    color: $colorOrange;
+    color: black;
     text-decoration: none;
 }
 
 h3 {
     color: orange;
-    font-size: 18px;
-    font-family: $Cursive;
-    font-size: 24px;
-}
-
-p {
-    font-size: 14px;
 }
 
 .mainfooter {
-    margin-top: 80px;
+    text-align: center;
 }
 
-.topfooter .column1 {
-    img {
-        height: 80px;
-        width: auto;
-    }
-
-    .cafe_socmed {
-        margin-bottom: 15px;
-        padding-left: 15px;
-    }
-
-    .cafe_info {
-        padding-left: 15px;
-    }
+.topfooter div {
+    padding: 3px;
+    right: 10px;
+    width: 30%;
+    display: inline-block;
 }
 
 .bottomfooter {
-    color: $colorBrown;
-    margin-top: 60px;
-    margin-bottom: 30px;
-    text-align: center;
-
-    h5 {
-        font-size: 12px;
-    }
+    background-color: #008000e8;
+    padding: 3px 0px;
+    color: white;
 }
 
 .map {
     width: 400px;
     height: 250px;
-}
-
-.column3 .links {
-    font-size: 12px;
-    display: flex;
+    border: 1px solid black;
 }
