@@ -2,18 +2,47 @@
 
 .brand-name {
     font-weight: bold;
+    @media screen and (max-width: 480px) {
+        height: auto;
+        width: 80%;
+    }
+
+    @media screen and (max-width: 380px) {
+        height: auto;
+        width: 70%;
+    }
 }
 
 .brand-logo {
     margin-right: 10px;
     height: 60px;
     width: 60px;
+
+    @media screen and (max-width: 380px) {
+        height: 50px;
+        width: 50px;
+    }
+
+    @media screen and (max-width: 280px) {
+        height: 35px;
+        width: 35px;
+    }
 }
 
 .navigation-menu {
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: $colorCream;
+
+    @media screen and (max-width: 380px) {
+        height: 80px;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    @media screen and (max-width: 280px) {
+        height: 65px;
+    }
 }
 
 .navigation-link {

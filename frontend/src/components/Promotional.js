@@ -22,11 +22,11 @@ const Promotional = () => {
                             <p>
                             Rolls of our irresistible Brazo de Mercedes are rolling out for you!
                             </p>
-                            <br/>
+                            
                             <Button href='#product' className='recom-btn .btn-primary'>View product</Button>
                         </Col>
                     </Row>
-                    </Container>
+                </Container>
             </Carousel.Item>
             
             <Carousel.Item interval={5000}>
@@ -35,7 +35,7 @@ const Promotional = () => {
                         <Col className="recom-section-img">
                         <img
                             alt=""
-                            src="/images/recommended_product.png"
+                            src="/images/teriyaki.jpg"
                             className="recom-product"
                             />
                         </Col>
@@ -44,9 +44,9 @@ const Promotional = () => {
                             <h5>Japanese Chicken Teriyaki Rice Meal</h5>
                             <br/>
                             <p>
-                            We use real Japanese rice wine for that sweet and tangy taste
+                            We use real Japanese rice wine for that sweet and tangy taste!
                             </p>
-                            <br/>
+                            
                             <Button href='#product' className='recom-btn .btn-primary'>View product</Button>
                         </Col>
                     </Row>

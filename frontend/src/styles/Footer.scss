@@ -1,8 +1,8 @@
 @import "./variables.scss";
 
 a {
-    color: $colorOrange;
     text-decoration: none;
+    color: $colorBrown;
 }
 
 h3 {
@@ -14,25 +14,26 @@ h3 {
 
 p {
     font-size: 14px;
+    color: $colorBrown;
 }
 
 .mainfooter {
     margin-top: 80px;
+    .website_info {
+        display: flex;
+    }
 }
 
-.topfooter .column1 {
+.topfooter .cafe_name {
+    padding: 0;
     img {
         height: 80px;
         width: auto;
     }
 
-    .cafe_socmed {
-        margin-bottom: 15px;
-        padding-left: 15px;
-    }
-
     .cafe_info {
-        padding-left: 15px;
+        padding-left: 20px;
+        margin-top: 20px;
     }
 }
 
@@ -47,7 +48,7 @@ p {
     }
 }
 
-.map {
+.footer-col iframe {
     width: 400px;
     height: 250px;
 }
