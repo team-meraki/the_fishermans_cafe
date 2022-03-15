@@ -1,8 +1,20 @@
-import React from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 import '../styles/Footer.scss';
 
 function Footer(){
+    let [cafeInfo, setCafeInfo] = useState()
+
+    useEffect(() => {
+        getCafeInfo()
+    }, [])
+
+    let getCafeInfo = async () => {
+        let response = await fetch("/api/cafeinfo/")
+        let data = await response.json()
+        setCafeInfo(data)
+    }
+
     return(
         <Container className="mainfooter">
             <Row className="topfooter">
@@ -18,20 +30,18 @@ function Footer(){
                     <Row className="cafe_info">
                         <Col className="cafe_hours">
                             <h3>Cafe Hours</h3>
-                            <p>Mondays to Sundays</p>
-                            <p>9:00 AM - 7:00 PM</p>
+                            <p>{cafeInfo?.schedule}</p>
                         </Col>
 
                         <Col className="cafe_loc">
                             <h3>Location</h3>
-                            <p>St. Peter and Paul Parish, Binaobao</p>
-                            <p>Bantayan Island</p>
+                            <p>{cafeInfo?.location}</p>
                         </Col>
 
                         <Col id='contact' className="cafe_contact">
                             <h3>Contact us</h3>
-                            <p><a className="navigation-link" href="facebook.com/thefishermanscafe">Facebook</a></p>
-                            <p>0927-416-2976</p>
+                            <p><a className="navigation-link" href={cafeInfo?.socials}>Facebook</a></p>
+                            <p>{cafeInfo?.contact_number}</p>
                         </Col>
                     </Row>
                 </Col>

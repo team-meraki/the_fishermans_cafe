@@ -28,9 +28,9 @@ class Testimonial(models.Model):
 
 class CafeInfo(models.Model):
     logo = models.ImageField()
-    location = models.CharField(max_length=200)
+    location = models.TextField()
     about = models.TextField()
-    schedule = models.CharField(max_length=100)
+    schedule = models.TextField()
     email = models.EmailField()
     socials = models.URLField()
     contact_number = models.CharField(
