@@ -17,7 +17,7 @@ export default function NavBar() {
         <div>
             <Navbar fixed="top" className="navigation-menu" expand="lg">
                 <Container className="d-flex align-items-center">
-                    <Navbar.Brand as={Link} to={"/home"} className="brand-name">
+                    <Navbar.Brand as={Link} to={""} className="brand-name">
                     <img
                         alt=""
                         src="/images/brand-logo.svg"
@@ -35,7 +35,7 @@ export default function NavBar() {
                         <Nav className="container-fluid justify-content-end me-auto">
                             <Nav.Link as={Link} to={"/menu"} className="navigation-link">Menu</Nav.Link>
                             <Nav.Link as={Link} to={"/gallery"} className="navigation-link">Gallery</Nav.Link>
-                            <Nav.Link as={Link} to={"/contact"} className="navigation-link">Contact</Nav.Link>
+                            <Nav.Link className="navigation-link" href="#contact">Contact</Nav.Link>
                             <Nav.Link as={Link} to={"/about"} className="navigation-link">About</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -45,7 +45,6 @@ export default function NavBar() {
         <div>
             <Routes>
                 <Route path="" element={<><Promotional/><Content/></>}/>
-                <Route path="/home" element={<><Promotional/><Content/></>}/>
                 <Route exact path="/menu" element={<Menu/>}/>
             </Routes>
         </div>

@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 function Menu(){
     return(
         <div className="menu">
-            <Button variant="outline-primary">Order</Button>
+            <Button href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" className="orderbtn">Order</Button>
         </div>
     )
 }
