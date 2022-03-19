@@ -21,3 +21,34 @@ $Cursive: "Cormorant Garamond", serif;
         }
     }
 }
+
+// BOOTSTRAP STYLES OVERRIDES
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: $colorOrange !important;
+    border-color: $colorOrange !important;
+}
+
+.btn-primary:hover {
+    background-color: $colorLightOrange !important;
+    border-color: $colorLightOrange !important;
+}
+
+// MEDIA SCREEN ADJUSTMENTS FOR BUTTONS
+@media screen and (max-width: 280px) {
+    .btn {
+        padding: 5px 5px !important;
+        font-size: 70% !important;
+        line-height: 1 !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .btn {
+        padding: 8px 8px !important;
+        font-size: 80% !important;
+        line-height: 1 !important;
+    }
+}

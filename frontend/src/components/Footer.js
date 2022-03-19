@@ -58,7 +58,7 @@ function Footer(){
             </Row>
         
             <div className="bottomfooter">
-                <h5>Copyright 2022 | The Fisherman's Cafe. All Rights Reserved.</h5>
+                <h5>© Copyright 2022 | The Fisherman's Cafe. All Rights Reserved.</h5>
             </div>
 
         </Container>
