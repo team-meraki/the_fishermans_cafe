@@ -102,7 +102,7 @@ class ViewsTestCase(APITestCase):
         url = reverse('get-update-cafeInfo')
 
         data = {
-            "logo" = "http://localhost:8000/media/logo/test.png"
+            "logo":"http://localhost:8000/media/logo/test.png",
             "location":"new location", 
             "about":"new about", 
             "schedule":"new schedule",
