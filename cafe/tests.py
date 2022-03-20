@@ -50,7 +50,7 @@ class CafeInfoTestCase(TestCase):
     
     def test_default_logo(self):
         info1 = CafeInfo.objects.get()
-        self.assertEqual(info1.logo.name, "logo/default-logo.png")
+        self.assertEqual(info1.logo.name, "logo/tfcafe_logo.png")
 
     def test_delete_is_disabled(self):
         info2 = CafeInfo.objects.all()

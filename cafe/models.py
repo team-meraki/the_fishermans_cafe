@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.core.validators import MinValueValidator, RegexValidator
 from decimal import Decimal
@@ -15,7 +16,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50, unique=True)
     category = models.CharField(max_length=7, choices=PRODUCT_CATEGORY)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
-    image = models.ImageField(upload_to='products/')
+    image = models.ImageField(upload_to='products/', blank=True, default='/products/product-placeholder.png')
     last_modified = models.DateTimeField(auto_now_add=True)
 
 class Testimonial(models.Model):
@@ -42,7 +43,7 @@ class CafeInfoManager(models.Manager):
         return CafeInfoQuerySet(self.model, using=self._db)
 
 class CafeInfo(models.Model):
-    logo = models.ImageField(upload_to='logo/')
+    logo = models.ImageField(upload_to='logo/', blank=True, default='logo/tfcafe_logo.png')
     location = models.TextField()
     about = models.TextField()
     schedule = models.TextField()

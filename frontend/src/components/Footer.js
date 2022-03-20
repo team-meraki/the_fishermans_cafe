@@ -6,13 +6,19 @@ function Footer(){
     let [cafeInfo, setCafeInfo] = useState()
 
     useEffect(() => {
-        getCafeInfo()
+        let mounted = true
+        getCafeInfo().then(info => {
+            if(mounted) {
+                setCafeInfo(info)
+            }
+        })
+        return () => mounted = false
     }, [])
 
     let getCafeInfo = async () => {
         let response = await fetch("/api/cafeinfo/")
         let data = await response.json()
-        setCafeInfo(data)
+        return data
     }
 
     return(
