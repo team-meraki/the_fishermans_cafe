@@ -15,19 +15,17 @@ class Product(models.Model):
     name = models.CharField(max_length=50, unique=True)
     category = models.CharField(max_length=7, choices=PRODUCT_CATEGORY)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
-    description = models.TextField()
-    image = models.ImageField(upload_to='products/', blank=True, default='products/default.svg')
-    last_modified = models.DateTimeField(auto_now=True)
-    class Meta:
-        ordering = ['-last_modified']
+    image = models.ImageField(upload_to='products/')
+    last_modified = models.DateTimeField(auto_now_add=True)
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=50, blank=True, default='Customer')
-    email = models.EmailField(blank=True)
+    email = models.EmailField()
     message = models.TextField()
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery/')
+    category = models.CharField(max_length= 10, choices=[('interior','Interior'),('exterior','Exterior')])
 
 class CafeInfoQuerySet(models.QuerySet):
     def delete(self):
@@ -44,7 +42,7 @@ class CafeInfoManager(models.Manager):
         return CafeInfoQuerySet(self.model, using=self._db)
 
 class CafeInfo(models.Model):
-    logo = models.ImageField(upload_to='logo/', blank=True, default='logo/default-logo.png')
+    logo = models.ImageField(upload_to='logo/')
     location = models.TextField()
     about = models.TextField()
     schedule = models.TextField()
