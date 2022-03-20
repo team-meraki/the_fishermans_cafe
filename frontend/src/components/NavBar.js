@@ -3,9 +3,10 @@ import {Navbar, Nav, Container} from 'react-bootstrap'
 import '../styles/NavBar.scss';
 import {
     BrowserRouter as Router,
+    NavLink,
     Routes,
     Route,
-    Link
+    Link,
   } from "react-router-dom";
 import Menu from "./Menu"
 import Promotional from "./Promotional"
@@ -33,10 +34,11 @@ export default function NavBar() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="container-fluid justify-content-end me-auto">
-                            <Nav.Link as={Link} to={"/menu"} className="navigation-link">Menu</Nav.Link>
-                            <Nav.Link as={Link} to={"/gallery"} className="navigation-link">Gallery</Nav.Link>
+                            <NavLink to="" className="navigation-link">Home</NavLink>
+                            <NavLink to="/menu" className="navigation-link">Menu</NavLink>
+                            <NavLink to="/gallery" className="navigation-link">Gallery</NavLink>
                             <Nav.Link className="navigation-link" href="#contact">Contact</Nav.Link>
-                            <Nav.Link as={Link} to={"/about"} className="navigation-link">About</Nav.Link>
+                            <NavLink to="/about" className="navigation-link">About</NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -44,7 +46,7 @@ export default function NavBar() {
         </div>
         <div>
             <Routes>
-                <Route path="" element={<><Promotional/><Content/></>}/>
+                <Route exact path="" element={<><Promotional/><Content/></>}/>
                 <Route exact path="/menu" element={<Menu/>}/>
             </Routes>
         </div>
