@@ -28,7 +28,9 @@ jobs:
   test_react:
 
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./frontend
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
@@ -40,7 +42,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: '**/package.json'
     - name: Install Dependencies
       run: |
         npm install
