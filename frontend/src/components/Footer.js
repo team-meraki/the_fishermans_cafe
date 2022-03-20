@@ -40,7 +40,7 @@ function Footer(){
 
                         <Col id='contact' className="cafe_contact">
                             <h3>Contact us</h3>
-                            <p><a className="navigation-link" href={cafeInfo?.socials}>Facebook</a></p>
+                            <p><a className="navigation-link" href={cafeInfo?.facebook}>Facebook</a></p>
                             <p>{cafeInfo?.contact_number}</p>
                         </Col>
                     </Row>
