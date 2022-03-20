@@ -1,0 +1,59 @@
+@import "./variables.scss";
+
+.testimonials {
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.review-section-title {
+    text-align: center;
+
+    h4 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.review-carousel {
+    display: block;
+    padding-right: 0;
+    width: 50%;
+
+    .review-image {
+        height: 80px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .review-section-content {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+}
+
+.illustration {
+    display: none;
+    img {
+        display: none;
+    }
+}
+
+// desktop code
+@media (min-width: 768px) {
+    .illustration {
+        display: inline;
+        justify-content: center;
+        align-items: center;
+        img {
+            display: flex;
+            height: 200px;
+            width: auto;
+            margin-top: 50px;
+        }
+    }
+
+    .review-carousel {
+        padding-left: 50px;
+    }
+}

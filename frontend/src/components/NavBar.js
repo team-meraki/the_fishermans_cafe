@@ -11,6 +11,7 @@ import {
 import Menu from "./Menu"
 import Promotional from "./Promotional"
 import Content from "./Content"
+import Reviews from "./Reviews"
 
 export default function NavBar() {
   return (
@@ -46,7 +47,7 @@ export default function NavBar() {
         </div>
         <div>
             <Routes>
-                <Route exact path="" element={<><Promotional/><Content/></>}/>
+                <Route exact path="" element={<><Promotional/><Content/><Reviews/></>}/>
                 <Route exact path="/menu" element={<Menu/>}/>
             </Routes>
         </div>
