@@ -131,8 +131,8 @@ STATICFILES_DIRS = [
 ]
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/build/images')
-MEDIA_URL = 'images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'cafe/media/')
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -141,10 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOWED_ORIGINS = [
-<<<<<<< HEAD
     "http://localhost:3000",
 ]
-=======
-    "http://127.0.0.1:3000",
-]
->>>>>>> 30e2312bce96c4e9060ccd6fc372928f009b9916
