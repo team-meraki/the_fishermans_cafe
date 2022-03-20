@@ -21,7 +21,7 @@ class CafeInfoTestCase(TestCase):
         self.assertEqual(info1.pk, 1)
     
     def test_create_behaves_as_update(self):
-        info1 = CafeInfo.objects.create(location="new location", about="new about", 
+        info1 = CafeInfo.objects.create(logo = "http://localhost:8000/media/logo/test.png", location="new location", about="new about", 
         schedule="new schedule", email="testemail@email.com", facebook="newfb.com",
         contact_number="09123456789")
         info2 = CafeInfo.objects.get()
@@ -34,7 +34,7 @@ class CafeInfoTestCase(TestCase):
         self.assertEqual(info2.facebook, "newfb.com")
         self.assertEqual(info2.contact_number, "09123456789")
 
-        info3 = CafeInfo(location="2new location", about="2new about", 
+        info3 = CafeInfo(logo = "http://localhost:8000/media/logo/test.png", location="2new location", about="2new about", 
         schedule="2new schedule", email="2testemail@email.com", facebook="2newfb.com",
         contact_number="09999999999")
         info3.save()
@@ -81,7 +81,6 @@ class ViewsTestCase(APITestCase):
             'name':'test',
             'category':'meal',
             'price':'100.23',
-            'description':'just some product',
         }
         response = self.client.post(url1, data=data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -97,12 +96,13 @@ class ViewsTestCase(APITestCase):
 
 
     def test_cafeinfo_api(self):
-        info = CafeInfo.objects.create(location="test location", about="test about", 
+        info = CafeInfo.objects.create(logo = "http://localhost:8000/media/logo/test.png", location="test location", about="test about", 
         schedule="test schedule", email="testemail@email.com", facebook="fb.com",
         contact_number="09123456789")
         url = reverse('get-update-cafeInfo')
 
         data = {
+            "logo" = "http://localhost:8000/media/logo/test.png"
             "location":"new location", 
             "about":"new about", 
             "schedule":"new schedule",
