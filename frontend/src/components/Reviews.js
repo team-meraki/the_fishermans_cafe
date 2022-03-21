@@ -22,7 +22,7 @@ export default function Reviews() {
         return data
     }
 
-    reviews = reviews.slice(0, 3);
+    reviews = reviews.slice(0, 2);
     
     return (
         <Row className="testimonials">

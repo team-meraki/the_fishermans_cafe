@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import '../styles/Menu.scss';
 
 function Menu(){
     return(
@@ -9,4 +10,4 @@ function Menu(){
     )
 }
 
-export default Menu;
+export default Menu
