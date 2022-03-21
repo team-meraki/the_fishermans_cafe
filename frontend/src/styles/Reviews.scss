@@ -18,6 +18,7 @@
 .review-carousel {
     display: block;
     padding-right: 0;
+    width: 50%;
 
     .review-image {
         height: 80px;
@@ -41,14 +42,13 @@
 // desktop code
 @media (min-width: 768px) {
     .illustration {
-        display: flex;
+        display: inline;
         justify-content: center;
         align-items: center;
-        padding-left: 0;
         img {
             display: flex;
             height: 200px;
-            width: 100%;
+            width: auto;
             margin-top: 50px;
         }
     }
