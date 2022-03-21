@@ -9,7 +9,7 @@ const Reviews = () => {
                 <h4>WHAT OUR CUSTOMERS ARE SAYING</h4>
             </div>
             
-            <Col md='auto' className="review-carousel">
+            <Col md={4} className="review-carousel">
                 
                 <Carousel controls={false} className='carousel' variant='dark'>
                     <Carousel.Item className='review-wrapper' interval={5000}>
