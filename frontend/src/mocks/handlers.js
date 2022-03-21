@@ -4,6 +4,7 @@ const infoURL = "/api/cafeinfo"
 const productURL = "/api/product"
 const galleryURL = "/api/gallery"
 const testimonialURL = "/api/testimonial"
+
 let cafeinfo = {
   id : 1,
   logo : "http://127.0.0.1:8000/media/logo/tfcafe_logo.png",
@@ -45,6 +46,23 @@ let products = [{
   last_modified : "2022-03-20T04:15:54.579776Z"
 }]
 
+let testimonials = [{
+  id : 1,
+  name : "Person1",
+  email : "person1@email.com",
+  message : "Good service!"
+}, {
+  id : 2,
+  name : "Person2",
+  email : "person2@email.com",
+  message : "Good service!"
+}, {
+  id : 3,
+  name : "Person3",
+  email : "person3@email.com",
+  message : "Good service!"
+}]
+
 export const handlers = [
     rest.get(infoURL, (req, res, ctx) => {
       return res(ctx.delay(), ctx.status(200), ctx.json(cafeinfo))
@@ -64,7 +82,6 @@ export const handlers = [
     }),
 
     rest.get(productURL, (req, res, ctx) => {
-      ctx.json(products)
       return res(ctx.delay(), ctx.status(200), ctx.json(products))
     }),
 
@@ -110,5 +127,15 @@ export const handlers = [
         return res(ctx.delay(), ctx.status(200))
       else
         return res(ctx.delay(), ctx.status(404))
+    }),
+
+    rest.get(testimonialURL, (req, res, ctx) => {
+      return res(ctx.delay(), ctx.status(200), ctx.json(testimonials))
+    }),
+
+    rest.post(testimonialURL, (req, res, ctx) => {
+      const { testimonial } = req.body;
+      testimonials.push(testimonial)
+      return res(ctx.delay(), ctx.status(201), ctx.json(testimonial))
     }),
 ]
