@@ -33,7 +33,7 @@ export default function Reviews() {
             <Col md='auto' className="review-carousel">
                 <Carousel controls={false} className='carousel' variant='dark'>
                     {reviews.map(review => (    
-                        <Carousel.Item className='review-wrapper' interval={5000}>
+                        <Carousel.Item key={review?.id} className='review-wrapper' interval={5000}>
                             <Container className="review-section">
                                 
                                 <Row className="review-section-img">
@@ -44,7 +44,7 @@ export default function Reviews() {
                                         />
                                 </Row>
                                 <Row className="review-section-content">
-                                    <p>Lorem ipsum.</p>
+                                    <p>{review?.message}</p>
                                 </Row>  
                             </Container>
                         </Carousel.Item>

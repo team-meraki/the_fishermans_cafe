@@ -55,12 +55,12 @@ let testimonials = [{
   id : 2,
   name : "Person2",
   email : "person2@email.com",
-  message : "Good service!"
+  message : "Well done!"
 }, {
   id : 3,
   name : "Person3",
   email : "person3@email.com",
-  message : "Good service!"
+  message : "We'll come back for more!"
 }]
 
 export const handlers = [
@@ -134,7 +134,7 @@ export const handlers = [
     }),
 
     rest.post(testimonialURL, (req, res, ctx) => {
-      const { testimonial } = req.body;
+      const testimonial = req.body;
       testimonials.push(testimonial)
       return res(ctx.delay(), ctx.status(201), ctx.json(testimonial))
     }),
