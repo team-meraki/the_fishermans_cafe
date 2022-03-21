@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "lite-server": "^2.6.1"
+    "lite-server": "^2.6.1",
+    "msw": "^0.39.2"
   }
 }
