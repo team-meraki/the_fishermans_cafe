@@ -1,0 +1,66 @@
+@import "./variables.scss";
+
+a {
+    text-decoration: none;
+    color: $colorBrown;
+}
+
+h3 {
+    color: orange;
+    font-size: 18px;
+    font-family: $Cursive;
+    font-size: 24px;
+}
+
+p {
+    font-size: 14px;
+    color: $colorBrown;
+    white-space: pre-wrap;
+}
+
+.mainfooter {
+    margin-top: 80px;
+    .website_info {
+        display: flex;
+    }
+}
+
+.topfooter .cafe_name {
+    padding: 0;
+
+    img {
+        height: 80px;
+        width: auto;
+    }
+}
+
+.topfooter .cafe_info {
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.bottomfooter {
+    color: $colorBrown;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+
+    h5 {
+        font-size: 10px;
+    }
+}
+
+.footer-col-map {
+    display: flex;
+    justify-content: center;
+
+    .map {
+        width: 400px;
+        height: 250px;
+    }
+}
+
+.column3 .links {
+    font-size: 12px;
+    display: flex;
+}

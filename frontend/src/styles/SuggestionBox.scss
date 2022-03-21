@@ -1,0 +1,46 @@
+@import "./variables.scss";
+
+.suggestion-box-wrapper {
+    display: block;
+    margin-bottom: 200px;
+    margin-top: 90px;
+    background-color: $colorCream;
+    padding-bottom: 60px;
+}
+.feedback-img {
+    height: 200px;
+    width: 100%;
+    padding-top: 80px;
+}
+.suggestion-box {
+    padding: 10px 0;
+}
+.suggestion-form {
+    width: 80%;
+
+    .submit-btn {
+        display: flex;
+        justify-content: center;
+    }
+}
+.suggestion-box-row {
+    display: flex;
+    justify-content: center;
+
+    h4 {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+// desktop code
+@media (min-width: 768px) {
+    h4 {
+        font-size: 20px;
+    }
+    .suggestion-form {
+        width: 50%;
+    }
+}

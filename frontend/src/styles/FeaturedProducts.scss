@@ -1,0 +1,26 @@
+@import "./variables.scss";
+
+.featured-products {
+    background-color: $colorCream;
+    padding: 60px 30px;
+}
+.featured-products-title {
+    text-align: center;
+    font-family: $Cursive;
+    font-weight: bold;
+    font-style: italic;
+    color: $colorOrange;
+}
+
+.see-more-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.cardImgWrapper .img-content {
+    height: 200px;
+    min-width: 200px;
+    width: 100%;
+    object-fit: cover;
+}
