@@ -4,6 +4,7 @@ const infoURL = "/api/cafeinfo"
 const productURL = "/api/product"
 const galleryURL = "/api/gallery"
 const testimonialURL = "/api/testimonial"
+const recaptchaURL = "/api/recaptcha"
 
 let cafeinfo = {
   id : 1,
@@ -65,12 +66,12 @@ let testimonials = [{
 
 export const handlers = [
     rest.get(infoURL, (req, res, ctx) => {
-      return res(ctx.delay(), ctx.status(200), ctx.json(cafeinfo))
+      return res(ctx.status(200), ctx.json(cafeinfo))
     }),
 
     rest.put(infoURL, (req, res, ctx) => {
       cafeinfo = req.body;
-      return res(ctx.delay(), ctx.status(200), ctx.json(cafeinfo))
+      return res(ctx.status(200), ctx.json(cafeinfo))
     }),
 
     rest.post(infoURL, (req, res, ctx) => {
@@ -82,7 +83,7 @@ export const handlers = [
     }),
 
     rest.get(productURL, (req, res, ctx) => {
-      return res(ctx.delay(), ctx.status(200), ctx.json(products))
+      return res(ctx.status(200), ctx.json(products))
     }),
 
     rest.get(productURL+'/:id', (req, res, ctx) => {
@@ -91,9 +92,9 @@ export const handlers = [
         return prod.id === id
       })
       if (product)
-        return res(ctx.delay(), ctx.status(200), ctx.json(product))
+        return res(ctx.status(200), ctx.json(product))
       else
-        return res(ctx.delay(), ctx.status(404))
+        return res(ctx.status(404))
     }),
 
     rest.put(productURL+'/:id', (req, res, ctx) => {
@@ -108,15 +109,15 @@ export const handlers = [
         return prod.id === id
       })
       if (product)
-        return res(ctx.delay(), ctx.status(200), ctx.json(product))
+        return res(ctx.status(200), ctx.json(product))
       else
-        return res(ctx.delay(), ctx.status(404))
+        return res(ctx.status(404))
     }),
 
     rest.post(productURL, (req, res, ctx) => {
       const { product } = req.body;
       products.push(product)
-      return res(ctx.delay(), ctx.status(201), ctx.json(product))
+      return res(ctx.status(201), ctx.json(product))
     }),
 
     rest.delete(productURL+'/:id', (req, res, ctx) => {
@@ -124,18 +125,22 @@ export const handlers = [
         return prod.id === id
       })
       if (product)
-        return res(ctx.delay(), ctx.status(200))
+        return res(ctx.status(200))
       else
-        return res(ctx.delay(), ctx.status(404))
+        return res(ctx.status(404))
     }),
 
     rest.get(testimonialURL, (req, res, ctx) => {
-      return res(ctx.delay(), ctx.status(200), ctx.json(testimonials))
+      return res(ctx.status(200), ctx.json(testimonials))
     }),
 
     rest.post(testimonialURL, (req, res, ctx) => {
       const testimonial = req.body;
       testimonials.push(testimonial)
-      return res(ctx.delay(), ctx.status(201), ctx.json(testimonial))
+      return res(ctx.status(201), ctx.json(testimonial))
     }),
+
+    rest.post(recaptchaURL, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json({ success : true }))
+    })
 ]
