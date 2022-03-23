@@ -46,7 +46,8 @@ function Footer(){
 
                         <Col id='contact' className="cafe_contact">
                             <h3>Contact us</h3>
-                            <p><a className="navigation-link" href={cafeInfo?.facebook}>Facebook</a></p>
+                            <p><a className="navigation-link" target={"_blank"} rel={"noreferrer"}
+                            href={cafeInfo?.facebook}>Facebook</a></p>
                             <p>{cafeInfo?.contact_number}</p>
                         </Col>
                     </Row>
@@ -64,7 +65,7 @@ function Footer(){
             </Row>
         
             <div className="bottomfooter">
-                <h5>© Copyright 2022 | The Fisherman's Cafe. All Rights Reserved.</h5>
+                <h5>&copy; Copyright 2022 | The Fisherman's Cafe. All Rights Reserved.</h5>
             </div>
 
         </Container>
