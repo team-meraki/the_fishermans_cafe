@@ -24,8 +24,8 @@
     "build": "react-scripts build ",
     "cy:run": "cypress run",
     "test-e2e": "start-server-and-test start http://localhost:3000 cy:run",
-    "test": "test-unit && test-e2e",
-    "test-unit": "react-scripts test",
+    "test-ci": "npm test && npm run test-e2e",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lite": "lite-server"
   },
