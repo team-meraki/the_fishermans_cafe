@@ -1,0 +1,29 @@
+[{
+    "id" : 1,
+    "name" : "product1",
+    "category" : "meal",
+    "price" : "999.00",
+    "image" : "http://127.0.0.1:8000/media/products/product1.png",
+    "last_modified" : "2022-03-20T04:16:19.450471Z"
+  }, {
+    "id" : 2,
+    "name" : "product2",
+    "category" : "drink",
+    "price" : "25.00",
+    "image" : "http://127.0.0.1:8000/media/products/product2.png",
+    "last_modified" : "2022-03-20T04:15:54.579776Z"
+  }, {
+    "id" : 3,
+    "name" : "product3",
+    "category" : "meal",
+    "price" : "199.25",
+    "image" : "http://127.0.0.1:8000/media/products/product3.png",
+    "last_modified" : "2022-03-20T04:16:19.450471Z"
+  }, {
+    "id" : 4,
+    "name" : "product4",
+    "category" : "drink",
+    "price" : "50.00",
+    "image" : "http://127.0.0.1:8000/media/products/product4.png",
+    "last_modified" : "2022-03-20T04:15:54.579776Z"
+  }]

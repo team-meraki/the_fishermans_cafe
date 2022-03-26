@@ -34,10 +34,10 @@ export default function FeaturedProducts() {
                     <Col xs={12} md={6} lg={3} key={product?.id}>
                         <Card>
                         <div className='cardImgWrapper'>
-                            <Card.Img className='img-content' variant="top" src={product.image} />
+                            <Card.Img className='img-content' variant="top" src={product?.image} />
                         </div>
                             <Card.Body>
-                                <Card.Text> <span>{product.name}</span> <br/> Php <span>{product.price}</span>
+                                <Card.Text> <span>{product?.name}</span> <br/> Php <span>{product?.price}</span>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

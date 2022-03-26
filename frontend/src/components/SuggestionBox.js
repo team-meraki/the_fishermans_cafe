@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row} from 'react-bootstrap'
-import '../styles/SuggestionBox.scss';
+import '../styles/SuggestionBox.scss'
+import ReCAPTCHA from "react-google-recaptcha"
 
 export default function SuggestionBox() {
 
@@ -11,6 +12,7 @@ export default function SuggestionBox() {
     })
 
     const [formData, setFormData] = useState(initialData)
+    const [captchaResult, setCaptchaResult] = useState(false)
 
     const handleChange = (e) => {
         setFormData({...formData,
@@ -29,6 +31,16 @@ export default function SuggestionBox() {
         e.preventDefault()
         setFormData(initialData)
         alert("Suggestion successfully sent!") // idk how to yassify an alert haha
+    }
+
+    const handleRecaptcha = async (value) => {
+        fetch('api/recaptcha/', {
+          method: 'POST',
+          body: JSON.stringify({ 'captcha_value': value }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(data => setCaptchaResult(data.success))
     }
 
   return (
@@ -52,10 +64,17 @@ export default function SuggestionBox() {
                             <Form.Control className="mb-2" type="email" placeholder="Email address" value={formData.email} name="email" onChange={handleChange} required />
                             <Form.Control as="textarea"  rows={4} placeholder="Tell us something" value={formData.message} name="message" onChange={handleChange} required />
                         </Form.Group>
+                        <ReCAPTCHA
+                            sitekey={window.Cypress
+                                ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+                                : '6Le6R_YeAAAAAGYCegFq7rj-KX0iFThcV6Bsg8LI'}
+                            onChange={handleRecaptcha}
+                        />
                         <div className='submit-btn'>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
+                            { captchaResult && <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            }
                         </div>
                     </Form>
                 </div>     
