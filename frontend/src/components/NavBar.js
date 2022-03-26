@@ -13,6 +13,7 @@ import Reviews from "./Reviews"
 import FeaturedProducts from './FeaturedProducts';
 import SuggestionBox from './SuggestionBox';
 import Menu from "./Menu";
+import Gallery from "./Gallery";
 
 export default function NavBar() {
   return (
@@ -48,6 +49,7 @@ export default function NavBar() {
         <Routes>
             <Route exact path="" element={<><Promotional/><FeaturedProducts/><Reviews/><SuggestionBox/></>}/>
             <Route exact path="/menu" element={<Menu/>}/>
+            <Route exact path="/gallery" element={<Gallery/>}/>
         </Routes>
     </Router>
   )
