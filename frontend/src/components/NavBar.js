@@ -9,7 +9,6 @@ import {
   } from "react-router-dom";
 import {HashLink} from 'react-router-hash-link';
 import Promotional from "./Promotional"
-import Reviews from "./Reviews"
 import FeaturedProducts from './FeaturedProducts';
 import SuggestionBox from './SuggestionBox';
 import Menu from "./Menu";
@@ -47,7 +46,7 @@ export default function NavBar() {
         </Navbar>
         
         <Routes>
-            <Route exact path="" element={<><Promotional/><FeaturedProducts/><Reviews/><SuggestionBox/></>}/>
+            <Route exact path="" element={<><Promotional/><FeaturedProducts/><SuggestionBox/></>}/>
             <Route exact path="/menu" element={<Menu/>}/>
             <Route exact path="/gallery" element={<Gallery/>}/>
         </Routes>
