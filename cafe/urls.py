@@ -9,4 +9,5 @@ urlpatterns = [
     path('cafeinfo/', views.RetrieveUpdateCafeInfo.as_view(), name='get-update-cafeInfo'),
     path('gallery/', views.ListCreateGallery.as_view(), name='list-create-gallery'),
     path('gallery/<str:pk>', views.RetrieveDestroyGallery.as_view(), name='delete-update-gallery'),
+    path('recaptcha/', views.recaptcha, name="recaptcha")
 ]

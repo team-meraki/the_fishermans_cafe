@@ -2,6 +2,9 @@ from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, R
 from .models import *
 from .serializers import *
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+import requests
 
 # Create your views here.
 class ListCreateProduct(ListCreateAPIView):
@@ -34,3 +37,13 @@ class ListCreateGallery(ListCreateAPIView):
 class RetrieveDestroyGallery(RetrieveDestroyAPIView):
     queryset = Gallery.objects.all()
     serializer_class = GallerySerializer
+
+@api_view(['POST'])
+def recaptcha(request):
+    res = requests.post('https://www.google.com/recaptcha/api/siteverify',
+      data={
+        'secret': '6Le6R_YeAAAAAJepBNwXtUxrRpBp1klsk9iiqjB2',
+        'response': request.data['captcha_value'],
+      }
+    )
+    return Response(res.json())
