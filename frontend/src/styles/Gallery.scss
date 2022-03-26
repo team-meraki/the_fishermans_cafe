@@ -1,0 +1,38 @@
+@import "./variables.scss";
+
+.gallery-wrapper {
+    margin-top: 10rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-title {
+    text-align: center;
+    font-family: $Cursive;
+    font-weight: bold;
+    font-style: italic;
+    color: $colorOrange;
+    margin-bottom: 3rem;
+}
+
+.gallery-tab {
+    margin-bottom: 1rem;
+}
+
+.cardImgWrapper {
+    overflow: hidden;
+}
+
+.cardImgWrapper .img-content {
+    height: 350px;
+    min-width: 200px;
+    width: 100%;
+    object-fit: cover;
+    -webkit-transition: all.3s ease-in-out;
+    transition: all.3s ease-in-out;
+}
+
+.cardImgWrapper:hover .img-content {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
