@@ -2,17 +2,14 @@
 
 describe('landing page', () => {
     beforeEach(() => {
-        cy.intercept("GET", "/api/cafeinfo", { fixture: "cafeinfo.json" })
-        .as('cafeinfoAPI')
-        
-        cy.intercept("GET", "/api/product", { fixture: "products.json" })
-        .as('productAPI')
-        
-        cy.intercept("GET", "/api/testimonial", { fixture: "testimonials.json" })
-        .as('testimonialAPI')
-        
-        cy.visit('/')
-      })
+      cy.intercept("GET", "/api/cafeinfo", { fixture: "cafeinfo.json" })
+      
+      cy.intercept("GET", "/api/product", { fixture: "products.json" })
+      
+      cy.intercept("GET", "/api/testimonial", { fixture: "testimonials.json" })
+      
+      cy.visit('/')
+    })
 
     it('scrolls down the footer when contact nav link is clicked', () => {
       cy.contains('Contact').click()

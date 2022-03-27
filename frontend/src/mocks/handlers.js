@@ -64,6 +64,24 @@ let testimonials = [{
   message : "We'll come back for more!"
 }]
 
+let gallery = [{
+  id : 1,
+  image : "http://127.0.0.1:8000/media/gallery/interior1.png",
+  category : 'interior'
+}, {
+  id : 2,
+  image : "http://127.0.0.1:8000/media/gallery/interior2.png",
+  category : 'interior'
+}, {
+  id : 3,
+  image : "http://127.0.0.1:8000/media/gallery/interior3.png",
+  category : 'interior'
+}, {
+  id : 4,
+  image : "http://127.0.0.1:8000/media/gallery/exterior1.png",
+  category : 'exterior'
+}]
+
 export const handlers = [
     rest.get(infoURL, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(cafeinfo))
@@ -142,5 +160,9 @@ export const handlers = [
 
     rest.post(recaptchaURL, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json({ success : true }))
-    })
+    }),
+
+    rest.get(galleryURL, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(gallery))
+    }),
 ]
