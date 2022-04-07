@@ -6,7 +6,7 @@ it('renders promotional buttons', () => {
     render(<Promotional />);
     const prev = screen.getByRole('button', {  name: /previous/i});
     expect(prev).toBeInTheDocument();
-    const viewProduct = screen.getAllByRole('button', {  name: /view product/i});
+    const viewProduct = screen.getAllByRole('button', {  name: /order/i});
     viewProduct.forEach(viewElement => {
         expect(viewElement).toBeInTheDocument();
     });
