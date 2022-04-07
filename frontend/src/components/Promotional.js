@@ -23,7 +23,7 @@ const Promotional = () => {
                             Rolls of our irresistible Brazo de Mercedes are rolling out for you!
                             </p>
                             
-                            <Button href='#product' className='recom-btn .btn-primary'>View product</Button>
+                            <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" className='recom-btn .btn-primary'>Order</Button>
                         </Col>
                     </Row>
                 </Container>
@@ -47,7 +47,7 @@ const Promotional = () => {
                             We use real Japanese rice wine for that sweet and tangy taste!
                             </p>
                             
-                            <Button href='#product' className='recom-btn .btn-primary'>View product</Button>
+                            <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" className='recom-btn .btn-primary'>Order</Button>
                         </Col>
                     </Row>
                 </Container>
