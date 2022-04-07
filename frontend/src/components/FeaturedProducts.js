@@ -25,8 +25,6 @@ export default function FeaturedProducts() {
     products = products.slice(0, 4);
     return (
         <div className='featured-products'>
-
-        
         <Container>
             <h1 className='featured-products-title'>On the menu</h1>
             <Row>   
@@ -46,8 +44,8 @@ export default function FeaturedProducts() {
                 ))}
             </Row>
             <div className='see-more-btn-wrap'>
-                <Button href='/menu' size="sm"> 
-                    See more 
+                <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" size="sm"> 
+                    Order
                 </Button>
             </div>
         </Container>
