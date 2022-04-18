@@ -18,13 +18,14 @@ export default function NavBar() {
   return (
     <Router>
         <Navbar fixed="top" className="navigation-menu" expand="lg">
+        {/*<Navbar className="navigation-menu" expand="lg">*/}
             <Container className="d-flex align-items-center">
                 <Navbar.Brand as={Link} to={""} className="brand-name">
-                <img
+                {/*<img
                     alt=""
                     src="/images/brand-logo.svg"
                     className="brand-logo"
-                    />
+                />*/}
                 <img
                     alt=""
                     src="/images/brand-name.svg"
@@ -35,7 +36,6 @@ export default function NavBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="container-fluid justify-content-end me-auto">
-                        <Nav.Link as={Link} to="" className="navigation-link">Home</Nav.Link>
                         <Nav.Link as={Link} to="/menu" className="navigation-link">Menu</Nav.Link>
                         <Nav.Link as={Link} to="/gallery" className="navigation-link">Gallery</Nav.Link>
                         <Nav.Link as={HashLink} to="#contact" className="navigation-link">Contact</Nav.Link>
