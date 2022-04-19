@@ -35,7 +35,6 @@ export default function NavBar() {
   return (
     <Router>
         <Navbar fixed="top" className={scrolled? "navigation-menu changeBgColor" : "navigation-menu"}>
-        {/*<Navbar className="navigation-menu" expand="lg">*/}
             <Container className="d-flex align-items-center justify-contents-center">
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
