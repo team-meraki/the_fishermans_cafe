@@ -1,5 +1,5 @@
 import '../styles/NavBar.scss';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Navbar, Nav, Container} from 'react-bootstrap'
 import {
     BrowserRouter as Router,
@@ -15,14 +15,34 @@ import Menu from "./Menu";
 import Gallery from "./Gallery";
 
 export default function NavBar() {
+
+    const [scrolled, setChangeBgColorAfterScroll] = useState(false);
+
+    const changeBgColor = () => {
+        console.log(window.scrollY)
+        if (window.scrollY >= 66) {
+            setChangeBgColorAfterScroll(true)
+        } else {
+            setChangeBgColorAfterScroll(false)
+        }
+    }
+
+    useEffect(() => {
+        changeBgColor();
+        window.addEventListener("scroll", changeBgColor)
+      })
+
   return (
     <Router>
-        <Navbar fixed="top" className="navigation-menu">
+        <Navbar fixed="top" className={scrolled? "navigation-menu changeBgColor" : "navigation-menu"}>
         {/*<Navbar className="navigation-menu" expand="lg">*/}
             <Container className="d-flex align-items-center justify-contents-center">
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="container-fluid justify-content-center me-auto">
+                        <Nav.Link as={Link} to="/home" className="navigation-link">
+                            <span className='underline-hover'>Home</span>
+                        </Nav.Link>
                         <Nav.Link as={Link} to="/menu" className="navigation-link">
                             <span className='underline-hover'>Menu</span>
                         </Nav.Link>
