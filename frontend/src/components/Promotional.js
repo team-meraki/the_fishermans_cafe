@@ -4,7 +4,9 @@ import '../styles/Promotional.scss';
 
 const Promotional = () => {
     return (
-        <Carousel indicators={false} className= 'd-block carousel' variant='dark'>
+        <Container fluid className='promo-section'>
+
+        <Carousel indicators={false} controls={false} className= 'd-block carousel' variant='dark'>
             <Carousel.Item interval={5000}>
                 <Container fluid className="recom-section">
                     <Row>
@@ -53,6 +55,8 @@ const Promotional = () => {
                 </Container>
             </Carousel.Item>
         </Carousel>
+
+        </Container>
     )
 }
 

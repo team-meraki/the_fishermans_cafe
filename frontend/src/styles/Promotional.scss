@@ -1,8 +1,12 @@
 @import "./variables.scss";
 
+.promo-section {
+    height: 100vh;
+    background-color: #F6F0E9;
+    overflow: hidden;
+}
 .carousel {
     width: 100%;
-    margin-top: 60px;
     display: block;
     position: relative;
 
@@ -24,8 +28,8 @@
 // RECOMMENDATION SECTION STYLES
 .recom-section {
     display: flex;
-    height: 300px;
-    margin-top: 50px;
+    height: 80%;
+    margin-top: 10rem;
     width: 100%;
     justify-content: center;
 
@@ -52,9 +56,8 @@
         h1 {
             color: $colorOrange;
             font-family: $Cursive;
-            font-style: italic;
-            font-weight: bold;
-            font-size: 50px;
+            font-size: 70px;
+            font-weight: 800px;
         }
 
         h5 {
