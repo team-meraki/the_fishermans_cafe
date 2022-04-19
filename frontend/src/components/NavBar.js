@@ -17,29 +17,24 @@ import Gallery from "./Gallery";
 export default function NavBar() {
   return (
     <Router>
-        <Navbar fixed="top" className="navigation-menu" expand="lg">
+        <Navbar fixed="top" className="navigation-menu">
         {/*<Navbar className="navigation-menu" expand="lg">*/}
-            <Container className="d-flex align-items-center">
-                <Navbar.Brand as={Link} to={""} className="brand-name">
-                {/*<img
-                    alt=""
-                    src="/images/brand-logo.svg"
-                    className="brand-logo"
-                />*/}
-                <img
-                    alt=""
-                    src="/images/brand-name.svg"
-                    width="100%"
-                    className="brand-name"
-                    />{' '}
-                </Navbar.Brand>
+            <Container className="d-flex align-items-center justify-contents-center">
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="container-fluid justify-content-end me-auto">
-                        <Nav.Link as={Link} to="/menu" className="navigation-link">Menu</Nav.Link>
-                        <Nav.Link as={Link} to="/gallery" className="navigation-link">Gallery</Nav.Link>
-                        <Nav.Link as={HashLink} to="#contact" className="navigation-link">Contact</Nav.Link>
-                        <Nav.Link as={Link} to="/about" className="navigation-link">About</Nav.Link>
+                    <Nav className="container-fluid justify-content-center me-auto">
+                        <Nav.Link as={Link} to="/menu" className="navigation-link">
+                            <span className='underline-hover'>Menu</span>
+                        </Nav.Link>
+                        <Nav.Link as={Link} to="/gallery" className="navigation-link">
+                            <span className='underline-hover'>Gallery</span>
+                        </Nav.Link>
+                        <Nav.Link as={HashLink} to="#contact" className="navigation-link">
+                            <span className='underline-hover'>Contact</span>
+                        </Nav.Link>
+                        <Nav.Link as={Link} to="/about" className="navigation-link">
+                        <span className='underline-hover'>About</span>
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
