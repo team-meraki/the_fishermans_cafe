@@ -1,10 +1,48 @@
 @import "./variables.scss";
 
 .promo-section {
-    height: 100vh;
-    background-color: #F6F0E9;
-    overflow: hidden;
+    width: 100%;
+    height: 50vh;
+
+    background-image: url(../../public/images/promo-bg1.png); /* fallback */
+    background-image: linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.20)), url(../../public/images/promo-bg1.png);
+    
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+
+    // Small screens (landscape phones)
+    @media (min-width: 576px) { 
+        height: 80vh;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        height: 100vh;
+    }
 }
+.brand-name-wrapper {
+    justify-content: center;
+}
+.brand-name-img {
+    height: auto;
+    width: 90%;
+    margin-top: 100px;
+    position: relative;
+
+    // Small screens (landscape phones)
+    @media (min-width: 576px) { 
+        margin-top: 130px;
+        width: 80%;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        margin-top: 200px;
+        width: 70%;
+    }
+}
+
 .carousel {
     width: 100%;
     display: block;
