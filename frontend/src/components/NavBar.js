@@ -1,6 +1,6 @@
 import '../styles/NavBar.scss';
 import React, { useEffect, useState } from 'react'
-import {Navbar, Nav, Container} from 'react-bootstrap'
+import {Navbar, Nav, Container, NavbarBrand} from 'react-bootstrap'
 import {
     BrowserRouter as Router,
     Routes,
@@ -13,13 +13,13 @@ import FeaturedProducts from './FeaturedProducts';
 import SuggestionBox from './SuggestionBox';
 import Menu from "./Menu";
 import Gallery from "./Gallery";
+import About from "./About";
 
 export default function NavBar() {
 
     const [scrolled, setChangeBgColorAfterScroll] = useState(false);
 
     const changeBgColor = () => {
-        //console.log(window.scrollY)
         if (window.scrollY >= 66) {
             setChangeBgColorAfterScroll(true)
         } else {
@@ -34,12 +34,19 @@ export default function NavBar() {
 
   return (
     <Router>
-        <Navbar fixed="top" className={scrolled? "navigation-menu changeBgColor" : "navigation-menu"}>
+        <Navbar fixed="top" className={scrolled? "navigation-menu changeBgColor" : "navigation-menu"} expand="lg">
             <Container className="d-flex align-items-center justify-contents-center">
+                <Navbar.Brand as={Link} to={""} className="brand-name">
+                    <img
+                        alt=""
+                        src="/images/brand-name-white.svg"
+                        className="brand-name-img"
+                        />{' '}
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="container-fluid justify-content-center me-auto">
-                        <Nav.Link as={Link} to="/home" className="navigation-link">
+                    <Nav className="container-fluid justify-content-end me-auto">
+                        <Nav.Link as={Link} to="" className="navigation-link">
                             <span className='underline-hover'>Home</span>
                         </Nav.Link>
                         <Nav.Link as={Link} to="/menu" className="navigation-link">
@@ -63,8 +70,8 @@ export default function NavBar() {
             <Route exact path="" element={<><Promotional/><FeaturedProducts/><SuggestionBox/></>}/>
             <Route exact path="/menu" element={<Menu/>}/>
             <Route exact path="/gallery" element={<Gallery/>}/>
+            <Route exact path="/about" element={<About/>}/>
         </Routes>
     </Router>
   )
 }
-
