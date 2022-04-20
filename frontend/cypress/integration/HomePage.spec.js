@@ -7,6 +7,8 @@ describe('landing page', () => {
       cy.intercept("GET", "/api/product", { fixture: "products.json" })
       
       cy.intercept("GET", "/api/testimonial", { fixture: "testimonials.json" })
+
+      cy.intercept(/https:\/\/maps.googleapis.com\/.*/, { statusCode: 200 })
       
       cy.visit('/')
     })

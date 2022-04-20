@@ -9,11 +9,12 @@ describe('gallery page', () => {
         cy.intercept("GET", "/api/testimonial", { fixture: "testimonials.json" })
 
         cy.intercept("GET", "/api/gallery", { fixture: "gallery.json" })
-        
+
+        cy.intercept(/https:\/\/maps.googleapis.com\/.*/, { statusCode: 200 })
+
         cy.visit('/')
 
         cy.contains(/gallery/i).click()
-
 
     })
 

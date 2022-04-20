@@ -19,7 +19,7 @@ export default function NavBar() {
     const [scrolled, setChangeBgColorAfterScroll] = useState(false);
 
     const changeBgColor = () => {
-        console.log(window.scrollY)
+        //console.log(window.scrollY)
         if (window.scrollY >= 66) {
             setChangeBgColorAfterScroll(true)
         } else {
