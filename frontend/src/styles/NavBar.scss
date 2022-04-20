@@ -10,26 +10,23 @@
 }
 
 .navigation-link {
-    font-size: 10px;
+    margin: 0 2%;
+    font-size: 11px;
     background: none !important;
     border: none;
     text-transform: uppercase;
 
      // Small screens (landscape phones)
      @media (min-width: 576px) { 
-        font-size: 11px;
+        font-size: 14px;
         margin: 0 2rem;
      }
 
     // Medium devices (tablets, 768px and up)
     @media (min-width: 768px) { 
-        font-size: 12px;
+        font-size: 16px;
         margin: 0 2.5rem;
     }
-}
-
-.nav-link {
-    margin: 0 1rem !important;
 }
 
 .underline-hover {
@@ -46,18 +43,12 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: $colorOrange;
+    background-color: #FFA658;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
 
-
 .navigation-link:hover .underline-hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
-}
-
-.brand-name-img {
-    height: auto;
-    margin-top: 0;
 }
