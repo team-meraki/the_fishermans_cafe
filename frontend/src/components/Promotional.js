@@ -4,7 +4,32 @@ import '../styles/Promotional.scss';
 
 const Promotional = () => {
     return (
-        <Carousel indicators={false} className= 'd-block carousel' variant='dark'>
+        <Container fluid className='promo-section'>
+            <Row className='brand-name-wrapper'>
+                <img
+                    alt=""
+                    src="/images/brand-name-white.svg"
+                    className="brand-name-img"
+                    />{' '}
+            </Row>
+            
+            {/* 
+            <Row>
+                <Col className="recom-section-content">
+                    <h1>Rolled to perfection</h1>
+                    <h5>Brazo de Mercedes</h5>
+                    <br/>
+                    <p>
+                    Rolls of our irresistible Brazo de Mercedes are rolling out for you!
+                    </p>
+                    
+                    <Button href='#product' className='recom-btn .btn-primary'>View product</Button>
+                </Col>
+            </Row>
+            */}
+
+        {/* 
+        <Carousel indicators={false} controls={false} className= 'd-block carousel' variant='dark'>
             <Carousel.Item interval={5000}>
                 <Container fluid className="recom-section">
                     <Row>
@@ -53,6 +78,9 @@ const Promotional = () => {
                 </Container>
             </Carousel.Item>
         </Carousel>
+        */}
+
+        </Container>
     )
 }
 

@@ -1,50 +1,54 @@
 @import "./variables.scss";
 
-.brand-name {
-    font-weight: bold;
-    @media screen and (max-width: 480px) {
-        height: auto;
-        width: 80%;
-    }
-
-    @media screen and (max-width: 380px) {
-        height: auto;
-        width: 70%;
-    }
-}
-
-.brand-logo {
-    margin-right: 10px;
-    height: 60px;
-    width: 60px;
-
-    @media screen and (max-width: 380px) {
-        height: 50px;
-        width: 50px;
-    }
-
-    @media screen and (max-width: 280px) {
-        height: 35px;
-        width: 35px;
-    }
-}
-
 .navigation-menu {
     padding-top: 15px;
-    background-color: $colorCream;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    @media screen and (max-width: 380px) {
-        height: 80px;
-        width: 100%;
-        padding-top: 10px;
-    }
+    background: transparent;
+}
 
-    @media screen and (max-width: 280px) {
-        height: 65px;
-    }
+.changeBgColor {
+    background:linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.1));
 }
 
 .navigation-link {
-    margin: 0 15px;
-    color: grey;
+    margin: 0 2%;
+    font-size: 11px;
+    background: none !important;
+    border: none;
+    text-transform: uppercase;
+
+     // Small screens (landscape phones)
+     @media (min-width: 576px) { 
+        font-size: 14px;
+        margin: 0 2rem;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        font-size: 16px;
+        margin: 0 2.5rem;
+    }
+}
+
+.underline-hover {
+    position: relative;
+    color: rgb(255, 255, 255) !important;
+    padding-bottom: 10px;
+}
+   
+.underline-hover:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFA658;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.navigation-link:hover .underline-hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }

@@ -9,9 +9,9 @@ $colorLightOrange: #fac699;
 $colorWhite: #fff;
 
 // fonts
-$Inter: "Inter", sans-serif;
+$Inter: 'Montserrat', sans-serif;
 $Code: "source-code-pro", "Courier New", monospace;
-$Cursive: "Cormorant Garamond", serif;
+$Cursive: "Square Peg", serif;
 
 @mixin breakpoint($point) {
     @if $point == md {
