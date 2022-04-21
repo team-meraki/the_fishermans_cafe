@@ -27,7 +27,7 @@ export default function Interior() {
             <Row>
                 {products.filter(product => product.category === 'dessert').map(product => (
                     <Col md={4} sm={6} xs={12} key={product?.id}>
-                        <Card>
+                        <Card className='cardWrapper'>
                             <div className='cardImgWrapper'>
                                 <Card.Img className='img-content' variant="top" src={product.image} />
                             </div>
