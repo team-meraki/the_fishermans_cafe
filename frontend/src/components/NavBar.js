@@ -45,11 +45,7 @@ export default function NavBar() {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-<<<<<<< HEAD
-                    <Nav className="container-fluid justify-content-center me-auto">
-=======
                     <Nav className="container-fluid justify-content-end me-auto">
->>>>>>> 97a55b9e69a846395fb25f7740c763d0c279aea2
                         <Nav.Link as={Link} to="" className="navigation-link">
                             <span className='underline-hover'>Home</span>
                         </Nav.Link>
