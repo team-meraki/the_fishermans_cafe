@@ -27,13 +27,29 @@ $Cursive: "Square Peg", serif;
 .btn-primary:active,
 .btn-primary:visited,
 .btn-primary:focus {
-    background-color: $colorOrange !important;
-    border-color: $colorOrange !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    border-radius: 0px !important;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 5px 10px;
+
+
+     // Small screens (landscape phones)
+     @media (min-width: 576px) { 
+        font-size: 11px;
+        padding: 10px 15px;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        font-size: 12px;
+    }
 }
 
 .btn-primary:hover {
-    background-color: $colorLightOrange !important;
-    border-color: $colorLightOrange !important;
+    background-color: #9a9a9a36 !important;
+    border-color: white !important;
 }
 
 // MEDIA SCREEN ADJUSTMENTS FOR BUTTONS
