@@ -1,9 +1,56 @@
 @import "./variables.scss";
 
-.menu {
-    height: 400px;
+.menu-wrapper {
+    margin-top: 10rem;
+    margin-bottom: 2rem;
+}
+
+.menu-title {
+    text-align: center;
+    font-family: $Cursive;
+    font-weight: bold;
+    font-style: italic;
+    color: $colorOrange;
+    margin-bottom: 3rem;
+}
+
+.menu-tab {
+    margin-bottom: 1rem;
+}
+
+.orderBtn {
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(199, 199, 199);
-} 
+    border-radius: 50%;
+    font-size: 15px;
+    position: fixed;
+    right: 30px;
+    bottom: 100px;
+    outline: black;
+}
+
+.cardWrapper{
+    margin-bottom: 1rem;
+}
+
+.cardImgWrapper {
+    overflow: hidden;
+}
+
+.cardImgWrapper .img-content {
+    height: 350px;
+    min-width: 200px;
+    width: 100%;
+    object-fit: cover;
+    -webkit-transition: all.3s ease-in-out;
+    transition: all.3s ease-in-out;
+}
+
+.cardImgWrapper:hover .img-content {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
