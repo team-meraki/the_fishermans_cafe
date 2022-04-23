@@ -26,7 +26,7 @@ export default function Drinks() {
         <Container>
             <Row className='d-flex justify-content-start'>
                 {products.filter(product => product.category === 'drink').map(product => (
-                    <Col sm={6} xs={12} key={product?.id}>
+                    <Col md={6} xs={12} xxl={4} key={product?.id}>
                         <Card className='menu-card-wrapper'>
                             <div className='d-flex menu-product-card'>
 
