@@ -38,6 +38,13 @@ class RetrieveDestroyGallery(RetrieveDestroyAPIView):
     queryset = Gallery.objects.all()
     serializer_class = GallerySerializer
 
+class RetrieveUpdateAbout(RetrieveUpdateAPIView):
+    queryset = About.objects.all()
+    serializer_class = AboutSerializer
+
+    def get_object(self):
+        return get_object_or_404(About, pk='1')
+
 @api_view(['POST'])
 def recaptcha(request):
     res = requests.post('https://www.google.com/recaptcha/api/siteverify',
