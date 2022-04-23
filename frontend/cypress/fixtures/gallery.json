@@ -1,17 +1,13 @@
 [{
     "id" : 1,
-    "image" : "http://127.0.0.1:8000/media/gallery/interior1.png",
-    "category" : "interior"
+    "image" : "http://127.0.0.1:8000/media/gallery/interior1.png"
   }, {
     "id" : 2,
-    "image" : "http://127.0.0.1:8000/media/gallery/interior2.png",
-    "category" : "interior"
+    "image" : "http://127.0.0.1:8000/media/gallery/interior2.png"
   }, {
     "id" : 3,
-    "image" : "http://127.0.0.1:8000/media/gallery/interior3.png",
-    "category" : "interior"
+    "image" : "http://127.0.0.1:8000/media/gallery/interior3.png"
   }, {
     "id" : 4,
-    "image" : "http://127.0.0.1:8000/media/gallery/exterior1.png",
-    "category" : "exterior"
+    "image" : "http://127.0.0.1:8000/media/gallery/exterior1.png"
   }]

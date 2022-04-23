@@ -26,7 +26,6 @@ class Testimonial(models.Model):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery/')
-    category = models.CharField(max_length= 10, choices=[('interior','Interior'),('exterior','Exterior')])
 
 class CafeInfoQuerySet(models.QuerySet):
     def delete(self):
