@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 
 // colors
+$bg-primary: #e8e8e8;
+
 $colorCream: #fff6dd;
 $colorBrown: #372c1f;
-$colorLightbrown: #92816c;
 $colorOrange: #ffa658;
 $colorLightOrange: #fac699;
 $colorWhite: #fff;
@@ -22,7 +23,15 @@ $Cursive: "Square Peg", serif;
     }
 }
 
+body {
+    background: $bg-primary;
+}
+
+// ======================================
 // BOOTSTRAP STYLES OVERRIDES
+// ======================================
+
+// --- FOR NAVBAR ---
 .btn-primary,
 .btn-primary:active,
 .btn-primary:visited,
@@ -52,6 +61,50 @@ $Cursive: "Square Peg", serif;
     border-color: white !important;
 }
 
+
+// --- FOR MENU CATEGORY TABS ---
+.btn-secondary {
+    color: $colorLightOrange !important;
+    font-weight: normal;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid $bg-primary!important;
+    border-radius: 0px !important;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 5px 10px;
+
+
+     // Small screens (landscape phones)
+     @media (min-width: 576px) { 
+        font-size: 14px;
+        padding: 10px 15px;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        font-size: 16px;
+    }
+}
+
+.btn-secondary:active,
+.btn-secondary:visited,
+.btn-secondary:focus {
+    color: $colorOrange !important;
+    font-weight: bold !important;
+}
+
+.btn-secondary:hover {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid $colorOrange !important;
+}
+
+
+
+
+
+// --------------------------------------
 // MEDIA SCREEN ADJUSTMENTS FOR BUTTONS
 @media screen and (max-width: 280px) {
     .btn {

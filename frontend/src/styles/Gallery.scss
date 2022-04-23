@@ -2,16 +2,15 @@
 
 .gallery-wrapper {
     margin-top: 10rem;
-    margin-bottom: 2rem;
 }
 
 .gallery-title {
     text-align: center;
     font-family: $Cursive;
     font-weight: bold;
-    font-style: italic;
     color: $colorOrange;
     margin-bottom: 3rem;
+    margin-top: 5rem;
 }
 
 .gallery-tab {
@@ -27,12 +26,12 @@
     min-width: 200px;
     width: 100%;
     object-fit: cover;
-    -webkit-transition: all.3s ease-in-out;
-    transition: all.3s ease-in-out;
+    --webkit-transition: all.3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 .cardImgWrapper:hover .img-content {
-    -ms-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
+    --ms-transform: scale(1.2);
+    --webkit-transform: scale(1.2);
     transform: scale(1.2);
 }

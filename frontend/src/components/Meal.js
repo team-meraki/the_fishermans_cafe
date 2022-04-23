@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap'
 import '../styles/Menu.scss';
 
-export default function Dessert() {
+export default function Meal() {
     let [products, setProduct] = useState([]);
 
     useEffect(() => {
@@ -24,8 +24,8 @@ export default function Dessert() {
 
     return (
         <Container>
-           <Row className='d-flex justify-content-start'>
-                {products.filter(product => product.category === 'dessert').map(product => (
+            <Row className='d-flex justify-content-start'>
+                {products.filter(product => product.category === 'meal').map(product => (
                     <Col md={6} xs={12} xxl={4} key={product?.id}>
                         <Card className='menu-card-wrapper'>
                             <div className='d-flex menu-product-card'>

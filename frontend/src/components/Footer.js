@@ -22,7 +22,7 @@ function Footer(){
     }
 
     return(
-        <Container className="mainfooter">
+        <Container fluid className="mainfooter">
             <Row className="topfooter">
                 <Col className="footer-col">
                     <Row className="cafe_name">   
