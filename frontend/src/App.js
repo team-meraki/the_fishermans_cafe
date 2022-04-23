@@ -21,7 +21,7 @@ function App() {
               <Route exact path="" element={<><LandingNavBar /><Promotional/><FeaturedProducts/><SuggestionBox/></>}/>
               <Route exact path="/menu" element={<><NavBar/><Menu/></>}/>
               <Route exact path="/gallery" element={<><NavBar/><Gallery/></>}/>
-              <Route exact path="/about" element={<><NavBar/><About/></>}/>
+              <Route exact path="/about" element={<><LandingNavBar/><About/></>}/>
               <Route exact path="/test" element={<><NavBar/><AllGallery/></>}/>
           </Routes>
         </Router>

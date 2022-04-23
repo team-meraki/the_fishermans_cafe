@@ -1,0 +1,129 @@
+@import "./variables.scss";
+
+.about {
+  height: 50vh;
+  background-image: url(../../public/images/about-bg-img.jpg); /* fallback */
+  background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.60)), url(../../public/images/about-bg-img.jpg);
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+
+  // Small screens (landscape phones)
+  @media (min-width: 576px) { 
+    height: 80vh;
+ }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { 
+    height: 100vh;
+  }
+}
+
+.about-board {
+  width: 100%;
+  margin: 0;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+}
+
+.about-content {
+  color: rgb(255, 255, 255);
+  width: 100%;
+  padding-top: 6rem;
+
+  @media (min-width: 768px){
+    padding-top: 10rem;
+  }
+
+}
+
+.about-content .about-title {
+  font-size: 4rem;
+  font-family: $Cursive;
+
+  @media (min-width: 768px){
+    font-size: 6rem;
+  }
+  @media (min-width: 992px){
+    font-size: 8rem;
+  }
+
+}
+
+.about-content .about-description {
+  margin-left: 20px;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+}
+
+.notice {
+  border: 2px rgb(230, 230, 230);
+  border-radius: 17px;
+  
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+
+  padding: 8px;
+  width: 30%;
+  height: 7.3rem;
+  
+
+  p {
+    color: white;
+    font-size: 0.5rem;
+  }
+
+  span {
+    h5 {
+      font-family: $Cursive;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      font-weight: bold;
+      color: $colorOrange;
+    }
+    img {
+      width: 14px;
+      height: auto;
+      margin-bottom: 5px;
+    }
+  }
+  
+
+  @media (min-width: 768px){
+    padding: 15px;
+    height: 8rem;
+    p {
+      font-size: 0.7rem;
+    }
+    span {
+      h5 {
+        font-size: 1rem;
+      }
+      img {
+        width: 20px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  @media (min-width: 992px){
+    padding: 20px;
+    height: 9rem;
+    p {
+      font-size: 0.8rem;
+    }
+
+    span {
+      h5 {
+        font-size: 1.5rem;
+      }
+      img {
+        width: 24px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
