@@ -35,7 +35,7 @@ export default function About() {
 
           <Row className='about-content'>
             <h1 className='about-title'>Who are we.</h1>
-            <p className='about-description'>about the cafe</p>
+            <p className='about-description'>{attrib.description}</p>
           </Row>
 
           <Row className='d-flex about-board'>

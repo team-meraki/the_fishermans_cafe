@@ -1,14 +1,23 @@
 import { render, screen } from '@testing-library/react';
 import NavBar from '../NavBar';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const MockNavBar = () => {
+  return (
+    <Router>
+      <NavBar />
+    </Router>
+  )
+}
 
 it('renders navbar', () => {
-  render(<NavBar />);
+  render(<MockNavBar />);
   const navBarElement = screen.getByRole('navigation');
   expect(navBarElement).toBeInTheDocument();
 });
 
 it('renders nav links', () => {
-    render(<NavBar />);
+    render(<MockNavBar />);
     const menuLinkElement = screen.getByRole('link', {  name: /menu/i})
     expect(menuLinkElement).toBeInTheDocument();
     const galleryLinkElement = screen.getByRole('link', {  name: /gallery/i})
