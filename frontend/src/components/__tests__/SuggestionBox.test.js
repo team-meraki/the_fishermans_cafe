@@ -4,7 +4,7 @@ import SuggestionBox from '../SuggestionBox'
 
 it('renders featured product heading', () => {
     render(<SuggestionBox />)
-    expect(screen.getByRole('heading', {  name: /send us your feedback or suggestions!/i})).toBeInTheDocument()
+    expect(screen.getByRole('heading', {  name: /send us your feedback\/suggestions!/i})).toBeInTheDocument()
 })
 
 it('renders customer name input box', () => {

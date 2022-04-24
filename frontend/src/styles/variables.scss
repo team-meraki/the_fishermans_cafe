@@ -1,17 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 
 // colors
+$bg-primary: #e8e8e8;
+
 $colorCream: #fff6dd;
 $colorBrown: #372c1f;
-$colorLightbrown: #92816c;
 $colorOrange: #ffa658;
 $colorLightOrange: #fac699;
 $colorWhite: #fff;
 
 // fonts
-$Inter: "Inter", sans-serif;
+$Inter: 'Montserrat', sans-serif;
 $Code: "source-code-pro", "Courier New", monospace;
-$Cursive: "Cormorant Garamond", serif;
+$Cursive: "Square Peg", serif;
 
 @mixin breakpoint($point) {
     @if $point == md {
@@ -22,20 +23,102 @@ $Cursive: "Cormorant Garamond", serif;
     }
 }
 
+body {
+    background: $bg-primary;
+}
+
+// ======================================
 // BOOTSTRAP STYLES OVERRIDES
+// ======================================
+
+// --- FOR NAVBAR ---
 .btn-primary,
 .btn-primary:active,
 .btn-primary:visited,
 .btn-primary:focus {
-    background-color: $colorOrange !important;
-    border-color: $colorOrange !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    border-radius: 0px !important;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 5px 10px;
+
+
+     // Small screens (landscape phones)
+     @media (min-width: 576px) { 
+        font-size: 11px;
+        padding: 10px 15px;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        font-size: 12px;
+    }
 }
 
 .btn-primary:hover {
-    background-color: $colorLightOrange !important;
-    border-color: $colorLightOrange !important;
+    background-color: #9a9a9a36 !important;
+    border-color: white !important;
 }
 
+
+// --- FOR MENU CATEGORY TABS ---
+.btn-secondary {
+    color: $colorLightOrange !important;
+    font-weight: normal;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid $bg-primary!important;
+    border-radius: 0px !important;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 5px 10px;
+
+
+     // Small screens (landscape phones)
+     @media (min-width: 576px) { 
+        font-size: 14px;
+        padding: 10px 15px;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        font-size: 16px;
+    }
+}
+
+.btn-secondary:active,
+.btn-secondary:visited,
+.btn-secondary:focus {
+    color: $colorOrange !important;
+    font-weight: bold !important;
+}
+
+.btn-secondary:hover {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid $colorOrange !important;
+}
+
+.btn-light {
+    color: #fff6dd;
+    background-color: #ffa658;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 15px;
+    position: static;
+    bottom: 100px;
+}
+
+
+
+
+
+// --------------------------------------
 // MEDIA SCREEN ADJUSTMENTS FOR BUTTONS
 @media screen and (max-width: 280px) {
     .btn {

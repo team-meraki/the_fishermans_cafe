@@ -1,9 +1,98 @@
 @import "./variables.scss";
 
-.menu {
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(199, 199, 199);
-} 
+.menu-wrapper {
+    margin-top: 10rem;
+    margin-bottom: 2rem;
+    background-color: $bg-primary;
+}
+
+.menu-title {
+    text-align: center;
+    font-family: $Cursive;
+    font-weight: bold;
+    color: $colorOrange;
+    margin-bottom: 3rem;
+}
+
+.menu-tab {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+// ======== PRODUCT CARDS ==========
+.menu-card-wrapper{
+    
+    margin-bottom: 1.3rem;
+    border-radius: 30px;
+    background: #e0e0e0;
+    border: none;
+    box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+
+
+    @media (min-width: 1200px) {
+        width: 500px;
+        height: 150px;
+    }
+    
+    @media (min-width: 1400px) {
+        width: 400px;
+    }
+
+}
+
+.menu-card-wrapper .menu-product-card {
+    border-radius: 30px;
+}
+
+.menu-card-img-wrapper {
+    overflow: hidden;
+    width: 180px;
+    height: 150px;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-card-img-wrapper .menu-img {
+    height: 100%;
+    width: 180px;
+    max-height: 100%;
+    object-fit: cover;
+    --webkit-transition: all.3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 30px 0 0 30px;
+
+    
+}
+
+
+.menu-card-img-wrapper:hover .menu-img {
+    --ms-transform: scale(1);
+    --moz-animation-delay: scale(1);
+    transform: scale(1);
+}
+
+.product-name {
+    font-size: 1.9rem;
+    font-family: $Cursive;
+
+    @media (min-width: 768px) {
+        font-size: 2rem;
+    
+    }
+    @media (min-width: 992px) {
+        font-size: 2.5rem;
+    }
+    @media (min-width: 1400px) {
+        font-size: 2.1rem;
+    }
+}
+
+.product-price {
+    font-size: 1rem;
+}
+
+.card-body {
+    padding-top: 0 !important;
+    padding-left: 1.7rem !important;
+}

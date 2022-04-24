@@ -26,7 +26,6 @@ class Testimonial(models.Model):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery/')
-    category = models.CharField(max_length= 10, choices=[('interior','Interior'),('exterior','Exterior')])
 
 class CafeInfoQuerySet(models.QuerySet):
     def delete(self):
@@ -62,5 +61,34 @@ class CafeInfo(models.Model):
         pass
 
     objects = CafeInfoManager()
+
+class AboutQuerySet(models.QuerySet):
+    def delete(self):
+        pass
+
+class AboutManager(models.Manager):
+    def create(self, **kwargs):
+        obj = self.model(**kwargs)
+        self._for_write = True
+        obj.save(using=self.db)
+        return obj
+
+    def get_queryset(self):
+        return AboutQuerySet(self.model, using=self._db)
+
+class About(models.Model):
+    description = models.TextField()
+    announcement = models.TextField()
+    table_accomodation = models.TextField()
+    delivery_info = models.TextField()
+    
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(About, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    objects = AboutManager()
 
     

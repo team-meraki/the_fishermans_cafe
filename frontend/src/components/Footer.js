@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faClock, faLocationPin, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { Container, Row, Col } from 'react-bootstrap'
 import '../styles/Footer.scss';
 
@@ -22,7 +25,7 @@ function Footer(){
     }
 
     return(
-        <Container className="mainfooter">
+        <Container fluid className="mainfooter">
             <Row className="topfooter">
                 <Col className="footer-col">
                     <Row className="cafe_name">   
@@ -35,20 +38,20 @@ function Footer(){
 
                     <Row className="cafe_info">
                         <Col className="cafe_hours">
-                            <h3>Cafe Hours</h3>
+                            <h3>Cafe Hours <FontAwesomeIcon icon={ faClock }/></h3>
                             <p>{cafeInfo?.schedule}</p>
                         </Col>
 
                         <Col className="cafe_loc">
-                            <h3>Location</h3>
+                            <h3>Location <FontAwesomeIcon icon={ faLocationPin }/></h3>
                             <p>{cafeInfo?.location}</p>
                         </Col>
 
                         <Col id='contact' className="cafe_contact">
                             <h3>Contact us</h3>
                             <p><a className="navigation-link" target={"_blank"} rel={"noreferrer"}
-                            href={cafeInfo?.facebook}>Facebook</a></p>
-                            <p>{cafeInfo?.contact_number}</p>
+                            href={cafeInfo?.facebook}><FontAwesomeIcon icon={ faFacebook }/></a></p>
+                            <p><FontAwesomeIcon icon={ faPhone }/> {cafeInfo?.contact_number}</p>
                         </Col>
                     </Row>
                 </Col>

@@ -81,7 +81,6 @@ class ViewsTestCase(APITestCase):
             'name':'test',
             'category':'meal',
             'price':'100.23',
-            'description':'just some product',
         }
         response = self.client.post(url1, data=data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -97,7 +96,7 @@ class ViewsTestCase(APITestCase):
 
 
     def test_cafeinfo_api(self):
-        info = CafeInfo.objects.create(location="test location", about="test about", 
+        CafeInfo.objects.create(location="test location", about="test about", 
         schedule="test schedule", email="testemail@email.com", facebook="fb.com",
         contact_number="09123456789")
         url = reverse('get-update-cafeInfo')

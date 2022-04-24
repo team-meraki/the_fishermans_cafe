@@ -30,7 +30,7 @@ export default function Reviews() {
                 <h4>WHAT OUR CUSTOMERS ARE SAYING</h4>
             </div>
             
-            <Col md='auto' className="review-carousel">
+            <Col className="review-carousel">
                 <Carousel controls={false} className='carousel' variant='dark'>
                     {reviews.map(review => (    
                         <Carousel.Item key={review?.id} className='review-wrapper' interval={5000}>
@@ -50,14 +50,6 @@ export default function Reviews() {
                         </Carousel.Item>
                     ))}
                 </Carousel>
-            </Col>
-
-            <Col md={4} className="illustration">
-                <img
-                    alt=""
-                    src="/images/reviews.svg"
-                    className="review-illustration"
-                />
             </Col>
         </Row>
     )

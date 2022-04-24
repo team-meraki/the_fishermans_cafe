@@ -1,10 +1,11 @@
 @import "./variables.scss";
 
 .testimonials {
-    padding: 25px 0;
     display: flex;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 }
 
 .review-section-title {
@@ -13,13 +14,12 @@
     h4 {
         font-size: 20px;
         font-weight: bold;
+        color: $colorWhite;
     }
 }
 
 .review-carousel {
     display: inline-block;
-    padding-right: 0;
-    width: 50%;
 
     .review-image {
         height: 70px;
@@ -30,31 +30,16 @@
     .review-section-content {
         text-align: center;
         margin-bottom: 50px;
-    }
-}
+        min-height: 70px;
 
-.illustration {
-    display: none;
-    img {
-        display: none;
-    }
-}
-
-// desktop code
-@media (min-width: 768px) {
-    .illustration {
-        display: inline-block;
-        justify-content: center;
-        align-items: center;
-        img {
-            display: inline-flex;
-            height: 150px;
-            width: auto;
-            margin-top: 50px;
+        p {
+            color: $colorWhite;
         }
     }
+}
 
-    .review-carousel {
-        padding-left: 50px;
+@media (max-width: 768px) {
+    .testimonials {
+        padding-top: 1rem;
     }
 }
