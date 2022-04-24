@@ -3,7 +3,7 @@ import NavBar from './components/NavBarWithBgColor';
 import Promotional from './components/Promotional';
 import FeaturedProducts from './components/FeaturedProducts';
 import SuggestionBox from './components/SuggestionBox';
-import Menu from './components/Menu';
+import Menu from './components/menu/Menu';
 import Gallery from './components/Gallery';
 import About from './components/About';
 import AllGallery from './components/AllGallery';
