@@ -38,7 +38,7 @@
 }
 
 .about-content .about-title {
-  font-size: 4rem;
+  font-size: 2rem;
   font-family: $Cursive;
 
   @media (min-width: 768px){
@@ -50,10 +50,19 @@
 
 }
 
+
+
 .about-content .about-description {
-  margin-left: 20px;
+  margin-left: 10px;
   color: rgb(255, 255, 255);
-  font-size: 1rem;
+  font-size: 0.5rem;
+
+  @media (min-width: 768px){
+    font-size: 1rem;
+  }
+  @media (min-width: 992px){
+    font-size: 1rem;
+  }
 }
 
 .notice {
