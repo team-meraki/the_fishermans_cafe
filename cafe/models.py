@@ -1,4 +1,5 @@
 from email.policy import default
+from tkinter import TRUE
 from django.db import models
 from django.core.validators import MinValueValidator, RegexValidator
 from decimal import Decimal
@@ -90,5 +91,9 @@ class About(models.Model):
         pass
 
     objects = AboutManager()
+
+class FeaturedProduct(models.Model):
+    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=TRUE, related_name="featured")
+    
 
     

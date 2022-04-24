@@ -10,5 +10,8 @@ urlpatterns = [
     path('gallery/', views.ListCreateGallery.as_view(), name='list-create-gallery'),
     path('gallery/<str:pk>', views.RetrieveDestroyGallery.as_view(), name='delete-update-gallery'),
     path('about/', views.RetrieveUpdateAbout.as_view(), name='get-update-about'),
+    path('featured/', views.ListFeaturedProduct.as_view(), name='list-featured'),
+    path('featured/<str:pk>', views.RetrieveUpdateFeaturedProduct.as_view(), name='get-update-featured'),
     path('recaptcha/', views.recaptcha, name="recaptcha")
+    
 ]
