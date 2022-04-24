@@ -14,7 +14,7 @@ export default class ProductsDisplay extends Component {
         <Row className='d-flex justify-content-start'>
           {products.map(product => (
             <Col md={6} xs={12} xxl={4} key={product?.id}>
-              <Card className='menu-card-wrapper'>
+              <Card className='menu-card-wrapper' data-testid='product-card'>
                 <div className='d-flex menu-product-card'>
                   <div className='menu-card-img-wrapper'>
                       <Card.Img className='menu-img' variant="top" src={product.image} />

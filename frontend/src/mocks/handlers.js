@@ -5,6 +5,7 @@ const productURL = "/api/product"
 const galleryURL = "/api/gallery"
 const testimonialURL = "/api/testimonial"
 const recaptchaURL = "/api/recaptcha"
+const aboutURL = "/api/about"
 
 let cafeinfo = {
   id : 1,
@@ -45,6 +46,13 @@ let products = [{
   price : "50.00",
   image : "http://127.0.0.1:8000/media/products/product4.png",
   last_modified : "2022-03-20T04:15:54.579776Z"
+}, {
+  id : 5,
+  name : "product5",
+  category : "dessert",
+  price : "199.00",
+  image : "http://127.0.0.1:8000/media/products/product5.png",
+  last_modified : "2022-03-20T04:15:54.579776Z"
 }]
 
 let testimonials = [{
@@ -77,6 +85,14 @@ let gallery = [{
   id : 4,
   image : "http://127.0.0.1:8000/media/gallery/exterior1.png"
 }]
+
+let about = {
+  id: 1,
+  description: "This is a description",
+  announcement: "This is an announcement",
+  table_accomodation: "This provides table accommodation",
+  delivery_info: "This provides delivery info"
+}
 
 export const handlers = [
     rest.get(infoURL, (req, res, ctx) => {
@@ -160,5 +176,9 @@ export const handlers = [
 
     rest.get(galleryURL, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(gallery))
+    }),
+
+    rest.get(aboutURL, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(about))
     }),
 ]
