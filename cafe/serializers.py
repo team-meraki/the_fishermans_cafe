@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Product, Testimonial, CafeInfo, Gallery, About
+from .models import Product, Testimonial, CafeInfo, Gallery, About, FeaturedProduct
 
 class ProductSerializer(ModelSerializer):
     class Meta:
@@ -25,3 +25,10 @@ class AboutSerializer(ModelSerializer):
     class Meta:
         model = About
         fields = '__all__'
+
+class FeaturedProductSerializer(ModelSerializer):
+    class Meta:
+        model =  FeaturedProduct
+        fields = '__all__'
+
+

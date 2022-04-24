@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView, ListAPIView
 from .models import *
 from .serializers import *
 from django.shortcuts import get_object_or_404
@@ -44,6 +44,14 @@ class RetrieveUpdateAbout(RetrieveUpdateAPIView):
 
     def get_object(self):
         return get_object_or_404(About, pk='1')
+
+class ListFeaturedProduct(ListAPIView):
+    queryset = FeaturedProduct.objects.all()
+    serializer_class = FeaturedProductSerializer
+
+class RetrieveUpdateFeaturedProduct(RetrieveUpdateAPIView):
+    queryset = FeaturedProduct.objects.all()
+    serializer_class = FeaturedProductSerializer
 
 @api_view(['POST'])
 def recaptcha(request):
