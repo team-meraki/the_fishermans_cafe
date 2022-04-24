@@ -100,6 +100,20 @@ body {
     border-bottom: 3px solid $colorOrange !important;
 }
 
+.btn-light {
+    color: #fff6dd;
+    background-color: #ffa658;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 15px;
+    position: static;
+    bottom: 100px;
+}
+
 
 
 

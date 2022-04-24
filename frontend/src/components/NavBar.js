@@ -28,7 +28,7 @@ export default function NavBar() {
         className={scrolled? "navigation-menu changeBgColor" : "navigation-menu"} expand="lg"
     >
         <Container className="d-flex align-items-center justify-contents-center">
-            <Navbar.Brand as={Link} to={""} className="brand-name">
+            <Navbar.Brand as={Link} to={"/"} className="brand-name">
                 <img
                     alt=""
                     src="/images/brand-name-white.svg"
@@ -38,7 +38,7 @@ export default function NavBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="container-fluid justify-content-end me-auto">
-                    <Nav.Link as={Link} to="" className="navigation-link">
+                    <Nav.Link as={Link} to="/" className="navigation-link">
                         <span className='underline-hover'>Home</span>
                     </Nav.Link>
                     <Nav.Link as={Link} to="/menu" className="navigation-link">
