@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Tab, Tabs } from 'react-bootstrap'
+import { Container, Tab, Tabs, Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import ProductsDisplay from './ProductsDisplay'
 
 import '../../styles/Menu.scss';
@@ -51,6 +53,9 @@ export default function Menu() {
               <ProductsDisplay products={drinks} />
             </Tab>
           </Tabs>
+          <div class="d-flex justify-content-center">
+            <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" variant='light'><FontAwesomeIcon icon={ faCartShopping }/></Button>
+          </div>
         </Container>
       </Container>
     )

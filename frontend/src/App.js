@@ -8,6 +8,7 @@ import Gallery from './components/Gallery';
 import About from './components/About';
 import AllGallery from './components/AllGallery';
 import Footer from './components/Footer';
+import DeliveryBanner from './components/DeliveryBanner';
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,7 +19,7 @@ function App() {
       <div className="App">
         <Router>
           <Routes>
-              <Route exact path="" element={<><LandingNavBar /><Promotional/><FeaturedProducts/><SuggestionBox/></>}/>
+              <Route exact path="" element={<><LandingNavBar /><Promotional/><FeaturedProducts/><SuggestionBox/><DeliveryBanner/></>}/>
               <Route exact path="/menu" element={<><NavBar/><Menu/></>}/>
               <Route exact path="/gallery" element={<><NavBar/><Gallery/></>}/>
               <Route exact path="/about" element={<><LandingNavBar/><About/></>}/>

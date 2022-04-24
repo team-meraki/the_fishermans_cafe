@@ -1,6 +1,16 @@
 @import "./variables.scss";
 .suggestion-box-wrapper {
     background-color: $bg-primary;
+    padding-top: 66rem;
+
+    @media (min-width: 576px) { 
+        padding-top: 1rem;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        padding-top: 1rem;
+    }
 }
 .suggestion-box {
     padding-top: 5rem;
