@@ -49,7 +49,7 @@ function Footer(){
 
                         <Col id='contact' className="cafe_contact">
                             <h3>Contact us</h3>
-                            <p><a className="navigation-link" target={"_blank"} rel={"noreferrer"}
+                            <p><a className="navigation-link" target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
                             href={cafeInfo?.facebook}><FontAwesomeIcon icon={ faFacebook }/></a></p>
                             <p><FontAwesomeIcon icon={ faPhone }/> {cafeInfo?.contact_number}</p>
                         </Col>

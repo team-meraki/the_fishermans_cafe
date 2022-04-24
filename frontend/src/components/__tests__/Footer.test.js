@@ -1,21 +1,20 @@
 import { render, screen } from '@testing-library/react'
 import Footer from '../Footer'
 
-it('renders map', () => {
+beforeEach(() => {
     render(<Footer />)
-    const map = screen.getByTitle(/map of the fisherman's cafe/i);
-    expect(map).toBeInTheDocument()
+})
+
+it('renders map', () => {
+    expect(screen.getByTitle(/map of the fisherman's cafe/i)).toBeInTheDocument()
 })
 
 it('renders headings in footer', () => {
-    render(<Footer />)
-    const footerSections = screen.getAllByRole('heading')
-    expect(footerSections.length).toBe(4)
+    expect(screen.getAllByRole('heading').length).toBe(4)
 })
 
 it('renders cafe info', async () => {
-    render(<Footer />)
-    const facebookLink = await screen.findByRole('link', {  name: /facebook/i})
+    const facebookLink = await screen.findByTestId('fb-link')
     expect(facebookLink).toBeInTheDocument()
     const schedule = await screen.findByText(/monday \- sunday 9:00 am \- 7:00 pm/i)
     expect(schedule).toBeInTheDocument()

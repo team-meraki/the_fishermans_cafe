@@ -46,6 +46,13 @@ let products = [{
   price : "50.00",
   image : "http://127.0.0.1:8000/media/products/product4.png",
   last_modified : "2022-03-20T04:15:54.579776Z"
+}, {
+  id : 5,
+  name : "product5",
+  category : "dessert",
+  price : "199.00",
+  image : "http://127.0.0.1:8000/media/products/product5.png",
+  last_modified : "2022-03-20T04:15:54.579776Z"
 }]
 
 let testimonials = [{
