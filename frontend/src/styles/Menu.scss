@@ -96,3 +96,18 @@
     padding-top: 0 !important;
     padding-left: 1.7rem !important;
 }
+
+ul.nav.nav-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    li button {
+        color: $colorOrange !important;
+    }
+}
+
+.products {
+    margin-top: 15px;
+}
