@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import Menu from '../Menu'
+import Menu from '../menu/Menu'
 
 beforeEach(() => {
     render(<Menu />)
@@ -14,14 +14,13 @@ it('redirects to foxcity listing in play store when order button is clicked', ()
 })
 
 it('renders product category buttons', () => {
-    expect(screen.getByRole('button', {name: /meals/i})).toBeInTheDocument()
-    expect(screen.getByRole('button', {name: /desserts/i})).toBeInTheDocument()
-    expect(screen.getByRole('button', {name: /drinks/i})).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /meals/i})).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /drinks/i})).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /desserts/i})).toBeInTheDocument()
 })
 
 it('shows just the meal category products at first mount', async () => {
     const products = await screen.findAllByTestId('product-card')
-    expect(products.length).toBe(2)
     expect(await screen.findByText(/product1/i)).toBeInTheDocument()
     expect(await screen.findByText(/999.00/i)).toBeInTheDocument()
     expect(await screen.findByText(/product3/i)).toBeInTheDocument()

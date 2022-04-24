@@ -53,8 +53,8 @@ export default function Menu() {
               <ProductsDisplay products={drinks} />
             </Tab>
           </Tabs>
-          <div class="d-flex justify-content-center">
-            <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" variant='light'><FontAwesomeIcon icon={ faCartShopping }/></Button>
+          <div className="d-flex justify-content-center">
+            <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" data-testid='order-button' variant='light'><FontAwesomeIcon icon={ faCartShopping }/></Button>
           </div>
         </Container>
       </Container>

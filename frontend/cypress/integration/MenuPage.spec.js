@@ -11,22 +11,30 @@ describe('menu page', () => {
     })
 
     it('shows meal category products on first visit', () => {
-        cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 2)
+        cy.get('.active.show').within(() => {
+            cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 2)
+        })
     })
 
     it('shows dessert category products after clicking dessert button', () => {
         cy.contains(/desserts/i).click({ force: true })
-        cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 1)
+        cy.get('.active.show').within(() => {
+            cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 1)
+        })
     })
 
     it('shows drink category products after clicking drink button', () => {
         cy.contains(/drinks/i).click({ force: true })
-        cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 2)
+        cy.get('.active.show').within(() => {
+            cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 2)
+        })
     })
 
     it('shows meal category products after clicking meal button', () => {
         cy.contains(/meals/i).click({ force: true })
-        cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 2)
+        cy.get('.active.show').within(() => {
+            cy.get('.menu-card-wrapper[data-testid="product-card"]').should('have.length', 2)
+        })
     })
 
 })
