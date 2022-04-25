@@ -17,12 +17,11 @@ export default function FeaturedProducts() {
     }, [])
 
     let getProduct = async () => {
-        let response = await fetch("/api/product/")
+        let response = await fetch("/api/featured/")
         let data = await response.json()
         return data
     }
 
-    products = products.slice(0, 4);
     return (
         <div className='featured-products'>
 
@@ -31,13 +30,13 @@ export default function FeaturedProducts() {
             <h1 className='featured-products-title'>On the menu</h1>
             <Row>   
                 {products.map(product => (
-                    <Col xs={12} md={6} lg={3} key={product?.id}>
+                    <Col xs={12} md={6} lg={3} key={product?.product_id.id}>
                         <Card>
                         <div className='cardImgWrapper'>
-                            <Card.Img className='img-content' variant="top" src={product?.image} />
+                            <Card.Img className='img-content' variant="top" src={product?.product_id.image} />
                         </div>
                             <Card.Body>
-                                <Card.Text> <span>{product?.name}</span> <br/> Php <span>{product?.price}</span>
+                                <Card.Text> <span>{product?.product_id.name}</span> <br/> Php <span>{product?.product_id.price}</span>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
