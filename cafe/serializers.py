@@ -27,6 +27,7 @@ class AboutSerializer(ModelSerializer):
         fields = '__all__'
 
 class FeaturedProductSerializer(ModelSerializer):
+    product_id = ProductSerializer()
     class Meta:
         model =  FeaturedProduct
         fields = '__all__'
