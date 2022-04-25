@@ -46,11 +46,11 @@ class RetrieveUpdateAbout(RetrieveUpdateAPIView):
         return get_object_or_404(About, pk='1')
 
 class ListFeaturedProduct(ListAPIView):
-    queryset = FeaturedProduct.objects.all()
+    queryset = FeaturedProduct.objects.select_related('product_id').all()
     serializer_class = FeaturedProductSerializer
 
 class RetrieveUpdateFeaturedProduct(RetrieveUpdateAPIView):
-    queryset = FeaturedProduct.objects.all()
+    queryset = FeaturedProduct.objects.select_related('product_id').all()
     serializer_class = FeaturedProductSerializer
 
 @api_view(['POST'])
