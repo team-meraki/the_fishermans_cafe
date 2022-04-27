@@ -1,17 +1,23 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import SimpleRouter
 from . import views
+from rest_framework_simplejwt.views import TokenRefreshView
 
-urlpatterns = [
-    path('product/', views.ListCreateProduct.as_view(), name='list-create-product'),
-    path('product/<str:pk>', views.RetrieveUpdateDestroyProduct.as_view(), name='delete-update-product'),
-    path('testimonial/', views.ListCreateTestimonial.as_view(), name='list-create-testimonial'),
-    path('testimonial/<str:pk>', views.RetrieveUpdateDestroyTestimonial.as_view, name='delete-update-testimonial'),
+router = SimpleRouter()
+router.register(r'product', views.ProductViewSet, basename='product')
+router.register(r'testimonial', views.TestimonialViewSet, basename='testimonial')
+router.register(r'gallery', views.GalleryViewSet, basename='gallery')
+router.register(r'featured', views.FeaturedProductViewSet, basename='featured')
+urlpatterns = router.urls
+
+urlpatterns += [
     path('cafeinfo/', views.RetrieveUpdateCafeInfo.as_view(), name='get-update-cafeInfo'),
-    path('gallery/', views.ListCreateGallery.as_view(), name='list-create-gallery'),
-    path('gallery/<str:pk>', views.RetrieveDestroyGallery.as_view(), name='delete-update-gallery'),
     path('about/', views.RetrieveUpdateAbout.as_view(), name='get-update-about'),
-    path('featured/', views.ListFeaturedProduct.as_view(), name='list-featured'),
-    path('featured/<str:pk>', views.RetrieveUpdateFeaturedProduct.as_view(), name='get-update-featured'),
-    path('recaptcha/', views.recaptcha, name="recaptcha")
-    
+    path('recaptcha/', views.recaptcha, name="recaptcha"),
+    path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('user/', views.RegisterView.as_view(), name='register-user'),
+    path('user/update/password', views.ChangePasswordView.as_view(), name='change-password'),
+    path('user/update/name', views.ChangeUsernameOrEmailView.as_view(), name='change-username-or-email'),
+    path('token/blacklist/', views.BlacklistToken.as_view(), name='blacklist-token'),
 ]
