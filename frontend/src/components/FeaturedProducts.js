@@ -9,6 +9,7 @@ export default function FeaturedProducts() {
         let mounted = true
         getProduct()
         .then(products => {
+            console.log(products)
             if(mounted) {
                 setProduct(products)
             }
@@ -29,14 +30,14 @@ export default function FeaturedProducts() {
         <Container>
             <h1 className='featured-products-title'>On the menu</h1>
             <Row>   
-                {products.map(featured => (
-                    <Col xs={12} md={6} lg={3} key={featured?.product_id}>
+                {products.map((featured,index) => (
+                    <Col xs={12} md={6} lg={3} key={index}>
                         <Card>
                         <div className='cardImgWrapper'>
-                            <Card.Img className='img-content' variant="top" src={featured?.product.image} />
+                            <Card.Img className='img-content' variant="top" src={featured.product?.image} />
                         </div>
                             <Card.Body>
-                                <Card.Text> <span>{featured?.product.name}</span> <br/> Php <span>{featured?.product.price}</span>
+                                <Card.Text> <span>{featured.product.name}</span> <br/> Php <span>{featured.product.price}</span>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

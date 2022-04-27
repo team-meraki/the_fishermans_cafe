@@ -97,7 +97,8 @@ let about = {
 
 let featured = [{
   id : 1,
-  product_id : {
+  product_id : 1,
+  product : {
     id : 1,
     name : "product1",
     category : "meal",
@@ -107,7 +108,8 @@ let featured = [{
   }
 }, {
   id : 2,
-  product_id : {
+  product_id : 2,
+  product : {
     id : 2,
     name : "product2",
     category : "drink",
@@ -117,7 +119,8 @@ let featured = [{
   }
 }, {
   id : 3,
-  product_id : {
+  product_id : 3,
+  product : {
     id : 3,
     name : "product3",
     category : "meal",
@@ -127,7 +130,8 @@ let featured = [{
   }
 }, {
   id : 4,
-  product_id : {
+  product_id : 4,
+  product : {
     id : 4,
     name : "product4",
     category : "drink",
