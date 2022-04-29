@@ -1,0 +1,25 @@
+@import "../variables.scss";
+
+.main-container{
+  font-family: $AdminFont;
+}
+
+.main_content{
+  width: auto;
+  margin-left: 250px;
+}
+
+.main_content .header{
+  margin-top: 30px;
+  padding: 20px;
+  color: #2d2d2d;
+}
+
+.main_content .content-wrapper{
+  margin: 20px;
+  font-size: 16px;
+}
+
+.main_content .content-wrapper .content{
+  margin-bottom: 20px;
+}

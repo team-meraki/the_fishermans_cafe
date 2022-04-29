@@ -1,0 +1,88 @@
+@import "../variables.scss";
+
+
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.wrapper .sidebar{
+  width: 230px;
+  height: 100%;
+  background: white;
+  position: fixed;
+}
+
+.wrapper .sidebar .brand-name-wrapper {
+  padding: 20px 5px;
+  margin-bottom: 20px;
+
+  .cafe-logo-img {
+    width: 60px;
+    height: auto;
+    left: 35%;
+    position: relative;
+  }
+
+  .brand-name-img {
+    margin-top: 10px;
+    left: 5%;
+    position: relative;
+  }
+}
+
+
+.wrapper .sidebar .brand-name-wrapper img{
+  width: 190px;
+  height: auto;
+}
+
+.wrapper .sidebar ul {
+  padding-left: 0;
+}
+
+.wrapper .sidebar ul li{
+  padding: 17px 10px;
+  list-style: none;
+  
+}    
+
+.wrapper .sidebar ul li a{
+  color: #2e2c2c;
+  display: block;
+  font-size: 15px;
+}
+
+.wrapper .sidebar ul li:hover{
+  background-color: #c4c4c436;
+}
+    
+.wrapper .sidebar ul li:hover a{
+  color: rgb(40, 40, 40);
+}
+
+ 
+.wrapper .sidebar .sidenav-footer{
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  transform: translateX(-50%);
+  display: flex;
+  margin-bottom:  30px;
+
+  a {
+    padding-left: 30px;
+    font-size: 14px;
+    color: #919191;
+  }
+
+  a:hover {
+    color: rgb(26, 25, 25);
+  }
+}
+
+span {
+  margin-right: 20px;
+  margin-left: 10px;
+}

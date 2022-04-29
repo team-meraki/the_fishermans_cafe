@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 // colors
 $bg-primary: #e8e8e8;
@@ -13,6 +14,7 @@ $colorWhite: #fff;
 $Inter: 'Montserrat', sans-serif;
 $Code: "source-code-pro", "Courier New", monospace;
 $Cursive: "Square Peg", serif;
+$AdminFont: "Josefin Sans", sans-serif;
 
 @mixin breakpoint($point) {
     @if $point == md {
