@@ -9,7 +9,6 @@ export default function FeaturedProducts() {
         let mounted = true
         getProduct()
         .then(products => {
-            console.log(products)
             if(mounted) {
                 setProduct(products)
             }
