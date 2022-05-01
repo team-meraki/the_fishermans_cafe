@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 // styles 
 import '../../styles/admin/SideNavbar.scss';
@@ -29,13 +30,13 @@ export default function SideNavbar() {
         <hr className='h-line'></hr>
         <ul>
             <li>
-              <a href="#">
+              <Link to="/admin/all-products" href="#">
               <span><img src={productsIcon}></img></span>
-               All Products</a>
+               All Products</Link>
             </li>
-            <li><a href="#"><span><img src={featuredIcon}></img></span>Featured Products</a></li>
-            <li><a href="#"><span><img src={galleryIcon}></img></span>Gallery</a></li>
-            <li><a href="#"><span><img src={cafeIcon}></img></span>About the cafe</a></li>
+            <li><Link to="/admin/featured"><span><img src={featuredIcon}></img></span>Featured Products</Link></li>
+            <li><Link to="/admin/all-gallery"><span><img src={galleryIcon}></img></span>Gallery</Link></li>
+            <li><Link to="/admin/about"><span><img src={cafeIcon}></img></span>About the cafe</Link></li>
         </ul>
         <div class="sidenav-footer">
           <a href="#"><span><img src={logoutIcon}></img></span>Log out</a>
