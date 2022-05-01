@@ -9,6 +9,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import DeliveryBanner from './components/DeliveryBanner';
 import AllProducts from './components/admin/AllProducts';
+import AllGallery from './components/admin/Gallery';
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,6 +27,7 @@ function App() {
 
               {/* Admin */}
               <Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
+              <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>
           </Routes>
         </Router>
 
