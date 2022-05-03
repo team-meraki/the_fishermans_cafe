@@ -47,7 +47,9 @@ export default function Gallery() {
                             <tr className='text-center'>
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
-                                <td><button type="button "></button></td>
+                                <td><button type="btn btn-success" data-toggle="modal" data-target="#sampleModal"
+                                onClick={() => this.editModalItem(index)}>edit</button> {" "}
+                                </td>
                             </tr>
                     
                         ))}
