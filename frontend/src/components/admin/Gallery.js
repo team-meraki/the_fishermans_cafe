@@ -3,6 +3,7 @@ import SideNavbar from "./SideNavbar";
 import '../../styles/admin/Body.scss';
 import { Table } from 'react-bootstrap';
 import '../../styles/admin/AdminTable.scss';
+import { Button } from 'react-bootstrap';
 
 export default function Gallery() {
   let [galleryAdmin, setGalleryAdmin] = useState([]);
@@ -36,7 +37,7 @@ export default function Gallery() {
                 <Table responsive className='table-striped table-bordered'>
                     <thead>
                         <tr className='text-center'>
-                            <th>Id</th>
+                            <th>ID</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
@@ -46,7 +47,9 @@ export default function Gallery() {
                             <tr className='text-center'>
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
+                                <td><button type="button "></button></td>
                             </tr>
+                    
                         ))}
                     </tbody>
                 </Table>
