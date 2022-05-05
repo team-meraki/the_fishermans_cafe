@@ -5,6 +5,10 @@ import { Table } from 'react-bootstrap';
 import '../../styles/admin/AdminTable.scss';
 import { Button } from 'react-bootstrap';
 
+// icons
+import editIcon from '../../icons/edit.svg'
+import deleteIcon from '../../icons/delete.svg'
+
 export default function Gallery() {
   let [galleryAdmin, setGalleryAdmin] = useState([]);
 
@@ -47,8 +51,13 @@ export default function Gallery() {
                             <tr className='text-center'>
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
-                                <td><button type="btn btn-success" data-toggle="modal" data-target="#sampleModal"
-                                onClick={() => this.editModalItem(index)}>edit</button> {" "}
+                                <td>
+                                    <Button variant="primary" type="btn btn-primary" data-toggle="modal" data-target="#sampleModal"
+                                    onClick={() => (gallery.id)}>Edit 
+                                    <img src= {editIcon} height="20"/></Button> {" "}
+                                    <Button variant="primary "type="btn btn-primary" data-toggle="modal" data-target="#sampleModal"
+                                    onClick={() => (gallery.id)}>Delete
+                                    <img src= {deleteIcon} height="20"/></Button> {" "}
                                 </td>
                             </tr>
                     
