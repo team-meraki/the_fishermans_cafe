@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap';
 import '../../styles/admin/AdminTable.scss';
-
+import {formatDate} from '../common.js'
 
 export default class AllProductsDisplay extends Component {
     render() {
@@ -9,13 +9,12 @@ export default class AllProductsDisplay extends Component {
   
       return (
         <div className='tablewrapper'>
-                <Table responsive className='table-striped table-bordered'>
+                <Table responsive>
                     <thead>
                         <tr className='text-center'>
-                            <th>Id</th>
+                            <th></th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Image</th>
                             <th>Last Modified</th>
                             <th>Action</th>
                         </tr>
@@ -23,11 +22,10 @@ export default class AllProductsDisplay extends Component {
                     <tbody>
                         {products.map(product => ( 
                             <tr className='text-center'>
-                                <td>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.price}</td>
                                 <td><img alt='product-img' className="img-content" src={product.image}/></td>
-                                <td>{product.last_modified}</td>
+                                <td>{product.name}</td>
+                                <td>{"Php " + product.price}</td>
+                                <td>{formatDate(product.last_modified)}</td>
                             </tr>
                         ))}
                     </tbody>
