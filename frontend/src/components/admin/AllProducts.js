@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Tabs, Tab } from 'react-bootstrap'
+import { Tabs, Tab, DropdownButton, Dropdown } from 'react-bootstrap'
 import SideNavbar from "./SideNavbar";
 import AllProductsDisplay from './AllProductsDisplay'
 import '../../styles/admin/Body.scss';
@@ -32,20 +32,42 @@ export default function AllProducts() {
 
     // Filter products the belong to drink catgory
     const drinks = products.filter(product => product.category === 'drink');
-  
+    
+    // Monitors state of filter value
+    const [value, setValue] = useState('category');
+    const handleCategorySelect = (e) => {
+      setValue(e)
+    }
+
   return (
     <div className='main-container'>
       <SideNavbar/>
       <div className='main_content'>
         <div className='header'>
-          <h2>Admin Products</h2>
+          <h2>Products</h2>
         </div>
         <div className='content-wrapper'>
-          <Tabs defaultActiveKey="meal">
-              <Tab eventKey="meal" title="Meals"><AllProductsDisplay products={meals}/></Tab>
-              <Tab eventKey="dessert" title="Desserts"><AllProductsDisplay products={desserts}/></Tab>
-              <Tab eventKey="drink" title="Drinks"><AllProductsDisplay products={drinks}/></Tab>
-          </Tabs>
+          <div className='d-flex align-items-center'>
+            <h6>Filter by: </h6>
+            <div>
+              <DropdownButton 
+                id="dropdown-basic-button" 
+                title={value} 
+                variant='info'
+                size="sm"
+                onSelect={handleCategorySelect}
+              >
+                <Dropdown.Item eventKey="meals">Meals</Dropdown.Item>
+                <Dropdown.Item eventKey="desserts">Desserts</Dropdown.Item>
+                <Dropdown.Item eventKey="drinks">Drinks</Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </div>
+        
+          {(value === 'meals' || value === 'category') && <AllProductsDisplay products={meals}/>}
+          {(value === 'desserts') && <AllProductsDisplay products={desserts}/>}
+          {(value === 'drinks') && <AllProductsDisplay products={drinks}/>}
+          
         </div>
       </div>
     </div>
