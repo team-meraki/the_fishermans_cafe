@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Tabs, Tab, DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import SideNavbar from "./SideNavbar";
 import AllProductsDisplay from './AllProductsDisplay'
-import '../../styles/admin/Body.scss';
+import '../../styles/admin/Common.scss';
 
 // icons
 import addIcon from '../../icons/add.svg'
