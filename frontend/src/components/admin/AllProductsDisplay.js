@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap';
-import '../../styles/admin/AdminTable.scss';
+import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
 
 export default class AllProductsDisplay extends Component {

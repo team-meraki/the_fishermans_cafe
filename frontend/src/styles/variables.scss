@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
 
 // colors
 $bg-primary: #e8e8e8;
@@ -116,33 +116,6 @@ body {
     bottom: 100px;
 }
 
-
-// --- FOR ADMIN BUTTONS ---
-.btn-info {
-    color: #228c95 !important;
-    font-weight: normal;
-    background-color: transparent !important;
-    text-transform: capitalize;
-    font-size: 12px;
-    border: none !important;
-
-     // Small screens (landscape phones)
-     @media (min-width: 576px) { 
-        font-size: 14px;
-     }
-
-    // Medium devices (tablets, 768px and up)
-    @media (min-width: 768px) { 
-        font-size: 16px;
-    }
-}
-
-.btn-info:active,
-.btn-info:visited,
-.btn-info:focus {
-    color: #228c95 !important;
-    border: none !important;
-}
 
 
 
