@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import SideNavbar from "./SideNavbar";
 import { Col, Row, Table } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
+// icons
+import editIcon from '../../icons/edit.svg'
+import deleteIcon from '../../icons/delete.svg'
 import addIcon from '../../icons/add.svg'
 
 // css
@@ -39,9 +42,23 @@ export default function Gallery() {
             </div>
             
             <div className='header-add-btn'>
-                <Button variant='success'>
-                    <span><img src={addIcon}></img></span>Add a photo
-                </Button>
+                <Button type="button" variant='success'>
+                    <span><img src={addIcon}></img></span>Add a Photo</Button>
+                    <Form>
+                        <div class="form-group">
+                            <label for="inputProductName">Product Name *</label>
+                            <input type="name" class="form-control" id="inputProductName" placeholder="Enter product name"></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputProductPrice">Product Price *</label>
+                            <input type="price" class="form-control" id="inputProductPrice" placeholder="Enter product price"></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputProductImg">Product Image</label>
+                            <input type="file" class="form-control-file" id="inputProductImg"></input>
+                        </div>
+                        <Button type="Submit" class="btn btn-primary">Submit</Button>
+                    </Form> 
             </div>
         </div>
         <div className='content-wrapper'>
@@ -59,7 +76,14 @@ export default function Gallery() {
                             <tr className='text-center'>
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
-                                <td><button type="button "></button></td>
+                                <td>
+                                    <Button variant="primary" type="btn btn-primary" data-toggle="modal" data-target="#sampleModal"
+                                    onClick={() => (gallery.id)}>Edit 
+                                    <img src= {editIcon} height="20"/></Button> {" "}
+                                    <Button variant="primary "type="btn btn-primary" data-toggle="modal" data-target="#sampleModal"
+                                    onClick={() => (gallery.id)}>Delete
+                                    <img src= {deleteIcon} height="20"/></Button> {" "}
+                                </td>
                             </tr>
                     
                         ))}
