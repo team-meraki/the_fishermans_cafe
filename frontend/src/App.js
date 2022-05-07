@@ -15,6 +15,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Login from './components/admin/Login';
 function App() {
   return (
       <div className="App">
@@ -26,6 +27,7 @@ function App() {
               <Route exact path="/about" element={<><LandingNavBar/><About/><Footer /></>}/>
 
               {/* Admin */}
+              <Route exact path="/admin" element={<><Login/></>}/>
               <Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
               <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>
           </Routes>
