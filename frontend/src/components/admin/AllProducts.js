@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import { Tabs, Tab, DropdownButton, Dropdown } from 'react-bootstrap'
+import { Tabs, Tab, DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import SideNavbar from "./SideNavbar";
 import AllProductsDisplay from './AllProductsDisplay'
 import '../../styles/admin/Body.scss';
+
+// icons
+import addIcon from '../../icons/add.svg'
 
 export default function AllProducts() {
   let [products, setProduct] = useState([]);
@@ -46,6 +49,7 @@ export default function AllProducts() {
         <div className='header'>
           <h2>Products</h2>
         </div>
+
         <div className='content-wrapper'>
           <div className='d-flex align-items-center'>
             <h6>Filter by: </h6>
