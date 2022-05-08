@@ -1,9 +1,9 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
-import { ToastContainer, toast } from 'react-toastify';
-import { deleteProduct } from '../../adminAPI';
+import { toast } from 'react-toastify';
+import { deleteProduct, updateProduct } from '../../adminAPI';
 import { reloadPage } from '../common';
 
 // icons & css
@@ -13,21 +13,89 @@ import 'react-toastify/dist/ReactToastify.css';
 import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
-export default function AllProductsDisplay ({products, handleDelClose, onClickDelBtn, delShow, selected, handleEditClose, handleEditShow, editShow} ) {
+export default function AllProductsDisplay ({products}) {
+    
+    const [selected, setSelected] = useState('') // for edit and delete modals
+    
+    // DELETE MODAL HANDLER
+    const [delShow, setDelShow] = useState(false);
+    const handleDelClose = () => setDelShow(false);
+    const handleDelShow = () => setDelShow(true);
+
+    // EDIT MODAL HANDLER
+    const [editShow, setEditShow] = useState(false);
+    const handleEditClose = () => setEditShow(false);
+    const handleEditShow = () => setEditShow(true);
+
+
+    function onClickDelBtn(id) {
+        handleDelShow();
+        const str_id = id.toString();
+        setSelected(str_id);
+    }
+
+    function onClickEditBtn(id) {
+        handleEditShow();
+        const str_id = id.toString();
+        setSelected(str_id);
+    }
+    
+    // Edited Product
+    const [editedProduct, setEditedProduct] = useState({
+        name: "",
+        category: "",
+        price: "",
+        image: "",
+      });
+  
+      // Edit Product Handler
+      const handleEditChange = (e) => {
+        const { name, value } = e.target;
+        setEditedProduct(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+      }
+      const handleEditImage = (e) => {
+        let editedImg = { ...editedProduct };
+        editedImg["image"] = e.target.files[0];
+        setEditedProduct(editedImg);
+      }
+
+    // EDIT API
+    async function editProduct() {
+        const response = await updateProduct(selected, editedProduct);
+        console.log(response)
+        if (response.data.status === 200) {
+        toast.success('Successfully edited a product!');
+        setTimeout(function () {
+            reloadPage();
+        }, 2000);
+        }
+        if (response.data.status === 400) {
+            toast.error('Failed to edit a product!');
+        }
+    }
 
     // DELETE API
-  async function delProduct() {
-    const response = await deleteProduct(selected);
-    if (response.data.status === 204) {
-      toast.success('Successfully deleted a product!');
-      setTimeout(function () {
-        reloadPage();
-      }, 2000);
+    async function delProduct() {
+        const response = await deleteProduct(selected);
+        console.log(response)
+        if (response.data.status === 204) {
+        toast.success('Successfully deleted a product!');
+        setTimeout(function () {
+            reloadPage();
+        }, 2000);
+        }
+        if (response.data.status === 400) {
+            toast.error('Failed to delete a product!');
+        }
+        if (response.data.status === 404) {
+            toast.error('Product not found!');
+        }
     }
-    if (response.data.status === 400) {
-        toast.error('Failed to delete a product!');
-    }
-  }
+
+    
 
       return (
         <div className='tablewrapper'>
@@ -53,7 +121,7 @@ export default function AllProductsDisplay ({products, handleDelClose, onClickDe
                                 onClick={() => onClickDelBtn(product.id)}>
                                 <img src= {deleteIcon} height="20"/></Button> {" "}
 
-                                <Button variant="primary "type="btn" onClick={handleEditShow}>
+                                <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product.id)}>
                                 <img src= {editIcon} height="20"/></Button> {" "}
                             </td>
                         </tr>
@@ -77,68 +145,73 @@ export default function AllProductsDisplay ({products, handleDelClose, onClickDe
                 </Modal.Footer>
             </Modal>
 
-            {/* EDIT MODAL HANDLER 
+            {/* EDIT MODAL HANDLER */}
             <Modal show={editShow} onHide={handleEditClose} className='admin-modal'>
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                    Edit Product
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                    <Form.Group key='inline-radio' className="admin-formg4">
-                        <div className='d-flex justify-content-between align-items-center'>
-                        <Form.Label className='form-label-category'>Category</Form.Label>
-                        <div>
-                        <Form.Check
-                            inline
-                            label="Meal"
-                            name="group1"
-                            type='radio'
-                            id='inline-radio-1'
-                        />
-                        <Form.Check
-                            inline
-                            label="Dessert"
-                            name="group1"
-                            type='radio'
-                            id='inline-radio-2'
-                        />
-                        <Form.Check
-                            inline
-                            label="Drinks"
-                            name="group1"
-                            type='radio'
-                            id='inline-radio-3'
-                        />
-                        </div>
-                        </div>
-                    </Form.Group>
-                    <Form.Group className="admin-formg1">
-                        <Form.Label>Product Name *</Form.Label>
-                        <Form.Control type="text" required></Form.Control>
-                    </Form.Group>
-                    <Form.Group className="admin-formg2">
-                        <Form.Label>Product Price *</Form.Label>
-                        <Form.Control type="number" min="0.01" step="0.01" placeholder="Ex. 100" required></Form.Control>
-                    </Form.Group>
-                    <Form.Group className="admin-formg3">
-                        <Form.Label>Product Image *</Form.Label>
-                        <Form.Control type="file" required></Form.Control>
-                    </Form.Group>
-                    
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="outline-danger" onClick={handleEditClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="success" type="submit">
-                        Save changes
-                    </Button>
-                </Modal.Footer>
+            <Modal.Header closeButton>
+                <Modal.Title>Edit Product</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                <Form.Group key='inline-radio' className="admin-formg4">
+                    <div className='d-flex justify-content-between align-items-center'>
+                    <Form.Label className='form-label-category'>Category</Form.Label>
+                    <div>
+                    <Form.Check
+                        inline
+                        label="Meal"
+                        name="category"
+                        type='radio'
+                        id='inline-radio-1'
+                        value='meal'
+                        defaultChecked
+                        onChange={(e) => handleEditChange(e)}
+                    />
+                    <Form.Check
+                        inline
+                        label="Dessert"
+                        name="category"
+                        type='radio'
+                        id='inline-radio-2'
+                        value='dessert'
+                        onChange={(e) => handleEditChange(e)}
+                    />
+                    <Form.Check
+                        inline
+                        label="Drinks"
+                        name="category"
+                        type='radio'
+                        id='inline-radio-3'
+                        value='drink'
+                        onChange={(e) => handleEditChange(e)}
+                    />
+                    </div>
+                    </div>
+                </Form.Group>
+                <Form.Group className="admin-formg1">
+                    <Form.Label>Product Name *</Form.Label>
+                    <Form.Control type="text" name="name" required onChange={(e) => handleEditChange(e)}></Form.Control>
+                </Form.Group>
+                <Form.Group className="admin-formg2">
+                    <Form.Label>Product Price *</Form.Label>
+                    <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required onChange={(e) => handleEditChange(e)}></Form.Control>
+                </Form.Group>
+                <Form.Group className="admin-formg3">
+                    <Form.Label>Product Image *</Form.Label>
+                    <Form.Control type="file" name="image" required onChange={(e) => handleEditImage(e)}></Form.Control>
+                </Form.Group>
+                
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="outline-danger" onClick={handleEditClose}>
+                Cancel
+                </Button>
+                <Button variant="success" type="submit" onClick={() => editProduct()}>
+                Save changes
+                </Button>
+            </Modal.Footer>
             </Modal>
-            */}
+            
         </div>
       )
     

@@ -1,4 +1,4 @@
-import { deleteApi, getApi, postApi } from "./adminAxios";
+import { deleteApi, getApi, postApi, putApi } from "./adminAxios";
 
 // GET
 export const getAllProducts = async () => {
@@ -41,6 +41,31 @@ export const deleteProduct = async (id) => {
      console.log(response);
     return ({data:response});   
   } catch (error) {
-    return ({error: error});
+    return ({data: error.response});
   }
  }
+
+ 
+// EDIT
+export const updateProduct = async (id, product) => {
+  try {
+    let form_data = new FormData();
+      if (product.image)
+          form_data.append("image", product.image, product.image.name);
+      form_data.append("name", product.name);
+      form_data.append("price", product.price);
+      form_data.append("category", product.category);
+  
+     const response = await putApi(
+       '/api/product/' + id +'/',
+       form_data,
+       { headers: {
+            "Content-Type": "multipart/form-data",
+        },}
+      )
+     return ({data:response});   
+   } catch (error) {
+     return ({data: error});
+   }
+ }
+
