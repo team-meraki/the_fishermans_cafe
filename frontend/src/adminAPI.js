@@ -1,5 +1,9 @@
 import { deleteApi, getApi, postApi, putApi } from "./adminAxios";
 
+/* =====================================
+   --- ADMIN PRODUCTS API CALLS ---
+  ===================================== */ 
+
 // GET
 export const getAllProducts = async () => {
  try {
@@ -43,7 +47,7 @@ export const deleteProduct = async (id) => {
   } catch (error) {
     return ({data: error.response});
   }
- }
+}
 
  
 // EDIT
@@ -69,3 +73,48 @@ export const updateProduct = async (id, product) => {
    }
  }
 
+/* =====================================
+   --- ADMIN GALLERY API CALLS ---
+  ===================================== */ 
+
+  // GET
+export const getAllPhotos = async () => {
+  try {
+    const response = await getApi('/api/gallery/');
+     console.log(response);
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+ }
+
+// POST
+export const addPhoto = async (gallery) => {
+  try {
+   let form_data = new FormData();
+     if (gallery.image)
+         form_data.append("image", gallery.image, gallery.image.name);
+ 
+    const response = await postApi(
+      '/api/gallery/',
+      form_data,
+      { headers: {
+           "Content-Type": "multipart/form-data",
+       },}
+     )
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+ }
+ 
+ // DELETE
+ export const deletePhoto = async (id) => {
+   try {
+     const response = await deleteApi('/api/gallery/' + id);
+      console.log(response);
+     return ({data:response});   
+   } catch (error) {
+     return ({data: error.response});
+   }
+ }

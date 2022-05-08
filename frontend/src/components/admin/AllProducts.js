@@ -76,11 +76,6 @@ export default function AllProducts() {
           toast.error('Invalid field: Failed to add the product!');
       }
     }
-
-  
-
-  
-
     
     useEffect(() => {
       fetchAllProducts();
