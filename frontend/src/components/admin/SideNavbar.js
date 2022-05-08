@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
 
 // styles 
@@ -10,9 +10,11 @@ import featuredIcon from '../../icons/featured.svg'
 import galleryIcon from '../../icons/gallery.svg'
 import cafeIcon from '../../icons/about-cafe.svg'
 import logoutIcon from '../../icons/logout.svg'
+import AuthContext from './context/AuthContext'
 
 // main 
 export default function SideNavbar() {
+  let { logoutUser } = useContext(AuthContext)
   return (
     <div className="wrapper">
       <div className="sidebar">
@@ -39,7 +41,7 @@ export default function SideNavbar() {
             <li><Link to="/admin/about"><span><img src={cafeIcon}></img></span>About the cafe</Link></li>
         </ul>
         <div class="sidenav-footer">
-          <a href="#"><span><img src={logoutIcon}></img></span>Log out</a>
+          <Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon}></img></span>Log out</Link>
         </div>
 
       </div>

@@ -16,6 +16,9 @@ import {
   Route
 } from "react-router-dom";
 import Login from './components/admin/Login';
+import PrivateRoute from './components/admin/utils/PrivateRoute';
+import { AuthProvider } from './components/admin/context/AuthContext';
+
 function App() {
   return (
       <div className="App">
@@ -27,9 +30,15 @@ function App() {
               <Route exact path="/about" element={<><LandingNavBar/><About/><Footer /></>}/>
 
               {/* Admin */}
-              <Route exact path="/admin" element={<><Login/></>}/>
-              <Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
-              <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>
+              <Route exact path="/admin" element={<AuthProvider/>}>
+                <Route exact path="/admin" element={<Login/>}/>
+                <Route exact path="/admin" element={<PrivateRoute/>}>
+                  <Route exact path="/admin/all-products" element={<AllProducts/>}/>
+                  <Route exact path="/admin/all-gallery" element={<AllGallery/>}/>
+              {/*<Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
+              <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>*/}
+                </Route>
+              </Route>
           </Routes>
         </Router>
 
