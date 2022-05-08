@@ -1,4 +1,4 @@
-import { getApi, postApi } from "./adminAxios";
+import { deleteApi, getApi, postApi } from "./adminAxios";
 
 // GET
 export const getAllProducts = async () => {
@@ -21,8 +21,6 @@ export const addProduct = async (product) => {
     form_data.append("price", product.price);
     form_data.append("category", product.category);
 
-
-
    const response = await postApi(
      '/api/product/',
      form_data,
@@ -30,9 +28,19 @@ export const addProduct = async (product) => {
           "Content-Type": "multipart/form-data",
       },}
     )
-   // console.log(response);
    return ({data:response});   
  } catch (error) {
    return ({error: error});
  }
 }
+
+// DELETE
+export const deleteProduct = async (id) => {
+  try {
+    const response = await deleteApi('/api/product/' + id);
+     console.log(response);
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+ }

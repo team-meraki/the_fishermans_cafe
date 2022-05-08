@@ -3,7 +3,7 @@ import SideNavbar from "./SideNavbar";
 import AllProductsDisplay from './AllProductsDisplay'
 import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
-import { addProduct, getAllProducts } from '../../adminAPI';
+import { addProduct, deleteProduct, getAllProducts } from '../../adminAPI';
 import { reloadPage } from '../common';
 
 // icons & css
@@ -16,8 +16,31 @@ export default function AllProducts() {
   let [meals, setMeals] = useState([]);
   let [desserts, setDesserts] = useState([]);
   let [drinks, setDrinks] = useState([]);
-  //let [loading, setLoading] = useState(true);
 
+  // DELETE MODAL HANDLER
+  const [delShow, setDelShow] = useState(false);
+  const handleDelClose = () => setDelShow(false);
+  const handleDelShow = () => setDelShow(true);
+
+  // EDIT MODAL HANDLER
+  const [editShow, setEditShow] = useState(false);
+  const handleEditClose = () => setEditShow(false);
+  const handleEditShow = () => setEditShow(true);
+
+  // ADD MODAL HANDLER
+  const [addShow, setAddShow] = useState(false);
+  const handleAddClose = () => setAddShow(false);
+  const handleAddShow = () => setAddShow(true);
+
+  const [selected, setSelected] = useState('') // for edit and delete modals
+  // Monitors state of filter value
+  const [value, setValue] = useState('All');
+  const handleCategorySelect = (e) => {
+    setValue(e)
+  }
+
+  
+  // Get all products
   async function fetchAllProducts() {
     const response = await getAllProducts();
     setProduct(response.data.data);
@@ -25,12 +48,6 @@ export default function AllProducts() {
     setDesserts(response.data.data.filter(product => product.category === 'dessert'))
     setDrinks(response.data.data.filter(product => product.category === 'drink'))
   }
-
-    // Monitors state of filter value
-    const [value, setValue] = useState('All');
-    const handleCategorySelect = (e) => {
-      setValue(e)
-    }
 
     // Add Product
     const [newProduct, setNewProduct] = useState({
@@ -47,46 +64,38 @@ export default function AllProducts() {
           ...prevState,
           [name]: value
       }));
-      //console.log(newProduct);
     }
-
     const handleAddImage = (e) => {
       let newProductWithImg = { ...newProduct };
       newProductWithImg["image"] = e.target.files[0];
       setNewProduct(newProductWithImg);
-      //console.log(newProduct);
     }
-
+    
+    // POST API
     async function addNewProduct() {
       console.log(newProduct)
       const response = await addProduct(newProduct);
       console.log(response);
-      if(response.data.status === 201) {
+      if (response.data.status === 201) {
           toast.success('Successfully added a product!');
           setTimeout(function () {
             reloadPage();
           }, 2000);
         }
-      if(response.data.status === 400) {
+      if (response.data.status === 400) {
           toast.error('Invalid field: Failed to add the product!');
       }
+    }
+
+  
+
+  function onClickDelBtn(id) {
+    handleDelShow();
+    const str_id = id.toString();
+    setSelected(str_id);
   }
 
-    // DELETE MODAL HANDLER
-    const [delShow, setDelShow] = useState(false);
-    const handleDelClose = () => setDelShow(false);
-    const handleDelShow = () => setDelShow(true);
-
-    // EDIT MODAL HANDLER
-    const [editShow, setEditShow] = useState(false);
-    const handleEditClose = () => setEditShow(false);
-    const handleEditShow = () => setEditShow(true);
-
-    // ADD MODAL HANDLER
-    const [addShow, setAddShow] = useState(false);
-    const handleAddClose = () => setAddShow(false);
-    const handleAddShow = () => setAddShow(true);
-
+    
     useEffect(() => {
       fetchAllProducts();
     }, [])
@@ -129,8 +138,9 @@ export default function AllProducts() {
           <AllProductsDisplay 
             products={all}
             handleDelClose={handleDelClose}
-            handleDelShow={handleDelShow}
+            onClickDelBtn={onClickDelBtn}
             delShow={delShow}
+            selected={selected}
             handleEditClose={handleEditClose}
             handleEditShow={handleEditShow}
             editShow={editShow}
@@ -141,8 +151,9 @@ export default function AllProducts() {
           <AllProductsDisplay 
             products={meals}
             handleDelClose={handleDelClose}
-            handleDelShow={handleDelShow}
+            onClickDelBtn={onClickDelBtn}
             delShow={delShow}
+            selected={selected}
             handleEditClose={handleEditClose}
             handleEditShow={handleEditShow}
             editShow={editShow}
@@ -153,8 +164,9 @@ export default function AllProducts() {
           <AllProductsDisplay 
             products={desserts}
             handleDelClose={handleDelClose}
-            handleDelShow={handleDelShow}
+            onClickDelBtn={onClickDelBtn}
             delShow={delShow}
+            selected={selected}
             handleEditClose={handleEditClose}
             handleEditShow={handleEditShow}
             editShow={editShow}
@@ -165,8 +177,9 @@ export default function AllProducts() {
           <AllProductsDisplay 
             products={drinks}
             handleDelClose={handleDelClose}
-            handleDelShow={handleDelShow}
+            onClickDelBtn={onClickDelBtn}
             delShow={delShow}
+            selected={selected}
             handleEditClose={handleEditClose}
             handleEditShow={handleEditShow}
             editShow={editShow}
