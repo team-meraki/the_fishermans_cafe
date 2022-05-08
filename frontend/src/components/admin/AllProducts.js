@@ -213,7 +213,6 @@ export default function AllProducts() {
             </Button>
           </Modal.Footer>
         </Modal>
-
       </div>
     </div>
   )
