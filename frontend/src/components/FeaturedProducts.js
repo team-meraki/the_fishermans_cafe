@@ -29,14 +29,14 @@ export default function FeaturedProducts() {
         <Container>
             <h1 className='featured-products-title'>On the menu</h1>
             <Row>   
-                {products.map(product => (
-                    <Col xs={12} md={6} lg={3} key={product?.product_id.id}>
+                {products.map((featured,index) => (
+                    <Col xs={12} md={6} lg={3} key={index}>
                         <Card>
                         <div className='cardImgWrapper'>
-                            <Card.Img className='img-content' variant="top" src={product?.product_id.image} />
+                            <Card.Img className='img-content' variant="top" src={featured.product?.image} />
                         </div>
                             <Card.Body>
-                                <Card.Text> <span>{product?.product_id.name}</span> <br/> Php <span>{product?.product_id.price}</span>
+                                <Card.Text> <span>{featured.product.name}</span> <br/> Php <span>{featured.product.price}</span>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

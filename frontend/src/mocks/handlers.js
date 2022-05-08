@@ -6,6 +6,7 @@ const galleryURL = "/api/gallery"
 const testimonialURL = "/api/testimonial"
 const recaptchaURL = "/api/recaptcha"
 const aboutURL = "/api/about"
+const featuredURL = "/api/featured"
 
 let cafeinfo = {
   id : 1,
@@ -94,6 +95,52 @@ let about = {
   delivery_info: "This provides delivery info"
 }
 
+let featured = [{
+  id : 1,
+  product_id : 1,
+  product : {
+    id : 1,
+    name : "product1",
+    category : "meal",
+    price : "999.00",
+    image : "http://127.0.0.1:8000/media/products/product1.png",
+    last_modified : "2022-03-20T04:16:19.450471Z"
+  }
+}, {
+  id : 2,
+  product_id : 2,
+  product : {
+    id : 2,
+    name : "product2",
+    category : "drink",
+    price : "25.00",
+    image : "http://127.0.0.1:8000/media/products/product2.png",
+    last_modified : "2022-03-20T04:15:54.579776Z"
+  }
+}, {
+  id : 3,
+  product_id : 3,
+  product : {
+    id : 3,
+    name : "product3",
+    category : "meal",
+    price : "199.25",
+    image : "http://127.0.0.1:8000/media/products/product3.png",
+    last_modified : "2022-03-20T04:16:19.450471Z"
+  }
+}, {
+  id : 4,
+  product_id : 4,
+  product : {
+    id : 4,
+    name : "product4",
+    category : "drink",
+    price : "50.00",
+    image : "http://127.0.0.1:8000/media/products/product4.png",
+    last_modified : "2022-03-20T04:15:54.579776Z"
+  }
+}]
+
 export const handlers = [
     rest.get(infoURL, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(cafeinfo))
@@ -180,5 +227,9 @@ export const handlers = [
 
     rest.get(aboutURL, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(about))
+    }),
+
+    rest.get(featuredURL, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(featured))
     }),
 ]

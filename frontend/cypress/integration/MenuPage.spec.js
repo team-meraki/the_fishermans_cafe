@@ -3,8 +3,9 @@
 describe('menu page', () => {
     beforeEach(() => {
         cy.intercept("GET", "/api/cafeinfo", { fixture: "cafeinfo.json" })
-        cy.intercept("GET", "/api/product", { fixture: "products.json" })
+        cy.intercept("GET", "/api/featured", { fixture: "featured_products.json" })
         cy.intercept("GET", "/api/testimonial", { fixture: "testimonials.json" })
+        cy.intercept("GET", "/api/product", { fixture: "products.json" })
         cy.intercept(/https:\/\/maps.googleapis.com\/.*/, { statusCode: 200 })
         cy.visit('/')
         cy.contains(/menu/i).click()
