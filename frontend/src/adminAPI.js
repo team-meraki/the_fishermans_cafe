@@ -14,12 +14,22 @@ export const getAllProducts = async () => {
 // POST
 export const addProduct = async (product) => {
  try {
-   const response = await postApi('/api/product/', {
-    name: product.name,
-    category: product.category, 
-    price: product.price, 
-    //image: product.image
-   });
+  let form_data = new FormData();
+    if (product.image)
+        form_data.append("image", product.image, product.image.name);
+    form_data.append("name", product.name);
+    form_data.append("price", product.price);
+    form_data.append("category", product.category);
+
+
+
+   const response = await postApi(
+     '/api/product/',
+     form_data,
+     { headers: {
+          "Content-Type": "multipart/form-data",
+      },}
+    )
    // console.log(response);
    return ({data:response});   
  } catch (error) {

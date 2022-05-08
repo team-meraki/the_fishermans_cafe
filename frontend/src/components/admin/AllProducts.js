@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import SideNavbar from "./SideNavbar";
 import AllProductsDisplay from './AllProductsDisplay'
-import '../../styles/admin/Common.scss';
-
-// icons
-import addIcon from '../../icons/add.svg'
+import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
 import { addProduct, getAllProducts } from '../../adminAPI';
+import { reloadPage } from '../common';
+
+// icons & css
+import addIcon from '../../icons/add.svg'
+import 'react-toastify/dist/ReactToastify.css';
+import '../../styles/admin/Common.scss';
 
 export default function AllProducts() {
   let [all, setProduct] = useState([]);
@@ -44,20 +47,28 @@ export default function AllProducts() {
           ...prevState,
           [name]: value
       }));
+      //console.log(newProduct);
+    }
+
+    const handleAddImage = (e) => {
+      let newProductWithImg = { ...newProduct };
+      newProductWithImg["image"] = e.target.files[0];
+      setNewProduct(newProductWithImg);
+      //console.log(newProduct);
     }
 
     async function addNewProduct() {
       console.log(newProduct)
       const response = await addProduct(newProduct);
       console.log(response);
-      if(response.data.data.status === 201) {
-          //toast.success(response.data.data.message.success);
+      if(response.data.status === 201) {
+          toast.success('Successfully added a product!');
           setTimeout(function () {
-           // refreshPage();
-          }, 3000);
+            reloadPage();
+          }, 2000);
         }
       if(response.data.status === 400) {
-          //toast.error(response.data.message[0]);
+          toast.error('Invalid field: Failed to add the product!');
       }
   }
 
@@ -84,11 +95,12 @@ export default function AllProducts() {
     <div className='main-container'>
       <SideNavbar/>
       <div className='main_content'>
+      <ToastContainer />
         {/* HEADER  */}
         <div className='d-flex justify-content-between header'>
             <h2>All Products</h2>
             <Button className='add-btn' type="button" variant='success' onClick={handleAddShow}>
-                <span><img src={addIcon}></img></span>
+                <span><img src={addIcon} alt="add icon"></img></span>
                 Add a new product
             </Button>
         </div>
@@ -129,8 +141,10 @@ export default function AllProducts() {
           <AllProductsDisplay 
             products={meals}
             handleDelClose={handleDelClose}
+            handleDelShow={handleDelShow}
             delShow={delShow}
             handleEditClose={handleEditClose}
+            handleEditShow={handleEditShow}
             editShow={editShow}
           />
         }
@@ -139,8 +153,10 @@ export default function AllProducts() {
           <AllProductsDisplay 
             products={desserts}
             handleDelClose={handleDelClose}
+            handleDelShow={handleDelShow}
             delShow={delShow}
             handleEditClose={handleEditClose}
+            handleEditShow={handleEditShow}
             editShow={editShow}
           />
         }
@@ -173,38 +189,45 @@ export default function AllProducts() {
                   <Form.Check
                     inline
                     label="Meal"
-                    name="group1"
+                    name="category"
                     type='radio'
                     id='inline-radio-1'
+                    defaultChecked
+                    value='meal'
+                    onChange={(e) => handleAddChange(e)}
                   />
                   <Form.Check
                     inline
                     label="Dessert"
-                    name="group1"
+                    name="category"
                     type='radio'
                     id='inline-radio-2'
+                    value='dessert'
+                    onChange={(e) => handleAddChange(e)}
                   />
                   <Form.Check
                     inline
                     label="Drinks"
-                    name="group1"
+                    name="category"
                     type='radio'
                     id='inline-radio-3'
+                    value='drink'
+                    onChange={(e) => handleAddChange(e)}
                   />
                   </div>
                 </div>
               </Form.Group>
               <Form.Group className="admin-formg1">
                 <Form.Label>Product Name *</Form.Label>
-                <Form.Control type="text" required onChange={(e) => handleAddChange(e)}></Form.Control>
+                <Form.Control type="text" name="name" required onChange={(e) => handleAddChange(e)}></Form.Control>
               </Form.Group>
               <Form.Group className="admin-formg2">
                 <Form.Label>Product Price *</Form.Label>
-                <Form.Control type="number" min="0.01" step="0.01" placeholder="Ex. 100" required onChange={(e) => handleAddChange(e)}></Form.Control>
+                <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required onChange={(e) => handleAddChange(e)}></Form.Control>
               </Form.Group>
               <Form.Group className="admin-formg3">
                 <Form.Label>Product Image *</Form.Label>
-                <Form.Control type="file" required onChange={(e) => handleAddChange(e)}></Form.Control>
+                <Form.Control type="file" name="image" required onChange={(e) => handleAddImage(e)}></Form.Control>
               </Form.Group>
               
             </Form>
