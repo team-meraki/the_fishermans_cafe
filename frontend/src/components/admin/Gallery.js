@@ -58,25 +58,6 @@ export default function Gallery() {
             </Button>
         </div>
 
-            {/* <div className='header-add-btn'>
-                <Button type="button" variant='success'>
-                    <span><img src={addIcon}></img></span>Add a Photo</Button>
-                    <Form>
-                        <div class="form-group">
-                            <label for="inputProductName">Product Name *</label>
-                            <input type="name" class="form-control" id="inputProductName" placeholder="Enter product name"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputProductPrice">Product Price *</label>
-                            <input type="price" class="form-control" id="inputProductPrice" placeholder="Enter product price"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputProductImg">Product Image</label>
-                            <input type="file" class="form-control-file" id="inputProductImg"></input>
-                        </div>
-                        <Button type="Submit" class="btn btn-primary">Submit</Button>
-                    </Form> 
-            </div> */}
         
         {/* TABLE */}
         <div className='content-wrapper'>
