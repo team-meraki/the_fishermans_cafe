@@ -16,11 +16,11 @@ export default function AllProducts() {
   //let [loading, setLoading] = useState(true);
 
   async function fetchAllProducts() {
-    const response = await getAllProducts().data.data;
-    setProduct(response);
-    setMeals(response.filter(product => product.category === 'meal'))
-    setDesserts(response.filter(product => product.category === 'dessert'))
-    setDrinks(response.filter(product => product.category === 'drink'))
+    const response = await getAllProducts();
+    setProduct(response.data.data);
+    setMeals(response.data.data.filter(product => product.category === 'meal'))
+    setDesserts(response.data.data.filter(product => product.category === 'dessert'))
+    setDrinks(response.data.data.filter(product => product.category === 'drink'))
   }
 
     // Monitors state of filter value
