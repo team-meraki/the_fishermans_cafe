@@ -51,13 +51,13 @@ export default function AllProducts() {
       const response = await addProduct(newProduct);
       console.log(response);
       if(response.data.data.status === 201) {
-          toast.success(response.data.data.message.success);
+          //toast.success(response.data.data.message.success);
           setTimeout(function () {
-            refreshPage();
+           // refreshPage();
           }, 3000);
         }
       if(response.data.status === 400) {
-          toast.error(response.data.message[0]);
+          //toast.error(response.data.message[0]);
       }
   }
 
@@ -177,6 +177,30 @@ export default function AllProducts() {
               <Form.Group className="admin-formg3">
                 <Form.Label>Product Image *</Form.Label>
                 <Form.Control type="file" required onChange={(e) => handleAddChange(e)}></Form.Control>
+              </Form.Group>
+              <Form.Group key='inline-radio' className="admin-formg4 mb-3">
+                <Form.Label>Category *</Form.Label>
+                  <Form.Check
+                    inline
+                    label="Meal"
+                    name="group1"
+                    type='radio'
+                    id='inline-radio-1'
+                  />
+                  <Form.Check
+                    inline
+                    label="Dessert"
+                    name="group1"
+                    type='radio'
+                    id='inline-radio-2'
+                  />
+                  <Form.Check
+                    inline
+                    label="Drinks"
+                    name="group1"
+                    type='radio'
+                    id='inline-radio-3'
+                  />
               </Form.Group>
             </Form>
           </Modal.Body>
