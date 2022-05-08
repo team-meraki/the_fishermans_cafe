@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import SideNavbar from "./SideNavbar";
-import { Col, Row, Table } from 'react-bootstrap';
+import { Col, Modal, Row, Table } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
 
 // icons
-import editIcon from '../../icons/edit.svg'
 import deleteIcon from '../../icons/delete.svg'
 import addIcon from '../../icons/add.svg'
 
 // css
-import '../../styles/admin/Body.scss';
-import '../../styles/admin/AdminTable.scss';
+import '../../styles/admin/Common.scss';
 
 export default function Gallery() {
   let [galleryAdmin, setGalleryAdmin] = useState([]);
@@ -31,17 +29,36 @@ export default function Gallery() {
         let data = await response.json();
         return data;
     }
+    
+    // ADD MODAL HANDLER
+    const [addShow, setAddShow] = useState(false);
+    const handleAddClose = () => setAddShow(false);
+    const handleAddShow = () => setAddShow(true);
+
+    
+    // DELETE MODAL HANDLER
+    const [delShow, setDelShow] = useState(false);
+    const handleDelClose = () => setDelShow(false);
+    const handleDelShow = () => setDelShow(true);
+
+
   
   return (
     <div className='main-container'>
       <SideNavbar/>
+
       <div className='main_content'>
+        
+        {/* HEADER  */}
         <div className='d-flex justify-content-between header'>
-            <div>
-                <h2>Gallery</h2>
-            </div>
-            
-            <div className='header-add-btn'>
+            <h2>Gallery</h2>
+            <Button className='add-btn' type="button" variant='success' onClick={handleAddShow}>
+                <span><img src={addIcon}></img></span>
+                Add a Photo
+            </Button>
+        </div>
+
+            {/* <div className='header-add-btn'>
                 <Button type="button" variant='success'>
                     <span><img src={addIcon}></img></span>Add a Photo</Button>
                     <Form>
@@ -59,8 +76,9 @@ export default function Gallery() {
                         </div>
                         <Button type="Submit" class="btn btn-primary">Submit</Button>
                     </Form> 
-            </div>
-        </div>
+            </div> */}
+        
+        {/* TABLE */}
         <div className='content-wrapper'>
             <div className='tablewrapper'>
                 <Table responsive>
@@ -77,11 +95,8 @@ export default function Gallery() {
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
                                 <td>
-                                    <Button variant="primary" type="btn btn-primary" data-toggle="modal" data-target="#sampleModal"
-                                    onClick={() => (gallery.id)}>Edit 
-                                    <img src= {editIcon} height="20"/></Button> {" "}
-                                    <Button variant="primary "type="btn btn-primary" data-toggle="modal" data-target="#sampleModal"
-                                    onClick={() => (gallery.id)}>Delete
+                                    <Button variant="primary "type="btn" 
+                                    onClick={handleDelShow}>
                                     <img src= {deleteIcon} height="20"/></Button> {" "}
                                 </td>
                             </tr>
@@ -91,6 +106,46 @@ export default function Gallery() {
                 </Table>
             </div>
         </div>
+
+        {/* ADD MODAL */}
+        <Modal show={addShow} onHide={handleAddClose} className='admin-modal'>
+        <Modal.Header closeButton>
+          <Modal.Title>Add a photo to display</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+              <Form.Label>Upload a file</Form.Label>
+              <Form.Control
+                type="file"
+                autoFocus
+              />
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-danger" onClick={handleAddClose}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleAddClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+        </Modal>
+
+        {/* DELETE MODAL */}
+        <Modal show={delShow} onHide={handleDelClose} className='admin-modal'>
+            <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to delete this photo?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>You cannot undo this action.</Modal.Body>
+            <Modal.Footer>
+            <Button variant="danger" onClick={handleDelClose}>
+                Cancel
+            </Button>
+            <Button variant="outline-success" onClick={handleDelClose}>
+                Delete
+            </Button>
+            </Modal.Footer>
+        </Modal>
       </div>
     </div>
   )

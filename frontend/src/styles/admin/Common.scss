@@ -1,8 +1,82 @@
-@import "../variables.scss";
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+.main-container, .admin-modal{
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.main_content{
+  width: auto;
+  margin-left: 250px;
+  margin-right: 15px;
+}
+
+.main_content .header{
+  margin-top: 30px;
+  padding: 10px;
+  color: #2d2d2d;
+
+  .header-add-btn {
+    span {
+      margin-right: 8px;
+      margin-left: 0;
+    }
+  }
+}
+
+.main_content .content-wrapper{
+  margin: 10px;
+  font-size: 16px;
+
+  h6 {
+    margin: 0;
+    margin-right: 8px;
+  }
+}
+
+.main_content .content-wrapper .content{
+  margin-bottom: 20px;
+}
 
 .login-wrapper {
  width: 400px;
  height: 100vh;
  margin-top: 15%;
- font-family: $AdminFont;
+ font-family: "Josefin Sans", sans-serif;
+}
+
+.tablewrapper {
+    border-radius: 4px;
+    max-width: 100%;
+    background: rgb(255, 255, 255);
+    overflow-y: scroll;
+    overflow-x: auto;
+    max-height: 72vh;
+}
+
+.table {
+
+    width: 100%;
+    border-spacing: 0px; 
+    
+    .img-content {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+    }
+    
+    th {    
+        position: sticky; 
+        top: 0px;
+        
+        background-color: #198754;
+        color: white;
+        
+        font-weight: normal;
+        font-size: 16px;
+    }
+
+}
+
+.admin-btn {
+    color:rgba(0, 0, 0, 0.9) !important;
 }
