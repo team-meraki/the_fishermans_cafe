@@ -2,12 +2,32 @@ import React, { Component, useState } from 'react'
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
+import { ToastContainer, toast } from 'react-toastify';
+import { deleteProduct } from '../../adminAPI';
+import { reloadPage } from '../common';
+
+// icons & css
+import 'react-toastify/dist/ReactToastify.css';
 
 // icons
 import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
-export default function AllProductsDisplay ({products, handleDelClose, handleDelShow, delShow, handleEditClose, handleEditShow, editShow} ) {
+export default function AllProductsDisplay ({products, handleDelClose, onClickDelBtn, delShow, selected, handleEditClose, handleEditShow, editShow} ) {
+
+    // DELETE API
+  async function delProduct() {
+    const response = await deleteProduct(selected);
+    if (response.data.status === 204) {
+      toast.success('Successfully deleted a product!');
+      setTimeout(function () {
+        reloadPage();
+      }, 2000);
+    }
+    if (response.data.status === 400) {
+        toast.error('Failed to delete a product!');
+    }
+  }
 
       return (
         <div className='tablewrapper'>
@@ -23,14 +43,14 @@ export default function AllProductsDisplay ({products, handleDelClose, handleDel
                 </thead>
                 <tbody>
                     {products.map(product => ( 
-                        <tr className='text-center'>
+                        <tr key={product.id} className='text-center'>
                             <td><img alt='product-img' className="img-content" src={product.image}/></td>
                             <td>{product.name}</td>
                             <td>{"Php " + product.price}</td>
                             <td>{formatDate(product.last_modified)}</td>
                             <td>
                                 <Button variant="primary "type="btn" 
-                                onClick={handleDelShow}>
+                                onClick={() => onClickDelBtn(product.id)}>
                                 <img src= {deleteIcon} height="20"/></Button> {" "}
 
                                 <Button variant="primary "type="btn" onClick={handleEditShow}>
@@ -51,13 +71,13 @@ export default function AllProductsDisplay ({products, handleDelClose, handleDel
                 <Button variant="danger" onClick={handleDelClose}>
                     Cancel
                 </Button>
-                <Button variant="outline-success" onClick={handleDelClose}>
+                <Button variant="outline-success" type="submit" onClick={()=>delProduct()}>
                     Delete
                 </Button>
                 </Modal.Footer>
             </Modal>
 
-            {/* EDIT MODAL HANDLER */}
+            {/* EDIT MODAL HANDLER 
             <Modal show={editShow} onHide={handleEditClose} className='admin-modal'>
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -118,6 +138,7 @@ export default function AllProductsDisplay ({products, handleDelClose, handleDel
                     </Button>
                 </Modal.Footer>
             </Modal>
+            */}
         </div>
       )
     
