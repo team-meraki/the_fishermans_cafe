@@ -16,6 +16,10 @@ p {
     font-size: 14px;
     color: $colorBrown;
     white-space: pre-wrap;
+
+    .navigation-link {
+        font-size: 25px;
+    }
 }
 
 .mainfooter {
