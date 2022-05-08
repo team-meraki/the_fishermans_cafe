@@ -80,3 +80,15 @@
 .admin-btn {
     color:rgba(0, 0, 0, 0.9) !important;
 }
+
+.form-label {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: small;
+}
+
+.btn:focus,.btn:active, .form-control:focus, .form-control:active,.form-check-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

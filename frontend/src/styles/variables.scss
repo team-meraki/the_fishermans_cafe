@@ -136,3 +136,10 @@ body {
         line-height: 1 !important;
     }
 }
+
+// BUTTON BOOTSTRAP OVERRIDE
+
+.btn:focus,.btn:active, .form-control:focus, .form-control:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
