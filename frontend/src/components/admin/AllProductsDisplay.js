@@ -59,35 +59,64 @@ export default function AllProductsDisplay ({products, handleDelClose, handleDel
 
             {/* EDIT MODAL HANDLER */}
             <Modal show={editShow} onHide={handleEditClose} className='admin-modal'>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                Edit Product
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
-                <Form.Group className="admin-formg1">
-                    <Form.Label>Product Name *</Form.Label>
-                    <Form.Control type="text" placeholder="Product Name" autoFocus required></Form.Control>
-                </Form.Group>
-                <Form.Group className="admin-formg2">
-                    <Form.Label>Product Price *</Form.Label>
-                    <Form.Control type="price" placeholder="PHP" autoFocus required></Form.Control>
-                </Form.Group>
-                <Form.Group className="admin-formg3">
-                    <Form.Label>Product Image *</Form.Label>
-                    <Form.Control type="file" autoFocus></Form.Control>
-                </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="outline-danger" onClick={handleEditClose}>
-                Close
-                </Button>
-                <Button variant="sucess">
-                Save Changes
-                </Button>
-            </Modal.Footer>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                    Edit Product
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                    <Form.Group key='inline-radio' className="admin-formg4">
+                        <div className='d-flex justify-content-between align-items-center'>
+                        <Form.Label className='form-label-category'>Category</Form.Label>
+                        <div>
+                        <Form.Check
+                            inline
+                            label="Meal"
+                            name="group1"
+                            type='radio'
+                            id='inline-radio-1'
+                        />
+                        <Form.Check
+                            inline
+                            label="Dessert"
+                            name="group1"
+                            type='radio'
+                            id='inline-radio-2'
+                        />
+                        <Form.Check
+                            inline
+                            label="Drinks"
+                            name="group1"
+                            type='radio'
+                            id='inline-radio-3'
+                        />
+                        </div>
+                        </div>
+                    </Form.Group>
+                    <Form.Group className="admin-formg1">
+                        <Form.Label>Product Name *</Form.Label>
+                        <Form.Control type="text" required></Form.Control>
+                    </Form.Group>
+                    <Form.Group className="admin-formg2">
+                        <Form.Label>Product Price *</Form.Label>
+                        <Form.Control type="number" min="0.01" step="0.01" placeholder="Ex. 100" required></Form.Control>
+                    </Form.Group>
+                    <Form.Group className="admin-formg3">
+                        <Form.Label>Product Image *</Form.Label>
+                        <Form.Control type="file" required></Form.Control>
+                    </Form.Group>
+                    
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="outline-danger" onClick={handleEditClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="success" type="submit">
+                        Save changes
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </div>
       )

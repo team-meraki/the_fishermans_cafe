@@ -16,11 +16,11 @@ export default function AllProducts() {
   //let [loading, setLoading] = useState(true);
 
   async function fetchAllProducts() {
-    const response = await getAllProducts().data.data;
-    setProduct(response);
-    setMeals(response.filter(product => product.category === 'meal'))
-    setDesserts(response.filter(product => product.category === 'dessert'))
-    setDrinks(response.filter(product => product.category === 'drink'))
+    const response = await getAllProducts();
+    setProduct(response.data.data);
+    setMeals(response.data.data.filter(product => product.category === 'meal'))
+    setDesserts(response.data.data.filter(product => product.category === 'dessert'))
+    setDrinks(response.data.data.filter(product => product.category === 'drink'))
   }
 
     // Monitors state of filter value
@@ -166,20 +166,10 @@ export default function AllProducts() {
           </Modal.Header>
           <Modal.Body>
             <Form>
-              <Form.Group className="admin-formg1">
-                <Form.Label>Product Name *</Form.Label>
-                <Form.Control type="text" placeholder="Product Name" autoFocus required onChange={(e) => handleAddChange(e)}></Form.Control>
-              </Form.Group>
-              <Form.Group className="admin-formg2">
-                <Form.Label>Product Price *</Form.Label>
-                <Form.Control type="price" placeholder="PHP" required onChange={(e) => handleAddChange(e)}></Form.Control>
-              </Form.Group>
-              <Form.Group className="admin-formg3">
-                <Form.Label>Product Image *</Form.Label>
-                <Form.Control type="file" required onChange={(e) => handleAddChange(e)}></Form.Control>
-              </Form.Group>
-              <Form.Group key='inline-radio' className="admin-formg4 mb-3">
-                <Form.Label>Category *</Form.Label>
+              <Form.Group key='inline-radio' className="admin-formg4">
+                <div className='d-flex justify-content-between align-items-center'>
+                  <Form.Label className='form-label-category'>Category</Form.Label>
+                  <div>
                   <Form.Check
                     inline
                     label="Meal"
@@ -201,15 +191,30 @@ export default function AllProducts() {
                     type='radio'
                     id='inline-radio-3'
                   />
+                  </div>
+                </div>
               </Form.Group>
+              <Form.Group className="admin-formg1">
+                <Form.Label>Product Name *</Form.Label>
+                <Form.Control type="text" required onChange={(e) => handleAddChange(e)}></Form.Control>
+              </Form.Group>
+              <Form.Group className="admin-formg2">
+                <Form.Label>Product Price *</Form.Label>
+                <Form.Control type="number" min="0.01" step="0.01" placeholder="Ex. 100" required onChange={(e) => handleAddChange(e)}></Form.Control>
+              </Form.Group>
+              <Form.Group className="admin-formg3">
+                <Form.Label>Product Image *</Form.Label>
+                <Form.Control type="file" required onChange={(e) => handleAddChange(e)}></Form.Control>
+              </Form.Group>
+              
             </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="outline-danger" onClick={handleAddClose}>
-              Close
+              Cancel
             </Button>
-            <Button variant="sucess" type="submit" onClick={() => addNewProduct()}>
-              Save Changes
+            <Button variant="success" type="submit" onClick={() => addNewProduct()}>
+              Save product
             </Button>
           </Modal.Footer>
         </Modal>

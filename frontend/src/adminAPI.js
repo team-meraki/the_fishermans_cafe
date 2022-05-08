@@ -4,7 +4,7 @@ import { getApi, postApi } from "./adminAxios";
 export const getAllProducts = async () => {
  try {
    const response = await getApi('/api/product/');
-   // console.log(response);
+    console.log(response);
    return ({data:response});   
  } catch (error) {
    return ({error: error});
