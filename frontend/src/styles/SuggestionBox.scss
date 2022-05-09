@@ -1,7 +1,7 @@
 @import "./variables.scss";
 .suggestion-box-wrapper {
     background-color: rgba(38, 44, 54, 0.907);
-    padding-top: 66rem;
+    padding-top: 60rem;
 
     @media (min-width: 576px) { 
         padding-top: 1rem;
@@ -24,9 +24,7 @@
         font-weight: bold;
     }
 }
-.box-wrapper {
-    margin-top: 80px;
-}
+
 
 .suggestion-form {
     .submit-btn {
@@ -35,15 +33,25 @@
     }
 }
 .suggestion-box-row {
-    display: flex;
+    display: inline;
     justify-content: center;
+    padding-left: 1rem;
+
+    @media (min-width: 576px) { 
+        padding-left: 5rem;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        padding-left: 7rem;
+    }
 
     h4 {
         font-size: 18px;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 20px;
         color: $colorWhite;
+        margin-bottom: 20px;
     }
 }
 
