@@ -51,8 +51,6 @@ export default function SuggestionBox() {
             <Col className='wrapper suggestion-box'>
                 <div className="suggestion-box-row">
                     <h4 className='suggestion-box-title'>SEND US YOUR FEEDBACK/SUGGESTIONS!</h4>
-                </div>
-                <div className="suggestion-box-row">
                     <Form className='suggestion-form' onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Control className="mb-2" type="text" placeholder="Name (optional)" value={formData.name} name="name" onChange={handleChange}/>

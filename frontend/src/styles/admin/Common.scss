@@ -6,8 +6,17 @@
 
 .main_content{
   width: auto;
-  margin-left: 250px;
   margin-right: 15px;
+  margin-left: 110px;
+
+  @media (min-width: 576px) { 
+    margin-left: 210px;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { 
+    margin-left: 250px;
+  }
 }
 
 .main_content .header{

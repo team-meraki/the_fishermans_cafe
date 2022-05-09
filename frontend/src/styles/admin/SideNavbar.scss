@@ -7,11 +7,20 @@
   position: relative;
 }
 
-.wrapper .sidebar{
-  width: 230px;
+.wrapper .sidebar {
+  width: 100px;
   height: 100%;
   background: white;
   position: fixed;
+
+  @media (min-width: 576px) { 
+    width: 200px;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { 
+    width: 230px;
+  }
 }
 
 .wrapper .sidebar .brand-name-wrapper {
@@ -19,16 +28,37 @@
   margin-bottom: 20px;
 
   .cafe-logo-img {
-    width: 60px;
+    width: 30px;
     height: auto;
-    left: 35%;
+    left: 30%;
     position: relative;
+
+    @media (min-width: 576px) { 
+      width: 40px;
+    }
+  
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+      width: 60px;
+    }
   }
 
   .brand-name-img {
     margin-top: 10px;
-    left: 5%;
     position: relative;
+    width: 90px;
+    
+
+    @media (min-width: 576px) { 
+      width: 170px;
+      left: 5%;
+    }
+  
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+      width: 200px;
+      left: 5%;
+    }
   }
 }
 
@@ -51,7 +81,24 @@
 .wrapper .sidebar ul li a{
   color: #2e2c2c;
   display: block;
-  font-size: 15px;
+  font-size: 12px;
+  padding-left: 5px;
+
+  img {
+    width: 40px;
+  }
+
+  @media (min-width: 576px) { 
+    font-size: 15px;
+    padding-left: 0px;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { 
+    font-size: 15px;
+    padding-left: 0px;
+  }
+
 }
 
 .wrapper .sidebar ul li:hover{

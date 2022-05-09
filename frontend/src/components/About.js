@@ -53,7 +53,7 @@ export default function About() {
             </Col>
 
             <Col xs={3} className='notice'>
-            <span><img src={deliveryIcon}></img></span>
+              <span><img src={deliveryIcon}></img></span>
               <span><h5>Delivery</h5></span>
               <p>{attrib.delivery_info}</p>
             </Col>
