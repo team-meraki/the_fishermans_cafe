@@ -21,10 +21,11 @@ export default function SideNavbar() {
         <div className='brand-name-wrapper'>
           <img
             src="/images/tfcafe_logo.png"
+            alt="Cafe Logo"
             className='cafe-logo-img'
           />
           <img
-            alt=""
+            alt="Brand Name"
             src="/images/brand-name.svg"
             className="brand-name-img"
           />{' '}
@@ -33,15 +34,15 @@ export default function SideNavbar() {
         <ul>
             <li>
               <Link to="/admin/all-products" href="#">
-              <span><img src={productsIcon}></img></span>
+              <span><img src={productsIcon} alt="Products Icon"></img></span>
                All Products</Link>
             </li>
-            <li><Link to="/admin/featured"><span><img src={featuredIcon}></img></span>Featured Products</Link></li>
-            <li><Link to="/admin/all-gallery"><span><img src={galleryIcon}></img></span>Gallery</Link></li>
-            <li><Link to="/admin/about"><span><img src={cafeIcon}></img></span>About the cafe</Link></li>
+            <li><Link to="/admin/featured"><span><img src={featuredIcon} alt="Featured Icon"></img></span>Featured Products</Link></li>
+            <li><Link to="/admin/all-gallery"><span><img src={galleryIcon} alt="Gallery Icon"></img></span>Gallery</Link></li>
+            <li><Link to="/admin/about"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link></li>
         </ul>
-        <div class="sidenav-footer">
-          <Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon}></img></span>Log out</Link>
+        <div className="sidenav-footer">
+          <Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link>
         </div>
 
       </div>

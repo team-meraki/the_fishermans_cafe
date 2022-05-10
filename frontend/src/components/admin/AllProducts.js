@@ -17,7 +17,7 @@ export default function AllProducts() {
   let [desserts, setDesserts] = useState([]);
   let [drinks, setDrinks] = useState([]);
   
-  
+
   // Monitors state of filter value
   const [value, setValue] = useState('All');
   const handleCategorySelect = (e) => {
@@ -37,16 +37,21 @@ export default function AllProducts() {
   // ADD MODAL HANDLER
   const [addShow, setAddShow] = useState(false);
   const handleAddClose = () => setAddShow(false);
-  const handleAddShow = () => setAddShow(true);
+  const handleAddShow = () => {
+    setNewProduct(initialData);
+    setAddShow(true);
+  }
 
     // Add Product
-    const [newProduct, setNewProduct] = useState({
+    const initialData = Object.freeze({
       name: "",
-      category: "",
+      category: "meal",
       price: "",
       image: "",
-    });
+    })
 
+    const [newProduct, setNewProduct] = useState(initialData);
+    
     // Add Product Handler
     const handleAddChange = (e) => {
       const { name, value } = e.target;
@@ -63,16 +68,17 @@ export default function AllProducts() {
     
     // POST API
     async function addNewProduct() {
-      console.log(newProduct)
       const response = await addProduct(newProduct);
-      console.log(response);
-      if (response.data.status === 201) {
+
+      if (response.status === 201) {
+          setAddShow(false)
           toast.success('Successfully added a product!');
-          setTimeout(function () {
-            reloadPage();
-          }, 2000);
-        }
-      if (response.data.status === 400) {
+          fetchAllProducts()
+          //setTimeout(function () {
+          //  reloadPage();
+          //}, 2000);
+      } 
+      else if (response.status === 400) {
           toast.error('Invalid field: Failed to add the product!');
       }
     }
@@ -96,7 +102,7 @@ export default function AllProducts() {
         </div>
         <div className='content-wrapper'>
           <div className='d-flex align-items-center'>
-              <h6>Filter by: </h6>
+              <h6>Filter by Category: </h6>
               <div>
                 <DropdownButton 
                   id="dropdown-basic-button" 
@@ -115,29 +121,39 @@ export default function AllProducts() {
         </div>
 
         
-        {(value === 'All') && 
+        <AllProductsDisplay 
+            products={
+              value === 'All' ? all : 
+              (value === 'Meals' ? meals : 
+              (value === 'Desserts' ? desserts : drinks))
+            } 
+            fetchAllProducts={fetchAllProducts}
+        />
+
+      {/*}
+        {(value === 'All') &&
           <AllProductsDisplay 
-            products={all}
+            products={all} fetchAllProducts={fetchAllProducts}
           />
         }
           
         {(value === 'Meals') && 
           <AllProductsDisplay 
-            products={meals}
+            products={meals} fetchAllProducts={fetchAllProducts}
           />
         }
 
         {(value === 'Desserts') && 
           <AllProductsDisplay 
-            products={desserts}
+            products={desserts} fetchAllProducts={fetchAllProducts}
           />
         }
 
         {(value === 'Drinks') && 
           <AllProductsDisplay 
-            products={drinks}
+            products={drinks} fetchAllProducts={fetchAllProducts}
         />}
-          
+      */}    
 
         {/* ADD MODAL HANDLER */}
         <Modal show={addShow} onHide={handleAddClose} className='admin-modal'>
@@ -185,15 +201,15 @@ export default function AllProducts() {
               </Form.Group>
               <Form.Group className="admin-formg1">
                 <Form.Label>Product Name *</Form.Label>
-                <Form.Control type="text" name="name" required onChange={(e) => handleAddChange(e)}></Form.Control>
+                <Form.Control type="text" name="name" required autoComplete="off" onChange={(e) => handleAddChange(e)}></Form.Control>
               </Form.Group>
               <Form.Group className="admin-formg2">
                 <Form.Label>Product Price *</Form.Label>
-                <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required onChange={(e) => handleAddChange(e)}></Form.Control>
+                <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100.00" required autoComplete="off" onChange={(e) => handleAddChange(e)}></Form.Control>
               </Form.Group>
               <Form.Group className="admin-formg3">
                 <Form.Label>Product Image *</Form.Label>
-                <Form.Control type="file" name="image" required onChange={(e) => handleAddImage(e)}></Form.Control>
+                <Form.Control type="file" name="image" accept="image/*" required onChange={(e) => handleAddImage(e)}></Form.Control>
               </Form.Group>
               
             </Form>
@@ -203,7 +219,7 @@ export default function AllProducts() {
               Cancel
             </Button>
             <Button variant="success" type="submit" onClick={() => addNewProduct()}>
-              Save product
+              Save Product
             </Button>
           </Modal.Footer>
         </Modal>

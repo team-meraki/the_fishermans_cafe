@@ -22,7 +22,7 @@ const Promotional = () => {
             <div>
                 <Button className='promo-btn' href='/menu' size="sm"> 
                     <span>View full menu</span>
-                    <img src={arrowRightWhiteIcon}></img>
+                    <img src={arrowRightWhiteIcon} alt="Right Arrow"></img>
                 </Button>
             </div>
         

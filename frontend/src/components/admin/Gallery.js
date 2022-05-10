@@ -101,7 +101,7 @@ export default function Gallery() {
         <div className='d-flex justify-content-between header'>
             <h2>Gallery</h2>
             <Button className='add-btn' type="button" variant='success' onClick={handleAddShow}>
-                <span><img src={addIcon}></img></span>
+                <span><img src={addIcon} alt="Add Icon"></img></span>
                 Add a Photo
             </Button>
         </div>
@@ -126,7 +126,7 @@ export default function Gallery() {
                                 <td>
                                     <Button variant="primary "type="btn" 
                                     onClick={() => onClickDelBtn(gallery.id)}>
-                                    <img src= {deleteIcon} height="20"/></Button> {" "}
+                                    <img src={deleteIcon} alt="Delete Icon" height="20"/></Button> {" "}
                                 </td>
                             </tr>
                     

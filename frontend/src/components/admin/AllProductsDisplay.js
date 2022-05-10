@@ -13,9 +13,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
-export default function AllProductsDisplay ({products}) {
+export default function AllProductsDisplay ({products, fetchAllProducts}) {
     
-    const [selected, setSelected] = useState('') // for edit and delete modals
+    const [selected, setSelected] = useState({}) // for edit and delete modals
     
     // DELETE MODAL HANDLER
     const [delShow, setDelShow] = useState(false);
@@ -27,26 +27,36 @@ export default function AllProductsDisplay ({products}) {
     const handleEditClose = () => setEditShow(false);
     const handleEditShow = () => setEditShow(true);
 
-
+    // Edited Product
+    const [editedProduct, setEditedProduct] = useState({});
+    
     function onClickDelBtn(id) {
         handleDelShow();
         const str_id = id.toString();
         setSelected(str_id);
     }
 
-    function onClickEditBtn(id) {
+
+    function onClickEditBtn(product) {
+        setSelected({
+            id: product.id,
+            name: product.name,
+            category: product.category,
+            price: product.price,
+        })
+        setEditedProduct({
+            id: product.id,
+            name: product.name,
+            category: product.category,
+            price: product.price,
+        })
         handleEditShow();
-        const str_id = id.toString();
-        setSelected(str_id);
+        
+        //const str_id = id.toString();
+        //setSelected(product);
     }
     
-    // Edited Product
-    const [editedProduct, setEditedProduct] = useState({
-        name: "",
-        category: "",
-        price: "",
-        image: "",
-      });
+    
   
       // Edit Product Handler
       const handleEditChange = (e) => {
@@ -64,15 +74,19 @@ export default function AllProductsDisplay ({products}) {
 
     // EDIT API
     async function editProduct() {
-        const response = await updateProduct(selected, editedProduct);
-        console.log(response)
+        const response = await updateProduct(editedProduct);
+        setEditedProduct(selected)
+
         if (response.data.status === 200) {
-        toast.success('Successfully edited a product!');
-        setTimeout(function () {
-            reloadPage();
-        }, 2000);
+            setEditShow(false)
+            setSelected({})
+            toast.success('Successfully edited a product!');
+            fetchAllProducts()
+        //setTimeout(function () {
+        //    reloadPage();
+        //}, 2000);
         }
-        if (response.data.status === 400) {
+        else if (response.data.status === 400) {
             toast.error('Failed to edit a product!');
         }
     }
@@ -80,17 +94,18 @@ export default function AllProductsDisplay ({products}) {
     // DELETE API
     async function delProduct() {
         const response = await deleteProduct(selected);
-        console.log(response)
         if (response.data.status === 204) {
+        setDelShow(false)
         toast.success('Successfully deleted a product!');
-        setTimeout(function () {
-            reloadPage();
-        }, 2000);
+        fetchAllProducts()
+        //setTimeout(function () {
+        //    reloadPage();
+        //}, 2000);
         }
         if (response.data.status === 400) {
             toast.error('Failed to delete a product!');
         }
-        if (response.data.status === 404) {
+        else if (response.data.status === 404) {
             toast.error('Product not found!');
         }
     }
@@ -119,10 +134,10 @@ export default function AllProductsDisplay ({products}) {
                             <td>
                                 <Button variant="primary "type="btn" 
                                 onClick={() => onClickDelBtn(product.id)}>
-                                <img src= {deleteIcon} height="20"/></Button> {" "}
+                                <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> {" "}
 
-                                <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product.id)}>
-                                <img src= {editIcon} height="20"/></Button> {" "}
+                                <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product)}>
+                                <img src= {editIcon} alt="Edit Icon" height="20"/></Button> {" "}
                             </td>
                         </tr>
                     ))}
@@ -163,7 +178,7 @@ export default function AllProductsDisplay ({products}) {
                         type='radio'
                         id='inline-radio-1'
                         value='meal'
-                        defaultChecked
+                        checked={editedProduct.category === 'meal' ? true : false}
                         onChange={(e) => handleEditChange(e)}
                     />
                     <Form.Check
@@ -173,6 +188,7 @@ export default function AllProductsDisplay ({products}) {
                         type='radio'
                         id='inline-radio-2'
                         value='dessert'
+                        checked={editedProduct.category === 'dessert' ? true : false}
                         onChange={(e) => handleEditChange(e)}
                     />
                     <Form.Check
@@ -182,6 +198,7 @@ export default function AllProductsDisplay ({products}) {
                         type='radio'
                         id='inline-radio-3'
                         value='drink'
+                        checked={editedProduct.category === 'drink' ? true : false}
                         onChange={(e) => handleEditChange(e)}
                     />
                     </div>
@@ -189,15 +206,15 @@ export default function AllProductsDisplay ({products}) {
                 </Form.Group>
                 <Form.Group className="admin-formg1">
                     <Form.Label>Product Name *</Form.Label>
-                    <Form.Control type="text" name="name" required onChange={(e) => handleEditChange(e)}></Form.Control>
+                    <Form.Control type="text" name="name" required value={editedProduct.name} onChange={(e) => handleEditChange(e)}></Form.Control>
                 </Form.Group>
                 <Form.Group className="admin-formg2">
                     <Form.Label>Product Price *</Form.Label>
-                    <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required onChange={(e) => handleEditChange(e)}></Form.Control>
+                    <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required value={editedProduct.price} onChange={(e) => handleEditChange(e)}></Form.Control>
                 </Form.Group>
                 <Form.Group className="admin-formg3">
                     <Form.Label>Product Image *</Form.Label>
-                    <Form.Control type="file" name="image" required onChange={(e) => handleEditImage(e)}></Form.Control>
+                    <Form.Control type="file" name="image" accept="image/*" required onChange={(e) => handleEditImage(e)}></Form.Control>
                 </Form.Group>
                 
                 </Form>

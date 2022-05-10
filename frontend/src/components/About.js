@@ -41,19 +41,19 @@ export default function About() {
           <Row className='d-flex about-board'>
 
             <Col xs={3} className='notice'>
-              <span><img src={announcementIcon}></img></span>
+              <span><img src={announcementIcon} alt="Announcement Icon"></img></span>
               <span><h5>Announcement</h5></span>
               <p>{attrib.announcement}</p>
             </Col>
 
             <Col xs={3} className='notice'>
-              <span><img src={tableIcon}></img></span>
+              <span><img src={tableIcon} alt="Table Icon"></img></span>
               <span><h5>Table Accomodation</h5></span>
               <p>{attrib.table_accomodation}</p>
             </Col>
 
             <Col xs={3} className='notice'>
-              <span><img src={deliveryIcon}></img></span>
+              <span><img src={deliveryIcon} alt="Delivery Icon"></img></span>
               <span><h5>Delivery</h5></span>
               <p>{attrib.delivery_info}</p>
             </Col>

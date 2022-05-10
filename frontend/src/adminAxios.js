@@ -9,6 +9,9 @@ export const postApi = (url, data) => {
 export const putApi = (url, data, config) => {
     return axios.put(url, data, config);
 }
+export const patchApi = (url, data, config) => {
+    return axios.patch(url, data, config);
+}
 export const deleteApi = (url) => {
     return axios.delete(url);
 }

@@ -1,4 +1,4 @@
-import { deleteApi, getApi, postApi, putApi } from "./adminAxios";
+import { deleteApi, getApi, postApi, putApi, patchApi } from "./adminAxios";
 
 /* =====================================
    --- ADMIN PRODUCTS API CALLS ---
@@ -8,7 +8,6 @@ import { deleteApi, getApi, postApi, putApi } from "./adminAxios";
 export const getAllProducts = async () => {
  try {
    const response = await getApi('/api/product/');
-    console.log(response);
    return ({data:response});   
  } catch (error) {
    return ({error: error});
@@ -32,9 +31,9 @@ export const addProduct = async (product) => {
           "Content-Type": "multipart/form-data",
       },}
     )
-   return ({data:response});   
+   return response;   
  } catch (error) {
-   return ({error: error});
+   return error.response;
  }
 }
 
@@ -42,7 +41,6 @@ export const addProduct = async (product) => {
 export const deleteProduct = async (id) => {
   try {
     const response = await deleteApi('/api/product/' + id);
-     console.log(response);
     return ({data:response});   
   } catch (error) {
     return ({data: error.response});
@@ -51,22 +49,34 @@ export const deleteProduct = async (id) => {
 
  
 // EDIT
-export const updateProduct = async (id, product) => {
+export const updateProduct = async (product) => {
   try {
+    let response;
     let form_data = new FormData();
-      if (product.image)
-          form_data.append("image", product.image, product.image.name);
-      form_data.append("name", product.name);
-      form_data.append("price", product.price);
-      form_data.append("category", product.category);
-  
-     const response = await putApi(
-       '/api/product/' + id +'/',
-       form_data,
-       { headers: {
-            "Content-Type": "multipart/form-data",
-        },}
+    form_data.append("name", product.name);
+    form_data.append("price", product.price);
+    form_data.append("category", product.category);
+    if (product.image){
+      form_data.append("image", product.image, product.image.name);
+
+      response = await putApi(
+        '/api/product/' + product.id +'/',
+        form_data,
+        { headers: {
+             "Content-Type": "multipart/form-data",
+         },}
+       )
+    }
+    else {
+      response = await patchApi(
+        '/api/product/' + product.id +'/',
+        form_data,
+        { headers: {
+             "Content-Type": "multipart/form-data",
+         },}
       )
+    }
+    
      return ({data:response});   
    } catch (error) {
      return ({data: error});
