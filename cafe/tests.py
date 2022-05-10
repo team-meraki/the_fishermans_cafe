@@ -117,7 +117,7 @@ class ViewsTestCase(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        response = self.client.post(url, data=data, format='json')
+        response = self.client.post(url, data=data, format='multipart')
         #self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
@@ -125,6 +125,6 @@ class ViewsTestCase(APITestCase):
         #self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
-        response = self.client.put(url, data=data, format='json')
+        response = self.client.put(url, data=data, format='multipart')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
