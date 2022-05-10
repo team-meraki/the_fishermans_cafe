@@ -48,6 +48,7 @@ class TestimonialViewSet(ModelViewSet):
 class RetrieveUpdateCafeInfo(RetrieveUpdateAPIView):
     queryset = CafeInfo.objects.all()
     serializer_class = CafeInfoSerializer
+    parser_classes = (MultiPartParser, FormParser)
     # permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_object(self):
@@ -57,6 +58,7 @@ class RetrieveUpdateCafeInfo(RetrieveUpdateAPIView):
 class GalleryViewSet(ModelViewSet):
     queryset = Gallery.objects.all()
     serializer_class = GallerySerializer
+    parser_classes = (MultiPartParser, FormParser)
     http_method_names = ['get', 'post', 'delete', 'head', 'options']
     # permission_classes = [IsAuthenticatedOrReadOnly]
 

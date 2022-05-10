@@ -19,34 +19,32 @@ export default function Gallery() {
   let [galleryPhotos, setGalleryPhotos] = useState([]);
 
   // Get all products
-  async function fetchAllPhotots() {
+  async function fetchAllPhotos() {
     const response = await getAllPhotos();
     setGalleryPhotos(response.data.data);
   }
 
   // Add Photo
-  const [newPhoto, setNewPhoto] = useState({
-    image: "",
-  });
+  const [newPhoto, setNewPhoto] = useState(null);
 
   const handleAddImage = (e) => {
-    let img = { ...newPhoto };
-    img["image"] = e.target.files[0];
-    setNewPhoto(img);
+    setNewPhoto(e.target.files[0]);
   }
 
   // POST API
   async function addNewPhoto() {
-    console.log(newPhoto)
     const response = await addPhoto(newPhoto);
-    console.log(response);
+    
     if (response.data.status === 201) {
+        setAddShow(false)
+        setNewPhoto(null)
         toast.success('Successfully added a photo in gallery!');
-        setTimeout(function () {
-          reloadPage();
-        }, 2000);
+        fetchAllPhotos()
+        //setTimeout(function () {
+        //  reloadPage();
+        //}, 2000);
       }
-    if (response.data.status === 400) {
+      else if (response.data.status === 400) {
         toast.error('Invalid field: Failed to add a photo!');
     }
   }
@@ -54,20 +52,21 @@ export default function Gallery() {
   const [selected, setSelected] = useState('') // for delete modals
 
     function onClickDelBtn(id) {
-        handleDelShow();
-        const str_id = id.toString();
-        setSelected(str_id);
+      const str_id = id.toString();
+      setSelected(str_id);
+      handleDelShow();
     }
 
     // DELETE API
     async function delPhoto() {
       const response = await deletePhoto(selected);
-      console.log(response)
+      setDelShow(false)
       if (response.data.status === 204) {
-      toast.success('Successfully deleted a photo!');
-      setTimeout(function () {
-          reloadPage();
-      }, 2000);
+        toast.success('Successfully deleted a photo!');
+        fetchAllPhotos()
+      //setTimeout(function () {
+      //    reloadPage();
+      //}, 2000);
       }
       if (response.data.status === 400) {
           toast.error('Failed to delete a photo!');
@@ -79,16 +78,22 @@ export default function Gallery() {
 
     // ADD MODAL HANDLER
     const [addShow, setAddShow] = useState(false);
-    const handleAddClose = () => setAddShow(false);
+    const handleAddClose = () => {
+      setAddShow(false);
+      setNewPhoto(null)
+    }
     const handleAddShow = () => setAddShow(true);
 
     // DELETE MODAL HANDLER
     const [delShow, setDelShow] = useState(false);
-    const handleDelClose = () => setDelShow(false);
+    const handleDelClose = () => {
+      setDelShow(false);
+      setSelected(null)
+    }
     const handleDelShow = () => setDelShow(true);
 
     useEffect(() => {
-      fetchAllPhotots();
+      fetchAllPhotos();
     }, [])
   
   return (
@@ -120,7 +125,7 @@ export default function Gallery() {
                     </thead>
                     <tbody>
                         {galleryPhotos.map(gallery => ( 
-                            <tr className='text-center'>
+                            <tr key={gallery.id} className='text-center'>
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
                                 <td>
@@ -145,7 +150,7 @@ export default function Gallery() {
           <Form>
               <Form.Label>Upload a file</Form.Label>
               <Form.Control
-                type="file" name="image" required onChange={(e) => handleAddImage(e)}
+                type="file" name="image" accept="image/*" required onChange={(e) => handleAddImage(e)}
                 autoFocus
               />
           </Form>
@@ -155,7 +160,7 @@ export default function Gallery() {
             Close
           </Button>
           <Button variant="success" type="submit" onClick={() => addNewPhoto()}>
-            Save Changes
+            Save Photo
           </Button>
         </Modal.Footer>
         </Modal>

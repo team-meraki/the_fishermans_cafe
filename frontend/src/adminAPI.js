@@ -31,9 +31,9 @@ export const addProduct = async (product) => {
           "Content-Type": "multipart/form-data",
       },}
     )
-   return response;   
+   return ({data:response});   
  } catch (error) {
-   return error.response;
+   return ({data: error.response});
  }
 }
 
@@ -79,7 +79,7 @@ export const updateProduct = async (product) => {
     
      return ({data:response});   
    } catch (error) {
-     return ({data: error});
+     return ({data: error.response});
    }
  }
 
@@ -91,7 +91,6 @@ export const updateProduct = async (product) => {
 export const getAllPhotos = async () => {
   try {
     const response = await getApi('/api/gallery/');
-     console.log(response);
     return ({data:response});   
   } catch (error) {
     return ({error: error});
@@ -99,11 +98,11 @@ export const getAllPhotos = async () => {
  }
 
 // POST
-export const addPhoto = async (gallery) => {
+export const addPhoto = async (newPhoto) => {
   try {
-   let form_data = new FormData();
-     if (gallery.image)
-         form_data.append("image", gallery.image, gallery.image.name);
+    let form_data = new FormData();
+      if (newPhoto)
+        form_data.append("image", newPhoto, newPhoto.name);
  
     const response = await postApi(
       '/api/gallery/',
@@ -114,15 +113,14 @@ export const addPhoto = async (gallery) => {
      )
     return ({data:response});   
   } catch (error) {
-    return ({error: error});
+    return ({data: error.response});
   }
  }
  
  // DELETE
  export const deletePhoto = async (id) => {
    try {
-     const response = await deleteApi('/api/gallery/' + id);
-      console.log(response);
+     const response = await deleteApi('/api/gallery/' + id + '/');
      return ({data:response});   
    } catch (error) {
      return ({data: error.response});

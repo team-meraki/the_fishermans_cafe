@@ -19,21 +19,27 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     
     // DELETE MODAL HANDLER
     const [delShow, setDelShow] = useState(false);
-    const handleDelClose = () => setDelShow(false);
+    const handleDelClose = () => {
+        setDelShow(false);
+        setSelected(null)
+    }
     const handleDelShow = () => setDelShow(true);
 
     // EDIT MODAL HANDLER
     const [editShow, setEditShow] = useState(false);
-    const handleEditClose = () => setEditShow(false);
+    const handleEditClose = () => {
+        setEditShow(false);
+        setEditedProduct({})
+    }
     const handleEditShow = () => setEditShow(true);
 
     // Edited Product
     const [editedProduct, setEditedProduct] = useState({});
     
     function onClickDelBtn(id) {
-        handleDelShow();
         const str_id = id.toString();
         setSelected(str_id);
+        handleDelShow();
     }
 
 
@@ -75,11 +81,11 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     // EDIT API
     async function editProduct() {
         const response = await updateProduct(editedProduct);
-        setEditedProduct(selected)
 
         if (response.data.status === 200) {
             setEditShow(false)
             setSelected({})
+            setEditedProduct({})
             toast.success('Successfully edited a product!');
             fetchAllProducts()
         //setTimeout(function () {
@@ -87,6 +93,7 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
         //}, 2000);
         }
         else if (response.data.status === 400) {
+            setEditedProduct(selected)
             toast.error('Failed to edit a product!');
         }
     }
@@ -94,10 +101,10 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     // DELETE API
     async function delProduct() {
         const response = await deleteProduct(selected);
-        if (response.data.status === 204) {
         setDelShow(false)
-        toast.success('Successfully deleted a product!');
-        fetchAllProducts()
+        if (response.data.status === 204) {
+            toast.success('Successfully deleted a product!');
+            fetchAllProducts()
         //setTimeout(function () {
         //    reloadPage();
         //}, 2000);
@@ -206,11 +213,11 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
                 </Form.Group>
                 <Form.Group className="admin-formg1">
                     <Form.Label>Product Name *</Form.Label>
-                    <Form.Control type="text" name="name" required value={editedProduct.name} onChange={(e) => handleEditChange(e)}></Form.Control>
+                    <Form.Control type="text" name="name" required autoComplete="off" value={editedProduct.name} onChange={(e) => handleEditChange(e)}></Form.Control>
                 </Form.Group>
                 <Form.Group className="admin-formg2">
                     <Form.Label>Product Price *</Form.Label>
-                    <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required value={editedProduct.price} onChange={(e) => handleEditChange(e)}></Form.Control>
+                    <Form.Control type="number" name="price" min="0.01" step="0.01" placeholder="Ex. 100" required autoComplete="off" value={editedProduct.price} onChange={(e) => handleEditChange(e)}></Form.Control>
                 </Form.Group>
                 <Form.Group className="admin-formg3">
                     <Form.Label>Product Image *</Form.Label>

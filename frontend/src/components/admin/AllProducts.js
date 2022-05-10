@@ -36,11 +36,11 @@ export default function AllProducts() {
 
   // ADD MODAL HANDLER
   const [addShow, setAddShow] = useState(false);
-  const handleAddClose = () => setAddShow(false);
-  const handleAddShow = () => {
+  const handleAddClose = () => {
+    setAddShow(false);
     setNewProduct(initialData);
-    setAddShow(true);
   }
+  const handleAddShow = () => setAddShow(true);
 
     // Add Product
     const initialData = Object.freeze({
@@ -70,15 +70,16 @@ export default function AllProducts() {
     async function addNewProduct() {
       const response = await addProduct(newProduct);
 
-      if (response.status === 201) {
+      if (response.data.status === 201) {
           setAddShow(false)
+          setNewProduct(initialData);
           toast.success('Successfully added a product!');
           fetchAllProducts()
           //setTimeout(function () {
           //  reloadPage();
           //}, 2000);
       } 
-      else if (response.status === 400) {
+      else if (response.data.status === 400) {
           toast.error('Invalid field: Failed to add the product!');
       }
     }
