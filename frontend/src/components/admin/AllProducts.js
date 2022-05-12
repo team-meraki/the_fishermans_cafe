@@ -24,14 +24,24 @@ export default function AllProducts() {
     setValue(e)
   }
 
-  
+  useEffect(() => {
+    let mounted = true
+    fetchAllProducts()
+    .then(response => {
+        if(mounted) {
+          setProduct(response.data.data);
+          setMeals(response.data.data.filter(product => product.category === 'meal'))
+          setDesserts(response.data.data.filter(product => product.category === 'dessert'))
+          setDrinks(response.data.data.filter(product => product.category === 'drink'))
+        }
+    })
+    return () => mounted = false
+  }, [])
+
   // Get all products
   async function fetchAllProducts() {
     const response = await getAllProducts();
-    setProduct(response.data.data);
-    setMeals(response.data.data.filter(product => product.category === 'meal'))
-    setDesserts(response.data.data.filter(product => product.category === 'dessert'))
-    setDrinks(response.data.data.filter(product => product.category === 'drink'))
+    return response
   }
 
   // ADD MODAL HANDLER
@@ -80,8 +90,14 @@ export default function AllProducts() {
           //}, 2000);
       } 
       else if (response.data.status === 400) {
-          toast.error('Invalid field: Failed to add the product!');
-      }
+        const error = JSON.parse(response.data.request.response)
+        for (const key in error){
+          for (const message of error[key]){
+            toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+          }
+        }
+        //toast.error('Invalid field: Failed to add the product!');
+      }  
     }
     
     useEffect(() => {

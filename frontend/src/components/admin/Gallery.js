@@ -19,9 +19,20 @@ export default function Gallery() {
   let [galleryPhotos, setGalleryPhotos] = useState([]);
 
   // Get all products
+  useEffect(() => {
+    let mounted = true
+    fetchAllPhotos()
+    .then(response => {
+        if(mounted) {
+          setGalleryPhotos(response.data.data);
+        }
+    })
+    return () => mounted = false
+  }, [])
+
   async function fetchAllPhotos() {
     const response = await getAllPhotos();
-    setGalleryPhotos(response.data.data);
+    return response
   }
 
   // Add Photo
