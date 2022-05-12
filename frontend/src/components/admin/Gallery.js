@@ -17,19 +17,9 @@ import { addPhoto, deletePhoto, getAllPhotos } from '../../adminAPI';
 
 export default function Gallery() {
   let [galleryPhotos, setGalleryPhotos] = useState([]);
-
+  let [refreshData, setRefreshData] = useState(false)
+  
   // Get all products
-  useEffect(() => {
-    let mounted = true
-    fetchAllPhotos()
-    .then(response => {
-        if(mounted) {
-          setGalleryPhotos(response.data.data);
-        }
-    })
-    return () => mounted = false
-  }, [])
-
   async function fetchAllPhotos() {
     const response = await getAllPhotos();
     return response
@@ -50,7 +40,7 @@ export default function Gallery() {
         setAddShow(false)
         setNewPhoto(null)
         toast.success('Successfully added a photo in gallery!');
-        fetchAllPhotos()
+        setRefreshData(!refreshData)
         //setTimeout(function () {
         //  reloadPage();
         //}, 2000);
@@ -73,8 +63,9 @@ export default function Gallery() {
       const response = await deletePhoto(selected);
       setDelShow(false)
       if (response.data.status === 204) {
+        setSelected('')
         toast.success('Successfully deleted a photo!');
-        fetchAllPhotos()
+        setRefreshData(!refreshData)
       //setTimeout(function () {
       //    reloadPage();
       //}, 2000);
@@ -104,8 +95,15 @@ export default function Gallery() {
     const handleDelShow = () => setDelShow(true);
 
     useEffect(() => {
-      fetchAllPhotos();
-    }, [])
+      let mounted = true
+      fetchAllPhotos()
+      .then(response => {
+          if(mounted) {
+            setGalleryPhotos(response.data.data);
+          }
+      })
+      return () => mounted = false
+    }, [refreshData])
   
   return (
     <div className='main-container'>

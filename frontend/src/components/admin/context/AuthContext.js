@@ -2,6 +2,7 @@ import { createContext, useState } from 'react'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { useNavigate, Outlet } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext()
 
@@ -27,7 +28,8 @@ export const AuthProvider = () => {
             navigate('/admin/all-products', { replace: true })
         }).catch(error => {
             if (error.response.status === 401)
-                alert('Incorrect credentials.')
+                //alert('Incorrect credentials.')
+                toast.error('Incorrect credentials. Please try again.');
         })
     }
 

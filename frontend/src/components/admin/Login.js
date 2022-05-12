@@ -3,6 +3,7 @@ import { Button, Container, Form, Row } from 'react-bootstrap'
 import '../../styles/admin/Common.scss';
 import AuthContext from './context/AuthContext'
 import { Navigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
 
 export default function Login() {
   const initialData = Object.freeze({
@@ -22,6 +23,7 @@ export default function Login() {
 
   return (
     user ? <Navigate to="/admin/all-products" replace={true}/> :
+    <div><ToastContainer/>
     <Container>
      <Container className='login-wrapper'>
       <Row><h1>Admin Login</h1></Row>
@@ -43,5 +45,6 @@ export default function Login() {
       </Row>
      </Container>
     </Container>
+    </div>
   )
 }

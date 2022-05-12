@@ -24,19 +24,7 @@ export default function AllProducts() {
     setValue(e)
   }
 
-  useEffect(() => {
-    let mounted = true
-    fetchAllProducts()
-    .then(response => {
-        if(mounted) {
-          setProduct(response.data.data);
-          setMeals(response.data.data.filter(product => product.category === 'meal'))
-          setDesserts(response.data.data.filter(product => product.category === 'dessert'))
-          setDrinks(response.data.data.filter(product => product.category === 'drink'))
-        }
-    })
-    return () => mounted = false
-  }, [])
+  const [refreshData, setRefreshData] = useState(false)
 
   // Get all products
   async function fetchAllProducts() {
@@ -84,7 +72,7 @@ export default function AllProducts() {
           setAddShow(false)
           setNewProduct(initialData);
           toast.success('Successfully added a product!');
-          fetchAllProducts()
+          setRefreshData(!refreshData)
           //setTimeout(function () {
           //  reloadPage();
           //}, 2000);
@@ -101,8 +89,18 @@ export default function AllProducts() {
     }
     
     useEffect(() => {
-      fetchAllProducts();
-    }, [])
+      let mounted = true
+      fetchAllProducts()
+      .then(response => {
+          if(mounted) {
+            setProduct(response.data.data);
+            setMeals(response.data.data.filter(product => product.category === 'meal'))
+            setDesserts(response.data.data.filter(product => product.category === 'dessert'))
+            setDrinks(response.data.data.filter(product => product.category === 'drink'))
+          }
+      })
+      return () => mounted = false
+    }, [refreshData])
 
   return (
     <div className='main-container'>
@@ -143,8 +141,9 @@ export default function AllProducts() {
               value === 'All' ? all : 
               (value === 'Meals' ? meals : 
               (value === 'Desserts' ? desserts : drinks))
-            } 
-            fetchAllProducts={fetchAllProducts}
+            }
+            refreshData={refreshData} 
+            setRefreshData={setRefreshData}
         />
 
       {/*}

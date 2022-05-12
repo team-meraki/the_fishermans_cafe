@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
-export default function AllProductsDisplay ({products, fetchAllProducts}) {
+export default function AllProductsDisplay ({products, refreshData, setRefreshData}) {
     
     const initialData = Object.freeze({
         id: "",
@@ -27,7 +27,7 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     const [delShow, setDelShow] = useState(false);
     const handleDelClose = () => {
         setDelShow(false);
-        setSelected(null)
+        setSelected(initialData)
     }
     const handleDelShow = () => setDelShow(true);
 
@@ -40,7 +40,7 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     const handleEditShow = () => setEditShow(true);
 
     // Edited Product
-    const [editedProduct, setEditedProduct] = useState({});
+    const [editedProduct, setEditedProduct] = useState(initialData);
     
     function onClickDelBtn(id) {
         const str_id = id.toString();
@@ -90,10 +90,10 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
 
         if (response.data.status === 200) {
             setEditShow(false)
-            setSelected({})
-            setEditedProduct({})
+            setSelected(initialData)
+            setEditedProduct(initialData)
             toast.success('Successfully edited a product!');
-            fetchAllProducts()
+            setRefreshData(!refreshData)
         //setTimeout(function () {
         //    reloadPage();
         //}, 2000);
@@ -115,8 +115,9 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
         const response = await deleteProduct(selected);
         setDelShow(false)
         if (response.data.status === 204) {
+            setSelected(initialData)
             toast.success('Successfully deleted a product!');
-            fetchAllProducts()
+            setRefreshData(!refreshData)
         //setTimeout(function () {
         //    reloadPage();
         //}, 2000);
