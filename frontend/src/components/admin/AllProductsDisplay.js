@@ -15,7 +15,13 @@ import editIcon from '../../icons/edit.svg'
 
 export default function AllProductsDisplay ({products, fetchAllProducts}) {
     
-    const [selected, setSelected] = useState({}) // for edit and delete modals
+    const initialData = Object.freeze({
+        id: "",
+        name: "",
+        category: "",
+        price: ""
+    })
+    const [selected, setSelected] = useState(initialData) // for edit and delete modals
     
     // DELETE MODAL HANDLER
     const [delShow, setDelShow] = useState(false);
@@ -28,8 +34,8 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     // EDIT MODAL HANDLER
     const [editShow, setEditShow] = useState(false);
     const handleEditClose = () => {
-        setEditShow(false);
-        setEditedProduct({})
+        setEditShow(false); 
+        setEditedProduct(initialData)
     }
     const handleEditShow = () => setEditShow(true);
 
@@ -94,7 +100,13 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
         }
         else if (response.data.status === 400) {
             setEditedProduct(selected)
-            toast.error('Failed to edit a product!');
+            const error = JSON.parse(response.data.request.response)
+            for (const key in error){
+              for (const message of error[key]){
+                toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+              }
+            }
+            //toast.error('Failed to edit a product!');
         }
     }
 
