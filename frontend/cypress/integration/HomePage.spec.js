@@ -8,12 +8,7 @@ describe('landing page', () => {
       cy.intercept(/https:\/\/maps.googleapis.com\/.*/, { statusCode: 200 })
       cy.visit('/')
     })
-
-    it('scrolls down the footer when contact nav link is clicked', () => {
-      cy.contains('Contact').click()
-      cy.window().its('scrollY').should('not.equal', 0) 
-    })
-
+    
     it('successfuly sends suggestion form with correct inputs', () => {
       const newSuggestion = {
         name : "Person5",
