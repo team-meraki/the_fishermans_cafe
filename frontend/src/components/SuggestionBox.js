@@ -59,8 +59,8 @@ export default function SuggestionBox() {
                         </Form.Group>
                         <ReCAPTCHA
                             sitekey={window.Cypress
-                                ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-                                : '6Le6R_YeAAAAAGYCegFq7rj-KX0iFThcV6Bsg8LI'}
+                                ? process.env.REACT_APP_RECAPTCHA_TEST_SITE_KEY
+                                : process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                             onChange={handleRecaptcha}
                         />
                         <div className='submit-btn'>

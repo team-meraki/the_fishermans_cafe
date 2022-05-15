@@ -4,7 +4,6 @@ import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
 import { toast } from 'react-toastify';
 import { deleteProduct, updateProduct } from '../../adminAPI';
-import { reloadPage } from '../common';
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -94,9 +93,6 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
             setEditedProduct(initialData)
             toast.success('Successfully edited a product!');
             setRefreshData(!refreshData)
-        //setTimeout(function () {
-        //    reloadPage();
-        //}, 2000);
         }
         else if (response.data.status === 400) {
             setEditedProduct(selected)
@@ -118,9 +114,6 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
             setSelected(initialData)
             toast.success('Successfully deleted a product!');
             setRefreshData(!refreshData)
-        //setTimeout(function () {
-        //    reloadPage();
-        //}, 2000);
         }
         if (response.data.status === 400) {
             toast.error('Failed to delete a product!');

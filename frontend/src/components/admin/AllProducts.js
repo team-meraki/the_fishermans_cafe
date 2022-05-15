@@ -4,7 +4,6 @@ import AllProductsDisplay from './AllProductsDisplay'
 import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import { addProduct, getAllProducts } from '../../adminAPI';
-import { reloadPage } from '../common';
 
 // icons & css
 import addIcon from '../../icons/add.svg'
@@ -73,9 +72,6 @@ export default function AllProducts() {
           setNewProduct(initialData);
           toast.success('Successfully added a product!');
           setRefreshData(!refreshData)
-          //setTimeout(function () {
-          //  reloadPage();
-          //}, 2000);
       } 
       else if (response.data.status === 400) {
         const error = JSON.parse(response.data.request.response)

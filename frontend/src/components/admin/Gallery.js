@@ -3,7 +3,6 @@ import SideNavbar from "./SideNavbar";
 import { Modal, Table } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import { reloadPage } from '../common';
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,9 +40,6 @@ export default function Gallery() {
         setNewPhoto(null)
         toast.success('Successfully added a photo in gallery!');
         setRefreshData(!refreshData)
-        //setTimeout(function () {
-        //  reloadPage();
-        //}, 2000);
       }
       else if (response.data.status === 400) {
         toast.error('Invalid field: Failed to add a photo!');
@@ -66,9 +62,6 @@ export default function Gallery() {
         setSelected('')
         toast.success('Successfully deleted a photo!');
         setRefreshData(!refreshData)
-      //setTimeout(function () {
-      //    reloadPage();
-      //}, 2000);
       }
       if (response.data.status === 400) {
           toast.error('Failed to delete a photo!');

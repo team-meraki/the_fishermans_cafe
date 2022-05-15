@@ -4,8 +4,8 @@
     width: 100%;
     height: 50vh;
 
-    background-image: url(../../public/images/promo-bg1.png); /* fallback */
-    background-image: linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.20)), url(../../public/images/promo-bg1.png);
+    background-image: url(../images/promo-bg1.png); /* fallback */
+    background-image: linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.20)), url(../images/promo-bg1.png);
     
     background-size:cover;
     background-repeat: no-repeat;

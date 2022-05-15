@@ -4,6 +4,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faClock, faLocationPin, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { Container, Row, Col } from 'react-bootstrap'
 import '../styles/Footer.scss';
+import BrandName from "../images/brand-name.svg"
 
 function Footer(){
     let [cafeInfo, setCafeInfo] = useState()
@@ -31,7 +32,7 @@ function Footer(){
                     <Row className="cafe_name">   
                         <img
                             alt=""
-                            src="/images/brand-name.svg"
+                            src={BrandName}
                             className="brand-name"
                         />
                     </Row>

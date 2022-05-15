@@ -2,8 +2,8 @@
 
 .about {
   height: 50vh;
-  background-image: url(../../public/images/about-bg-img.jpg); /* fallback */
-  background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.60)), url(../../public/images/about-bg-img.jpg);
+  background-image: url(../images/about-bg-img.jpg); /* fallback */
+  background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.60)), url(../images/about-bg-img.jpg);
   background-size:cover;
   background-repeat: no-repeat;
   background-position: 0% 0%;

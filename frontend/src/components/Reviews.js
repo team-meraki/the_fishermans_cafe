@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {Carousel, Container, Row, Col} from 'react-bootstrap'
 import '../styles/Reviews.scss';
+import Avatar2 from "../images/avatar2.svg"
 
 export default function Reviews() {
     let [reviews, setReview] = useState([]);
@@ -39,7 +40,7 @@ export default function Reviews() {
                                 <Row className="review-section-img">
                                     <img
                                         alt=""
-                                        src="/images/avatar2.svg"
+                                        src={Avatar2}
                                         className="review-image"
                                         />
                                 </Row>
