@@ -3,9 +3,9 @@
 describe('about page', () => {
     beforeEach(() => {
         cy.intercept("GET", "/api/cafeinfo", { fixture: "cafeinfo.json" })
-        cy.intercept("GET", "/api/featured", { fixture: "featured_products.json" })
+        cy.intercept("GET", "/api/featured-product", { fixture: "featured_products.json" })
+        cy.intercept("GET", "/api/featured-review", { fixture: "featured_reviews.json" })
         cy.intercept("GET", "/api/testimonial", { fixture: "testimonials.json" })
-        cy.intercept("GET", "/api/about", { fixture: "about.json" })
         cy.intercept(/https:\/\/maps.googleapis.com\/.*/, { statusCode: 200 })
         cy.visit('/')
         cy.contains(/about/i).click()

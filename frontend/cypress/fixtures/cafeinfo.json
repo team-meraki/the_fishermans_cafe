@@ -2,9 +2,11 @@
     "id" : 1,
     "logo" : "http://127.0.0.1:8000/media/logo/tfcafe_logo.png",
     "location" : "Sts. Peter and Paul Parish, Binaobao, Bantayan Island, Cebu, Philippines",
-    "about" : "The Fisherman's Cafe is a coffee shop located within the compound of the St. Peter’s Parish, Binaobao, Bantayan Island.\r\nWe serve all-day breakfast, coffee, pastries, and more!",
+    "description": "This is a description",
+    "announcement": "This is an announcement",
+    "table_accommodation": "This provides table accommodation",
+    "delivery_info": "This provides delivery info",
     "schedule" : "Monday - Sunday\r\n9:00 AM - 7:00 PM",
-    "email" : "tfcafe@gmail.com",
     "facebook" : "https://www.facebook.com/thefishermanscafe/",
     "contact_number" : "09123456789"
 }

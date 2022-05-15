@@ -18,7 +18,7 @@ export default function Reviews() {
     }, [])
 
     let getReview = async () => {
-        let response = await fetch("/api/testimonial/")
+        let response = await fetch("/api/featured-review/")
         let data = await response.json()
         return data
     }
@@ -33,8 +33,8 @@ export default function Reviews() {
             
             <Col className="review-carousel">
                 <Carousel controls={false} className='carousel' variant='dark'>
-                    {reviews.map(review => (    
-                        <Carousel.Item key={review?.id} className='review-wrapper' interval={5000}>
+                    {reviews.map(featured => (    
+                        <Carousel.Item key={featured.review?.id} className='review-wrapper' interval={5000}>
                             <Container className="review-section">
                                 
                                 <Row className="review-section-img">
@@ -45,7 +45,7 @@ export default function Reviews() {
                                         />
                                 </Row>
                                 <Row className="review-section-content">
-                                    <p>{review?.message}</p>
+                                    <p>{featured.review?.message}</p>
                                 </Row>  
                             </Container>
                         </Carousel.Item>

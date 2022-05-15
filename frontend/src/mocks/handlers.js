@@ -5,16 +5,18 @@ const productURL = "/api/product"
 const galleryURL = "/api/gallery"
 const testimonialURL = "/api/testimonial"
 const recaptchaURL = "/api/recaptcha"
-const aboutURL = "/api/about"
-const featuredURL = "/api/featured"
+const featuredProductURL = "/api/featured-product"
+const featuredReviewURL = "/api/featured-review"
 
 let cafeinfo = {
   id : 1,
   logo : "http://127.0.0.1:8000/media/logo/tfcafe_logo.png",
   location : "Sts. Peter and Paul Parish, Binaobao, Bantayan Island, Cebu, Philippines",
-  about : "The Fisherman's Cafe is a coffee shop located within the compound of the St. Peter’s Parish, Binaobao, Bantayan Island.\r\nWe serve all-day breakfast, coffee, pastries, and more!",
+  description: "This is a description",
+  announcement: "This is an announcement",
+  table_accommodation: "This provides table accommodation",
+  delivery_info: "This provides delivery info",
   schedule : "Monday - Sunday\r\n9:00 AM - 7:00 PM",
-  email : "tfcafe@gmail.com",
   facebook : "https://www.facebook.com/thefishermanscafe/",
   contact_number : '09123456789'
 }
@@ -87,15 +89,7 @@ let gallery = [{
   image : "http://127.0.0.1:8000/media/gallery/exterior1.png"
 }]
 
-let about = {
-  id: 1,
-  description: "This is a description",
-  announcement: "This is an announcement",
-  table_accomodation: "This provides table accommodation",
-  delivery_info: "This provides delivery info"
-}
-
-let featured = [{
+let featured_product = [{
   id : 1,
   product_id : 1,
   product : {
@@ -138,6 +132,26 @@ let featured = [{
     price : "50.00",
     image : "http://127.0.0.1:8000/media/products/product4.png",
     last_modified : "2022-03-20T04:15:54.579776Z"
+  }
+}]
+
+let featured_review = [{
+  id : 1,
+  review_id : 1,
+  review : {
+    id : 1,
+    name : "Person1",
+    email : "person1@email.com",
+    message : "Good service!"
+  }
+}, {
+  id : 2,
+  review_id : 2,
+  review : {
+    id : 2,
+    name : "Person2",
+    email : "person2@email.com",
+    message : "Well done!"
   }
 }]
 
@@ -225,11 +239,11 @@ export const handlers = [
       return res(ctx.status(200), ctx.json(gallery))
     }),
 
-    rest.get(aboutURL, (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(about))
+    rest.get(featuredProductURL, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(featured_product))
     }),
 
-    rest.get(featuredURL, (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(featured))
+    rest.get(featuredReviewURL, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(featured_review))
     }),
 ]
