@@ -24,7 +24,7 @@ export default function About() {
     }, [])
 
     let getAttrib = async () => {
-        let response = await fetch("/api/about/")
+        let response = await fetch("/api/cafeinfo/")
         let data = await response.json()
         return data
     }
@@ -48,8 +48,8 @@ export default function About() {
 
             <Col xs={3} className='notice'>
               <span><img src={tableIcon} alt="Table Icon"></img></span>
-              <span><h5>Table Accomodation</h5></span>
-              <p>{attrib.table_accomodation}</p>
+              <span><h5>Table Accommodation</h5></span>
+              <p>{attrib.table_accommodation}</p>
             </Col>
 
             <Col xs={3} className='notice'>

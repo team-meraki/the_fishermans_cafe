@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Testimonial, CafeInfo, Gallery, About, FeaturedProduct
+from .models import Product, Testimonial, CafeInfo, Gallery, FeaturedProduct, FeaturedReview
 from django.contrib.auth.models import User
 from django.contrib.auth import password_validation
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -32,16 +32,17 @@ class GallerySerializer(serializers.ModelSerializer):
         model = Gallery
         fields = '__all__'
 
-class AboutSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = About
-        fields = '__all__'
-
 class FeaturedProductSerializer(serializers.ModelSerializer):
     product = ProductSerializer(source='product_id', read_only=True)
     class Meta:
         model =  FeaturedProduct
         fields = ('id', 'product_id', 'product')
+
+class FeaturedReviewSerializer(serializers.ModelSerializer):
+    review = TestimonialSerializer(source='review_id', read_only=True)
+    class Meta:
+        model =  FeaturedReview
+        fields = ('id', 'review_id', 'review')
 
 #class RegisterUserSerializer(serializers.ModelSerializer):
 #    email = serializers.EmailField(
