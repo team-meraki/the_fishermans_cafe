@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, UpdateAPIView, GenericAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, UpdateAPIView, GenericAPIView
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from .serializers import *
@@ -62,19 +62,15 @@ class GalleryViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'delete', 'head', 'options']
     # permission_classes = [IsAuthenticatedOrReadOnly]
 
-
-class RetrieveUpdateAbout(RetrieveUpdateAPIView):
-    queryset = About.objects.all()
-    serializer_class = AboutSerializer
-    # permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def get_object(self):
-        return get_object_or_404(self.get_queryset(), pk='1')
-
-
 class FeaturedProductViewSet(ModelViewSet):
     queryset = FeaturedProduct.objects.select_related('product_id').all()
     serializer_class = FeaturedProductSerializer
+    http_method_names = ['get', 'put', 'patch', 'head', 'options']
+    # permission_classes = [IsAuthenticatedOrReadOnly]
+
+class FeaturedReviewViewSet(ModelViewSet):
+    queryset = FeaturedReview.objects.select_related('review_id').all()
+    serializer_class = FeaturedReviewSerializer
     http_method_names = ['get', 'put', 'patch', 'head', 'options']
     # permission_classes = [IsAuthenticatedOrReadOnly]
 

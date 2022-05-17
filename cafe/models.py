@@ -43,9 +43,11 @@ class CafeInfoManager(models.Manager):
 class CafeInfo(models.Model):
     logo = models.ImageField(upload_to='logo/', blank=True, default='logo/tfcafe_logo.png')
     location = models.TextField()
-    about = models.TextField()
+    description = models.TextField()
+    announcement = models.TextField()
+    table_accommodation = models.TextField()
+    delivery_info = models.TextField()
     schedule = models.TextField()
-    email = models.EmailField()
     facebook = models.URLField()
     contact_number = models.CharField(
         validators=[RegexValidator(regex=r'(09)\d{9}', 
@@ -61,37 +63,11 @@ class CafeInfo(models.Model):
 
     objects = CafeInfoManager()
 
-class AboutQuerySet(models.QuerySet):
-    def delete(self):
-        pass
-
-class AboutManager(models.Manager):
-    def create(self, **kwargs):
-        obj = self.model(**kwargs)
-        self._for_write = True
-        obj.save(using=self.db)
-        return obj
-
-    def get_queryset(self):
-        return AboutQuerySet(self.model, using=self._db)
-
-class About(models.Model):
-    description = models.TextField()
-    announcement = models.TextField()
-    table_accomodation = models.TextField()
-    delivery_info = models.TextField()
-    
-    def save(self, *args, **kwargs):
-        self.pk = 1
-        super(About, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        pass
-
-    objects = AboutManager()
-
 class FeaturedProduct(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="featured")
+    product_id = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
+
+class FeaturedReview(models.Model):
+    review_id = models.OneToOneField(Testimonial, on_delete=models.SET_NULL, null=True)
     
 
     

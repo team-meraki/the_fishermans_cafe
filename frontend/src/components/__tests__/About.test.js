@@ -16,7 +16,7 @@ it('renders about announcement', async () => {
 })
 
 it('renders about table accom', async () => {
-    expect(screen.getByRole('heading', {  name: /table accomodation/i})).toBeInTheDocument()
+    expect(screen.getByRole('heading', {  name: /table accommodation/i})).toBeInTheDocument()
     expect(await screen.findByText(/this provides table accommodation/i)).toBeInTheDocument() 
 })
 

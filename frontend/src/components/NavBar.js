@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {HashLink} from 'react-router-hash-link';
 
 import '../styles/NavBar.scss';
+import BrandNameWhite from "../images/brand-name-white.svg"
 
 export default function NavBar() {
 
@@ -31,7 +32,7 @@ export default function NavBar() {
             <Navbar.Brand as={Link} to={"/"} className="brand-name">
                 <img
                     alt=""
-                    src="/images/brand-name-white.svg"
+                    src={BrandNameWhite}
                     className="brand-name-img"
                     />{' '}
             </Navbar.Brand>

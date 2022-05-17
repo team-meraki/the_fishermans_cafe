@@ -17,7 +17,7 @@ export default function FeaturedProducts() {
     }, [])
 
     let getProduct = async () => {
-        let response = await fetch("/api/featured/")
+        let response = await fetch("/api/featured-product/")
         let data = await response.json()
         return data
     }

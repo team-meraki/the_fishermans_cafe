@@ -4,7 +4,6 @@ import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
 import { toast } from 'react-toastify';
 import { deleteProduct, updateProduct } from '../../adminAPI';
-import { reloadPage } from '../common';
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
-export default function AllProductsDisplay ({products, fetchAllProducts}) {
+export default function AllProductsDisplay ({products, refreshData, setRefreshData}) {
     
     const initialData = Object.freeze({
         id: "",
@@ -27,7 +26,7 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     const [delShow, setDelShow] = useState(false);
     const handleDelClose = () => {
         setDelShow(false);
-        setSelected(null)
+        setSelected(initialData)
     }
     const handleDelShow = () => setDelShow(true);
 
@@ -40,7 +39,7 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
     const handleEditShow = () => setEditShow(true);
 
     // Edited Product
-    const [editedProduct, setEditedProduct] = useState({});
+    const [editedProduct, setEditedProduct] = useState(initialData);
     
     function onClickDelBtn(id) {
         const str_id = id.toString();
@@ -90,13 +89,10 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
 
         if (response.data.status === 200) {
             setEditShow(false)
-            setSelected({})
-            setEditedProduct({})
+            setSelected(initialData)
+            setEditedProduct(initialData)
             toast.success('Successfully edited a product!');
-            fetchAllProducts()
-        //setTimeout(function () {
-        //    reloadPage();
-        //}, 2000);
+            setRefreshData(!refreshData)
         }
         else if (response.data.status === 400) {
             setEditedProduct(selected)
@@ -115,11 +111,9 @@ export default function AllProductsDisplay ({products, fetchAllProducts}) {
         const response = await deleteProduct(selected);
         setDelShow(false)
         if (response.data.status === 204) {
+            setSelected(initialData)
             toast.success('Successfully deleted a product!');
-            fetchAllProducts()
-        //setTimeout(function () {
-        //    reloadPage();
-        //}, 2000);
+            setRefreshData(!refreshData)
         }
         if (response.data.status === 400) {
             toast.error('Failed to delete a product!');

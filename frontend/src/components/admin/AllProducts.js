@@ -4,7 +4,6 @@ import AllProductsDisplay from './AllProductsDisplay'
 import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import { addProduct, getAllProducts } from '../../adminAPI';
-import { reloadPage } from '../common';
 
 // icons & css
 import addIcon from '../../icons/add.svg'
@@ -24,19 +23,7 @@ export default function AllProducts() {
     setValue(e)
   }
 
-  useEffect(() => {
-    let mounted = true
-    fetchAllProducts()
-    .then(response => {
-        if(mounted) {
-          setProduct(response.data.data);
-          setMeals(response.data.data.filter(product => product.category === 'meal'))
-          setDesserts(response.data.data.filter(product => product.category === 'dessert'))
-          setDrinks(response.data.data.filter(product => product.category === 'drink'))
-        }
-    })
-    return () => mounted = false
-  }, [])
+  const [refreshData, setRefreshData] = useState(false)
 
   // Get all products
   async function fetchAllProducts() {
@@ -84,10 +71,7 @@ export default function AllProducts() {
           setAddShow(false)
           setNewProduct(initialData);
           toast.success('Successfully added a product!');
-          fetchAllProducts()
-          //setTimeout(function () {
-          //  reloadPage();
-          //}, 2000);
+          setRefreshData(!refreshData)
       } 
       else if (response.data.status === 400) {
         const error = JSON.parse(response.data.request.response)
@@ -101,8 +85,18 @@ export default function AllProducts() {
     }
     
     useEffect(() => {
-      fetchAllProducts();
-    }, [])
+      let mounted = true
+      fetchAllProducts()
+      .then(response => {
+          if(mounted) {
+            setProduct(response.data.data);
+            setMeals(response.data.data.filter(product => product.category === 'meal'))
+            setDesserts(response.data.data.filter(product => product.category === 'dessert'))
+            setDrinks(response.data.data.filter(product => product.category === 'drink'))
+          }
+      })
+      return () => mounted = false
+    }, [refreshData])
 
   return (
     <div className='main-container'>
@@ -143,8 +137,9 @@ export default function AllProducts() {
               value === 'All' ? all : 
               (value === 'Meals' ? meals : 
               (value === 'Desserts' ? desserts : drinks))
-            } 
-            fetchAllProducts={fetchAllProducts}
+            }
+            refreshData={refreshData} 
+            setRefreshData={setRefreshData}
         />
 
       {/*}

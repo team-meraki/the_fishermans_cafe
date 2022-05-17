@@ -8,8 +8,9 @@ from django.urls import reverse
 # Create your tests here.
 class CafeInfoTestCase(TestCase):
     def setUp(self):
-        info = CafeInfo.objects.create(location="test location", about="test about", 
-        schedule="test schedule", email="testemail@email.com", facebook="fb.com",
+        info = CafeInfo.objects.create(location="test location", description="test description", 
+        announcement="test announcement", table_accommodation="test table accommodation",
+        delivery_info="test delivery info", schedule="test schedule", facebook="fb.com",
         contact_number="09123456789")
 
     def test_instance_count_always_one(self):
@@ -21,30 +22,36 @@ class CafeInfoTestCase(TestCase):
         self.assertEqual(info1.pk, 1)
     
     def test_create_behaves_as_update(self):
-        info1 = CafeInfo.objects.create(location="new location", about="new about", 
-        schedule="new schedule", email="testemail@email.com", facebook="newfb.com",
+        info1 = CafeInfo.objects.create(location="new location", description="new description", 
+        announcement="new announcement", table_accommodation="new table accommodation",
+        delivery_info="new delivery info", schedule="new schedule", facebook="newfb.com",
         contact_number="09123456789")
         info2 = CafeInfo.objects.get()
 
         self.assertEqual(info2.pk, 1)
         self.assertEqual(info2.location, "new location")
-        self.assertEqual(info2.about, "new about")
+        self.assertEqual(info2.description, "new description")
+        self.assertEqual(info2.announcement, "new announcement")
+        self.assertEqual(info2.table_accommodation, "new table accommodation")
+        self.assertEqual(info2.delivery_info, "new delivery info")
         self.assertEqual(info2.schedule, "new schedule")
-        self.assertEqual(info2.email, "testemail@email.com")
         self.assertEqual(info2.facebook, "newfb.com")
         self.assertEqual(info2.contact_number, "09123456789")
 
-        info3 = CafeInfo(location="2new location", about="2new about", 
-        schedule="2new schedule", email="2testemail@email.com", facebook="2newfb.com",
+        info3 = CafeInfo(location="2new location", description="2new description", 
+        announcement="2new announcement", table_accommodation="2new table accommodation",
+        delivery_info="2new delivery info", schedule="2new schedule", facebook="2newfb.com",
         contact_number="09999999999")
         info3.save()
         info2 = CafeInfo.objects.get()
 
         self.assertEqual(info2.pk, 1)
         self.assertEqual(info2.location, "2new location")
-        self.assertEqual(info2.about, "2new about")
+        self.assertEqual(info2.description, "2new description")
+        self.assertEqual(info2.announcement, "2new announcement")
+        self.assertEqual(info2.table_accommodation, "2new table accommodation")
+        self.assertEqual(info2.delivery_info, "2new delivery info")
         self.assertEqual(info2.schedule, "2new schedule")
-        self.assertEqual(info2.email, "2testemail@email.com")
         self.assertEqual(info2.facebook, "2newfb.com")
         self.assertEqual(info2.contact_number, "09999999999")
     
@@ -59,8 +66,9 @@ class CafeInfoTestCase(TestCase):
         info3 = CafeInfo.objects.get()
         info3.delete()        
         self.assertTrue(info3)
-        info3 = CafeInfo(location="2new location", about="2new about", 
-        schedule="2new schedule", email="2testemail@email.com", facebook="2newfb.com",
+        info3 = CafeInfo(location="2new location", description="2new description", 
+        announcement="2new announcement", table_accommodation="2new table accommodation",
+        delivery_info="2new delivery info", schedule="2new schedule", facebook="2newfb.com",
         contact_number="09999999999")
         info3.save()
         info3.delete()        
@@ -100,16 +108,19 @@ class ViewsTestCase(APITestCase):
 
 
     def test_cafeinfo_api(self):
-        CafeInfo.objects.create(location="test location", about="test about", 
-        schedule="test schedule", email="testemail@email.com", facebook="fb.com",
+        CafeInfo.objects.create(location="test location", description="test description", 
+        announcement="test announcement", table_accommodation="test table accommodation",
+        delivery_info="test delivery info", schedule="test schedule", facebook="fb.com",
         contact_number="09123456789")
-        url = reverse('get-update-cafeInfo')
+        url = reverse('get_update_cafeInfo')
 
         data = {
             "location":"new location", 
-            "about":"new about", 
+            "description":"new description", 
+            "announcement":"new announcement",
+            "table_accommodation":"new table accommodation",
+            "delivery_info":"new delivery info",
             "schedule":"new schedule",
-            "email":"testemail@email.com", 
             "facebook":"http://newfb.com",
             "contact_number":"09123456789"
         }
