@@ -151,7 +151,6 @@ export const editCafeInfo = async (editedInfo) => {
   try {
     let response;
     let form_data = new FormData();
-    
     form_data.append("schedule", editedInfo.schedule);
     form_data.append("location", editedInfo.location);
     form_data.append("contact_number", editedInfo.contact_number);
@@ -161,8 +160,8 @@ export const editCafeInfo = async (editedInfo) => {
     form_data.append("table_accommodation", editedInfo.table_accommodation);
     form_data.append("delivery_info", editedInfo.delivery_info);
 
-    console.log(editedInfo)
-    console.log(form_data)
+    //console.log(editedInfo)
+    //console.log(form_data)
 
     if (editedInfo.logo){
       form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
@@ -175,8 +174,8 @@ export const editCafeInfo = async (editedInfo) => {
          },}
        )
         
-       console.log('put')
-       console.log(response)
+       //console.log('put')
+       //console.log(response)
     }
     else {
       response = await patchApi(
@@ -187,10 +186,10 @@ export const editCafeInfo = async (editedInfo) => {
          },}
       )
 
-      console.log('patch')
-      console.log(response)
+      //console.log('patch')
+      //console.log(response)
     }
-    console.log(response)
+    //console.log(response)
      return ({data:response});   
    } catch (error) {
      return ({data: error.response});

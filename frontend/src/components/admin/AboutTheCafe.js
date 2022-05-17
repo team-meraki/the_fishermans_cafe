@@ -10,7 +10,19 @@ export default function AboutTheCafe() {
  //const [cafeInfo, setCafeInfo] = useState({});
 
  // Edit cafe details hooks
- const [editedInfo, setEditedCafeInfo] = useState({})
+ const initialData = Object.freeze({
+  schedule: "",
+  location: "",
+  contact_number: "",
+  facebook: "",
+  description: "",
+  announcement: "",
+  table_accommodation: "",
+  delivery_info: ""
+})
+
+ const [editedInfo, setEditedCafeInfo] = useState(initialData)
+ let [refreshData, setRefreshData] = useState(false)
 
  const handleEditChange = (e) => {
   const { name, value } = e.target;
@@ -18,35 +30,55 @@ export default function AboutTheCafe() {
       ...prevState,
       [name]: value
   }));
-  console.log(editedInfo)
+  //console.log(editedInfo)
  }
 
- async function saveEdits() {
-  console.log(editedInfo)
-  const response = await editCafeInfo(editedInfo)
-  console.log(response);
+  const handleEditImage = (e) => {
+    let editedImg = { ...editedInfo };
+    editedImg[e.target.name] = e.target.files[0];
+    setEditedCafeInfo(editedImg);
+  }
 
-//   if (response.data.status === 200) {
-//    toast.success('Successfully saved the changes!');
-//    //setRefreshData(!refreshData)
-//   }
-//   else if (response.data.status === 400) {
-//    toast.error('Failed to save changes');
-//   }
+ async function saveEdits() {
+  //console.log(editedInfo)
+  const response = await editCafeInfo(editedInfo)
+  //console.log(response);
+
+   if (response.data.status === 200) {
+    toast.success('Successfully saved the changes!');
+    setRefreshData(!refreshData)
+   }
+   else if (response.data.status === 400) {
+    toast.error('Failed to save changes');
+   }
  }
 
  // Fetch cafe details
  async function fetchCafeInfo() {
   const response = await getCafeInfo();
-  //setCafeInfo(response.data.data);
-  console.log(response.data.data)
-  setEditedCafeInfo(response.data.data)
-  console.log(editedInfo)
+  return response
+  //setEditedCafeInfo(response.data.data)
  }
 
  useEffect( () => {
-  fetchCafeInfo();
- },[])
+  let mounted = true
+  fetchCafeInfo()
+  .then(response => {
+    if (mounted){
+      setEditedCafeInfo({
+        schedule: response.data.data.schedule,
+        location: response.data.data.location,
+        contact_number: response.data.data.contact_number,
+        facebook: response.data.data.facebook,
+        description: response.data.data.description,
+        announcement: response.data.data.announcement,
+        table_accommodation: response.data.data.table_accommodation,
+        delivery_info: response.data.data.delivery_info
+      })
+    }
+  })
+  return () => mounted = false
+ },[refreshData])
 
  return (
   <div className='main-container'>
@@ -64,7 +96,7 @@ export default function AboutTheCafe() {
        <Row className='d-flex align-items-center mb-1'>
         <Col sm="2">Logo</Col>
         <Col sm="4" className='d-flex align-items-center'>
-          <Form.Control type="file" name="logo" onChange={(e) => handleEditChange(e)} />
+          <Form.Control type="file" name="logo" accept="image/*" onChange={(e) => handleEditImage(e)} />
         </Col>
        </Row>
        <Row className='d-flex align-items-center mb-1'>
