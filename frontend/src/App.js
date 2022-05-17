@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import DeliveryBanner from './components/DeliveryBanner';
 import AllProducts from './components/admin/AllProducts';
 import AllGallery from './components/admin/Gallery';
+import AboutTheCafe from './components/admin/AboutTheCafe';
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,6 +36,7 @@ function App() {
                 <Route exact path="/admin" element={<PrivateRoute/>}>
                   <Route exact path="/admin/all-products" element={<AllProducts/>}/>
                   <Route exact path="/admin/all-gallery" element={<AllGallery/>}/>
+                  <Route exact path="/admin/cafe" element={<AboutTheCafe/>}/>
               {/*<Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
               <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>*/}
                 </Route>
