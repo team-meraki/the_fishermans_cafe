@@ -142,30 +142,6 @@ export default function AllProducts() {
             setRefreshData={setRefreshData}
         />
 
-      {/*}
-        {(value === 'All') &&
-          <AllProductsDisplay 
-            products={all} fetchAllProducts={fetchAllProducts}
-          />
-        }
-          
-        {(value === 'Meals') && 
-          <AllProductsDisplay 
-            products={meals} fetchAllProducts={fetchAllProducts}
-          />
-        }
-
-        {(value === 'Desserts') && 
-          <AllProductsDisplay 
-            products={desserts} fetchAllProducts={fetchAllProducts}
-          />
-        }
-
-        {(value === 'Drinks') && 
-          <AllProductsDisplay 
-            products={drinks} fetchAllProducts={fetchAllProducts}
-        />}
-      */}    
 
         {/* ADD MODAL HANDLER */}
         <Modal show={addShow} onHide={handleAddClose} className='admin-modal'>
