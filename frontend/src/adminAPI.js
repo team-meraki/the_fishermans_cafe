@@ -126,3 +126,19 @@ export const addPhoto = async (newPhoto) => {
      return ({data: error.response});
    }
  }
+
+
+
+/* =================================================
+  --- ADMIN ABOUT THE CAFE / CAFE INFO API CALLS ---
+=================================================== */
+
+// GET
+export const getCafeInfo = async () => {
+  try {
+    const response = await getApi('/api/cafeinfo/');
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
