@@ -12,6 +12,9 @@ import cafeIcon from '../../icons/about-cafe.svg'
 import logoutIcon from '../../icons/logout.svg'
 import AuthContext from './context/AuthContext'
 
+import CafeLogoImg from '../../images/tfcafe_logo.png'
+import BrandNameImg from '../../images/brand-name.svg'
+
 // main 
 export default function SideNavbar() {
   let { logoutUser } = useContext(AuthContext)
@@ -20,13 +23,13 @@ export default function SideNavbar() {
       <div className="sidebar">
         <div className='brand-name-wrapper'>
           <img
-            src="/images/tfcafe_logo.png"
+            src={CafeLogoImg}
             alt="Cafe Logo"
             className='cafe-logo-img'
           />
           <img
             alt="Brand Name"
-            src="/images/brand-name.svg"
+            src={BrandNameImg}
             className="brand-name-img"
           />{' '}
         </div>

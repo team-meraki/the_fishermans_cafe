@@ -18,6 +18,7 @@ export default function About() {
         .then(attrib => {
             if(mounted) {
               setAttrib(attrib)
+              console.log(attrib)
             }
         })
         return () => mounted = false
