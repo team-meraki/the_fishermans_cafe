@@ -79,7 +79,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
       }
       const handleEditImage = (e) => {
         let editedImg = { ...editedProduct };
-        editedImg["image"] = e.target.files[0];
+        editedImg[e.target.name] = e.target.files[0];
         setEditedProduct(editedImg);
       }
 
