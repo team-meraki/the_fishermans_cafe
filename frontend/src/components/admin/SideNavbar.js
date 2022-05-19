@@ -11,6 +11,7 @@ import galleryIcon from '../../icons/gallery.svg'
 import cafeIcon from '../../icons/about-cafe.svg'
 import logoutIcon from '../../icons/logout.svg'
 import AuthContext from './context/AuthContext'
+import settingsIcon from '../../icons/settings.svg'
 
 import CafeLogoImg from '../../images/tfcafe_logo.png'
 import BrandNameImg from '../../images/brand-name.svg'
@@ -45,7 +46,10 @@ export default function SideNavbar() {
             <li><Link to="/admin/cafe"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link></li>
         </ul>
         <div className="sidenav-footer">
-          <Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link>
+          <ul>
+            <li><Link to="/admin/settings"><span><img src={settingsIcon} alt="Settings Icon"></img></span>Settings</Link></li>
+            <li><Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
+          </ul>
         </div>
 
       </div>
