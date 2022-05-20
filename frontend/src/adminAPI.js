@@ -56,6 +56,10 @@ export const updateProduct = async (product) => {
     form_data.append("name", product.name);
     form_data.append("price", product.price);
     form_data.append("category", product.category);
+
+    console.log(product)
+    console.log(form_data)
+
     if (product.image){
       form_data.append("image", product.image, product.image.name);
 
@@ -142,3 +146,65 @@ export const getCafeInfo = async () => {
     return ({error: error});
   }
 }
+
+export const editCafeInfo = async (editedInfo) => {
+  try {
+    let response;
+    let form_data = new FormData();
+    form_data.append("schedule", editedInfo.schedule);
+    form_data.append("location", editedInfo.location);
+    form_data.append("contact_number", editedInfo.contact_number);
+    form_data.append("facebook", editedInfo.facebook);
+    form_data.append("description", editedInfo.description);
+    form_data.append("announcement", editedInfo.announcement);
+    form_data.append("table_accommodation", editedInfo.table_accommodation);
+    form_data.append("delivery_info", editedInfo.delivery_info);
+
+    //console.log(editedInfo)
+    //console.log(form_data)
+
+    if (editedInfo.logo){
+      form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
+
+      response = await putApi(
+        '/api/cafeinfo/',
+        form_data,
+        { headers: {
+             "Content-Type": "multipart/form-data",
+         },}
+       )
+        
+       //console.log('put')
+       //console.log(response)
+    }
+    else {
+      response = await patchApi(
+        '/api/cafeinfo/',
+        form_data,
+        { headers: { 
+             "Content-Type": "multipart/form-data",
+         },}
+      )
+
+      //console.log('patch')
+      //console.log(response)
+    }
+    //console.log(response)
+     return ({data:response});   
+   } catch (error) {
+     return ({data: error.response});
+  }
+}
+
+// export const editCafeInfo = async (editedInfo) => {
+//   try {
+//     const response = await putApi(
+//       '/api/cafeinfo/',
+//       editedInfo,
+//     );
+//     console.log(response)
+//     return ({data:response});   
+//   } catch (error) {
+//     return ({error: error});
+//   }
+// }

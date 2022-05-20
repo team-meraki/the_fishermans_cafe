@@ -54,6 +54,9 @@ export default function NavBarWithBgColor() {
                     <Nav.Link as={Link} to="/about" className="navigation-link">
                     <span className='underline-hover'>About</span>
                     </Nav.Link>
+                    <Nav.Link as={Link} to="/admin" className="navigation-link">
+                    <span className='underline-hover'>Login</span>
+                    </Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Container>
