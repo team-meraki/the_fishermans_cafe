@@ -1,8 +1,8 @@
 import { deleteApi, getApi, postApi, putApi, patchApi } from "./adminAxios";
 
 /* =====================================
-   --- ADMIN PRODUCTS API CALLS ---
-  ===================================== */ 
+   ---    ADMIN PRODUCTS API CALLS   ---
+   ===================================== */ 
 
 // GET
 export const getAllProducts = async () => {
@@ -196,15 +196,28 @@ export const editCafeInfo = async (editedInfo) => {
   }
 }
 
-// export const editCafeInfo = async (editedInfo) => {
-//   try {
-//     const response = await putApi(
-//       '/api/cafeinfo/',
-//       editedInfo,
-//     );
-//     console.log(response)
-//     return ({data:response});   
-//   } catch (error) {
-//     return ({error: error});
-//   }
-// }
+/* =================================================
+  --- ADMIN FEATURED PRODUCTS API CALLS ---
+=================================================== */
+export const getFeaturedProducts = async () => {
+  try {
+    const response = await getApi('/api/featured-product/');
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
+
+export const editFeaturedProduct = async (id, product_id) => {
+  try {
+    
+    console.log(`editing #${id} with product_id ${product_id}`)
+    const response = await putApi('/api/featured-product/' + id + '/', 
+    {"product_id" : product_id});
+    console.log(response);
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
+
