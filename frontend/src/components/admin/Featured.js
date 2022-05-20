@@ -1,39 +1,67 @@
 import React, { useEffect, useState } from 'react'
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import SideNavbar from './SideNavbar'
 
 //css
 import '../../styles/admin/Common.scss';
-import { Container, Dropdown, DropdownButton, Form } from 'react-bootstrap';
-import { getAllProducts, getFeaturedProducts } from '../../adminAPI';
+import { Button, Col, Container, Dropdown, DropdownButton, Form, Row } from 'react-bootstrap';
+import { editFeaturedProduct, getAllProducts, getFeaturedProducts } from '../../adminAPI';
 
 export default function Featured() {
 
-  const [featured, setFeatured] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  function handleChange(e) {
-    const [name, value] = e.target
-  }
 
+  /* EDIT FEATURED PRODUCT HOOKS -- STORES PRODUCT_ID ONLY */
+  const [selected, setSelected] = useState('')
+  const [first, setFirst] = useState('');
+  const [second, setSecond] = useState('');
+  const [third, setThird] = useState('');
+  const [fourth, setFourth] = useState('');
 
   async function fetchAllFeaturedProducts() {
     const response = await getFeaturedProducts();
-    console.log(response.data.data);
-    setFeatured(response.data.data);
     
-    var featuredProductsID = [];
-    response.data.data.map(id => {
-      console.log(id)
-      console.log(id.product.id)
-      console.log(id.product.name)
-      featuredProductsID.push({id: id.product.id, name: id.product.name});
-    })
+    setFirst(response.data.data[0].product_id);
+    setSecond(response.data.data[1].product_id);
+    setThird(response.data.data[2].product_id);
+    setFourth(response.data.data[3].product_id);
+  }
 
-    console.log(featuredProductsID);
-    setSelected(featuredProductsID);
+  function handleFirst(e) {
+    setFirst(e.target.value)
+    setSelected(e.target.value)
+    console.log(first);
+    console.log(selected);
+  }
+  function handleSecond(e) {
+    setSecond(e.target.value)
+    setSelected(e.target.value)
+    console.log(second);
+  }
+  function handleThird(e) {
+    setThird(e.target.value)
+    setSelected(e.target.value)
+    console.log(third);
+  }
+  function handleFourth(e) {
+    setFourth(e.target.value)
+    setSelected(e.target.value)
+    console.log(fourth);
+  }
+  
+  const [refreshData, setRefreshData] = useState(false)
+  
+  async function handleEdit(id) {
+    const response = await editFeaturedProduct(id, selected);
+    console.log(response.data)
+    if (response.data.status === 200) {
+      toast.success('Saved!');
+      setRefreshData(!refreshData)
+    } else if (response.data.status === 404) {
+      toast.error('Product not found!');
+    } 
   }
 
   async function fetchAllProducts() {
@@ -48,7 +76,7 @@ export default function Featured() {
     fetchAllFeaturedProducts();
     fetchAllProducts();
     setLoading(false);
-  }, [])
+  }, [refreshData])
 
   return (
    <div className='main-container'>
@@ -66,54 +94,85 @@ export default function Featured() {
        </h6>
        <div className='featured-wrapper'>
        
-         { (loading === false) ?
-           
-          //  selected.map( (index) => {
-          //   return (
-          //     <Form.Select
-          //       name="featured"
-          //       value={index.name}
-          //       className='featured-select'
-          //       onChange={ (e) => handleChange(e, index) }
-          //       required
-          //     > 
-          //       {products.map((product) => {
-          //         return(<option key={product.id} value={product.id}>{product.name}</option>)
-          //       })
-          //       }
-          //     </Form.Select>
-          //   )
-          //  })
+       {/* FIRST FEATURED PRODUCT */}
+       <Row>
+         <Col>
+          <Form.Select
+            className='featured-select'
+            value={first}
+            onChange={e => handleFirst(e)}
+            required
+            > 
+              {products.map((product) => {
+                return(<option key={product.id} value={product.id}>{product.name}</option>)
+              })}
+            </Form.Select>
+         </Col>
+         <Col>
+          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(1)}>Save</Button>
+         </Col>
+       </Row>
+        
 
-              (<Form.Select
-                name="featured-0"
-                defaultValue={selected[0].name}
-                className='featured-select'
-                //onChange={ (e) => handleChange(e, index) }
-                required
-              > 
-                {products.map((product) => {
-                  return(<option key={product.id} value={product.id}>{product.name}</option>)
-                })}
-              </Form.Select>)
+       {/* SECOND FEATURED PRODUCT */}
+       <Row>
+         <Col>
+          <Form.Select
+            className='featured-select'
+            value={second}
+            onChange={e => handleSecond(e)}
+            required
+          > 
+            {products.map((product) => {
+              return(<option key={product.id} value={product.id}>{product.name}</option>)
+            })}
+          </Form.Select>
+          </Col>
+         <Col>
+          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(2)}>Save</Button>
+         </Col>
+       </Row>
 
-              (<Form.Select
-                name="featured-1"
-                defaultValue={selected[1].name}
-                className='featured-select'
-                //onChange={ (e) => handleChange(e) }
-                required
-              > 
-                {products.map((product) => {
-                  return(<option key={product.id} value={product.id}>{product.name}</option>)
-                })}
-              </Form.Select>)
-          
-          :
 
-            <div>Loading...</div>
-         }
-     
+       {/* THIRD FEATURED PRODUCT */}
+        <Row>
+         <Col>
+          <Form.Select
+            className='featured-select'
+            value={third}
+            onChange={e => handleThird(e)}
+            required
+          > 
+            {products.map((product) => {
+              return(<option key={product.id} value={product.id}>{product.name}</option>)
+            })}
+          </Form.Select>
+          </Col>
+         <Col>
+          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(3)}>Save</Button>
+         </Col>
+        </Row>
+
+
+       {/* FOURTH FEATURED PRODUCT */}
+       <Row>
+         <Col>
+          <Form.Select
+            className='featured-select'
+            value={fourth}
+            onChange={e => handleFourth(e)}
+            required
+          > 
+            {products.map((product) => {
+              return(<option key={product.id} value={product.id}>{product.name}</option>)
+            })}
+          </Form.Select>
+        </Col>
+        <Col>
+          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(4)}>Save</Button>
+        </Col>
+       </Row>
+
        </div>
       </Container>
      </div>
