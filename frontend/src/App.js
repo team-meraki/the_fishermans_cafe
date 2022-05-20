@@ -9,6 +9,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import DeliveryBanner from './components/DeliveryBanner';
 import AllProducts from './components/admin/AllProducts';
+import Featured from './components/admin/Featured';
 import AllGallery from './components/admin/Gallery';
 import AboutTheCafe from './components/admin/AboutTheCafe';
 import {
@@ -35,6 +36,7 @@ function App() {
                 <Route exact path="/admin" element={<Login/>}/>
                 <Route exact path="/admin" element={<PrivateRoute/>}>
                   <Route exact path="/admin/all-products" element={<AllProducts/>}/>
+                  <Route exact path="/admin/featured" element={<Featured/>}/>
                   <Route exact path="/admin/all-gallery" element={<AllGallery/>}/>
                   <Route exact path="/admin/cafe" element={<AboutTheCafe/>}/>
               {/*<Route exact path="/admin/all-products" element={<><AllProducts/></>}/>

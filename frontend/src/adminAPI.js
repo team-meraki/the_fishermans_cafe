@@ -196,15 +196,24 @@ export const editCafeInfo = async (editedInfo) => {
   }
 }
 
-// export const editCafeInfo = async (editedInfo) => {
-//   try {
-//     const response = await putApi(
-//       '/api/cafeinfo/',
-//       editedInfo,
-//     );
-//     console.log(response)
-//     return ({data:response});   
-//   } catch (error) {
-//     return ({error: error});
-//   }
-// }
+/* =================================================
+  --- ADMIN FEATURED PRODUCTS API CALLS ---
+=================================================== */
+export const getFeaturedProducts = async () => {
+  try {
+    const response = await getApi('/api/featured-product/');
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
+
+export const editFeaturedProduct = async (id) => {
+  try {
+    const response = await putApi('/api/featured-product/' + id);
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
+
