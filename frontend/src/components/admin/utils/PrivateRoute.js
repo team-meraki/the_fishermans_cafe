@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import { Navigate, Outlet } from "react-router-dom"
+import { useLocation, Navigate, Outlet } from "react-router-dom"
 import AuthContext from '../context/AuthContext'
 
 const PrivateRoute = () => {
-    let { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    const location = useLocation() 
     return (
-        true ? <Outlet/> : <Navigate to="/admin" replace={true}/>
+        true ? <Outlet/> : <Navigate to="/admin" state={{ from: location }} replace/>
     )
 }
 

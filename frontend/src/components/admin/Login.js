@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Button, Container, Form, Row } from 'react-bootstrap'
 import '../../styles/admin/Common.scss';
 import AuthContext from './context/AuthContext'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 
 export default function Login() {
@@ -12,6 +12,8 @@ export default function Login() {
   })
 
   const [formData, setFormData] = useState(initialData)
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/admin/all-products";
 
   const handleChange = (e) => {
     setFormData({...formData,
@@ -22,7 +24,7 @@ export default function Login() {
   let { user, loginUser } = useContext(AuthContext)
 
   return (
-    user ? <Navigate to="/admin/all-products" replace={true}/> :
+    user ? <Navigate to={from} replace/> :
     <div><ToastContainer/>
     <Container>
      <Container className='login-wrapper'>

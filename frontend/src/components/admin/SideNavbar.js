@@ -46,10 +46,14 @@ export default function SideNavbar() {
             <li><Link to="/admin/cafe"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link></li>
         </ul>
         <div className="sidenav-footer">
+<<<<<<< Updated upstream
           <ul>
             <li><Link to="/admin/settings"><span><img src={settingsIcon} alt="Settings Icon"></img></span>Settings</Link></li>
             <li><Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
           </ul>
+=======
+          <Link to="#" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link>
+>>>>>>> Stashed changes
         </div>
 
       </div>

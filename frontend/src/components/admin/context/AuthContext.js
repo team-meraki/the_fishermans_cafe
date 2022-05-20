@@ -11,12 +11,12 @@ export default AuthContext;
 export const AuthProvider = () => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
-
+    const baseURL = process.env.REACT_APP_API_BASE_URL
     const navigate = useNavigate()
 
     const loginUser = async (e)=> {
         e.preventDefault()
-        axios.post('http://127.0.0.1:8000/api/token/', 
+        axios.post(baseURL + 'api/token/', 
             { 
                 username: e.target.username.value, 
                 password: e.target.password.value
@@ -25,17 +25,15 @@ export const AuthProvider = () => {
             setAuthTokens(response.data)
             setUser(jwt_decode(response.data.access))
             localStorage.setItem('authTokens', JSON.stringify(response.data))
-            navigate('/admin/all-products', { replace: true })
         }).catch(error => {
             if (error.response.status === 401)
-                //alert('Incorrect credentials.')
                 toast.error('Incorrect credentials. Please try again.');
         })
     }
 
     let logoutUser = async (e) => {
         e.preventDefault()
-        axios.post('http://127.0.0.1:8000/api/token/blacklist/', 
+        axios.post(baseURL + 'api/token/blacklist/', 
             { 
                 refresh_token: authTokens.refresh
             }
