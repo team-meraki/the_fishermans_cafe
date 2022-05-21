@@ -48,7 +48,7 @@ export default function SideNavbar() {
         <div className="sidenav-footer">
           <ul>
             <li><Link to="/admin/settings"><span><img src={settingsIcon} alt="Settings Icon"></img></span>Settings</Link></li>
-            <li><Link to="#" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
+            <li><Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
           </ul>
         </div>
 

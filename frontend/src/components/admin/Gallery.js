@@ -12,15 +12,18 @@ import addIcon from '../../icons/add.svg'
 
 // css
 import '../../styles/admin/Common.scss';
-import { addPhoto, deletePhoto, getAllPhotos } from '../../adminAPI';
+
+import useAxios from './utils/useAxios';
+import axios from 'axios';
 
 export default function Gallery() {
   let [galleryPhotos, setGalleryPhotos] = useState([]);
   let [refreshData, setRefreshData] = useState(false)
-  
+  const api = useAxios()
+
   // Get all products
   async function fetchAllPhotos() {
-    const response = await getAllPhotos();
+    const response = await axios.get('/api/gallery/');
     return response
   }
 
@@ -31,19 +34,44 @@ export default function Gallery() {
     setNewPhoto(e.target.files[0]);
   }
 
+  const addPhoto = async (newPhoto) => {
+    let form_data = new FormData();
+    if (newPhoto)
+      form_data.append("image", newPhoto, newPhoto.name);
+  
+    const response = await api.post(
+      '/api/gallery/',
+      form_data,
+      { headers: {
+           "Content-Type": "multipart/form-data",
+       },}
+     )
+      return response;   
+   }
+
   // POST API
   async function addNewPhoto() {
-    const response = await addPhoto(newPhoto);
-    
-    if (response.data.status === 201) {
+    addPhoto(newPhoto)
+    .then(response => {
+      if (response.status === 201) {
         setAddShow(false)
         setNewPhoto(null)
         toast.success('Successfully added a photo in gallery!');
         setRefreshData(!refreshData)
       }
-      else if (response.data.status === 400) {
-        toast.error('Invalid field: Failed to add a photo!');
-    }
+    })
+    .catch(error => {
+      if (error.response.status === 400) {
+        const errorData = error.response.data
+        for (const key in errorData){
+          for (const message of errorData[key]){
+            toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+          }
+        }
+      } else {
+        toast.error('Failed to add a photo.');
+      }
+    })
   }
 
   const [selected, setSelected] = useState('') // for delete modals
@@ -54,21 +82,29 @@ export default function Gallery() {
       handleDelShow();
     }
 
+    const deletePhoto = async (id) => {
+      const response = await api.delete('/api/gallery/' + id + '/');
+      return response  
+    }
+
     // DELETE API
     async function delPhoto() {
-      const response = await deletePhoto(selected);
       setDelShow(false)
-      if (response.data.status === 204) {
-        setSelected('')
-        toast.success('Successfully deleted a photo!');
-        setRefreshData(!refreshData)
-      }
-      if (response.data.status === 400) {
-          toast.error('Failed to delete a photo!');
-      }
-      if (response.data.status === 404) {
-          toast.error('Photo not found!');
-      }
+      deletePhoto(selected)
+      .then(response => {
+        if (response.status === 204) {
+          setSelected('')
+          toast.success('Successfully deleted a photo!');
+          setRefreshData(!refreshData)
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 404) {
+          toast.error('Photo not found.');
+        } else {
+          toast.error('Failed to delete a photo.'); 
+        }
+      })
   }
 
     // ADD MODAL HANDLER
@@ -91,9 +127,12 @@ export default function Gallery() {
       let mounted = true
       fetchAllPhotos()
       .then(response => {
-          if(mounted) {
-            setGalleryPhotos(response.data.data);
-          }
+        if(mounted) {
+          setGalleryPhotos(response.data);
+        }
+      })
+      .catch(error => {
+        toast.error('Could not fetch Gallery photos.')
       })
       return () => mounted = false
     }, [refreshData])

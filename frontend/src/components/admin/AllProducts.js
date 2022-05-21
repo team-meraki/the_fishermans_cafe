@@ -3,12 +3,13 @@ import SideNavbar from "./SideNavbar";
 import AllProductsDisplay from './AllProductsDisplay'
 import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
-import { addProduct, getAllProducts } from '../../adminAPI';
+import useAxios from './utils/useAxios';
 
 // icons & css
 import addIcon from '../../icons/add.svg'
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/admin/Common.scss';
+import axios from 'axios';
 
 export default function AllProducts() {
   let [all, setProduct] = useState([]);
@@ -24,10 +25,11 @@ export default function AllProducts() {
   }
 
   const [refreshData, setRefreshData] = useState(false)
+  const api = useAxios()
 
   // Get all products
   async function fetchAllProducts() {
-    const response = await getAllProducts();
+    const response = await axios.get('/api/product/');
     return response
   }
 
@@ -62,26 +64,48 @@ export default function AllProducts() {
       newProductWithImg["image"] = e.target.files[0];
       setNewProduct(newProductWithImg);
     }
+
+    const addProduct = async (product) => {
+      let form_data = new FormData();
+        if (product.image)
+          form_data.append("image", product.image, product.image.name);
+        form_data.append("name", product.name);
+        form_data.append("price", product.price);
+        form_data.append("category", product.category);
+     
+      const response = await api.post(
+        '/api/product/',
+        form_data,
+        { headers: {
+          "Content-Type": "multipart/form-data",
+        },}
+      )
+      return response
+    }
     
     // POST API
     async function addNewProduct() {
-      const response = await addProduct(newProduct);
-
-      if (response.data.status === 201) {
+      addProduct(newProduct)
+      .then(response => {
+        if (response.status === 201) {
           setAddShow(false)
           setNewProduct(initialData);
           toast.success('Successfully added a product!');
           setRefreshData(!refreshData)
-      } 
-      else if (response.data.status === 400) {
-        const error = JSON.parse(response.data.request.response)
-        for (const key in error){
-          for (const message of error[key]){
-            toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
-          }
         }
-        //toast.error('Invalid field: Failed to add the product!');
-      }  
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          const errorData = error.response.data
+          for (const key in errorData){
+            for (const message of errorData[key]){
+              toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+            }
+          }
+        } else {
+            toast.error('Failed to add new product.');
+        }
+      })
     }
     
     useEffect(() => {
@@ -89,11 +113,14 @@ export default function AllProducts() {
       fetchAllProducts()
       .then(response => {
           if(mounted) {
-            setProduct(response.data.data);
-            setMeals(response.data.data.filter(product => product.category === 'meal'))
-            setDesserts(response.data.data.filter(product => product.category === 'dessert'))
-            setDrinks(response.data.data.filter(product => product.category === 'drink'))
+            setProduct(response.data);
+            setMeals(response.data.filter(product => product.category === 'meal'))
+            setDesserts(response.data.filter(product => product.category === 'dessert'))
+            setDrinks(response.data.filter(product => product.category === 'drink'))
           }
+      })
+      .catch(error => {
+        toast.error('Failed to fetch all Products.');
       })
       return () => mounted = false
     }, [refreshData])

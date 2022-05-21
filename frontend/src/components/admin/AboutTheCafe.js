@@ -3,8 +3,9 @@ import SideNavbar from "./SideNavbar";
 import { toast, ToastContainer } from 'react-toastify';
 import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
-import { editCafeInfo, getCafeInfo } from '../../adminAPI';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import axios from 'axios';
+import useAxios from './utils/useAxios';
 
 export default function AboutTheCafe() {
  //const [cafeInfo, setCafeInfo] = useState({});
@@ -23,6 +24,7 @@ export default function AboutTheCafe() {
 
  const [editedInfo, setEditedCafeInfo] = useState(initialData)
  let [refreshData, setRefreshData] = useState(false)
+  const api = useAxios()
 
  const handleEditChange = (e) => {
   const { name, value } = e.target;
@@ -39,25 +41,69 @@ export default function AboutTheCafe() {
     setEditedCafeInfo(editedImg);
   }
 
- async function saveEdits() {
-  //console.log(editedInfo)
-  const response = await editCafeInfo(editedInfo)
-  //console.log(response);
+  const editCafeInfo = async (editedInfo) => {
+    let response;
+    let form_data = new FormData();
+    form_data.append("schedule", editedInfo.schedule);
+    form_data.append("location", editedInfo.location);
+    form_data.append("contact_number", editedInfo.contact_number);
+    form_data.append("facebook", editedInfo.facebook);
+    form_data.append("description", editedInfo.description);
+    form_data.append("announcement", editedInfo.announcement);
+    form_data.append("table_accommodation", editedInfo.table_accommodation);
+    form_data.append("delivery_info", editedInfo.delivery_info);
+  
+    if (editedInfo.logo){
+      form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
 
-   if (response.data.status === 200) {
-    toast.success('Successfully saved the changes!');
-    setRefreshData(!refreshData)
-   }
-   else if (response.data.status === 400) {
-    toast.error('Failed to save changes');
-   }
+      response = await api.put(
+        'api/cafeinfo/',
+        form_data,
+        { headers: {
+             "Content-Type": "multipart/form-data",
+         },}
+       )
+        
+    }
+    else {
+      response = await api.patch(
+        'api/cafeinfo/',
+        form_data,
+        { headers: { 
+             "Content-Type": "multipart/form-data",
+         },}
+      )
+
+    }
+    return response 
+  }
+
+ async function saveEdits() {
+  editCafeInfo(editedInfo)
+  .then(response => {
+    if (response.status === 200) {
+      toast.success('Successfully saved the changes!');
+      setRefreshData(!refreshData)
+     }
+  })
+  .catch(error => {
+    if (error.response.status === 400) {
+      const errorData = error.response.data
+      for (const key in errorData){
+        for (const message of errorData[key]){
+          toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+        }
+      }
+    } else {
+      toast.error('Failed to edit a product.');
+    }
+  })
  }
 
  // Fetch cafe details
  async function fetchCafeInfo() {
-  const response = await getCafeInfo();
+  const response = await axios.get('/api/cafeinfo/');
   return response
-  //setEditedCafeInfo(response.data.data)
  }
 
  useEffect( () => {
@@ -66,16 +112,19 @@ export default function AboutTheCafe() {
   .then(response => {
     if (mounted){
       setEditedCafeInfo({
-        schedule: response.data.data.schedule,
-        location: response.data.data.location,
-        contact_number: response.data.data.contact_number,
-        facebook: response.data.data.facebook,
-        description: response.data.data.description,
-        announcement: response.data.data.announcement,
-        table_accommodation: response.data.data.table_accommodation,
-        delivery_info: response.data.data.delivery_info
+        schedule: response.data.schedule,
+        location: response.data.location,
+        contact_number: response.data.contact_number,
+        facebook: response.data.facebook,
+        description: response.data.description,
+        announcement: response.data.announcement,
+        table_accommodation: response.data.table_accommodation,
+        delivery_info: response.data.delivery_info
       })
     }
+  })
+  .catch(error => {
+    toast.error('Failed to fetch Cafe Info.');
   })
   return () => mounted = false
  },[refreshData])
@@ -101,9 +150,9 @@ export default function AboutTheCafe() {
        </Row>
        <Row className='d-flex align-items-center mb-1'>
         <Col sm="2">Schedule</Col>
-        <Col><Form.Control type="text" name="schedule" value={editedInfo.schedule} onChange={(e) => handleEditChange(e)}/></Col>
+        <Col><Form.Control as="textarea" name="schedule" value={editedInfo.schedule} onChange={(e) => handleEditChange(e)}/></Col>
         <Col sm="2">Location</Col>
-        <Col><Form.Control type="text" name="location" value={editedInfo.location} onChange={(e) => handleEditChange(e)}/></Col>
+        <Col><Form.Control as="textarea" name="location" value={editedInfo.location} onChange={(e) => handleEditChange(e)}/></Col>
        </Row>
        <Row className='d-flex align-items-center mb-1'>
         <Col sm="2">Contact Number</Col>

@@ -1,8 +1,7 @@
 import { createContext, useState } from 'react'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { useNavigate, Outlet } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import { Outlet } from 'react-router-dom'
 
 const AuthContext = createContext()
 
@@ -12,22 +11,16 @@ export const AuthProvider = () => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     const baseURL = process.env.REACT_APP_API_BASE_URL
-    const navigate = useNavigate()
 
-    const loginUser = async (e)=> {
-        e.preventDefault()
-        axios.post(baseURL + 'api/token/', 
-            { 
-                username: e.target.username.value, 
-                password: e.target.password.value
-            }
-        ).then(response => {
+    const loginUser = async (username, password)=> {
+        return axios.post(baseURL + 'api/token/', { username, password })
+        .then(response => {
             setAuthTokens(response.data)
             setUser(jwt_decode(response.data.access))
             localStorage.setItem('authTokens', JSON.stringify(response.data))
+            return Promise.resolve(response)
         }).catch(error => {
-            if (error.response.status === 401)
-                toast.error('Incorrect credentials. Please try again.');
+            return Promise.reject(error)
         })
     }
 

@@ -57,9 +57,6 @@ export const updateProduct = async (product) => {
     form_data.append("price", product.price);
     form_data.append("category", product.category);
 
-    console.log(product)
-    console.log(form_data)
-
     if (product.image){
       form_data.append("image", product.image, product.image.name);
 
@@ -160,8 +157,6 @@ export const editCafeInfo = async (editedInfo) => {
     form_data.append("table_accommodation", editedInfo.table_accommodation);
     form_data.append("delivery_info", editedInfo.delivery_info);
 
-    //console.log(editedInfo)
-    //console.log(form_data)
 
     if (editedInfo.logo){
       form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
@@ -174,8 +169,6 @@ export const editCafeInfo = async (editedInfo) => {
          },}
        )
         
-       //console.log('put')
-       //console.log(response)
     }
     else {
       response = await patchApi(
@@ -186,10 +179,8 @@ export const editCafeInfo = async (editedInfo) => {
          },}
       )
 
-      //console.log('patch')
-      //console.log(response)
     }
-    //console.log(response)
+
      return ({data:response});   
    } catch (error) {
      return ({data: error.response});
@@ -210,14 +201,30 @@ export const getFeaturedProducts = async () => {
 
 export const editFeaturedProduct = async (id, product_id) => {
   try {
-    
-    console.log(`editing #${id} with product_id ${product_id}`)
     const response = await putApi('/api/featured-product/' + id + '/', 
     {"product_id" : product_id});
-    console.log(response);
+
     return ({data:response});   
   } catch (error) {
     return ({error: error});
   }
 }
 
+/* =================================================
+  --- ADMIN SETTINGS API CALLS ---
+=================================================== */
+
+export const updateCredentials = async credentials => {
+  try {
+    const response = await putApi('/api/user/update/name/', 
+    {
+      "email" : credentials.email,
+      "username": credentials.username,
+      "password": credentials.password
+    });
+
+    return response;   
+  } catch (error) {
+    return error;
+  }
+}

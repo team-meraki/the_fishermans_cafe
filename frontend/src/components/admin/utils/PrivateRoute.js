@@ -6,7 +6,7 @@ const PrivateRoute = () => {
     const { user } = useContext(AuthContext)
     const location = useLocation() 
     return (
-        true ? <Outlet/> : <Navigate to="/admin" state={{ from: location }} replace/>
+        user ? <Outlet/> : <Navigate to="/admin" state={{ from: location }} replace/>
     )
 }
 
