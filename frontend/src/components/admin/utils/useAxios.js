@@ -13,9 +13,7 @@ const useAxios = () => {
     const axiosInstance = axios.create({
         baseURL,
         headers: {
-            'Content-Type': 'application/json',
             Authorization: authTokens ? 'Bearer ' + authTokens.access : null,
-            accept: 'application/json'
         }
     })
 
@@ -37,7 +35,7 @@ const useAxios = () => {
             const status = error.response ? error.response.status : null
 
             if(status === 401){
-                return axios.post(baseURL + '/api/token/refresh/', {
+                return axios.post(baseURL + 'api/token/refresh/', {
                     refresh: authTokens.refresh
                 })
                 .then(response => {
@@ -50,15 +48,18 @@ const useAxios = () => {
                     return axiosInstance(originalRequest)
                 })
                 .catch(error => {
-                    localStorage.removeItem('authTokens')
-                    setAuthTokens(null)
-                    setUser(null)
+                    if(error.response.status === 401){
+                        localStorage.removeItem('authTokens')
+                        setAuthTokens(null)
+                        setUser(null)
 
-                    navigate('/admin', { replace: true })
+                        navigate('/admin', { replace: true })
+                    }
+                    return Promise.reject(error)
                 })
             }
 
-            return Promise.resolve(error)
+            return Promise.reject(error)
         }
     )
 

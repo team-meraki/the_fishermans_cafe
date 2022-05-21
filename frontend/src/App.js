@@ -33,9 +33,9 @@ function App() {
               <Route exact path="/about" element={<><LandingNavBar/><About/><Footer /></>}/>
 
               {/* Admin */}
-              <Route exact path="/admin" element={<AuthProvider/>}>
+              <Route element={<AuthProvider/>}>
                 <Route exact path="/admin" element={<Login/>}/>
-                <Route exact path="/admin" element={<PrivateRoute/>}>
+                <Route element={<PrivateRoute/>}>
                   <Route exact path="/admin/all-products" element={<AllProducts/>}/>
                   <Route exact path="/admin/featured" element={<Featured/>}/>
                   <Route exact path="/admin/all-gallery" element={<AllGallery/>}/>

@@ -3,7 +3,7 @@ import { Button, Form, Modal, Table } from 'react-bootstrap';
 import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
 import { toast } from 'react-toastify';
-import { deleteProduct, updateProduct } from '../../adminAPI';
+import useAxios from './utils/useAxios';
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,8 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
         price: ""
     })
     const [selected, setSelected] = useState(initialData) // for edit and delete modals
-    
+    const api = useAxios()
+
     // DELETE MODAL HANDLER
     const [delShow, setDelShow] = useState(false);
     const handleDelClose = () => {
@@ -82,45 +83,89 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
         editedImg[e.target.name] = e.target.files[0];
         setEditedProduct(editedImg);
       }
+    
+    
+    const updateProduct = async (product) => {
+        let response;
+        let form_data = new FormData();
+        form_data.append("name", product.name);
+        form_data.append("price", product.price);
+        form_data.append("category", product.category);
+    
+        if (product.image){
+          form_data.append("image", product.image, product.image.name);
+    
+          response = await api.put(
+            'api/product/' + product.id +'/',
+            form_data,
+            { headers: {
+                 "Content-Type": "multipart/form-data",
+             },}
+           )
+        }
+        else {
+          response = await api.patch(
+            'api/product/' + product.id +'/',
+            form_data,
+            { headers: {
+                 "Content-Type": "multipart/form-data",
+             },}
+          )
+        }
+        
+        return response   
+    }
 
     // EDIT API
     async function editProduct() {
-        const response = await updateProduct(editedProduct);
-
-        if (response.data.status === 200) {
-            setEditShow(false)
-            setSelected(initialData)
-            setEditedProduct(initialData)
-            toast.success('Successfully edited a product!');
-            setRefreshData(!refreshData)
-        }
-        else if (response.data.status === 400) {
-            setEditedProduct(selected)
-            const error = JSON.parse(response.data.request.response)
-            for (const key in error){
-              for (const message of error[key]){
-                toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
-              }
+        updateProduct(editedProduct)
+        .then(response => {
+            if (response.status === 200) {
+                setEditShow(false)
+                setSelected(initialData)
+                setEditedProduct(initialData)
+                toast.success('Successfully edited a product!');
+                setRefreshData(!refreshData)
             }
-            //toast.error('Failed to edit a product!');
-        }
+        })
+        .catch(error => {
+            if (error.response.status === 400) {
+                setEditedProduct(selected)
+                const errorData = error.response.data
+                for (const key in errorData){
+                  for (const message of errorData[key]){
+                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+                  }
+                }
+            } else {
+                toast.error('Failed to edit a product.');
+            }
+        })
+    }
+
+    const deleteProduct = async (id) => {
+        const response = await api.delete('api/product/' + id);
+        return response 
     }
 
     // DELETE API
     async function delProduct() {
-        const response = await deleteProduct(selected);
         setDelShow(false)
-        if (response.data.status === 204) {
-            setSelected(initialData)
-            toast.success('Successfully deleted a product!');
-            setRefreshData(!refreshData)
-        }
-        if (response.data.status === 400) {
-            toast.error('Failed to delete a product!');
-        }
-        else if (response.data.status === 404) {
-            toast.error('Product not found!');
-        }
+        deleteProduct(selected)
+        .then(response => {
+            if (response.status === 204) {
+                setSelected(initialData)
+                toast.success('Successfully deleted a product!');
+                setRefreshData(!refreshData)
+            }
+        })
+        .catch(error => {
+            if (error.response.status === 404) {
+                toast.error('Product not found.');
+            } else {
+                toast.error('Failed to delete a product.')
+            }
+        })
     }
 
     

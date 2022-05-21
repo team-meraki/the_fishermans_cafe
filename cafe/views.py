@@ -28,7 +28,7 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     parser_classes = (MultiPartParser, FormParser)
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # def perform_create(self, serializer):
     #     serializer.save(creator=self.request.user)
@@ -42,14 +42,14 @@ class CustomerTestimonialPermission(BasePermission):
 class TestimonialViewSet(ModelViewSet):
     queryset = Testimonial.objects.all()
     serializer_class = TestimonialSerializer
-    # permission_classes = [CustomerTestimonialPermission]
+    permission_classes = [CustomerTestimonialPermission]
 
 
 class RetrieveUpdateCafeInfo(RetrieveUpdateAPIView):
     queryset = CafeInfo.objects.all()
     serializer_class = CafeInfoSerializer
     parser_classes = (MultiPartParser, FormParser)
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_object(self):
         return get_object_or_404(self.get_queryset(), pk='1')
@@ -60,19 +60,19 @@ class GalleryViewSet(ModelViewSet):
     serializer_class = GallerySerializer
     parser_classes = (MultiPartParser, FormParser)
     http_method_names = ['get', 'post', 'delete', 'head', 'options']
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class FeaturedProductViewSet(ModelViewSet):
     queryset = FeaturedProduct.objects.select_related('product_id').all()
     serializer_class = FeaturedProductSerializer
     http_method_names = ['get', 'put', 'patch', 'head', 'options']
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class FeaturedReviewViewSet(ModelViewSet):
     queryset = FeaturedReview.objects.select_related('review_id').all()
     serializer_class = FeaturedReviewSerializer
     http_method_names = ['get', 'put', 'patch', 'head', 'options']
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 # class RegisterView(CreateAPIView):
 #    queryset = User.objects.all()
@@ -81,7 +81,7 @@ class FeaturedReviewViewSet(ModelViewSet):
 
 class ChangePasswordView(UpdateAPIView):
     serializer_class = ChangePasswordSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
 
     def get_object(self):
@@ -90,7 +90,7 @@ class ChangePasswordView(UpdateAPIView):
 
 class ChangeUsernameOrEmailView(UpdateAPIView):
     serializer_class = ChangeUsernameOrEmailSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
 
     def get_object(self):
