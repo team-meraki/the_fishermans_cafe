@@ -21,6 +21,7 @@ import Login from './components/admin/Login';
 import PrivateRoute from './components/admin/utils/PrivateRoute';
 import { AuthProvider } from './components/admin/context/AuthContext';
 import AdminSettings from './components/admin/Settings';
+import ForgotPassword from './components/admin/ForgotPassword';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
               {/* Admin */}
               <Route element={<AuthProvider/>}>
                 <Route exact path="/admin" element={<Login/>}/>
+                <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
+
                 <Route element={<PrivateRoute/>}>
                   <Route exact path="/admin/all-products" element={<AllProducts/>}/>
                   <Route exact path="/admin/featured" element={<Featured/>}/>

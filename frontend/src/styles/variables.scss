@@ -137,7 +137,15 @@ body {
     }
 }
 
-// BUTTON BOOTSTRAP OVERRIDE
+// FORGOT PASSWORD BUTTON
+.btn-link {
+    padding: 0;
+    color: #2b2b2b;
+    text-decoration: none;
+}
+
+
+// ALL BUTTON BOOTSTRAP OVERRIDE
 
 .btn:focus,.btn:active, .form-control:focus, .form-control:active {
     outline: none !important;
