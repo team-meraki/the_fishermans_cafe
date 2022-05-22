@@ -1,8 +1,8 @@
 import { deleteApi, getApi, postApi, putApi, patchApi } from "./adminAxios";
 
 /* =====================================
-   --- ADMIN PRODUCTS API CALLS ---
-  ===================================== */ 
+   ---    ADMIN PRODUCTS API CALLS   ---
+   ===================================== */ 
 
 // GET
 export const getAllProducts = async () => {
@@ -56,9 +56,6 @@ export const updateProduct = async (product) => {
     form_data.append("name", product.name);
     form_data.append("price", product.price);
     form_data.append("category", product.category);
-
-    console.log(product)
-    console.log(form_data)
 
     if (product.image){
       form_data.append("image", product.image, product.image.name);
@@ -151,7 +148,6 @@ export const editCafeInfo = async (editedInfo) => {
   try {
     let response;
     let form_data = new FormData();
-    
     form_data.append("schedule", editedInfo.schedule);
     form_data.append("location", editedInfo.location);
     form_data.append("contact_number", editedInfo.contact_number);
@@ -161,8 +157,6 @@ export const editCafeInfo = async (editedInfo) => {
     form_data.append("table_accommodation", editedInfo.table_accommodation);
     form_data.append("delivery_info", editedInfo.delivery_info);
 
-    console.log(editedInfo)
-    console.log(form_data)
 
     if (editedInfo.logo){
       form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
@@ -175,8 +169,6 @@ export const editCafeInfo = async (editedInfo) => {
          },}
        )
         
-       console.log('put')
-       console.log(response)
     }
     else {
       response = await patchApi(
@@ -187,25 +179,52 @@ export const editCafeInfo = async (editedInfo) => {
          },}
       )
 
-      console.log('patch')
-      console.log(response)
     }
-    console.log(response)
+
      return ({data:response});   
    } catch (error) {
      return ({data: error.response});
   }
 }
 
-// export const editCafeInfo = async (editedInfo) => {
-//   try {
-//     const response = await putApi(
-//       '/api/cafeinfo/',
-//       editedInfo,
-//     );
-//     console.log(response)
-//     return ({data:response});   
-//   } catch (error) {
-//     return ({error: error});
-//   }
-// }
+/* =================================================
+  --- ADMIN FEATURED PRODUCTS API CALLS ---
+=================================================== */
+export const getFeaturedProducts = async () => {
+  try {
+    const response = await getApi('/api/featured-product/');
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
+
+export const editFeaturedProduct = async (id, product_id) => {
+  try {
+    const response = await putApi('/api/featured-product/' + id + '/', 
+    {"product_id" : product_id});
+
+    return ({data:response});   
+  } catch (error) {
+    return ({error: error});
+  }
+}
+
+/* =================================================
+  --- ADMIN SETTINGS API CALLS ---
+=================================================== */
+
+export const updateCredentials = async credentials => {
+  try {
+    const response = await putApi('/api/user/update/name/', 
+    {
+      "email" : credentials.email,
+      "username": credentials.username,
+      "password": credentials.password
+    });
+
+    return response;   
+  } catch (error) {
+    return error;
+  }
+}

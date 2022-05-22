@@ -79,15 +79,12 @@ class ViewsTestCase(APITestCase):
         url1 = reverse('product-list')
         url2 = reverse('product-detail', kwargs={"pk":1})
         response = self.client.delete(url2)
-        #self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
         response = self.client.get(url1)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)
 
-        #response = self.client.post(url1)
-        #self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         
         data = {
             'name':'test',
@@ -95,16 +92,10 @@ class ViewsTestCase(APITestCase):
             'price':'100.23',
         }
         response = self.client.post(url1, data=data, format='multipart')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         
         response = self.client.get(url1)
-        self.assertEqual(len(response.data), 1)
-        
-        response = self.client.put(url2, data=data, format='multipart')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
-        response = self.client.delete(url2)
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(len(response.data), 0)
 
 
     def test_cafeinfo_api(self):
@@ -129,13 +120,8 @@ class ViewsTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         response = self.client.post(url, data=data, format='multipart')
-        #self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
         response = self.client.delete(url)
-        #self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-
-        response = self.client.put(url, data=data, format='multipart')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         

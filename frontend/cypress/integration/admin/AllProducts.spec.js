@@ -32,7 +32,21 @@ describe('admin product page', () => {
         cy.intercept("GET", "/api/product", { body: product_list })
         cy.intercept("POST", "/api/product", { statusCode: 201 })
         cy.intercept("DELETE", "/api/product/*", { statusCode: 204 })
-        cy.visit('/admin/all-products')
+        
+        cy.visit('/admin')
+        const username = 'username123'
+        const password = 'password123'
+        cy.intercept("POST", "/api/token", (req) => {
+            if (req.body.username == username && req.body.password == password){
+                req.reply({
+                    access: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY1MzIyMDA4MSwiaWF0IjoxNjUzMTMzNjgxLCJqdGkiOiJlZjNlODBiZGQ5ZmQ0MDBlYjdjNjMyNTVlOGVjM2IwZCIsImlkIjo0LCJlbWFpbCI6InRoZWZpc2hlcm1hbnNjYWZlQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidGZjX3N0YWZmIn0.DBJWrIOBwUfn3GrJ1oGPJGSIM0DWLQT5y9ixF30j5no',
+                    refresh: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMTM1NDgxLCJpYXQiOjE2NTMxMzM2ODEsImp0aSI6IjFiNDVkYmZlNDAyMDQwYzliYWVlMmQ5ZWM1ZWRjMzJiIiwiaWQiOjQsImVtYWlsIjoidGhlZmlzaGVybWFuc2NhZmVAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZmNfc3RhZmYifQ.hLOjO83E9Wbj8TH0WsNaSHiC2lKFHdj_Q9kveOb6KRw'
+                })
+            }
+        })
+        cy.get('[placeholder="Enter username"]').type(username)
+        cy.get('[placeholder="Enter password"]').type(password)
+        cy.contains(/^(login)$/i).click()
     })
 
     it('filters products based on category', () => {

@@ -19,10 +19,26 @@ describe('admin gallery page', () => {
     })
 
     beforeEach(() => { 
+        cy.intercept("GET", "/api/product", { fixture: "products.json" })
         cy.intercept("GET", "/api/gallery", { body: gallery_list })
         cy.intercept("POST", "/api/gallery", { statusCode: 201 })
         cy.intercept("DELETE", "/api/gallery/*", { statusCode: 204 })
-        cy.visit('/admin/all-gallery')
+        
+        cy.visit('/admin')
+        const username = 'username123'
+        const password = 'password123'
+        cy.intercept("POST", "/api/token", (req) => {
+            if (req.body.username == username && req.body.password == password){
+                req.reply({
+                    access: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY1MzIyMDA4MSwiaWF0IjoxNjUzMTMzNjgxLCJqdGkiOiJlZjNlODBiZGQ5ZmQ0MDBlYjdjNjMyNTVlOGVjM2IwZCIsImlkIjo0LCJlbWFpbCI6InRoZWZpc2hlcm1hbnNjYWZlQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidGZjX3N0YWZmIn0.DBJWrIOBwUfn3GrJ1oGPJGSIM0DWLQT5y9ixF30j5no',
+                    refresh: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMTM1NDgxLCJpYXQiOjE2NTMxMzM2ODEsImp0aSI6IjFiNDVkYmZlNDAyMDQwYzliYWVlMmQ5ZWM1ZWRjMzJiIiwiaWQiOjQsImVtYWlsIjoidGhlZmlzaGVybWFuc2NhZmVAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZmNfc3RhZmYifQ.hLOjO83E9Wbj8TH0WsNaSHiC2lKFHdj_Q9kveOb6KRw'
+                })
+            }
+        })
+        cy.get('[placeholder="Enter username"]').type(username)
+        cy.get('[placeholder="Enter password"]').type(password)
+        cy.contains(/^(login)$/i).click()
+        cy.contains(/^(gallery)$/i).click()
     })
 
     it('allows addition of photos', () => {
@@ -35,7 +51,7 @@ describe('admin gallery page', () => {
             cy.get('tr').should('have.length', 4)
         })
 
-        cy.contains(/add/i).click()
+        cy.contains(/add/i).click({ force: true })
         cy.get('input[name="image"]').should('exist')
         cy.intercept("GET", "/api/gallery", { body: add1 })
         cy.contains(/save/i).click()
@@ -48,11 +64,13 @@ describe('admin gallery page', () => {
 
     it('fails on adding new photo with bad request', () => {
         cy.contains(/add/i).click()
-        cy.intercept("POST", "/api/gallery", { statusCode: 400 })
+        cy.intercept("POST", "/api/gallery", { body: {
+            image: ["No file was submitted."]
+        }, statusCode: 400 })
         cy.contains(/save/i).click()
 
         cy.get('div[role="alert"]').should('exist')
-        cy.contains(/invalid/i).should('be.visible')
+        cy.contains(/error/i).should('be.visible')
         cy.get('tbody').within(() => {
             cy.get('tr').should('have.length', 4)
         })

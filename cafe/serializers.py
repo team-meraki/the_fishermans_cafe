@@ -84,7 +84,7 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate_old_password(self, value):
         if not self.context['request'].user.check_password(value):
             raise serializers.ValidationError(
-                {'old_password': 'The old password is incorrect.'}
+                ['The old password is incorrect.']
             )
         return value
 
@@ -116,19 +116,19 @@ class ChangeUsernameOrEmailSerializer(serializers.ModelSerializer):
     def validate_email(self, value):
         user = self.context['request'].user
         if User.objects.exclude(pk=user.pk).filter(email=value).exists():
-            raise serializers.ValidationError({"email": "This email is already in use."})
+            raise serializers.ValidationError(["This email is already in use."])
         return value
 
     def validate_username(self, value):
         user = self.context['request'].user
         if User.objects.exclude(pk=user.pk).filter(username=value).exists():
-            raise serializers.ValidationError({"username": "This username is already in use."})
+            raise serializers.ValidationError(["This username is already in use."])
         return value
     
     def validate_password(self, value):
         if not self.context['request'].user.check_password(value):
             raise serializers.ValidationError(
-                {'password': 'The password is incorrect.'}
+                ['The password is incorrect.']
             )
         return value
 
