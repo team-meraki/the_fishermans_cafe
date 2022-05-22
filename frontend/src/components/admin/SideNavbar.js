@@ -12,6 +12,7 @@ import cafeIcon from '../../icons/about-cafe.svg'
 import logoutIcon from '../../icons/logout.svg'
 import AuthContext from './context/AuthContext'
 import settingsIcon from '../../icons/settings.svg'
+import reviewsIcon from '../../icons/review.svg'
 
 import CafeLogoImg from '../../images/tfcafe_logo.png'
 import BrandNameImg from '../../images/brand-name.svg'
@@ -44,6 +45,7 @@ export default function SideNavbar() {
             <li><Link to="/admin/featured"><span><img src={featuredIcon} alt="Featured Icon"></img></span>Featured Products</Link></li>
             <li><Link to="/admin/all-gallery"><span><img src={galleryIcon} alt="Gallery Icon"></img></span>Gallery</Link></li>
             <li><Link to="/admin/cafe"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link></li>
+            <li><Link to="/admin/testimonials"><span><img src={reviewsIcon} alt="Reviews Icon"></img></span>Reviews</Link></li>
         </ul>
         <div className="sidenav-footer">
           <ul>
