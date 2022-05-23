@@ -12,6 +12,7 @@ import AllProducts from './components/admin/AllProducts';
 import Featured from './components/admin/Featured';
 import AllGallery from './components/admin/Gallery';
 import AboutTheCafe from './components/admin/AboutTheCafe';
+import Reviews from './components/admin/Reviews';
 import {
   BrowserRouter as Router,
   Routes,
@@ -44,6 +45,7 @@ function App() {
                   <Route exact path="/admin/all-gallery" element={<AllGallery/>}/>
                   <Route exact path="/admin/cafe" element={<AboutTheCafe/>}/>
                   <Route exact path="/admin/settings" element={<AdminSettings/>}></Route>
+                  <Route exact path="/admin/reviews" element={<Reviews/>}></Route>
               {/*<Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
               <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>*/}
                 </Route>
