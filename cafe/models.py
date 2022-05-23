@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, RegexValidator
 from decimal import Decimal
+from django.utils import timezone
 
 # Create your models here.
 class Product(models.Model):
@@ -25,6 +26,7 @@ class Testimonial(models.Model):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery/')
+    last_modified = models.DateTimeField(auto_now_add=True)
 
 class CafeInfoQuerySet(models.QuerySet):
     def delete(self):
