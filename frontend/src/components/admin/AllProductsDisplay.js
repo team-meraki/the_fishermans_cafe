@@ -174,8 +174,8 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
         <div className='tablewrapper'>
             <Table responsive>
                 <thead>
-                    <tr className='text-center'>
-                        <th></th>
+                    <tr>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Last Modified</th>
@@ -184,7 +184,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 </thead>
                 <tbody>
                     {products.map(product => ( 
-                        <tr key={product.id} className='text-center'>
+                        <tr key={product.id}>
                             <td><img alt='product-img' className="img-content" src={product.image}/></td>
                             <td>{product.name}</td>
                             <td>{"Php " + product.price}</td>
