@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
 
 .main-container, .admin-modal{
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .main_content{
@@ -23,6 +25,7 @@
   margin-top: 30px;
   padding: 10px;
   color: #2d2d2d;
+  text-transform: uppercase;
 
   .header-add-btn {
     span {
@@ -50,7 +53,7 @@
  width: 400px;
  height: 100vh;
  margin-top: 15%;
- font-family: "Josefin Sans", sans-serif;
+ font-family: "Source Sans Pro", sans-serif;
 }
 
 .tablewrapper {
@@ -112,7 +115,7 @@
 
     tbody {
       display: block;
-      overflow-y: scroll;
+      overflow-y: auto;
       overflow-x: auto ;
       max-height: 65vh;
     }

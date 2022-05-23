@@ -57,7 +57,7 @@ export default function ForgotPassword() {
           <Col>
             <Button variant="outline-success" onClick={() => step1()}>
               {  loading &&
-                <Spinner animation="border" size="sm" role="status">
+                <Spinner className='mr-2' animation="border" size="sm" role="status">
                 </Spinner>
               }
               Proceed
