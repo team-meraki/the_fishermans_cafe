@@ -45,7 +45,7 @@ export default function SideNavbar() {
             <li><Link to="/admin/featured"><span><img src={featuredIcon} alt="Featured Icon"></img></span>Featured Products</Link></li>
             <li><Link to="/admin/all-gallery"><span><img src={galleryIcon} alt="Gallery Icon"></img></span>Gallery</Link></li>
             <li><Link to="/admin/cafe"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link></li>
-            <li><Link to="/admin/testimonials"><span><img src={reviewsIcon} alt="Reviews Icon"></img></span>Reviews</Link></li>
+            <li><Link to="/admin/reviews"><span><img src={reviewsIcon} alt="Reviews Icon"></img></span>Reviews</Link></li>
         </ul>
         <div className="sidenav-footer">
           <ul>
