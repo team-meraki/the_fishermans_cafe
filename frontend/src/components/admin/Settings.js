@@ -140,7 +140,7 @@ export default function AdminSettings() {
        <Row className='d-flex justify-content-center mb-1'>
         <Col sm="1">Username</Col>
         <Col sm="4" className='d-flex align-items-center'>
-          <Form.Control type='username' name="username" value={credentials.username} onChange={handleCredentialsChange}/>
+          <Form.Control type='text' name="username" value={credentials.username} onChange={handleCredentialsChange}/>
         </Col>
        </Row>
        <Row>
