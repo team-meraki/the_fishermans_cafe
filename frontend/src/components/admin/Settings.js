@@ -101,7 +101,7 @@ export default function AdminSettings() {
           }
         })
     } else {
-      toast.error('New password and confirm password do not match.');
+      toast.error("The two password fields didn't match.");
     }
   }
 
