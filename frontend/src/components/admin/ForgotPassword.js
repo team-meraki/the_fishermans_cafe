@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { Navigate } from 'react-router-dom';
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 // css
@@ -17,22 +17,27 @@ export default function ForgotPassword() {
     setEmail(e.target.value);
   }
   async function step1() {
-    const response = await axios.post(
+    setLoading(true)
+    axios.post(
       'api/password_reset/',
       {'email': email})
       .then(response => {
-        console.log(response);
-        toast.success('success proceed');
-        setStep(2);
+        if (response.status === 200 ) {
+          setStep(2);
+        }
+        setLoading(false)
       })
       .catch(error => {
         if (error.response.status === 400 ) {
           toast.error('Email not recognized!')
+        } else {
+          toast.error('Failed to proceed.')
         }
+        setLoading(false)
       }
     )
   }
-
+  const [ loading, setLoading ] = useState(false)
   function displayStep1() {
     return(
       <Container>
@@ -45,11 +50,18 @@ export default function ForgotPassword() {
               name="email"
               value={email}
               onChange={handleEmailChange}
+              autoFocus
               required
             />
           </Col>
           <Col>
-            <Button variant="outline-success" onClick={() => step1()}>Proceed</Button>
+            <Button variant="outline-success" onClick={() => step1()}>
+              {  loading &&
+                <Spinner animation="border" size="sm" role="status">
+                </Spinner>
+              }
+              Proceed
+            </Button>
           </Col>
         </Row>
       </Container>
@@ -62,30 +74,46 @@ export default function ForgotPassword() {
     confirmed_password: '',
     token: ''
   })
+
   const handleStep2Change = (e) => {
     setInitialData({...initialData, [e.target.name]: e.target.value})
   }
-  async function step2() {
-    console.log(initialData)
-    
-    const response = await axios.post(
-      '/api/password_reset/confirm/',
-      initialData)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          toast.success('success proceed to step 3');
-          setStep(3);
-          console.log(step)
+
+  async function step2(e) {
+    e.preventDefault()
+    setLoading(true)
+    if(initialData.password && 
+      (initialData.password === initialData.confirmed_password)){
+      axios.post(
+        '/api/password_reset/confirm/',
+        initialData)
+        .then(response => {
+          if (response.status === 200) {
+            setStep(3);
+          }
+          setLoading(false)
+        })
+        .catch(error => {
+          if (error.response.status === 404) {
+            toast.error('Invalid token.')
+          } else if (error.response.status === 400 ) {
+            const errorData = error.response.data
+            for (const key in errorData){
+              for (const message of errorData[key]){
+                toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+              }
+            }
+          } else {
+            toast.error('Failed to proceed.')
+          }
+          setLoading(false)
         }
-      })
-      .catch(error => {
-        if (error.response.status === 400 ) {
-          toast.error('invalid token')
-        }
+      )
+      } else {
+          toast.error("The two password fields didn't match.");
       }
-    )
   }
+
   function displayStep2() {
     return (
       <Container>
@@ -109,6 +137,7 @@ export default function ForgotPassword() {
               name="token"
               value={initialData.token}
               onChange={handleStep2Change}
+              autoFocus
               required
             />
             </Form.Group>
@@ -138,7 +167,13 @@ export default function ForgotPassword() {
             </Form.Group>
           </Col>
           <Col>
-            <Button variant="outline-success" type="submit">Proceed</Button>
+            <Button variant="outline-success" type="submit">
+              {  loading &&
+                <Spinner animation="border" size="sm" role="status">
+                </Spinner>
+              }
+              Proceed
+            </Button>
           </Col>
           </Form>
         </Row>
@@ -147,10 +182,11 @@ export default function ForgotPassword() {
   }   
 
   /* --- STEP 3 --- */
-  const [goBack, setGoBack] = useState(false);
+  const navigate = useNavigate()
   function goBackToLogIn() {
-    setGoBack(true);
+    navigate('/admin')
   }
+
   function displayStep3() {
     return (
       <Container>
@@ -164,12 +200,6 @@ export default function ForgotPassword() {
           </Col>
         </Row>
       </Container>
-    )
-  }
-  if (goBack === true) {
-    var link = "/admin";
-    return (
-      <Navigate to={link}/>
     )
   }
 

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { Button, Col, Container, Form, Nav, Row } from 'react-bootstrap'
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
 import '../../styles/admin/Common.scss';
 import AuthContext from './context/AuthContext'
-import { Navigate, useLocation } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Login() {
@@ -12,6 +12,7 @@ export default function Login() {
   })
 
   const [formData, setFormData] = useState(initialData)
+  const [loading, setLoading] = useState(false)
   const location = useLocation()
   const from = location.state?.from?.pathname || "/admin/all-products";
 
@@ -25,26 +26,24 @@ export default function Login() {
 
   const login = async (e) => {
     e.preventDefault()
+    setLoading(true)
     loginUser(e.target.username.value, e.target.password.value)
+    .then(response => {
+      setLoading(false)
+    })
     .catch(error => {
       if (error.response.status === 401)
         toast.error('Incorrect credentials. Please try again.');
       else {
         toast.error('Server error. Request timed out.');
       }
+      setLoading(false)
     })
   }
 
-  const [forgotPass, setForgotPassword] = useState(false)
+  const navigate = useNavigate()
   function onClickToForgotPass() {
-    setForgotPassword(true);
-  }
-
-  if (forgotPass === true) {
-    var link = '/forgot-password';
-    return (
-        <Navigate to={link}/>
-    )
+    navigate('/forgot-password')
   }
 
   return (
@@ -57,7 +56,7 @@ export default function Login() {
        <Form onSubmit={login}>
         <Form.Group className="mb-3">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter username" value={formData.username} name="username" onChange={handleChange} required />
+          <Form.Control type="text" placeholder="Enter username" value={formData.username} name="username" onChange={handleChange} autoFocus required />
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -72,6 +71,10 @@ export default function Login() {
         </Row>
 
         <Button variant="success" type="submit" >
+          {  loading &&
+                  <Spinner animation="border" size="sm" role="status">
+                  </Spinner>
+          }
           Login
         </Button>
         

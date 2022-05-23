@@ -25,10 +25,10 @@ export default function Featured() {
   async function fetchAllFeaturedProducts() {
       axios.get('/api/featured-product/')
       .then(response => {
-        setFirst(response.data[0].product_id);
-        setSecond(response.data[1].product_id);
-        setThird(response.data[2].product_id);
-        setFourth(response.data[3].product_id);
+        response.data[0].product_id && setFirst(response.data[0].product_id)
+        response.data[1].product_id && setSecond(response.data[1].product_id)
+        response.data[2].product_id && setThird(response.data[2].product_id)
+        response.data[3].product_id && setFourth(response.data[3].product_id)
         setInitial([
           response.data[0].product_id, 
           response.data[1].product_id, 
@@ -142,17 +142,18 @@ export default function Featured() {
          <Col>
           <Form.Select
             className='featured-select'
-            value={first}
+            value={first ? first : ''}
             onChange={e => handleFirst(e)}
             required
             > 
               {products.map((product) => {
                 return(<option key={product.id} value={product.id}>{product.name}</option>)
               })}
+              {!first && <option key={-1} value=''>----</option>}
             </Form.Select>
          </Col>
          <Col>
-          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(1)}>Save</Button>
+          <Button className='add-btn' type="button" variant='success' disabled={!first} onClick={() => handleEdit(1)}>Save</Button>
          </Col>
        </Row>
         
@@ -162,17 +163,18 @@ export default function Featured() {
          <Col>
           <Form.Select
             className='featured-select'
-            value={second}
+            value={second ? second : ''}
             onChange={e => handleSecond(e)}
             required
           > 
             {products.map((product) => {
               return(<option key={product.id} value={product.id}>{product.name}</option>)
             })}
+            {!second && <option key={-1} value=''>----</option>}
           </Form.Select>
           </Col>
          <Col>
-          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(2)}>Save</Button>
+          <Button className='add-btn' type="button" variant='success' disabled={!second} onClick={() => handleEdit(2)}>Save</Button>
          </Col>
        </Row>
 
@@ -182,17 +184,18 @@ export default function Featured() {
          <Col>
           <Form.Select
             className='featured-select'
-            value={third}
+            value={third ? third : ''}
             onChange={e => handleThird(e)}
             required
           > 
             {products.map((product) => {
               return(<option key={product.id} value={product.id}>{product.name}</option>)
             })}
+            {!third && <option key={-1} value=''>----</option>}
           </Form.Select>
           </Col>
          <Col>
-          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(3)}>Save</Button>
+          <Button className='add-btn' type="button" variant='success' disabled={!third} onClick={() => handleEdit(3)}>Save</Button>
          </Col>
         </Row>
 
@@ -202,17 +205,18 @@ export default function Featured() {
          <Col>
           <Form.Select
             className='featured-select'
-            value={fourth}
+            value={fourth ? fourth : ''}
             onChange={e => handleFourth(e)}
             required
           > 
             {products.map((product) => {
               return(<option key={product.id} value={product.id}>{product.name}</option>)
             })}
+            {!fourth && <option key={-1} value=''>----</option>}
           </Form.Select>
         </Col>
         <Col>
-          <Button className='add-btn' type="button" variant='success' onClick={() => handleEdit(4)}>Save</Button>
+          <Button className='add-btn' type="button" variant='success' disabled={!fourth} onClick={() => handleEdit(4)}>Save</Button>
         </Col>
        </Row>
 
