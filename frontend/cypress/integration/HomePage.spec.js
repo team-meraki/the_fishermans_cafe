@@ -40,18 +40,15 @@ describe('landing page', () => {
         })
       })
 
-      const stub = cy.stub()  
-      cy.on('window:alert', stub)
-
       cy.get('input[type="text"]').type(newSuggestion.name, { force: true })
       cy.get('input[type="email"]').type(newSuggestion.email, { force: true })
       cy.get('textarea.form-control').type(newSuggestion.message, { force: true })
       cy.confirmCaptcha()
       
       cy.contains('Submit').click({ force: true })
-      .then(() => {
-        expect(stub.getCall(0)).to.be.calledWith('Suggestion successfully sent!')      
-      })  
+      cy.get('div[role="alert"]').should('exist')
+      cy.contains(/successfully/i).should('be.visible') 
+      
       cy.get('input[type="text"]').should('have.value', "")
       cy.get('input[name="email"]').should('have.value', "")
       cy.get('textarea.form-control').should('have.value', "")
