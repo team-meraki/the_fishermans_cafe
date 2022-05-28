@@ -23,11 +23,13 @@ import PrivateRoute from './components/admin/utils/PrivateRoute';
 import { AuthProvider } from './components/admin/context/AuthContext';
 import AdminSettings from './components/admin/Settings';
 import ForgotPassword from './components/admin/ForgotPassword';
+import ScrollToTop from './components/ScrolltoTop';
 
 function App() {
   return (
       <div className="App">
         <Router>
+          <ScrollToTop/>
           <Routes>
               <Route exact path="" element={<><LandingNavBar /><Promotional/><FeaturedProducts/><SuggestionBox/><DeliveryBanner/><Footer /></>}/>
               <Route exact path="/menu" element={<><NavBar/><Menu/><Footer /></>}/>
