@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row} from 'react-bootstrap'
 import '../styles/SuggestionBox.scss'
 import ReCAPTCHA from "react-google-recaptcha"
 import Reviews from './Reviews'
-
+import { toast } from 'react-toastify';
 export default function SuggestionBox() {
 
     const initialData = Object.freeze({
@@ -22,6 +22,7 @@ export default function SuggestionBox() {
     }
 
     const handleSubmit = async (e) => {
+        e.preventDefault()
         fetch("/api/testimonial/", {
             method: "POST",
             headers: {
@@ -29,9 +30,16 @@ export default function SuggestionBox() {
             },
             body: JSON.stringify(formData)
         })
-        e.preventDefault()
-        setFormData(initialData)
-        alert("Suggestion successfully sent!") // idk how to yassify an alert haha
+        .then(response => {
+            if(response.status === 201){
+                setFormData(initialData)
+                toast.success('Successfully sent suggestion!', { autoClose: 2000, hideProgressBar: true });
+            }
+        })
+        .catch(error => {
+            toast.error('Failed to send suggestion.', { autoClose: 2000, hideProgressBar: true });
+        })
+        
     }
 
     const handleRecaptcha = async (value) => {

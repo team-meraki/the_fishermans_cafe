@@ -35,7 +35,7 @@ export default function Featured() {
           response.data[2].product_id, 
           response.data[3].product_id])
       }).catch(error => {
-        toast.error('Could not fetch Featured Products.')
+        toast.error('Could not fetch Featured Products.', { autoClose: 2000, hideProgressBar: true })
       })
   }
 
@@ -81,7 +81,7 @@ export default function Featured() {
     editFeaturedProduct(id, selected)
     .then(response => {
       if (response.status === 200) {
-        toast.success('Saved!');
+        toast.success('Saved!', { autoClose: 2000, hideProgressBar: true });
         setRefreshData(!refreshData)
       }
     })
@@ -96,11 +96,11 @@ export default function Featured() {
         setFourth(initial[3])
 
       if (error.request.status === 404) {
-        toast.error('Product not found!');
+        toast.error('Product not found!', { autoClose: 2000, hideProgressBar: true });
       } else if (error.request.status === 400) {
-        toast.error('Featured Products must be unique.');
+        toast.error('Featured Products must be unique.', { autoClose: 2000, hideProgressBar: true });
       } else {
-        toast.error('Failed to update Featured Products.');
+        toast.error('Failed to update Featured Products.', { autoClose: 2000, hideProgressBar: true });
       }
     })
   }
@@ -111,7 +111,7 @@ export default function Featured() {
       setProducts(response.data)
     })
     .catch(error => {
-      toast.error('Could not fetch all Products.')
+      toast.error('Could not fetch all Products.', { autoClose: 2000, hideProgressBar: true })
     })
   }
 

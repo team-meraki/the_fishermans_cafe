@@ -56,7 +56,7 @@ export default function Gallery() {
       if (response.status === 201) {
         setAddShow(false)
         setNewPhoto(null)
-        toast.success('Successfully added a photo in gallery!');
+        toast.success('Successfully added a photo in gallery!', { autoClose: 2000, hideProgressBar: true });
         setRefreshData(!refreshData)
       }
     })
@@ -65,11 +65,11 @@ export default function Gallery() {
         const errorData = error.response.data
         for (const key in errorData){
           for (const message of errorData[key]){
-            toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+            toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
           }
         }
       } else {
-        toast.error('Failed to add a photo.');
+        toast.error('Failed to add a photo.', { autoClose: 2000, hideProgressBar: true });
       }
     })
   }
@@ -94,15 +94,15 @@ export default function Gallery() {
       .then(response => {
         if (response.status === 204) {
           setSelected('')
-          toast.success('Successfully deleted a photo!');
+          toast.success('Successfully deleted a photo!', { autoClose: 2000, hideProgressBar: true });
           setRefreshData(!refreshData)
         }
       })
       .catch(error => {
         if (error.response.status === 404) {
-          toast.error('Photo not found.');
+          toast.error('Photo not found.', { autoClose: 2000, hideProgressBar: true });
         } else {
-          toast.error('Failed to delete a photo.'); 
+          toast.error('Failed to delete a photo.', { autoClose: 2000, hideProgressBar: true }); 
         }
       })
   }
@@ -132,7 +132,7 @@ export default function Gallery() {
         }
       })
       .catch(error => {
-        toast.error('Could not fetch Gallery photos.')
+        toast.error('Could not fetch Gallery photos.', { autoClose: 2000, hideProgressBar: true })
       })
       return () => mounted = false
     }, [refreshData])

@@ -33,9 +33,9 @@ export default function Login() {
     })
     .catch(error => {
       if (error.response.status === 401)
-        toast.error('Incorrect credentials. Please try again.');
+        toast.error('Incorrect credentials. Please try again.', { autoClose: 2000, hideProgressBar: true });
       else {
-        toast.error('Server error. Request timed out.');
+        toast.error('Server error. Request timed out.', { autoClose: 2000, hideProgressBar: true });
       }
       setLoading(false)
     })

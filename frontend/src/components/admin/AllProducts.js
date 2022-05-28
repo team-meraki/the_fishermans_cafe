@@ -90,7 +90,7 @@ export default function AllProducts() {
         if (response.status === 201) {
           setAddShow(false)
           setNewProduct(initialData);
-          toast.success('Successfully added a product!');
+          toast.success('Successfully added a product!', { autoClose: 2000, hideProgressBar: true });
           setRefreshData(!refreshData)
         }
       })
@@ -99,11 +99,11 @@ export default function AllProducts() {
           const errorData = error.response.data
           for (const key in errorData){
             for (const message of errorData[key]){
-              toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+              toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
             }
           }
         } else {
-            toast.error('Failed to add new product.');
+            toast.error('Failed to add new product.', { autoClose: 2000, hideProgressBar: true });
         }
       })
     }
@@ -120,7 +120,7 @@ export default function AllProducts() {
           }
       })
       .catch(error => {
-        toast.error('Failed to fetch all Products.');
+        toast.error('Failed to fetch all Products.', { autoClose: 2000, hideProgressBar: true });
       })
       return () => mounted = false
     }, [refreshData])
