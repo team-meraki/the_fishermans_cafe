@@ -3,6 +3,7 @@ import SideNavbar from "./SideNavbar";
 import { Modal, Table } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import {formatDate} from '../common.js'
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -158,17 +159,19 @@ export default function Gallery() {
             <div className='tablewrapper'>
                 <Table responsive>
                     <thead>
-                        <tr className='text-center'>
+                        <tr>
                             <th>ID</th>
                             <th>Image</th>
+                            <th>Date Added</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {galleryPhotos.map(gallery => ( 
-                            <tr key={gallery.id} className='text-center'>
+                            <tr key={gallery.id}>
                                 <td>{gallery.id}</td>
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
+                                <td>{formatDate(gallery.last_modified)}</td>
                                 <td>
                                     <Button variant="primary "type="btn" 
                                     onClick={() => onClickDelBtn(gallery.id)}>
