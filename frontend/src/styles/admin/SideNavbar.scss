@@ -125,7 +125,7 @@
 .wrapper .sidebar .sidenav-footer{
   position: absolute;
   bottom: 0;
-  left: 20%;
+  left: 35%;
   transform: translateX(-50%);
   display: flex;
   margin-bottom:  30px;
@@ -138,6 +138,14 @@
 
   a:hover {
     color: rgb(26, 25, 25);
+  }
+  @media (min-width: 576px) { 
+    left: 20%
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { 
+    left: 20%
   }
 }
 
