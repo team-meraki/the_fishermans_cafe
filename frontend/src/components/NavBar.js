@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Navbar, Nav, Container} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import {HashLink} from 'react-router-hash-link';
+import { ToastContainer } from 'react-toastify';
 
 import '../styles/NavBar.scss';
 import BrandNameWhite from "../images/brand-name-white.svg"
@@ -24,6 +25,7 @@ export default function NavBar() {
       })
 
   return ( 
+    <>
     <Navbar 
         fixed="top" 
         className={scrolled? "navigation-menu changeBgColor" : "navigation-menu"} expand="lg"
@@ -61,5 +63,7 @@ export default function NavBar() {
             </Navbar.Collapse>
         </Container>
     </Navbar>
+    <ToastContainer/>
+    </>
   )
 }

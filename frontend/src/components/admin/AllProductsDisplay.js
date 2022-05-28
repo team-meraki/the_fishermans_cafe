@@ -124,7 +124,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 setEditShow(false)
                 setSelected(initialData)
                 setEditedProduct(initialData)
-                toast.success('Successfully edited a product!');
+                toast.success('Successfully edited a product!', { autoClose: 2000, hideProgressBar: true });
                 setRefreshData(!refreshData)
             }
         })
@@ -134,11 +134,11 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 const errorData = error.response.data
                 for (const key in errorData){
                   for (const message of errorData[key]){
-                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
                   }
                 }
             } else {
-                toast.error('Failed to edit a product.');
+                toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
             }
         })
     }
@@ -155,15 +155,15 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
         .then(response => {
             if (response.status === 204) {
                 setSelected(initialData)
-                toast.success('Successfully deleted a product!');
+                toast.success('Successfully deleted a product!', { autoClose: 2000, hideProgressBar: true });
                 setRefreshData(!refreshData)
             }
         })
         .catch(error => {
             if (error.response.status === 404) {
-                toast.error('Product not found.');
+                toast.error('Product not found.', { autoClose: 2000, hideProgressBar: true });
             } else {
-                toast.error('Failed to delete a product.')
+                toast.error('Failed to delete a product.', { autoClose: 2000, hideProgressBar: true })
             }
         })
     }

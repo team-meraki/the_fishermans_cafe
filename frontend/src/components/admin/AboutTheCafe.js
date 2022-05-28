@@ -82,7 +82,7 @@ export default function AboutTheCafe() {
   editCafeInfo(editedInfo)
   .then(response => {
     if (response.status === 200) {
-      toast.success('Successfully saved the changes!');
+      toast.success('Successfully saved the changes!', { autoClose: 2000, hideProgressBar: true });
       setRefreshData(!refreshData)
      }
   })
@@ -91,11 +91,11 @@ export default function AboutTheCafe() {
       const errorData = error.response.data
       for (const key in errorData){
         for (const message of errorData[key]){
-          toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+          toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
         }
       }
     } else {
-      toast.error('Failed to edit a product.');
+      toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
     }
   })
  }

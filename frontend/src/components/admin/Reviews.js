@@ -29,7 +29,7 @@ export default function Reviews(){
             }
         })
         .catch(error => {
-            toast.error('Could not fetch any testimonials.')
+            toast.error('Could not fetch any testimonials.', { autoClose: 2000, hideProgressBar: true })
         })
         return () => mounted = false
     },[])

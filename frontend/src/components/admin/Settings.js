@@ -49,13 +49,13 @@ export default function AdminSettings() {
     })
     .then(response => {
       if (response.status === 200){
-        toast.success('Successfully edited Admin Information!');
+        toast.success('Successfully edited Admin Information!', { autoClose: 2000, hideProgressBar: true });
         loginUser(credentials.username, credentials.password)
         .then(response => {
           setCredentials(initialCredentials);
         })
         .catch(error => {
-          toast.error('Please refresh.');
+          toast.error('Please refresh.', { autoClose: 2000, hideProgressBar: true });
         })
       }
     })
@@ -64,11 +64,11 @@ export default function AdminSettings() {
         const errorData = error.response.data
             for (const key in errorData){
               for (const message of errorData[key]){
-                toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+                toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
               }
             }
       } else {
-        toast.error('Failed to edit Admin Information');
+        toast.error('Failed to edit Admin Information', { autoClose: 2000, hideProgressBar: true });
       }
     })
   }
@@ -85,7 +85,7 @@ export default function AdminSettings() {
         .then(response => {
           if (response.status === 200){
             setCredentials(initialPasswordChange);
-            toast.success('Successfully changed Password!');
+            toast.success('Successfully changed Password!', { autoClose: 2000, hideProgressBar: true });
           }
         })
         .catch(error => {
@@ -93,15 +93,15 @@ export default function AdminSettings() {
             const errorData = error.response.data
                 for (const key in errorData){
                   for (const message of errorData[key]){
-                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
                   }
                 }
           } else {
-            toast.error('Failed to change Password.');
+            toast.error('Failed to change Password.', { autoClose: 2000, hideProgressBar: true });
           }
         })
     } else {
-      toast.error("The two password fields didn't match.");
+      toast.error("The two password fields didn't match.", { autoClose: 2000, hideProgressBar: true });
     }
   }
 

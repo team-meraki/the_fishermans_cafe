@@ -29,9 +29,9 @@ export default function ForgotPassword() {
       })
       .catch(error => {
         if (error.response.status === 400 ) {
-          toast.error('Email not recognized!')
+          toast.error('Email not recognized!', { autoClose: 2000, hideProgressBar: true })
         } else {
-          toast.error('Failed to proceed.')
+          toast.error('Failed to proceed.', { autoClose: 2000, hideProgressBar: true })
         }
         setLoading(false)
       }
@@ -95,22 +95,22 @@ export default function ForgotPassword() {
         })
         .catch(error => {
           if (error.response.status === 404) {
-            toast.error('Invalid token.')
+            toast.error('Invalid token.', { autoClose: 2000, hideProgressBar: true })
           } else if (error.response.status === 400 ) {
             const errorData = error.response.data
             for (const key in errorData){
               for (const message of errorData[key]){
-                toast.error(`Error in ${key.toUpperCase()} field: ${message}`);
+                toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
               }
             }
           } else {
-            toast.error('Failed to proceed.')
+            toast.error('Failed to proceed.', { autoClose: 2000, hideProgressBar: true })
           }
           setLoading(false)
         }
       )
       } else {
-          toast.error("The two password fields didn't match.");
+          toast.error("The two password fields didn't match.", { autoClose: 2000, hideProgressBar: true });
       }
   }
 

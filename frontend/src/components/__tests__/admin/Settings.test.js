@@ -23,7 +23,7 @@ it('renders admin information update form', () => {
     expect(screen.getByText(/^(password)$/i)).toBeInTheDocument()
     expect(screen.getByText(/old password/i)).toBeInTheDocument()
     expect(screen.getByText(/new password/i)).toBeInTheDocument()
-    expect(screen.getByText(/confirm password/i)).toBeInTheDocument()
+    expect(screen.getByText(/verify password/i)).toBeInTheDocument()
 })
 
 it('renders submit buttons', () => {
