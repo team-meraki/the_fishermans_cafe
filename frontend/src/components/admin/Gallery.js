@@ -4,6 +4,7 @@ import { Modal, Table } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import {formatDate} from '../common.js'
+import PulseLoader from "react-spinners/PulseLoader";
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +19,7 @@ import useAxios from './utils/useAxios';
 import axios from 'axios';
 
 export default function Gallery() {
+  const [clicked, setClicked] = useState(false);
   let [galleryPhotos, setGalleryPhotos] = useState([]);
   let [refreshData, setRefreshData] = useState(false)
   const api = useAxios()
@@ -52,27 +54,29 @@ export default function Gallery() {
 
   // POST API
   async function addNewPhoto() {
-    addPhoto(newPhoto)
-    .then(response => {
-      if (response.status === 201) {
-        setAddShow(false)
-        setNewPhoto(null)
-        toast.success('Successfully added a photo in gallery!', { autoClose: 2000, hideProgressBar: true });
-        setRefreshData(!refreshData)
-      }
-    })
-    .catch(error => {
-      if (error.response.status === 400) {
-        const errorData = error.response.data
-        for (const key in errorData){
-          for (const message of errorData[key]){
-            toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
-          }
+    if (clicked) {
+      addPhoto(newPhoto)
+      .then(response => {
+        if (response.status === 201) {
+          setAddShow(false)
+          setNewPhoto(null)
+          toast.success('Successfully added a photo in gallery!', { autoClose: 2000, hideProgressBar: true });
+          setRefreshData(!refreshData)
         }
-      } else {
-        toast.error('Failed to add a photo.', { autoClose: 2000, hideProgressBar: true });
-      }
-    })
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          const errorData = error.response.data
+          for (const key in errorData){
+            for (const message of errorData[key]){
+              toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+            }
+          }
+        } else {
+          toast.error('Failed to add a photo.', { autoClose: 2000, hideProgressBar: true });
+        }
+      }).finally(setClicked(false))
+    }
   }
 
   const [selected, setSelected] = useState('') // for delete modals
@@ -203,9 +207,22 @@ export default function Gallery() {
           <Button variant="outline-danger" onClick={handleAddClose}>
             Close
           </Button>
-          <Button variant="success" type="submit" onClick={() => addNewPhoto()}>
-            Save Photo
-          </Button>
+          {
+              (clicked === true) && 
+              (
+                <Button variant="success" type="submit" disabled className='loader-btn'>
+                  Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                </Button>
+              )
+            }
+            {
+              (clicked === false) && 
+              (<div>
+                <Button variant="success" type="submit" onClick={() => addNewPhoto()}>
+                  Save Photo
+                </Button>
+              </div>)
+            }
         </Modal.Footer>
         </Modal>
 
@@ -219,9 +236,15 @@ export default function Gallery() {
             <Button variant="danger" onClick={handleDelClose}>
                 Cancel
             </Button>
-            <Button variant="outline-success" onClick={()=>delPhoto()}>
-                Delete
-            </Button>
+            {(clicked === true) && 
+                (<Button variant="outline-success" disabled className='loader-btn'>
+                    Deleting <PulseLoader color="#5cb85c" size={5} speedMultiplier={0.5} />
+                </Button>)
+            }
+            {(clicked === false) && 
+                (<Button variant="outline-success" onClick={() => delPhoto()}>
+                Delete</Button>)
+            }
             </Modal.Footer>
         </Modal>
       </div>

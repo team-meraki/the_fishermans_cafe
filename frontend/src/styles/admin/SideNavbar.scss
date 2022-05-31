@@ -24,29 +24,12 @@
 }
 
 .wrapper .sidebar .brand-name-wrapper {
-  padding: 20px 5px;
   margin-bottom: 20px;
-
-  .cafe-logo-img {
-    width: 30px;
-    height: auto;
-    left: 30%;
-    position: relative;
-
-    @media (min-width: 576px) { 
-      width: 40px;
-    }
-  
-    // Medium devices (tablets, 768px and up)
-    @media (min-width: 768px) { 
-      width: 60px;
-    }
-  }
 
   .brand-name-img {
     margin-top: 10px;
     position: relative;
-    width: 90px;
+    width: 70px;
     
 
     @media (min-width: 576px) { 
@@ -56,8 +39,8 @@
   
     // Medium devices (tablets, 768px and up)
     @media (min-width: 768px) { 
-      width: 200px;
-      left: 5%;
+      width: 170px;
+      left: 8%;
     }
   }
 }
@@ -119,34 +102,6 @@
     
 .wrapper .sidebar ul li:hover a{
   color: rgb(40, 40, 40);
-}
-
- 
-.wrapper .sidebar .sidenav-footer{
-  position: absolute;
-  bottom: 0;
-  left: 35%;
-  transform: translateX(-50%);
-  display: flex;
-  margin-bottom:  30px;
-
-  a {
-    padding-left: 30px;
-    font-size: 14px;
-    color: #919191;
-  }
-
-  a:hover {
-    color: rgb(26, 25, 25);
-  }
-  @media (min-width: 576px) { 
-    left: 20%
-  }
-
-  // Medium devices (tablets, 768px and up)
-  @media (min-width: 768px) { 
-    left: 20%
-  }
 }
 
 span {

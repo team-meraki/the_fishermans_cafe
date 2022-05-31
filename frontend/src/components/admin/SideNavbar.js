@@ -10,12 +10,11 @@ import featuredIcon from '../../icons/featured.svg'
 import galleryIcon from '../../icons/gallery.svg'
 import cafeIcon from '../../icons/about-cafe.svg'
 import logoutIcon from '../../icons/logout.svg'
-import AuthContext from './context/AuthContext'
 import settingsIcon from '../../icons/settings.svg'
 import reviewsIcon from '../../icons/review.svg'
+import cafeLogo from '../../images/admin-logo.svg'
 
-import CafeLogoImg from '../../images/tfcafe_logo.png'
-import BrandNameImg from '../../images/brand-name.svg'
+import AuthContext from './context/AuthContext'
 
 // main 
 export default function SideNavbar() {
@@ -25,13 +24,8 @@ export default function SideNavbar() {
       <div className="sidebar">
         <div className='brand-name-wrapper'>
           <img
-            src={CafeLogoImg}
-            alt="Cafe Logo"
-            className='cafe-logo-img'
-          />
-          <img
-            alt="Brand Name"
-            src={BrandNameImg}
+            alt="Cafe Brand Name"
+            src={cafeLogo}
             className="brand-name-img"
           />{' '}
         </div>
@@ -47,12 +41,10 @@ export default function SideNavbar() {
             <li><Link to="/admin/reviews"><span><img src={reviewsIcon} alt="Reviews Icon"></img></span>Reviews</Link></li>
             <li><Link to="/admin/cafe"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link></li>
         </ul>
-        <div className="sidenav-footer">
-          <ul>
-            <li><Link to="/admin/settings"><span><img src={settingsIcon} alt="Settings Icon"></img></span>Settings</Link></li>
-            <li><Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
-          </ul>
-        </div>
+        <ul className='mt-5'>
+          <li><Link to="/admin/settings"><span><img src={settingsIcon} alt="Settings Icon"></img></span>Settings</Link></li>
+          <li><Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
+        </ul>
 
       </div>
     </div>

@@ -4,6 +4,7 @@ import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
 import { toast } from 'react-toastify';
 import useAxios from './utils/useAxios';
+import PulseLoader from "react-spinners/PulseLoader";
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +14,7 @@ import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
 export default function AllProductsDisplay ({products, refreshData, setRefreshData}) {
-    
+    const [clicked, setClicked] = useState(false);
     const initialData = Object.freeze({
         id: "",
         name: "",
@@ -86,6 +87,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
     
     
     const updateProduct = async (product) => {
+        
         let response;
         let form_data = new FormData();
         form_data.append("name", product.name);
@@ -93,54 +95,60 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
         form_data.append("category", product.category);
     
         if (product.image){
-          form_data.append("image", product.image, product.image.name);
+        form_data.append("image", product.image, product.image.name);
     
-          response = await api.put(
+        response = await api.put(
             'api/product/' + product.id +'/',
             form_data,
             { headers: {
-                 "Content-Type": "multipart/form-data",
-             },}
-           )
+                "Content-Type": "multipart/form-data",
+            },}
+        )
         }
         else {
-          response = await api.patch(
+        response = await api.patch(
             'api/product/' + product.id +'/',
             form_data,
             { headers: {
-                 "Content-Type": "multipart/form-data",
-             },}
-          )
+                "Content-Type": "multipart/form-data",
+            },}
+        )
         }
-        
-        return response   
+    
+        return response
     }
 
     // EDIT API
     async function editProduct() {
-        updateProduct(editedProduct)
-        .then(response => {
-            if (response.status === 200) {
-                setEditShow(false)
-                setSelected(initialData)
-                setEditedProduct(initialData)
-                toast.success('Successfully edited a product!', { autoClose: 2000, hideProgressBar: true });
-                setRefreshData(!refreshData)
-            }
-        })
-        .catch(error => {
-            if (error.response.status === 400) {
-                setEditedProduct(selected)
-                const errorData = error.response.data
-                for (const key in errorData){
-                  for (const message of errorData[key]){
-                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
-                  }
+        if (clicked===false) {
+            setClicked(true);
+            updateProduct(editedProduct)
+            .then(response => {
+                if (response.status === 200) {
+                    setEditShow(false)
+                    setSelected(initialData)
+                    setEditedProduct(initialData)
+                    toast.success('Successfully edited a product!', { autoClose: 2000, hideProgressBar: true });
+                    setRefreshData(!refreshData)
                 }
-            } else {
-                toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
-            }
-        })
+            })
+            .catch(error => {
+                if (error.response.status === 400) {
+                    setEditedProduct(selected)
+                    const errorData = error.response.data
+                    for (const key in errorData){
+                    for (const message of errorData[key]){
+                        toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+                    }
+                    }
+                } else {
+                    toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
+                }
+            })
+            .finally(
+                setClicked(false)
+            )
+        }
     }
 
     const deleteProduct = async (id) => {
@@ -185,7 +193,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 <tbody>
                     {products.map(product => ( 
                         <tr key={product.id}>
-                            <td><img alt='product-img' className="img-content" src={product.image}/></td>
+                            <td className='img-cell'><img alt='product-img' className="img-content" src={product.image}/></td>
                             <td>{product.name}</td>
                             <td>{"Php " + product.price}</td>
                             <td>{formatDate(product.last_modified)}</td>
@@ -212,9 +220,15 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 <Button variant="danger" onClick={handleDelClose}>
                     Cancel
                 </Button>
-                <Button variant="outline-success" type="submit" onClick={()=>delProduct()}>
-                    Delete
-                </Button>
+                {(clicked === true) && 
+                    (<Button variant="outline-success" type="submit" disabled className='loader-btn'>
+                        Deleting <PulseLoader color="#5cb85c" size={5} speedMultiplier={0.5} />
+                    </Button>)
+                }
+                {(clicked === false) && 
+                    (<Button variant="outline-success" type="submit" onClick={() => delProduct()}>
+                    Delete</Button>)
+                }
                 </Modal.Footer>
             </Modal>
 
@@ -281,9 +295,15 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 <Button variant="outline-danger" onClick={handleEditClose}>
                 Cancel
                 </Button>
-                <Button variant="success" type="submit" onClick={() => editProduct()}>
-                Save changes
-                </Button>
+                {(clicked === true) && 
+                    (<Button variant="success" type="submit" disabled className='loader-btn'>
+                        Updating <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                    </Button>)
+                }
+                {(clicked === false) && 
+                    (<Button variant="success" type="submit" onClick={() => editProduct()}>
+                    Save changes</Button>)
+                }
             </Modal.Footer>
             </Modal>
             
