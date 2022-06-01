@@ -134,27 +134,27 @@ export default function AdminSettings() {
             <Row>
               <h4 className='d-flex justify-content-center mb-1'>Admin Information</h4>
             </Row>
-            <Row className='d-flex justify-content-center mb-1'>
-              <Col sm="1" md='2'>Email</Col>
-              <Col sm="5" className='d-flex aline-items-center'>
+            <Form.Group className='d-flex justify-content-center align-items-center mb-1'> 
+              <Row>
+                <Form.Label>User Email</Form.Label>
                 <Form.Control type="email" name="email" value={credentials.email} onChange={handleCredentialsChange}/>
-              </Col>
-            </Row>
-            <Row className='d-flex justify-content-center mb-1'>
-              <Col sm="1" md='2'>Username</Col>
-              <Col sm="5" className='d-flex align-items-center'>
+              </Row>
+            </Form.Group> 
+            <Form.Group className='d-flex justify-content-center align-items-center mb-1'>
+              <Row>
+                <Form.Label>Username</Form.Label>
                 <Form.Control type='text' name="username" value={credentials.username} onChange={handleCredentialsChange}/>
-              </Col>
-            </Row>
+              </Row>
+            </Form.Group>
             <Row>
-              <p className='d-flex justify-content-center mb-1'>Enter password to confirm change.</p>
+              <p className='d-flex justify-content-center mt-2 mb-1'>Enter password to confirm change.</p>
             </Row>
-            <Row className='d-flex justify-content-center mb-1'>
-              <Col sm="1" md='2'>Password</Col>
-              <Col sm="5" className='d-flex align-items-center'>
+            <Form.Group className='d-flex justify-content-center align-items-center mb-1'>
+              <Row>
+                <Form.Label>Password</Form.Label>
                 <Form.Control type='password' name="password" value={credentials.password} onChange={handleCredentialsChange}/>
-              </Col>
-            </Row>
+              </Row>
+            </Form.Group>
             <div className='d-flex justify-content-center mt-4 '>
               <Button type="submit" onClick={editCredentials} variant="success">Save Changes</Button>
             </div>
@@ -164,24 +164,24 @@ export default function AdminSettings() {
             <Row>
               <h4 className='d-flex justify-content-center mb-1'>Change Password</h4>
             </Row>
-            <Row className='d-flex justify-content-center mb-1'>
-              <Col sm="1" md='3'>Old Password</Col>
-              <Col sm="5" className='d-flex aline-items-center'>
+            <Form.Group className='d-flex justify-content-center align-items-center mb-1'>
+              <Row>
+                <Form.Label>Old Password</Form.Label>
                 <Form.Control type="password" name="old_password" value={passwordChange.old_password} onChange={handlePasswordChange}/>
-              </Col>
-            </Row>
-            <Row className='d-flex justify-content-center mb-1'>
-              <Col sm="1" md='3'>New Password</Col>
-              <Col sm="5" className='d-flex align-items-center'>
-                <Form.Control type='password' name="new_password" value={passwordChange.new_password} onChange={handlePasswordChange}/>
-              </Col>
-            </Row>
-            <Row className='d-flex justify-content-center mb-1'>
-              <Col sm="1" md='3'>Verify Password</Col>
-              <Col sm="5" className='d-flex align-items-center'>
-                <Form.Control type='password' name="confirmed_password" value={passwordChange.confirmed_password} onChange={handlePasswordChange}/>
-              </Col>
-            </Row>
+              </Row>
+            </Form.Group>
+            <Form.Group className='d-flex justify-content-center align-items-center mb-1'>
+              <Row>
+                <Form.Label>New Password</Form.Label>
+                <Form.Control type="password" name="new_password" value={passwordChange.new_password} onChange={handlePasswordChange}/>
+              </Row>
+            </Form.Group>
+            <Form.Group className='d-flex justify-content-center align-items-center mb-1'>
+              <Row>
+                <Form.Label>Verify Password</Form.Label>
+                <Form.Control type="password" name="confirmed_password" value={passwordChange.confirmed_password} onChange={handlePasswordChange}/>
+              </Row>
+            </Form.Group>
             <div className='d-flex justify-content-center mt-4 '>
               <Button type="submit" onClick={editPassword} variant="success">Save Password</Button>
             </div>
