@@ -5,6 +5,7 @@ import { faClock, faLocationPin, faPhone } from '@fortawesome/free-solid-svg-ico
 import { Container, Row, Col } from 'react-bootstrap'
 import '../styles/Footer.scss';
 import BrandName from "../images/brand-name.svg"
+import { getApi } from '../adminAxios';
 
 function Footer(){
     let [cafeInfo, setCafeInfo] = useState()
@@ -20,9 +21,8 @@ function Footer(){
     }, [])
 
     let getCafeInfo = async () => {
-        let response = await fetch("/api/cafeinfo/")
-        let data = await response.json()
-        return data
+        let response = await getApi("api/cafeinfo/")
+        return response.data
     }
 
     return(

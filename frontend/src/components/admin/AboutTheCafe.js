@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import axios from 'axios';
+import { getApi } from '../../adminAxios';
 import useAxios from './utils/useAxios';
 import PulseLoader from "react-spinners/PulseLoader";
 
@@ -40,12 +40,6 @@ export default function AboutTheCafe() {
   //console.log(editedInfo)
  }
 
-  const handleEditImage = (e) => {
-    let editedImg = { ...editedInfo };
-    editedImg[e.target.name] = e.target.files[0];
-    setEditedCafeInfo(editedImg);
-  }
-
   const editCafeInfo = async (editedInfo) => {
     let response;
     let form_data = new FormData();
@@ -58,28 +52,14 @@ export default function AboutTheCafe() {
     form_data.append("table_accommodation", editedInfo.table_accommodation);
     form_data.append("delivery_info", editedInfo.delivery_info);
   
-    if (editedInfo.logo){
-      form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
-
-      response = await api.put(
-        'api/cafeinfo/',
-        form_data,
-        { headers: {
-             "Content-Type": "multipart/form-data",
-         },}
-       )
+    response = await api.put(
+      'api/cafeinfo/',
+      form_data,
+      { headers: {
+           "Content-Type": "multipart/form-data",
+       },}
+     )
         
-    }
-    else {
-      response = await api.patch(
-        'api/cafeinfo/',
-        form_data,
-        { headers: { 
-             "Content-Type": "multipart/form-data",
-         },}
-      )
-
-    }
     return response 
   }
 
@@ -110,7 +90,7 @@ export default function AboutTheCafe() {
 
  // Fetch cafe details
  async function fetchCafeInfo() {
-  const response = await axios.get('/api/cafeinfo/');
+  const response = await getApi('api/cafeinfo/');
   return response
  }
 

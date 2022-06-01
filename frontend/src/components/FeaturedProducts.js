@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import '../styles/FeaturedProducts.scss';
+import { getApi } from '../adminAxios';
 
 export default function FeaturedProducts() {
     let [products, setProduct] = useState([]);
@@ -17,9 +18,8 @@ export default function FeaturedProducts() {
     }, [])
 
     let getProduct = async () => {
-        let response = await fetch("/api/featured-product/")
-        let data = await response.json()
-        return data
+        let response = await getApi("api/featured-product/")
+        return response.data
     }
 
     return (

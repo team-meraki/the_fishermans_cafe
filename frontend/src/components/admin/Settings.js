@@ -42,7 +42,7 @@ export default function AdminSettings() {
   }
 
   const editCredentials = async () => {
-    api.put('/api/user/update/name/', {
+    api.put('api/user/update/name/', {
       "email" : credentials.email,
       "username": credentials.username,
       "password": credentials.password
