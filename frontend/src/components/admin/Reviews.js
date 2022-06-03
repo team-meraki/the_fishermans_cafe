@@ -9,6 +9,7 @@ import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
+import useAxios from './utils/useAxios';
 
 export default function Reviews(){
     const[testimonial, setTestimonial] = useState([]);
@@ -19,6 +20,34 @@ export default function Reviews(){
         const response = await axios.get('/api/testimonial');
         return response
     }
+
+    const [refreshData, setRefreshData] = useState(false)
+  
+    const postCustomerReview = async (id, review_id) => {
+        const response = await api.put('/api/featured-review/' + id + '/', 
+        {review_id});
+    
+        return response
+    }
+
+    // Post reviews
+    const api = useAxios();
+    async function postReview(id, reviewObj) {
+        postCustomerReview(id, reviewObj)
+        .then(response => {
+          if (response.status === 200) {
+            toast.success('Posted a review!', { autoClose: 2000, hideProgressBar: true });
+            setRefreshData(!refreshData)
+          }
+        })
+        .catch(error => {
+          if (error.request.status === 404) {
+            toast.error('Review not found!', { autoClose: 2000, hideProgressBar: true });
+          } else {
+            toast.error('Failed to post a review.', { autoClose: 2000, hideProgressBar: true });
+          }
+        })
+      }
 
     useEffect(() => {
         let mounted = true
@@ -60,7 +89,7 @@ export default function Reviews(){
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Message</th>
-                                    {/* <th>Action</th> */}
+                                    <th>Action/s</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,7 +98,7 @@ export default function Reviews(){
                                         <td>{testimonial.name}</td>
                                         <td>{testimonial.email}</td>
                                         <td>{testimonial.message}</td>
-                                        {/* <td> <Button className="btn btn-post" variant="success" onClick={testimonial}>Post</Button></td> */}
+                                        <td> <Button className="btn btn-post" variant="success" onClick={()=>postReview(testimonial.id, testimonial)}>Post</Button></td>
                                     </tr>
                                 ))}
                             </tbody>

@@ -94,22 +94,27 @@ export default function Gallery() {
 
     // DELETE API
     async function delPhoto() {
-      setDelShow(false)
-      deletePhoto(selected)
-      .then(response => {
-        if (response.status === 204) {
-          setSelected('')
-          toast.success('Successfully deleted a photo!', { autoClose: 2000, hideProgressBar: true });
-          setRefreshData(!refreshData)
-        }
-      })
-      .catch(error => {
-        if (error.response.status === 404) {
-          toast.error('Photo not found.', { autoClose: 2000, hideProgressBar: true });
-        } else {
-          toast.error('Failed to delete a photo.', { autoClose: 2000, hideProgressBar: true }); 
-        }
-      })
+      if (clicked===false) {
+        setClicked(true);
+        setDelShow(false)
+        deletePhoto(selected)
+        .then(response => {
+          if (response.status === 204) {
+            setSelected('')
+            toast.success('Successfully deleted a photo!', { autoClose: 2000, hideProgressBar: true });
+            setRefreshData(!refreshData)
+          }
+        })
+        .catch(error => {
+          if (error.response.status === 404) {
+            toast.error('Photo not found.', { autoClose: 2000, hideProgressBar: true });
+          } else {
+            toast.error('Failed to delete a photo.', { autoClose: 2000, hideProgressBar: true }); 
+          }
+        }).finally(
+          ()=>setClicked(false)
+        )
+      } 
   }
 
     // ADD MODAL HANDLER
