@@ -146,7 +146,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                 }
             })
             .finally(
-                setClicked(false)
+                ()=>setClicked(false)
             )
         }
     }
@@ -158,22 +158,25 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
 
     // DELETE API
     async function delProduct() {
-        setDelShow(false)
-        deleteProduct(selected)
-        .then(response => {
-            if (response.status === 204) {
-                setSelected(initialData)
-                toast.success('Successfully deleted a product!', { autoClose: 2000, hideProgressBar: true });
-                setRefreshData(!refreshData)
-            }
-        })
-        .catch(error => {
-            if (error.response.status === 404) {
-                toast.error('Product not found.', { autoClose: 2000, hideProgressBar: true });
-            } else {
-                toast.error('Failed to delete a product.', { autoClose: 2000, hideProgressBar: true })
-            }
-        })
+        if (clicked===false) {
+            setClicked(true);
+            setDelShow(false)
+            deleteProduct(selected)
+            .then(response => {
+                if (response.status === 204) {
+                    setSelected(initialData)
+                    toast.success('Successfully deleted a product!', { autoClose: 2000, hideProgressBar: true });
+                    setRefreshData(!refreshData)
+                }
+            })
+            .catch(error => {
+                if (error.response.status === 404) {
+                    toast.error('Product not found.', { autoClose: 2000, hideProgressBar: true });
+                } else {
+                    toast.error('Failed to delete a product.', { autoClose: 2000, hideProgressBar: true })
+                }
+            }).finally(()=>setClicked(false))
+        }
     }
 
     

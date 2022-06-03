@@ -38,7 +38,7 @@ export default function Featured() {
       }).catch(error => {
         toast.error('Could not fetch Featured Products.', { autoClose: 2000, hideProgressBar: true })
       }).finally(
-        setClicked(false)
+        ()=>setClicked(false)
       )
     }
   }

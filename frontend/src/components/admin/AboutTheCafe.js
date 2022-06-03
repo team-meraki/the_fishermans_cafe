@@ -84,7 +84,7 @@ export default function AboutTheCafe() {
       } else {
         toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
       }
-    }).finally(setClicked(false))
+    }).finally(()=>setClicked(false))
   }
  }
 

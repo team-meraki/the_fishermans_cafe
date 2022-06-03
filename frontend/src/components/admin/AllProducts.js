@@ -111,7 +111,7 @@ export default function AllProducts() {
           }
         })
         .finally(
-          setClicked(false)
+          ()=>setClicked(false)
         )
       }
     }
