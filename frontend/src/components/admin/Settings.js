@@ -123,7 +123,7 @@ export default function AdminSettings() {
     <ToastContainer />
      {/* HEADER  */}
      <div className='d-flex justify-content-center header'>
-         <h2>Admin Credentials</h2>
+         <h2>Account Settings</h2>
      </div>
 
      {/* FORM */}
@@ -131,8 +131,8 @@ export default function AdminSettings() {
       <div className='content-wrapper mt-5'>
         <Row>
           <Col className='admin-col'>
-            <Row>
-              <h4 className='d-flex justify-content-center mb-1'>Admin Information</h4>
+            <Row className='d-flex justify-content-center mb-1'>
+              <h4 className='settings-header'>Admin Information</h4>
             </Row>
               <Row>
                 <Form.Group> 
@@ -158,8 +158,8 @@ export default function AdminSettings() {
           </Col>
           
           <Col className='admin-col'>
-            <Row>
-              <h4 className='d-flex justify-content-center mb-1'>Change Password</h4>
+            <Row className='d-flex justify-content-center mb-1'>
+              <h4 className='settings-header'>Change Password</h4>
             </Row>
               <Row>
             <Form.Group>

@@ -17,7 +17,8 @@
 
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) { 
-    margin-left: 250px;
+    margin-left: 260px;
+    margin-right: 25px;
   }
 }
 
@@ -55,10 +56,25 @@
 }
 
 .login-wrapper {
- width: 400px;
+ width: 500px;
  height: 100vh;
- margin-top: 15%;
+ margin-top: 6%;
  font-family: "Source Sans Pro", sans-serif;
+}
+
+.login-box {
+  margin-top: 15%;
+  background-color: #e8e8e8;
+  box-shadow: 3px 3px 9px #c5c5c5,
+              -3px -3px 9px #ffffff !important;
+  padding: 50px;
+}
+
+.login-header {
+  text-align: center;
+  
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 .tablewrapper {
@@ -162,4 +178,49 @@
 .admin-col {
   padding-left: 7%;
   padding-right: 7%;
+  
+  h4 {
+    text-transform: uppercase;
+  }
 }
+
+/* scroll bars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(177, 177, 177);
+  border-radius: 10px;
+}
+
+.cafe-name-login {
+  width: 70%;
+}
+
+.forgot-pass-title {
+  font-size: 14px;
+  color: #747474 !important;
+}
+
+.forgot-pass-title:hover {
+  color: #454444 !important;
+}
+
+/* override bootstraps */
+.btn-warning,
+.btn-warning:visited{
+  color: #ffffff !important;
+  padding: 0.4em 5em !important;
+  font-size: 16px;
+  border-radius: 0.4em !important;
+  background: #1c435b !important;
+  border: none !important;
+  transition: all .3s;
+ }
+ 
+ .btn-warning:hover,
+ .btn-warning:active {
+  background: #2f5e7b !important;
+ }
+ 
