@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { useState, useEffect } from 'react'
 import SideNavbar from "./SideNavbar";
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
 import useAxios from './utils/useAxios';
+import { getApi } from '../../adminAxios';
 
 export default function Reviews(){
     const[testimonial, setTestimonial] = useState([]);
@@ -17,7 +18,7 @@ export default function Reviews(){
 
     // Getting all reviews
     async function fetchAllReviews(){
-        const response = await axios.get('/api/testimonial');
+        const response = await getApi('api/testimonial');
         return response
     }
 

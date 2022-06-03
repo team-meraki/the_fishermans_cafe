@@ -14,7 +14,6 @@ beforeEach( () => {
 })
 
 it('renders admin sidenavbar header', () => {
-    expect(screen.getByRole('img', {  name: /cafe logo/i})).toBeInTheDocument()
     expect(screen.getByRole('img', {  name: /brand name/i})).toBeInTheDocument()
 })
 

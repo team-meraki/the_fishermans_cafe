@@ -5,7 +5,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 //css
 import '../../styles/admin/Common.scss';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import axios from 'axios';
+import { getApi } from '../../adminAxios';
 import useAxios from './utils/useAxios';
 
 export default function Featured() {
@@ -24,7 +24,7 @@ export default function Featured() {
   async function fetchAllFeaturedProducts() {
     if (clicked===false) {
       setClicked(true);
-      axios.get('/api/featured-product/')
+      getApi('api/featured-product/')
       .then(response => {
         response.data[0].product_id && setFirst(response.data[0].product_id)
         response.data[1].product_id && setSecond(response.data[1].product_id)
@@ -75,7 +75,7 @@ export default function Featured() {
   const [refreshData, setRefreshData] = useState(false)
   
   const editFeaturedProduct = async (id, product_id) => {
-      const response = await api.put('/api/featured-product/' + id + '/', 
+      const response = await api.put('api/featured-product/' + id + '/', 
       {product_id});
   
       return response
@@ -110,7 +110,7 @@ export default function Featured() {
   }
 
   async function fetchAllProducts() {
-    await axios.get('/api/product/')
+    getApi('api/product/')
     .then(response => {
       setProducts(response.data)
     })

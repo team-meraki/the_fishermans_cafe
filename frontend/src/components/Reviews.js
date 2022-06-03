@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Carousel, Container, Row, Col} from 'react-bootstrap'
 import '../styles/Reviews.scss';
 import Avatar2 from "../images/avatar2.svg"
+import { getApi } from '../adminAxios';
 
 export default function Reviews() {
     let [reviews, setReview] = useState([]);
@@ -18,9 +19,8 @@ export default function Reviews() {
     }, [])
 
     let getReview = async () => {
-        let response = await fetch("/api/featured-review/")
-        let data = await response.json()
-        return data
+        let response = await getApi("api/featured-review/")
+        return response.data
     }
 
     reviews = reviews.slice(0, 2);

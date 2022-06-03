@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+import { getApi } from '../adminAxios';
 
 // icons
 import tableIcon from '../icons/table.png';
@@ -24,9 +25,8 @@ export default function About() {
     }, [])
 
     let getAttrib = async () => {
-        let response = await fetch("/api/cafeinfo/")
-        let data = await response.json()
-        return data
+      let response = await getApi("api/cafeinfo/")
+      return response.data
     }
 
   return (

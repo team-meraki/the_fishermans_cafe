@@ -10,7 +10,7 @@ export default AuthContext;
 export const AuthProvider = () => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
-    const baseURL = process.env.REACT_APP_API_BASE_URL
+    const baseURL = 'https://cafe-backend.azurewebsites.net/'
 
     const loginUser = async (username, password)=> {
         return axios.post(baseURL + 'api/token/', { username, password })

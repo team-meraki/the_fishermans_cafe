@@ -16,7 +16,7 @@ import addIcon from '../../icons/add.svg'
 import '../../styles/admin/Common.scss';
 
 import useAxios from './utils/useAxios';
-import axios from 'axios';
+import { getApi } from '../../adminAxios';
 
 export default function Gallery() {
   const [clicked, setClicked] = useState(false);
@@ -26,7 +26,7 @@ export default function Gallery() {
 
   // Get all products
   async function fetchAllPhotos() {
-    const response = await axios.get('/api/gallery/');
+    const response = await getApi('api/gallery/');
     return response
   }
 
@@ -43,7 +43,7 @@ export default function Gallery() {
       form_data.append("image", newPhoto, newPhoto.name);
   
     const response = await api.post(
-      '/api/gallery/',
+      'api/gallery/',
       form_data,
       { headers: {
            "Content-Type": "multipart/form-data",
@@ -88,7 +88,7 @@ export default function Gallery() {
     }
 
     const deletePhoto = async (id) => {
-      const response = await api.delete('/api/gallery/' + id + '/');
+      const response = await api.delete('api/gallery/' + id + '/');
       return response  
     }
 
