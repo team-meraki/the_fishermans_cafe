@@ -144,7 +144,7 @@ export default function AllProducts() {
         {/* HEADER  */}
         <div className='d-flex justify-content-between header'>
             <h2>All Products</h2>
-            <Button className='add-btn' type="button" variant='success' onClick={handleAddShow}>
+            <Button className='add-btn' type="button" variant='warning' onClick={handleAddShow}>
                 <span><img src={addIcon} alt="add icon"></img></span>
                 Add a new product
             </Button>

@@ -156,7 +156,7 @@ export default function Gallery() {
         {/* HEADER  */}
         <div className='d-flex justify-content-between header'>
             <h2>Gallery</h2>
-            <Button className='add-btn' type="button" variant='success' onClick={handleAddShow}>
+            <Button className='add-btn' type="button" variant='warning' onClick={handleAddShow}>
                 <span><img src={addIcon} alt="Add Icon"></img></span>
                 Add a Photo
             </Button>
@@ -215,7 +215,7 @@ export default function Gallery() {
           {
               (clicked === true) && 
               (
-                <Button variant="success" type="submit" disabled className='loader-btn'>
+                <Button variant="warning" type="submit" disabled className='loader-btn add-btn'>
                   Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
                 </Button>
               )
@@ -223,7 +223,7 @@ export default function Gallery() {
             {
               (clicked === false) && 
               (<div>
-                <Button variant="success" type="submit" onClick={() => addNewPhoto()}>
+                <Button variant="warning" type="submit" className='add-btn' onClick={() => addNewPhoto()}>
                   Save Photo
                 </Button>
               </div>)

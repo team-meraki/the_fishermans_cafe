@@ -82,12 +82,12 @@ export default function Login() {
           </Row>
 
           <div className='d-flex justify-content-center'>
-            <Button className='mt-4' variant="warning" type="submit" disabled={loading} >
+            <Button variant="warning" className='mt-4 login-btn' type="submit" disabled={loading} >
               {  loading &&
-                      <Spinner animation="border" size="sm" role="status">
+                      <Spinner className='mr-5' animation="border" size="sm" role="status">
                       </Spinner>
               }
-              Login
+               Login
             </Button>
           </div>
         
