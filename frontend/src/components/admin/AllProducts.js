@@ -9,14 +9,16 @@ import useAxios from './utils/useAxios';
 import addIcon from '../../icons/add.svg'
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/admin/Common.scss';
-import axios from 'axios';
+import { getApi } from '../../adminAxios';
+import PulseLoader from "react-spinners/PulseLoader";
 
+/* ****************** MAIN ****************** */
 export default function AllProducts() {
   let [all, setProduct] = useState([]);
   let [meals, setMeals] = useState([]);
   let [desserts, setDesserts] = useState([]);
   let [drinks, setDrinks] = useState([]);
-  
+  const [clicked, setClicked] = useState(false);
 
   // Monitors state of filter value
   const [value, setValue] = useState('All');
@@ -29,7 +31,7 @@ export default function AllProducts() {
 
   // Get all products
   async function fetchAllProducts() {
-    const response = await axios.get('/api/product/');
+    const response = await getApi('api/product/');
     return response
   }
 
@@ -66,15 +68,15 @@ export default function AllProducts() {
     }
 
     const addProduct = async (product) => {
+      
       let form_data = new FormData();
-        if (product.image)
-          form_data.append("image", product.image, product.image.name);
+        form_data.append("image", product.image, product.image.name);
         form_data.append("name", product.name);
         form_data.append("price", product.price);
         form_data.append("category", product.category);
      
       const response = await api.post(
-        '/api/product/',
+        'api/product/',
         form_data,
         { headers: {
           "Content-Type": "multipart/form-data",
@@ -85,27 +87,33 @@ export default function AllProducts() {
     
     // POST API
     async function addNewProduct() {
-      addProduct(newProduct)
-      .then(response => {
-        if (response.status === 201) {
-          setAddShow(false)
-          setNewProduct(initialData);
-          toast.success('Successfully added a product!', { autoClose: 2000, hideProgressBar: true });
-          setRefreshData(!refreshData)
-        }
-      })
-      .catch(error => {
-        if (error.response.status === 400) {
-          const errorData = error.response.data
-          for (const key in errorData){
-            for (const message of errorData[key]){
-              toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
-            }
+      if (clicked===false) {
+        setClicked(true);
+        addProduct(newProduct)
+        .then(response => {
+          if (response.status === 201) {
+            setAddShow(false)
+            setNewProduct(initialData);
+            toast.success('Successfully added a product!', { autoClose: 2000, hideProgressBar: true });
+            setRefreshData(!refreshData)
           }
-        } else {
-            toast.error('Failed to add new product.', { autoClose: 2000, hideProgressBar: true });
-        }
-      })
+        })
+        .catch(error => {
+          if (error.response.status === 400) {
+            const errorData = error.response.data
+            for (const key in errorData){
+              for (const message of errorData[key]){
+                toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+              }
+            }
+          } else {
+              toast.error('Failed to add new product.', { autoClose: 2000, hideProgressBar: true });
+          }
+        })
+        .finally(
+          setClicked(false)
+        )
+      }
     }
     
     useEffect(() => {
@@ -233,9 +241,22 @@ export default function AllProducts() {
             <Button variant="outline-danger" onClick={handleAddClose}>
               Cancel
             </Button>
-            <Button variant="success" type="submit" onClick={() => addNewProduct()}>
-              Save Product
-            </Button>
+            {
+              (clicked === true) && 
+              (
+                <Button variant="success" type="submit" disabled className='loader-btn'>
+                  Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                </Button>
+              )
+            }
+            {
+              (clicked === false) && 
+              (<div>
+                <Button variant="success" type="submit" onClick={() => addNewProduct()}>
+                  Save Product
+                </Button>
+              </div>)
+            }
           </Modal.Footer>
         </Modal>
       </div>

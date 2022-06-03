@@ -3,6 +3,7 @@ import { Container, Tab, Tabs, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import ProductsDisplay from './ProductsDisplay'
+import { getApi } from '../../adminAxios';
 
 import '../../styles/Menu.scss';
 
@@ -23,9 +24,8 @@ export default function Menu() {
     }, [])
 
     let getProduct = async () => {
-        let response = await fetch("/api/product/")
-        let data = await response.json()
-        return data
+        let response = await getApi("api/product/")
+        return response.data
     }
 
     // Filter products the belong to meal catgory

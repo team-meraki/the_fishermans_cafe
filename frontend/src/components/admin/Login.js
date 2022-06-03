@@ -70,7 +70,7 @@ export default function Login() {
           </Col>
         </Row>
 
-        <Button variant="success" type="submit" >
+        <Button variant="success" type="submit" disabled={loading} >
           {  loading &&
                   <Spinner animation="border" size="sm" role="status">
                   </Spinner>

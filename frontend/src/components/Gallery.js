@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap'
 import '../styles/Gallery.scss';
+import { getApi } from '../adminAxios';
 
 export default function Gallery() {
     let [galleryImgs, setGalleryImg] = useState([]);
@@ -17,9 +18,8 @@ export default function Gallery() {
     }, [])
 
     let getGalleryImg = async () => {
-        let response = await fetch("/api/gallery/");
-        let data = await response.json();
-        return data;
+        let response = await getApi("api/gallery/");
+        return response.data
     }
 
     return (

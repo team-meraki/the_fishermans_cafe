@@ -4,11 +4,15 @@ import { toast, ToastContainer } from 'react-toastify';
 import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import axios from 'axios';
+import { getApi } from '../../adminAxios';
 import useAxios from './utils/useAxios';
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default function AboutTheCafe() {
- //const [cafeInfo, setCafeInfo] = useState({});
+  const [clicked, setClicked] = useState(false);
+
+  // Monitor if something has changed
+  const [hasChanged, setHasChanged] = useState(false);
 
  // Edit cafe details hooks
  const initialData = Object.freeze({
@@ -27,6 +31,7 @@ export default function AboutTheCafe() {
   const api = useAxios()
 
  const handleEditChange = (e) => {
+  setHasChanged(true);
   const { name, value } = e.target;
   setEditedCafeInfo(prevState => ({
       ...prevState,
@@ -34,12 +39,6 @@ export default function AboutTheCafe() {
   }));
   //console.log(editedInfo)
  }
-
-  const handleEditImage = (e) => {
-    let editedImg = { ...editedInfo };
-    editedImg[e.target.name] = e.target.files[0];
-    setEditedCafeInfo(editedImg);
-  }
 
   const editCafeInfo = async (editedInfo) => {
     let response;
@@ -53,56 +52,45 @@ export default function AboutTheCafe() {
     form_data.append("table_accommodation", editedInfo.table_accommodation);
     form_data.append("delivery_info", editedInfo.delivery_info);
   
-    if (editedInfo.logo){
-      form_data.append("logo", editedInfo.logo, editedInfo.logo.name);
-
-      response = await api.put(
-        'api/cafeinfo/',
-        form_data,
-        { headers: {
-             "Content-Type": "multipart/form-data",
-         },}
-       )
+    response = await api.put(
+      'api/cafeinfo/',
+      form_data,
+      { headers: {
+           "Content-Type": "multipart/form-data",
+       },}
+     )
         
-    }
-    else {
-      response = await api.patch(
-        'api/cafeinfo/',
-        form_data,
-        { headers: { 
-             "Content-Type": "multipart/form-data",
-         },}
-      )
-
-    }
     return response 
   }
 
  async function saveEdits() {
-  editCafeInfo(editedInfo)
-  .then(response => {
-    if (response.status === 200) {
-      toast.success('Successfully saved the changes!', { autoClose: 2000, hideProgressBar: true });
-      setRefreshData(!refreshData)
-     }
-  })
-  .catch(error => {
-    if (error.response.status === 400) {
-      const errorData = error.response.data
-      for (const key in errorData){
-        for (const message of errorData[key]){
-          toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
-        }
+  if (clicked===false) {
+    setClicked(true);
+    editCafeInfo(editedInfo)
+    .then(response => {
+      if (response.status === 200) {
+        toast.success('Successfully saved the changes!', { autoClose: 2000, hideProgressBar: true });
+        setRefreshData(!refreshData)
       }
-    } else {
-      toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
-    }
-  })
+    })
+    .catch(error => {
+      if (error.response.status === 400) {
+        const errorData = error.response.data
+        for (const key in errorData){
+          for (const message of errorData[key]){
+            toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+          }
+        }
+      } else {
+        toast.error('Failed to edit a product.', { autoClose: 2000, hideProgressBar: true });
+      }
+    }).finally(setClicked(false))
+  }
  }
 
  // Fetch cafe details
  async function fetchCafeInfo() {
-  const response = await axios.get('/api/cafeinfo/');
+  const response = await getApi('api/cafeinfo/');
   return response
  }
 
@@ -141,13 +129,6 @@ export default function AboutTheCafe() {
 
      {/* FORM */}
      <div className='content-wrapper'>
-      {/* <Form onSubmit={() => saveEdits()}> */}
-       <Row className='d-flex align-items-center mb-1'>
-        <Col sm="2">Logo</Col>
-        <Col sm="4" className='d-flex align-items-center'>
-          <Form.Control type="file" name="logo" accept="image/*" onChange={(e) => handleEditImage(e)} />
-        </Col>
-       </Row>
        <Row className='d-flex align-items-center mb-1'>
         <Col sm="2">Schedule</Col>
         <Col><Form.Control as="textarea" name="schedule" value={editedInfo.schedule} onChange={(e) => handleEditChange(e)}/></Col>
@@ -182,8 +163,23 @@ export default function AboutTheCafe() {
          <Col><Form.Control as="textarea" name="delivery_info" value={editedInfo.delivery_info} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
         </Row>
 
-       <div className='d-flex justify-content-end mt-4 '>
-        <Button type="submit" variant="success" onClick={() => saveEdits()}>Save Changes</Button>
+       <div className='d-flex justify-content-end mt-5'>
+        {
+          (clicked === true) && 
+          (
+            <Button variant="success" type="submit" disabled className='loader-btn'>
+              Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+            </Button>
+          )
+        }
+        {
+          (clicked === false) && 
+          (<div>
+            <Button variant="success" type="submit" onClick={() => saveEdits()} disabled={!hasChanged}>
+              Save changes
+            </Button>
+          </div>)
+        }
        </div>
 
       {/* </Form> */}

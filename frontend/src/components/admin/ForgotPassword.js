@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { postApi } from '../../adminAxios';
 import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ export default function ForgotPassword() {
   }
   async function step1() {
     setLoading(true)
-    axios.post(
+    postApi(
       'api/password_reset/',
       {'email': email})
       .then(response => {
@@ -55,7 +55,7 @@ export default function ForgotPassword() {
             />
           </Col>
           <Col>
-            <Button variant="outline-success" onClick={() => step1()}>
+            <Button variant="outline-success" onClick={() => step1()} disabled={loading}>
               {  loading &&
                 <Spinner className='mr-2' animation="border" size="sm" role="status">
                 </Spinner>
@@ -84,8 +84,8 @@ export default function ForgotPassword() {
     setLoading(true)
     if(initialData.password && 
       (initialData.password === initialData.confirmed_password)){
-      axios.post(
-        '/api/password_reset/confirm/',
+      postApi(
+        'api/password_reset/confirm/',
         initialData)
         .then(response => {
           if (response.status === 200) {
@@ -121,7 +121,7 @@ export default function ForgotPassword() {
             <h6>We have sent a token code through the verified cafe email address you have provided.</h6>
         </Row>
         <Row>
-          <h6>Note: Token will expire in <b>one hour</b>. When exceeds, request for another password reset.</h6>
+          <h6>Note: Token will expire in <b>one hour</b>. When time exceeds, request for another password reset.</h6>
         </Row>
         <Row className='mt-4'>
         <Form 
@@ -167,7 +167,7 @@ export default function ForgotPassword() {
             </Form.Group>
           </Col>
           <Col>
-            <Button variant="outline-success" type="submit">
+            <Button variant="outline-success" type="submit" disabled={loading}>
               {  loading &&
                 <Spinner animation="border" size="sm" role="status">
                 </Spinner>

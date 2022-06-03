@@ -1,8 +1,7 @@
-// @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
 
-.main-container, .admin-modal{
+.main-container, .admin-modal, .header{
   font-family: "Source Sans Pro", sans-serif;
 }
 
@@ -10,6 +9,7 @@
   width: auto;
   margin-right: 15px;
   margin-left: 110px;
+  
 
   @media (min-width: 576px) { 
     margin-left: 210px;
@@ -26,12 +26,17 @@
   padding: 10px;
   color: #2d2d2d;
   text-transform: uppercase;
+  
 
   .header-add-btn {
     span {
       margin-right: 8px;
       margin-left: 0;
     }
+  }
+
+  h2{
+    font-weight: bold;
   }
 }
 
@@ -57,7 +62,8 @@
 }
 
 .tablewrapper {
-    border-radius: 4px;
+    font-family: "Source Sans Pro", sans-serif;
+    border-radius: 5px;
     width: 100%;
     background: rgb(255, 255, 255);
     table-layout: fixed;
@@ -65,7 +71,7 @@
 }
 
 .table {
-
+  
     width: 100%;
     border-spacing: 0px; 
     
@@ -75,29 +81,21 @@
         object-fit: cover;
 
         @media (min-width: 576px) { 
-          height: 100px;
-          width: 100px;
+          height: 60px;
+          width: 60px;
         }
-      
-        // Medium devices (tablets, 768px and up)
-        @media (min-width: 768px) { 
-          height: 100px;
-          width: 100px;
-        }
-      
     }
+
     
     thead tr {    
         display: block;
-        
         background-color: #198754;
         color: white;
-        
         font-weight: normal;
     }
 
     th, td {
-      width: 130px;
+      //width: 130px;
       font-size: 10px;
     
       @media (min-width: 576px) { 
@@ -150,4 +148,13 @@
   max-height: 100vh;
   margin-top: 8%;
   margin-left: 15%;
+}
+
+.save-btn, .cancel-btn {
+  width:25% !important;
+}
+
+.loader-btn {
+  padding-left: 15px;
+  padding-right: 0px;
 }

@@ -4,6 +4,8 @@ import '../styles/SuggestionBox.scss'
 import ReCAPTCHA from "react-google-recaptcha"
 import Reviews from './Reviews'
 import { toast } from 'react-toastify';
+import { postApi } from '../adminAxios';
+
 export default function SuggestionBox() {
 
     const initialData = Object.freeze({
@@ -23,13 +25,7 @@ export default function SuggestionBox() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        fetch("/api/testimonial/", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
+        postApi("api/testimonial/", formData )
         .then(response => {
             if(response.status === 201){
                 setFormData(initialData)
@@ -43,7 +39,7 @@ export default function SuggestionBox() {
     }
 
     const handleRecaptcha = async (value) => {
-        fetch('api/recaptcha/', {
+        fetch('https://cafe-backend.azurewebsites.net/api/recaptcha/', {
           method: 'POST',
           body: JSON.stringify({ 'captcha_value': value }),
           headers: { 'Content-Type': 'application/json' }
@@ -66,9 +62,7 @@ export default function SuggestionBox() {
                             <Form.Control as="textarea"  rows={2} placeholder="Tell us something" value={formData.message} name="message" onChange={handleChange} required />
                         </Form.Group>
                         <ReCAPTCHA
-                            sitekey={window.Cypress
-                                ? process.env.REACT_APP_RECAPTCHA_TEST_SITE_KEY
-                                : process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                            sitekey={"6Le6R_YeAAAAAGYCegFq7rj-KX0iFThcV6Bsg8LI"}
                             onChange={handleRecaptcha}
                         />
                         <div className='submit-btn'>

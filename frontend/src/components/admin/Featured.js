@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import SideNavbar from './SideNavbar'
-
+import PulseLoader from "react-spinners/PulseLoader";
 //css
 import '../../styles/admin/Common.scss';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import axios from 'axios';
+import { getApi } from '../../adminAxios';
 import useAxios from './utils/useAxios';
 
 export default function Featured() {
-
+  const [clicked, setClicked] = useState(false);
   const [products, setProducts] = useState([]);
-  const api = useAxios()
+  const api = useAxios();
 
   /* EDIT FEATURED PRODUCT HOOKS -- STORES PRODUCT_ID ONLY */
   const [selected, setSelected] = useState('')
@@ -21,9 +21,10 @@ export default function Featured() {
   const [fourth, setFourth] = useState('');
   const [initial, setInitial] = useState([]);
 
-
   async function fetchAllFeaturedProducts() {
-      axios.get('/api/featured-product/')
+    if (clicked===false) {
+      setClicked(true);
+      getApi('api/featured-product/')
       .then(response => {
         response.data[0].product_id && setFirst(response.data[0].product_id)
         response.data[1].product_id && setSecond(response.data[1].product_id)
@@ -36,7 +37,10 @@ export default function Featured() {
           response.data[3].product_id])
       }).catch(error => {
         toast.error('Could not fetch Featured Products.', { autoClose: 2000, hideProgressBar: true })
-      })
+      }).finally(
+        setClicked(false)
+      )
+    }
   }
 
   function handleFirst(e) {
@@ -71,7 +75,7 @@ export default function Featured() {
   const [refreshData, setRefreshData] = useState(false)
   
   const editFeaturedProduct = async (id, product_id) => {
-      const response = await api.put('/api/featured-product/' + id + '/', 
+      const response = await api.put('api/featured-product/' + id + '/', 
       {product_id});
   
       return response
@@ -106,7 +110,7 @@ export default function Featured() {
   }
 
   async function fetchAllProducts() {
-    await axios.get('/api/product/')
+    getApi('api/product/')
     .then(response => {
       setProducts(response.data)
     })
@@ -153,7 +157,14 @@ export default function Featured() {
             </Form.Select>
          </Col>
          <Col>
-          <Button className='add-btn' type="button" variant='success' disabled={!first} onClick={() => handleEdit(1)}>Save</Button>
+         {(clicked === true) && 
+              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+              </Button>)
+          }
+          {(clicked === false) && 
+              (<Button className='add-btn' variant='success' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>)
+          }
          </Col>
        </Row>
         
@@ -174,7 +185,14 @@ export default function Featured() {
           </Form.Select>
           </Col>
          <Col>
-          <Button className='add-btn' type="button" variant='success' disabled={!second} onClick={() => handleEdit(2)}>Save</Button>
+         {(clicked === true) && 
+              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+              </Button>)
+          }
+          {(clicked === false) && 
+              (<Button className='add-btn' variant='success' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>)
+          }
          </Col>
        </Row>
 
@@ -195,7 +213,14 @@ export default function Featured() {
           </Form.Select>
           </Col>
          <Col>
-          <Button className='add-btn' type="button" variant='success' disabled={!third} onClick={() => handleEdit(3)}>Save</Button>
+         {(clicked === true) && 
+              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+              </Button>)
+          }
+          {(clicked === false) && 
+              (<Button className='add-btn' variant='success' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>)
+          }
          </Col>
         </Row>
 
@@ -216,7 +241,14 @@ export default function Featured() {
           </Form.Select>
         </Col>
         <Col>
-          <Button className='add-btn' type="button" variant='success' disabled={!fourth} onClick={() => handleEdit(4)}>Save</Button>
+          {(clicked === true) && 
+              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+              </Button>)
+          }
+          {(clicked === false) && 
+              (<Button className='add-btn' variant='success' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>)
+          }
         </Col>
        </Row>
 
