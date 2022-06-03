@@ -1,12 +1,13 @@
 import { rest } from 'msw'
 
-const infoURL = "/api/cafeinfo"
-const productURL = "/api/product"
-const galleryURL = "/api/gallery"
-const testimonialURL = "/api/testimonial"
-const recaptchaURL = "/api/recaptcha"
-const featuredProductURL = "/api/featured-product"
-const featuredReviewURL = "/api/featured-review"
+const baseURL = "https://cafe-backend.azurewebsites.net"
+const infoURL = baseURL + "/api/cafeinfo"
+const productURL = baseURL + "/api/product"
+const galleryURL = baseURL + "/api/gallery"
+const testimonialURL = baseURL + "/api/testimonial"
+const recaptchaURL = baseURL + "/api/recaptcha"
+const featuredProductURL = baseURL + "/api/featured-product"
+const featuredReviewURL = baseURL + "/api/featured-review"
 
 let cafeinfo = {
   id : 1,
