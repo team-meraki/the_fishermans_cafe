@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from 'react'
-import SideNavbar from "./SideNavbar";
-import AllProductsDisplay from './AllProductsDisplay'
 import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
-import useAxios from './utils/useAxios';
+import PulseLoader from "react-spinners/PulseLoader";
 
 // icons & css
 import addIcon from '../../icons/add.svg'
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/admin/Common.scss';
+
+// page imports
+import AllProductsDisplay from './AllProductsDisplay'
+import SideNavbar from "./SideNavbar";
 import { getApi } from '../../adminAxios';
-import PulseLoader from "react-spinners/PulseLoader";
+import useAxios from './utils/useAxios';
+
 
 /* ****************** MAIN ****************** */
 export default function AllProducts() {
@@ -141,13 +144,13 @@ export default function AllProducts() {
         {/* HEADER  */}
         <div className='d-flex justify-content-between header'>
             <h2>All Products</h2>
-            <Button className='add-btn' type="button" variant='success' onClick={handleAddShow}>
+            <Button className='add-btn' type="button" variant='warning' onClick={handleAddShow}>
                 <span><img src={addIcon} alt="add icon"></img></span>
                 Add a new product
             </Button>
         </div>
         <div className='content-wrapper'>
-          <div className='d-flex align-items-center'>
+          <div className='d-flex align-items-center mb-3'>
               <h6>Filter by Category: </h6>
               <div>
                 <DropdownButton 
@@ -164,18 +167,20 @@ export default function AllProducts() {
                 </DropdownButton>
               </div>
             </div>
+
+            <AllProductsDisplay 
+              products={
+                value === 'All' ? all : 
+                (value === 'Meals' ? meals : 
+                (value === 'Desserts' ? desserts : drinks))
+              }
+              refreshData={refreshData} 
+              setRefreshData={setRefreshData}
+            />
         </div>
 
         
-        <AllProductsDisplay 
-            products={
-              value === 'All' ? all : 
-              (value === 'Meals' ? meals : 
-              (value === 'Desserts' ? desserts : drinks))
-            }
-            refreshData={refreshData} 
-            setRefreshData={setRefreshData}
-        />
+        
 
 
         {/* ADD MODAL HANDLER */}

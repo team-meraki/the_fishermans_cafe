@@ -5,6 +5,11 @@ import AuthContext from './context/AuthContext'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
+// images
+import logo from '../../images/tfcafe_logo.png'
+import cafeNameImg from '../../images/brand-name.svg'
+
+
 export default function Login() {
   const initialData = Object.freeze({
     username : '',
@@ -48,37 +53,47 @@ export default function Login() {
 
   return (
     user ? <Navigate to={from} replace/> :
-    <div><ToastContainer/>
-    <Container>
-     <Container className='login-wrapper'>
-      <Row><h1>Admin Login</h1></Row>
-      <Row>
-       <Form onSubmit={login}>
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter username" value={formData.username} name="username" onChange={handleChange} autoFocus required />
-        </Form.Group>
+    <div>
+      <ToastContainer/>
+      <Container>
+      <Container className='login-wrapper d-flex flex-column align-items-center'>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Enter password" value={formData.password} name="password" onChange={handleChange} required/>
-        </Form.Group>
-
-        <Row className='mb-4'>
-          <Col>
-            <Button variant="link" onClick={() => onClickToForgotPass()}>Forgot password?</Button>
-          </Col>
+      <Row className='login-box'>
+        <Row>
+          <h5 className='login-header'>ADMIN LOGIN</h5>
         </Row>
-
-        <Button variant="success" type="submit" disabled={loading} >
-          {  loading &&
-                  <Spinner animation="border" size="sm" role="status">
-                  </Spinner>
-          }
-          Login
-        </Button>
         
-       </Form>
+        <Form onSubmit={login}>
+          
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Enter username" value={formData.username} name="username" onChange={handleChange} autoFocus required />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Enter password" value={formData.password} name="password" onChange={handleChange} required/>
+          </Form.Group>
+
+          <Row className='mt-1'>
+            <Col >
+              <Button className='forgot-pass-title' variant="link" onClick={() => onClickToForgotPass()}>Forgot password?</Button>
+            </Col>
+          </Row>
+
+          <div className='d-flex justify-content-center'>
+            <Button variant="warning" className='mt-4 login-btn' type="submit" disabled={loading} >
+              {  loading &&
+                      <Spinner className='mr-5' animation="border" size="sm" role="status">
+                      </Spinner>
+              }
+               Login
+            </Button>
+          </div>
+        
+          
+
+        </Form>
       </Row>
      </Container>
     </Container>

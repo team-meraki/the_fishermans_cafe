@@ -158,12 +158,12 @@ export default function Featured() {
          </Col>
          <Col>
          {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
                   <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
               </Button>)
           }
           {(clicked === false) && 
-              (<Button className='add-btn' variant='success' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>)
+              (<Button className='add-btn' variant='warning' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>)
           }
          </Col>
        </Row>
@@ -186,12 +186,12 @@ export default function Featured() {
           </Col>
          <Col>
          {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
                   <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
               </Button>)
           }
           {(clicked === false) && 
-              (<Button className='add-btn' variant='success' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>)
+              (<Button className='add-btn' variant='warning' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>)
           }
          </Col>
        </Row>
@@ -214,12 +214,12 @@ export default function Featured() {
           </Col>
          <Col>
          {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
                   <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
               </Button>)
           }
           {(clicked === false) && 
-              (<Button className='add-btn' variant='success' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>)
+              (<Button className='add-btn' variant='warning' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>)
           }
          </Col>
         </Row>
@@ -242,12 +242,12 @@ export default function Featured() {
         </Col>
         <Col>
           {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='success' type="button" disabled>
+              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
                   <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
               </Button>)
           }
           {(clicked === false) && 
-              (<Button className='add-btn' variant='success' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>)
+              (<Button className='add-btn' variant='warning' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>)
           }
         </Col>
        </Row>

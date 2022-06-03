@@ -44,11 +44,7 @@ export default function FeaturedProducts() {
                     </Col>
                 ))}
             </Row>
-            <div className='see-more-btn-wrap'>
-                <Button href='/menu' size="sm"> 
-                    See more 
-                </Button>
-            </div>
+            
         </Container>
         </div>
     )
