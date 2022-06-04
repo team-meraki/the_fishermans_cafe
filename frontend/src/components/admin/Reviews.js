@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
-import axios from 'axios';
 import useAxios from './utils/useAxios';
 import { getApi } from '../../adminAxios';
 
@@ -20,19 +19,19 @@ export default function Reviews(){
 
     // Getting all reviews
     async function fetchAllReviews(){
-        const response = await getApi('api/testimonial');
+        const response = await getApi('api/testimonial/');
         return response
     }
     // Getting all featured reviews
     async function fetchAllFeaturedReviews(){
-        const response = await getApi('api/featured-review');
+        const response = await getApi('api/featured-review/');
         return response
     }
 
     const [refreshData, setRefreshData] = useState(false)
   
-    const postCustomerReview = async (id, review_id) => {
-        const response = await api.put('/api/featured-review/' + id + '/', 
+    const postCustomerReview = async (review_id) => {
+        const response = await api.post('/api/featured-review/', 
         {review_id});
         return response
     }
@@ -42,7 +41,7 @@ export default function Reviews(){
     async function postReview(id) {
         postCustomerReview(id)
         .then(response => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             toast.success('Posted a review!', { autoClose: 2000, hideProgressBar: true });
             setRefreshData(!refreshData)
           }
@@ -50,11 +49,34 @@ export default function Reviews(){
         .catch(error => {
           if (error.request.status === 404) {
             toast.error('Review not found!', { autoClose: 2000, hideProgressBar: true });
+          } else if (error.request.status === 400) {
+            toast.error(error.response.data.message, { autoClose: 2000, hideProgressBar: true });
           } else {
             toast.error('Failed to post a review.', { autoClose: 2000, hideProgressBar: true });
           }
         })
       }
+
+    const findReview = id => featured.find(obj => obj.review_id === id).id
+
+    const unpostReview = async (featured_id) => {
+        api.delete('/api/featured-review/' + featured_id + '/')
+        .then(response => {
+            if (response.status === 204) {
+                toast.success('Unposted a review!', { autoClose: 2000, hideProgressBar: true });
+                setRefreshData(!refreshData)
+            }
+        })
+        .catch(error => {
+            if (error.request.status === 404) {
+              toast.error('Review not found!', { autoClose: 2000, hideProgressBar: true });
+            } else if (error.request.status === 400) {
+                toast.error(error.response.data.message, { autoClose: 2000, hideProgressBar: true });
+            } else {
+              toast.error('Failed to unpost a review.', { autoClose: 2000, hideProgressBar: true });
+            }
+        })
+    }
 
     useEffect(() => {
         let mounted = true
@@ -74,7 +96,7 @@ export default function Reviews(){
         .then(response => {
             if(mounted) {
                 setFeatured(response.data);
-                setIdsFeatured(response.data.map( (id) => {return id.review_id} ));
+                setIdsFeatured(response.data.map(featured => featured.review_id));
             }
         })
         .catch(error => {
@@ -82,7 +104,7 @@ export default function Reviews(){
         })
         //console.log(idsFeatured);
         return () => mounted = false
-    },[])
+    },[refreshData])
 
     // Post API
 
@@ -98,7 +120,7 @@ export default function Reviews(){
                     <h2>Reviews</h2>
                 </div>
                 <div className='content-wrapper'>
-                    <h6>You need to have at least <b>2</b> customer reviews currently posted on the cafe website.</h6>
+                    <h6>You have <b>{Object.keys(featured).length}</b> customer reviews currently posted on the cafe website.</h6>
                 </div>
 
                 {/* TABLE */}
@@ -124,7 +146,7 @@ export default function Reviews(){
                                         {
                                             (idsFeatured.includes(testimonial.id)) ?
 
-                                             <Button className="btn btn-post" variant="outline-danger" onClick={()=>postReview(testimonial.id)}>Unpost</Button>
+                                             <Button className="btn btn-post" variant="outline-danger" onClick={()=>unpostReview(findReview(testimonial.id))}>Unpost</Button>
 
                                              :
                                             
