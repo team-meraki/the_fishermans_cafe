@@ -133,7 +133,7 @@ export default function Reviews(){
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Message</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
