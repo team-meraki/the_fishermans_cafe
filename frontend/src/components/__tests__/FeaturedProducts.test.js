@@ -5,11 +5,6 @@ beforeEach(() => {
     render(<FeaturedProducts />)
 })
 
-it('renders see more button', () => {
-    const seeMore = screen.getByRole('button', {name:/see more/i})
-    expect(seeMore).toBeInTheDocument()
-})
-
 it('renders featured product heading', () => {
     const productsHeading = screen.getByRole('heading', {name:/on the menu/i})
     expect(productsHeading).toBeInTheDocument()
