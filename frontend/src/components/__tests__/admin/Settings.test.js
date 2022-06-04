@@ -13,10 +13,6 @@ beforeEach( () => {
     )
 })
 
-it('renders admin credentials heading', () => {
-    expect(screen.getByRole('heading', {  name: /credentials/i})).toBeInTheDocument()
-})
-
 it('renders admin information update form', () => {
     expect(screen.getByText(/email/i)).toBeInTheDocument()
     expect(screen.getByText(/username/i)).toBeInTheDocument()
@@ -28,5 +24,5 @@ it('renders admin information update form', () => {
 
 it('renders submit buttons', () => {
     expect(screen.getByRole('button', {  name: /save changes/i})).toBeInTheDocument()
-    expect(screen.getByRole('button', {  name: /save password/i})).toBeInTheDocument()
+    expect(screen.getByRole('button', {  name: /save/i})).toBeInTheDocument()
 })
