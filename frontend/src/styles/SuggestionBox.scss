@@ -16,26 +16,22 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
+
+
+.suggestion-form {
+
+    .submit-btn {
+        justify-content: center;
+    }
+}
 .suggestion-box-row {
-    text-align: center;
+
+    padding-left: 1rem;
 
     .suggestion-box-title {
         font-size: 20px;
         font-weight: bold;
     }
-}
-
-
-.suggestion-form {
-    .submit-btn {
-        display: flex;
-        justify-content: center;
-    }
-}
-.suggestion-box-row {
-    display: inline;
-    justify-content: center;
-    padding-left: 1rem;
 
     @media (min-width: 576px) { 
         padding-left: 5rem;
@@ -43,8 +39,15 @@
 
     // Medium devices (tablets, 768px and up)
     @media (min-width: 768px) { 
-        padding-left: 7rem;
+        padding-left: 6rem;
+        padding-top: 2.5rem;
     }
+
+    @media (min-width: 900px) { 
+        padding-left: 7rem;
+        padding-top: 2.5rem;
+    }
+
 
     h4 {
         font-size: 18px;

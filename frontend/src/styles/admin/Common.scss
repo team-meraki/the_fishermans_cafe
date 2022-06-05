@@ -87,9 +87,11 @@
 }
 
 .table {
-  
+
+    display: flex;
+    flex-flow: column;
     width: 100%;
-    border-spacing: 0px; 
+    border-collapse: collapse;
     
     .img-content {
         height: 45px;
@@ -102,37 +104,26 @@
         }
     }
 
-    
-    thead tr {    
-        display: block;
-        background-color: #198754;
-        color: white;
-        font-weight: normal;
+    thead {    
+      flex: 0 0 auto;
+      background-color: #66bb86;
     }
 
-    th, td {
-      //width: 130px;
-      font-size: 10px;
-    
-      @media (min-width: 576px) { 
-        width: 320px;
-        font-size: 15px;
-      }
-    
-      // Medium devices (tablets, 768px and up)
-      @media (min-width: 768px) { 
-        width: 360px;
-        font-size: 16px;
-      }
-    
+    tr {    
+      width: 100%;
+      display: table;
+      table-layout: fixed;
     }
 
     tbody {
+      flex: 1 1 auto;
       display: block;
       overflow-y: auto;
-      overflow-x: auto ;
+      overflow-x: auto;
       max-height: 65vh;
+      word-break: break-word;
     }
+
 }
 
 .admin-btn {
