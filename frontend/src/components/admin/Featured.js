@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import SideNavbar from './SideNavbar'
 import PulseLoader from "react-spinners/PulseLoader";
+import ClipLoader from "react-spinners/ClipLoader";
+
 //css
 import '../../styles/admin/Common.scss';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
@@ -21,8 +23,10 @@ export default function Featured() {
   const [fourth, setFourth] = useState('');
   const [initial, setInitial] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   async function fetchAllFeaturedProducts() {
-    if (clicked===false) {
+    if (loading && clicked===false) {
       setClicked(true);
       getApi('api/featured-product/')
       .then(response => {
@@ -34,7 +38,8 @@ export default function Featured() {
           response.data[0].product_id, 
           response.data[1].product_id, 
           response.data[2].product_id, 
-          response.data[3].product_id])
+          response.data[3].product_id]);
+        
       }).catch(error => {
         toast.error('Could not fetch Featured Products.', { autoClose: 2000, hideProgressBar: true })
       }).finally(
@@ -109,13 +114,17 @@ export default function Featured() {
     })
   }
 
+  
   async function fetchAllProducts() {
     getApi('api/product/')
     .then(response => {
-      setProducts(response.data)
+      if(loading){
+        setProducts(response.data);
+        setLoading(false);
+      }
     })
     .catch(error => {
-      toast.error('Could not fetch all Products.', { autoClose: 2000, hideProgressBar: true })
+      toast.error('Could not fetch all products.', { autoClose: 2000, hideProgressBar: true })
     })
   }
 
@@ -135,125 +144,135 @@ export default function Featured() {
          <h2>Featured Products</h2>
       </div>
       {/* BODY CONTENT */}
-      <Container className='content-wrapper'>
-       <h6 className='mb-4'>
-         You can select up to <b>4</b> products to be displayed in featured collection section.
-       </h6>
-       <div className='featured-wrapper'>
-       
-       {/* FIRST FEATURED PRODUCT */}
-       <Row>
-         <Col>
-          <Form.Select
-            className='featured-select'
-            value={first ? first : ''}
-            onChange={e => handleFirst(e)}
-            required
+      {
+        loading===false ?
+
+        <Container className='content-wrapper'>
+        <h6 className='mb-4'>
+          You can select up to <b>4</b> products to be displayed in featured collection section.
+        </h6>
+        <div className='featured-wrapper'>
+        
+        {/* FIRST FEATURED PRODUCT */}
+        <Row>
+          <Col>
+            <Form.Select
+              className='featured-select'
+              value={first ? first : ''}
+              onChange={e => handleFirst(e)}
+              required
+              > 
+                {products.map((product) => {
+                  return(<option key={product.id} value={product.id}>{product.name}</option>)
+                })}
+                {!first && <option key={-1} value=''>----</option>}
+              </Form.Select>
+          </Col>
+          <Col>
+          {(clicked === true) && 
+                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+                    <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+                </Button>)
+            }
+            {(clicked === false) && 
+                (<Button className='add-btn' variant='warning' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>)
+            }
+          </Col>
+        </Row>
+          
+
+        {/* SECOND FEATURED PRODUCT */}
+        <Row>
+          <Col>
+            <Form.Select
+              className='featured-select'
+              value={second ? second : ''}
+              onChange={e => handleSecond(e)}
+              required
             > 
               {products.map((product) => {
                 return(<option key={product.id} value={product.id}>{product.name}</option>)
               })}
-              {!first && <option key={-1} value=''>----</option>}
+              {!second && <option key={-1} value=''>----</option>}
             </Form.Select>
-         </Col>
-         <Col>
-         {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
-                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-              </Button>)
-          }
-          {(clicked === false) && 
-              (<Button className='add-btn' variant='warning' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>)
-          }
-         </Col>
-       </Row>
-        
-
-       {/* SECOND FEATURED PRODUCT */}
-       <Row>
-         <Col>
-          <Form.Select
-            className='featured-select'
-            value={second ? second : ''}
-            onChange={e => handleSecond(e)}
-            required
-          > 
-            {products.map((product) => {
-              return(<option key={product.id} value={product.id}>{product.name}</option>)
-            })}
-            {!second && <option key={-1} value=''>----</option>}
-          </Form.Select>
+            </Col>
+          <Col>
+          {(clicked === true) && 
+                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+                    <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+                </Button>)
+            }
+            {(clicked === false) && 
+                (<Button className='add-btn' variant='warning' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>)
+            }
           </Col>
-         <Col>
-         {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
-                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-              </Button>)
-          }
-          {(clicked === false) && 
-              (<Button className='add-btn' variant='warning' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>)
-          }
-         </Col>
-       </Row>
-
-
-       {/* THIRD FEATURED PRODUCT */}
-        <Row>
-         <Col>
-          <Form.Select
-            className='featured-select'
-            value={third ? third : ''}
-            onChange={e => handleThird(e)}
-            required
-          > 
-            {products.map((product) => {
-              return(<option key={product.id} value={product.id}>{product.name}</option>)
-            })}
-            {!third && <option key={-1} value=''>----</option>}
-          </Form.Select>
-          </Col>
-         <Col>
-         {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
-                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-              </Button>)
-          }
-          {(clicked === false) && 
-              (<Button className='add-btn' variant='warning' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>)
-          }
-         </Col>
         </Row>
 
 
-       {/* FOURTH FEATURED PRODUCT */}
-       <Row>
-         <Col>
-          <Form.Select
-            className='featured-select'
-            value={fourth ? fourth : ''}
-            onChange={e => handleFourth(e)}
-            required
-          > 
-            {products.map((product) => {
-              return(<option key={product.id} value={product.id}>{product.name}</option>)
-            })}
-            {!fourth && <option key={-1} value=''>----</option>}
-          </Form.Select>
-        </Col>
-        <Col>
+        {/* THIRD FEATURED PRODUCT */}
+          <Row>
+          <Col>
+            <Form.Select
+              className='featured-select'
+              value={third ? third : ''}
+              onChange={e => handleThird(e)}
+              required
+            > 
+              {products.map((product) => {
+                return(<option key={product.id} value={product.id}>{product.name}</option>)
+              })}
+              {!third && <option key={-1} value=''>----</option>}
+            </Form.Select>
+            </Col>
+          <Col>
           {(clicked === true) && 
-              (<Button className='add-btn px-0' variant='warning' type="button" disabled>
-                  <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-              </Button>)
-          }
-          {(clicked === false) && 
-              (<Button className='add-btn' variant='warning' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>)
-          }
-        </Col>
-       </Row>
+                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+                    <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+                </Button>)
+            }
+            {(clicked === false) && 
+                (<Button className='add-btn' variant='warning' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>)
+            }
+          </Col>
+          </Row>
 
-       </div>
-      </Container>
+
+        {/* FOURTH FEATURED PRODUCT */}
+        <Row>
+          <Col>
+            <Form.Select
+              className='featured-select'
+              value={fourth ? fourth : ''}
+              onChange={e => handleFourth(e)}
+              required
+            > 
+              {products.map((product) => {
+                return(<option key={product.id} value={product.id}>{product.name}</option>)
+              })}
+              {!fourth && <option key={-1} value=''>----</option>}
+            </Form.Select>
+          </Col>
+          <Col>
+            {(clicked === true) && 
+                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+                    <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+                </Button>)
+            }
+            {(clicked === false) && 
+                (<Button className='add-btn' variant='warning' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>)
+            }
+          </Col>
+        </Row>
+
+        </div>
+        </Container>
+
+        :
+          <div className='d-flex justify-content-center align-item-center mt-5'>
+            <ClipLoader color="#274B5F" size={80} />
+          </div>
+      }
+
      </div>
     </div>
   )

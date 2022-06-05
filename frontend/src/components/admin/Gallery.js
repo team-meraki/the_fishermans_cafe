@@ -5,6 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import {formatDate} from '../common.js'
 import PulseLoader from "react-spinners/PulseLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
@@ -133,12 +134,15 @@ export default function Gallery() {
     }
     const handleDelShow = () => setDelShow(true);
 
+    // GET API 
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
       let mounted = true
       fetchAllPhotos()
       .then(response => {
-        if(mounted) {
+        if(mounted && loading) {
           setGalleryPhotos(response.data);
+          setLoading(false);
         }
       })
       .catch(error => {
@@ -165,6 +169,8 @@ export default function Gallery() {
         
         {/* TABLE */}
         <div className='content-wrapper'>
+        {
+          loading===false ?
             <div className='tablewrapper'>
                 <Table responsive>
                     <thead>
@@ -192,6 +198,11 @@ export default function Gallery() {
                     </tbody>
                 </Table>
             </div>
+              :
+            <div className='d-flex justify-content-center align-item-center mt-5'>
+              <ClipLoader color="#274B5F" size={80} />
+            </div>
+        }
         </div>
 
         {/* ADD MODAL */}

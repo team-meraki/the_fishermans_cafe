@@ -7,6 +7,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { getApi } from '../../adminAxios';
 import useAxios from './utils/useAxios';
 import PulseLoader from "react-spinners/PulseLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function AboutTheCafe() {
   const [clicked, setClicked] = useState(false);
@@ -94,11 +95,12 @@ export default function AboutTheCafe() {
   return response
  }
 
+ const [loading, setLoading] = useState(true);
  useEffect( () => {
   let mounted = true
   fetchCafeInfo()
   .then(response => {
-    if (mounted){
+    if (mounted && loading){
       setEditedCafeInfo({
         schedule: response.data.schedule,
         location: response.data.location,
@@ -108,7 +110,8 @@ export default function AboutTheCafe() {
         announcement: response.data.announcement,
         table_accommodation: response.data.table_accommodation,
         delivery_info: response.data.delivery_info
-      })
+      });
+      setLoading(false);
     }
   })
   .catch(error => {
@@ -119,72 +122,83 @@ export default function AboutTheCafe() {
 
  return (
   <div className='main-container'>
-   <SideNavbar/>
-   <div className='main_content'>
-    <ToastContainer />
-     {/* HEADER  */}
-     <div className='d-flex justify-content-between header'>
-         <h2>About the Cafe</h2>
-     </div>
+    <SideNavbar/>
 
-     {/* FORM */}
-     <div className='content-wrapper'>
-       <Row className='d-flex align-items-center mb-1'>
-        <Col sm="2">Schedule</Col>
-        <Col><Form.Control as="textarea" name="schedule" value={editedInfo.schedule} onChange={(e) => handleEditChange(e)}/></Col>
-        <Col sm="2">Location</Col>
-        <Col><Form.Control as="textarea" name="location" value={editedInfo.location} onChange={(e) => handleEditChange(e)}/></Col>
-       </Row>
-       <Row className='d-flex align-items-center mb-1'>
-        <Col sm="2">Contact Number</Col>
-        <Col><Form.Control type="text" name="contact_number" value={editedInfo.contact_number} onChange={(e) => handleEditChange(e)}/></Col>
-        <Col sm="2">Facebook Link</Col>
-        <Col><Form.Control type="text" name="facebook" value={editedInfo.facebook} onChange={(e) => handleEditChange(e)}/></Col>
-       </Row>
-       <Row className='mb-1'>
-        <Col sm="2">Description</Col>
-        <Col><Form.Control as="textarea" name="description" value={editedInfo.description} onChange={(e) => handleEditChange(e)} rows={4}/></Col>
-       </Row>
+    <div className='main_content'>
+      <ToastContainer />
 
-       <div className='mt-5'></div>
-        <hr></hr>
-       <div className='mb-5'></div>
+      <div className='d-flex justify-content-between header'>
+          <h2>About the Cafe</h2>
+      </div>
+      
+      { loading===false ?
+      
+        <div className='content-wrapper'>
+          <Row className='d-flex align-items-center mb-1'>
+            <Col sm="2">Schedule</Col>
+            <Col><Form.Control as="textarea" name="schedule" value={editedInfo.schedule} onChange={(e) => handleEditChange(e)}/></Col>
+            <Col sm="2">Location</Col>
+            <Col><Form.Control as="textarea" name="location" value={editedInfo.location} onChange={(e) => handleEditChange(e)}/></Col>
+          </Row>
+          <Row className='d-flex align-items-center mb-1'>
+            <Col sm="2">Contact Number</Col>
+            <Col><Form.Control type="text" name="contact_number" value={editedInfo.contact_number} onChange={(e) => handleEditChange(e)}/></Col>
+            <Col sm="2">Facebook Link</Col>
+            <Col><Form.Control type="text" name="facebook" value={editedInfo.facebook} onChange={(e) => handleEditChange(e)}/></Col>
+          </Row>
+          <Row className='mb-1'>
+            <Col sm="2">Description</Col>
+            <Col><Form.Control as="textarea" name="description" value={editedInfo.description} onChange={(e) => handleEditChange(e)} rows={4}/></Col>
+          </Row>
 
-        <Row className='d-flex align-items-center mb-1'>
-         <Col sm="2">Announcement</Col>
-         <Col><Form.Control as="textarea" name="announcement" value={editedInfo.announcement} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
-        </Row>
-        <Row className='d-flex align-items-center mb-1'>
-         <Col sm="2">Table Accomodation</Col>
-         <Col><Form.Control as="textarea" name="table_accommodation" value={editedInfo.table_accommodation} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
-        </Row>
-        <Row className='d-flex align-items-center mb-1'>
-         <Col sm="2">Delivery Info</Col>
-         <Col><Form.Control as="textarea" name="delivery_info" value={editedInfo.delivery_info} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
-        </Row>
+          <div className='mt-5'></div>
+            <hr></hr>
+          <div className='mb-5'></div>
 
-       <div className='d-flex justify-content-end mt-5'>
-        {
-          (clicked === true) && 
-          (
-            <Button variant="success" type="submit" disabled className='loader-btn'>
-              Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
-            </Button>
-          )
-        }
-        {
-          (clicked === false) && 
-          (<div>
-            <Button variant="success" type="submit" onClick={() => saveEdits()} disabled={!hasChanged}>
-              Save changes
-            </Button>
-          </div>)
-        }
-       </div>
+            <Row className='d-flex align-items-center mb-1'>
+            <Col sm="2">Announcement</Col>
+            <Col><Form.Control as="textarea" name="announcement" value={editedInfo.announcement} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
+            </Row>
+            <Row className='d-flex align-items-center mb-1'>
+            <Col sm="2">Table Accomodation</Col>
+            <Col><Form.Control as="textarea" name="table_accommodation" value={editedInfo.table_accommodation} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
+            </Row>
+            <Row className='d-flex align-items-center mb-1'>
+            <Col sm="2">Delivery Info</Col>
+            <Col><Form.Control as="textarea" name="delivery_info" value={editedInfo.delivery_info} onChange={(e) => handleEditChange(e)} rows={1}/></Col>
+            </Row>
 
-      {/* </Form> */}
-     </div>
-   </div>
+            <div className='d-flex justify-content-end mt-5'>
+              {
+                (clicked === true) && 
+                (
+                  <Button variant="success" type="submit" disabled className='loader-btn'>
+                    Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                  </Button>
+                )
+              }
+              {
+                (clicked === false) && 
+                (<div>
+                  <Button variant="success" type="submit" onClick={() => saveEdits()} disabled={!hasChanged}>
+                    Save changes
+                  </Button>
+                </div>)
+              }
+            </div>
+
+        </div>
+        
+      :
+
+        <div className='d-flex justify-content-center align-item-center mt-5'>
+          <ClipLoader color="#274B5F" size={80} />
+        </div>
+
+      }
+
+    </div>
+
   </div>
- )
+  )
 }

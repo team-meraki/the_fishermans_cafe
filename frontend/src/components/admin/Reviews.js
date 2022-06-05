@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react'
 import SideNavbar from "./SideNavbar";
 import { ToastContainer, toast } from 'react-toastify';
+import ClipLoader from "react-spinners/ClipLoader";
 
 // css
 import '../../styles/admin/Common.scss';
@@ -78,13 +79,15 @@ export default function Reviews(){
         })
     }
 
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         let mounted = true
         // all reviews
         fetchAllReviews()
         .then(response => {
-            if(mounted) {
+            if(mounted && loading) {
                 setTestimonial(response.data);
+                setLoading(false);
             }
         })
         .catch(error => {
@@ -119,51 +122,64 @@ export default function Reviews(){
                 <div className='d-flex justify-content-between header'>
                     <h2>Reviews</h2>
                 </div>
-                <div className='content-wrapper'>
-                    <h6>You have <b>{Object.keys(featured).length}</b> customer reviews currently posted on the cafe website.</h6>
-                </div>
+
+                {
+                loading===false ?
+                <>
+                    <div className='content-wrapper'>
+                        <h6>You have <b>{Object.keys(featured).length}</b> customer reviews currently posted on the cafe website.</h6>
+                    </div>
 
                 {/* TABLE */}
-                <div className='content-wrapper'>
-                    <div className='tablewrapper'>
-                        
-                        <Table responsive>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Message</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {testimonial.map(testimonial => (
-                                    <tr key = {testimonial.id}>
-                                        <td>{testimonial.name || '(Anonymous)' }</td>
-                                        <td>{testimonial.email}</td>
-                                        <td>{testimonial.message}</td>
-                                        <td className=''> 
-                                        {
-                                            (idsFeatured.includes(testimonial.id)) ?
-
-                                             <Button className="btn btn-post" variant="outline-danger" onClick={()=>unpostReview(findReview(testimonial.id))}>Unpost</Button>
-
-                                             :
-                                            
-                                             <Button className="btn btn-post" variant="outline-success" onClick={()=>postReview(testimonial.id)}>Post</Button>
-
-                                        }
-                                        </td>
+                     <div className='content-wrapper'>
+                
+                        <div className='tablewrapper'>
+                            
+                            <Table responsive>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Message</th>
+                                        <th>Action</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {testimonial.map(testimonial => (
+                                        <tr key = {testimonial.id}>
+                                            <td>{testimonial.name || '(Anonymous)' }</td>
+                                            <td>{testimonial.email}</td>
+                                            <td>{testimonial.message}</td>
+                                            <td className=''> 
+                                            {
+                                                (idsFeatured.includes(testimonial.id)) ?
 
-                    <div className='mt-2 ml-1'>
-                        <h6>{testimonial.length} reviews found</h6>
+                                                <Button className="btn btn-post" variant="outline-danger" onClick={()=>unpostReview(findReview(testimonial.id))}>Unpost</Button>
+
+                                                :
+                                                
+                                                <Button className="btn btn-post" variant="outline-success" onClick={()=>postReview(testimonial.id)}>Post</Button>
+
+                                            }
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </div>
+                        <div className='mt-2 ml-1'>
+                            <h6>{testimonial.length} reviews found</h6>
+                        </div>
                     </div>
-                </div>
+                </>
+                    :
+                    <div className='d-flex justify-content-center align-item-center mt-5'>
+                      <ClipLoader color="#274B5F" size={80} />
+                    </div>
+                }
+                 
+                   
+                
             </div>
         </div>
     )
