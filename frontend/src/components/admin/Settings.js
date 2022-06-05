@@ -7,10 +7,13 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import AuthContext from './context/AuthContext';
 // import { updateCredentials } from '../../adminAPI';
 import useAxios from './utils/useAxios';
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default function AdminSettings() {
   const { user, loginUser } = useContext(AuthContext)
-  
+  const [clickedCreds, setClickedCreds] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
   const initialCredentials = Object.freeze({
     email: user.email,
     username: user.username,
@@ -42,66 +45,79 @@ export default function AdminSettings() {
   }
 
   const editCredentials = async () => {
-    api.put('api/user/update/name/', {
-      "email" : credentials.email,
-      "username": credentials.username,
-      "password": credentials.password
-    })
-    .then(response => {
-      if (response.status === 200){
-        toast.success('Successfully edited Admin Information!', { autoClose: 2000, hideProgressBar: true });
-        loginUser(credentials.username, credentials.password)
-        .then(response => {
-          setCredentials(initialCredentials);
-        })
-        .catch(error => {
-          toast.error('Please refresh.', { autoClose: 2000, hideProgressBar: true });
-        })
-      }
-    })
-    .catch(error => {
-      if (error.response.status === 400) {
-        const errorData = error.response.data
-            for (const key in errorData){
-              for (const message of errorData[key]){
-                toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+    if (clickedCreds===false) {
+      setClickedCreds(true);
+      api.put('api/user/update/name/', {
+        "email" : credentials.email,
+        "username": credentials.username,
+        "password": credentials.password
+      })
+      .then(response => {
+        if (response.status === 200){
+          toast.success('Successfully edited Admin Information!', { autoClose: 2000, hideProgressBar: true });
+          loginUser(credentials.username, credentials.password)
+          .then(response => {
+            setCredentials(initialCredentials);
+          })
+          .catch(error => {
+            toast.error('Please refresh.', { autoClose: 2000, hideProgressBar: true });
+          })
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          const errorData = error.response.data
+              for (const key in errorData){
+                for (const message of errorData[key]){
+                  toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+                }
               }
-            }
-      } else {
-        toast.error('Failed to edit Admin Information', { autoClose: 2000, hideProgressBar: true });
-      }
-    })
+        } else {
+          toast.error('Failed to edit admin credentials', { autoClose: 2000, hideProgressBar: true });
+        }
+      })
+      .finally(
+        ()=>setClickedCreds(false)
+      )
+    }
   }
 
   const editPassword = async () => {
-    if(passwordChange.new_password && 
-      (passwordChange.new_password === passwordChange.confirmed_password)){
-      
-        api.put('/api/user/update/password/', {
-          "old_password" : passwordChange.old_password,
-          "new_password": passwordChange.new_password,
-          "confirmed_password": passwordChange.confirmed_password
-        })
-        .then(response => {
-          if (response.status === 200){
-            setCredentials(initialPasswordChange);
-            toast.success('Successfully changed Password!', { autoClose: 2000, hideProgressBar: true });
-          }
-        })
-        .catch(error => {
-          if (error.response.status === 400) {
-            const errorData = error.response.data
-                for (const key in errorData){
-                  for (const message of errorData[key]){
-                    toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+    if (clicked===false) {
+      setClicked(true);
+      if(passwordChange.new_password && 
+        (passwordChange.new_password === passwordChange.confirmed_password)){
+        
+          api.put('/api/user/update/password/', {
+            "old_password" : passwordChange.old_password,
+            "new_password": passwordChange.new_password,
+            "confirmed_password": passwordChange.confirmed_password
+          })
+          .then(response => {
+            if (response.status === 200){
+              setCredentials(initialPasswordChange);
+              toast.success('Successfully changed Password!', { autoClose: 2000, hideProgressBar: true });
+            }
+          })
+          .catch(error => {
+            if (error.response.status === 400) {
+              const errorData = error.response.data
+                  for (const key in errorData){
+                    for (const message of errorData[key]){
+                      toast.error(`Error in ${key.toUpperCase()} field: ${message}`, { autoClose: 2000, hideProgressBar: true });
+                    }
                   }
-                }
-          } else {
-            toast.error('Failed to change Password.', { autoClose: 2000, hideProgressBar: true });
-          }
-        })
-    } else {
-      toast.error("The two password fields didn't match.", { autoClose: 2000, hideProgressBar: true });
+            } else {
+              toast.error('Failed to change Password.', { autoClose: 2000, hideProgressBar: true });
+            }
+          })
+          .finally(
+            ()=>setClicked(false)
+          )
+      } else {
+        toast.error("The two password fields didn't match.", { autoClose: 2000, hideProgressBar: true });
+        setClicked(false);
+      }
     }
   }
 
@@ -141,20 +157,35 @@ export default function AdminSettings() {
                 </Form.Group> 
               </Row>
               <Row>
-            <Form.Group>
-                <Form.Label>Username</Form.Label>
-                <Form.Control type='text' name="username" value={credentials.username} onChange={handleCredentialsChange}/>
-            </Form.Group>
+                <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type='text' name="username" value={credentials.username} onChange={handleCredentialsChange}/>
+                </Form.Group>
               </Row>
               <Row>
-            <Form.Group>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='password' name="password" placeholder='Enter password to confirm change' value={credentials.password} onChange={handleCredentialsChange}/>
-            </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type='password' name="password" placeholder='Enter password to confirm change' value={credentials.password} onChange={handleCredentialsChange}/>
+                </Form.Group>
               </Row>
-            <div className='d-flex justify-content-center mt-4 '>
-              <Button type="submit" onClick={editCredentials} variant="success">Save Changes</Button>
-            </div>
+            
+            {
+              (clickedCreds === true) && 
+              (<div className='d-flex justify-content-center mt-4'>
+                  <Button variant="success" type="submit" disabled className='loader-btn'>
+                    Saving <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                  </Button>
+                </div>
+              )
+            }
+            {
+              (clickedCreds === false) && 
+              (<div className='d-flex justify-content-center mt-4'>
+                <Button variant="success" type="submit" onClick={() => editCredentials()}>
+                  Save Changes
+                </Button>
+              </div>)
+            }
           </Col>
           
           <Col className='admin-col'>
@@ -179,9 +210,26 @@ export default function AdminSettings() {
                 <Form.Control type="password" name="confirmed_password" value={passwordChange.confirmed_password} onChange={handlePasswordChange}/>
             </Form.Group>
               </Row>
-            <div className='d-flex justify-content-center mt-4 '>
-              <Button type="submit" onClick={editPassword} variant="success">Change Password</Button>
-            </div>
+
+
+            {
+              (clicked === true) && 
+              (<div className='d-flex justify-content-center mt-4'>
+                  <Button variant="success" type="submit" disabled className='loader-btn'>
+                    Changing <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                  </Button>
+                </div>
+              )
+            }
+            {
+              (clicked === false) && 
+              (<div className='d-flex justify-content-center mt-4'>
+                <Button variant="success" type="submit" onClick={() => editPassword()}>
+                  Change password
+                </Button>
+              </div>)
+            }
+
             </Col>
         </Row>
       </div>

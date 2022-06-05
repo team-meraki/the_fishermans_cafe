@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
+import ClipLoader from "react-spinners/ClipLoader";
 import PulseLoader from "react-spinners/PulseLoader";
 
 // icons & css
@@ -119,20 +120,23 @@ export default function AllProducts() {
       }
     }
     
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
       let mounted = true
       fetchAllProducts()
       .then(response => {
-          if(mounted) {
+          if(mounted && loading) {
             setProduct(response.data);
             setMeals(response.data.filter(product => product.category === 'meal'))
             setDesserts(response.data.filter(product => product.category === 'dessert'))
             setDrinks(response.data.filter(product => product.category === 'drink'))
+            setLoading(false);
           }
       })
       .catch(error => {
         toast.error('Failed to fetch all Products.', { autoClose: 2000, hideProgressBar: true });
       })
+    
       return () => mounted = false
     }, [refreshData])
 
@@ -168,7 +172,10 @@ export default function AllProducts() {
               </div>
             </div>
 
-            <AllProductsDisplay 
+            {
+              loading===false ?
+
+              <AllProductsDisplay 
               products={
                 value === 'All' ? all : 
                 (value === 'Meals' ? meals : 
@@ -176,7 +183,16 @@ export default function AllProducts() {
               }
               refreshData={refreshData} 
               setRefreshData={setRefreshData}
-            />
+              />
+
+              :
+              <div className='d-flex justify-content-center align-item-center mt-5'>
+                <ClipLoader color="#274B5F" size={80} />
+              </div>
+
+            }
+           
+
         </div>
 
         
