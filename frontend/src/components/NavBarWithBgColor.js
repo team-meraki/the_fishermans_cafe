@@ -41,9 +41,6 @@ export default function NavBarWithBgColor() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="container-fluid justify-content-end me-auto">
-                    <Nav.Link as={Link} to="/" className="navigation-link">
-                        <span className='underline-hover'>Home</span>
-                    </Nav.Link>
                     <Nav.Link as={Link} to="/menu" className="navigation-link">
                         <span className='underline-hover'>Menu</span>
                     </Nav.Link>
