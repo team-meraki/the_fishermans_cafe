@@ -91,6 +91,7 @@ export default function AllProducts() {
     
     // POST API
     async function addNewProduct() {
+      //console.log(clicked)
       if (clicked===false) {
         setClicked(true);
         addProduct(newProduct)
@@ -125,18 +126,19 @@ export default function AllProducts() {
       let mounted = true
       fetchAllProducts()
       .then(response => {
-          if(mounted && loading) {
+          if(mounted) {
             setProduct(response.data);
             setMeals(response.data.filter(product => product.category === 'meal'))
             setDesserts(response.data.filter(product => product.category === 'dessert'))
             setDrinks(response.data.filter(product => product.category === 'drink'))
-            setLoading(false);
+            if(loading)
+              setLoading(false)
           }
       })
       .catch(error => {
         toast.error('Failed to fetch all Products.', { autoClose: 2000, hideProgressBar: true });
       })
-    
+
       return () => mounted = false
     }, [refreshData])
 
@@ -173,8 +175,14 @@ export default function AllProducts() {
             </div>
 
             {
-              loading===false ?
+              loading ?
 
+              <div className='d-flex justify-content-center align-item-center mt-5'>
+                <ClipLoader color="#274B5F" size={80} />
+              </div>
+
+              :
+              
               <AllProductsDisplay 
               products={
                 value === 'All' ? all : 
@@ -184,11 +192,6 @@ export default function AllProducts() {
               refreshData={refreshData} 
               setRefreshData={setRefreshData}
               />
-
-              :
-              <div className='d-flex justify-content-center align-item-center mt-5'>
-                <ClipLoader color="#274B5F" size={80} />
-              </div>
 
             }
            

@@ -11,7 +11,7 @@ import { getApi } from '../../adminAxios';
 import useAxios from './utils/useAxios';
 
 export default function Featured() {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState({1: false, 2: false, 3: false, 4: false});
   const [products, setProducts] = useState([]);
   const api = useAxios();
 
@@ -26,8 +26,6 @@ export default function Featured() {
   const [loading, setLoading] = useState(true);
 
   async function fetchAllFeaturedProducts() {
-    if (loading && clicked===false) {
-      setClicked(true);
       getApi('api/featured-product/')
       .then(response => {
         response.data[0].product_id && setFirst(response.data[0].product_id)
@@ -42,10 +40,7 @@ export default function Featured() {
         
       }).catch(error => {
         toast.error('Could not fetch Featured Products.', { autoClose: 2000, hideProgressBar: true })
-      }).finally(
-        ()=>setClicked(false)
-      )
-    }
+      })
   }
 
   function handleFirst(e) {
@@ -87,6 +82,10 @@ export default function Featured() {
   }
 
   async function handleEdit(id) {
+    setClicked(items => ({
+      ...items,
+      [id] : id
+    }));
     editFeaturedProduct(id, selected)
     .then(response => {
       if (response.status === 200) {
@@ -111,6 +110,9 @@ export default function Featured() {
       } else {
         toast.error('Failed to update Featured Products.', { autoClose: 2000, hideProgressBar: true });
       }
+    })
+    .finally(() => {
+      setClicked(false)
     })
   }
 
@@ -169,14 +171,14 @@ export default function Featured() {
               </Form.Select>
           </Col>
           <Col>
-          {(clicked === true) && 
-                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
-                    <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-                </Button>)
-            }
-            {(clicked === false) && 
-                (<Button className='add-btn' variant='warning' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>)
-            }
+          {
+            clicked[1] ?
+            <Button className='add-btn px-0' variant='warning' type="button" disabled>
+                <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
+            </Button>
+            :
+            <Button className='add-btn' variant='warning' disabled={!first} type="button" onClick={() => handleEdit(1)}>Save</Button>
+          }
           </Col>
         </Row>
           
@@ -197,14 +199,14 @@ export default function Featured() {
             </Form.Select>
             </Col>
           <Col>
-          {(clicked === true) && 
-                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+          {
+            clicked[2] ? 
+                <Button className='add-btn px-0' variant='warning' type="button" disabled>
                     <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-                </Button>)
-            }
-            {(clicked === false) && 
-                (<Button className='add-btn' variant='warning' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>)
-            }
+                </Button>
+            :
+            <Button className='add-btn' variant='warning' disabled={!second} type="button" onClick={() => handleEdit(2)}>Save</Button>
+          }  
           </Col>
         </Row>
 
@@ -225,14 +227,15 @@ export default function Featured() {
             </Form.Select>
             </Col>
           <Col>
-          {(clicked === true) && 
-                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+          {
+            clicked[3] ?
+                <Button className='add-btn px-0' variant='warning' type="button" disabled>
                     <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-                </Button>)
-            }
-            {(clicked === false) && 
-                (<Button className='add-btn' variant='warning' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>)
-            }
+                </Button>
+            
+            :
+                <Button className='add-btn' variant='warning' disabled={!third} type="button" onClick={() => handleEdit(3)}>Save</Button>
+          }
           </Col>
           </Row>
 
@@ -253,13 +256,13 @@ export default function Featured() {
             </Form.Select>
           </Col>
           <Col>
-            {(clicked === true) && 
-                (<Button className='add-btn px-0' variant='warning' type="button" disabled>
+            {
+              clicked[4] ?
+              <Button className='add-btn px-0' variant='warning' type="button" disabled>
                     <PulseLoader color="#ffff" size={5} speedMultiplier={0.5} />
-                </Button>)
-            }
-            {(clicked === false) && 
-                (<Button className='add-btn' variant='warning' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>)
+              </Button>
+            :
+              <Button className='add-btn' variant='warning' disabled={!fourth} type="button" onClick={() => handleEdit(4)}>Save</Button>
             }
           </Col>
         </Row>

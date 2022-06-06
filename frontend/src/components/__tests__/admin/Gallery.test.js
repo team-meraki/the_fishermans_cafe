@@ -17,10 +17,10 @@ it('renders admin gallery heading', () => {
     expect(screen.getByRole('heading', {  name: /gallery/i})).toBeInTheDocument()
 })
 
-it('renders admin gallery table column headers', () => {
-    expect(screen.getByRole('columnheader', {  name: /id/i})).toBeInTheDocument()
-    expect(screen.getByRole('columnheader', {  name: /image/i})).toBeInTheDocument()
-    expect(screen.getByRole('columnheader', {  name: /action/i})).toBeInTheDocument()
+it('renders admin gallery table column headers', async () => {
+    expect(await screen.findByRole('columnheader', {  name: /id/i})).toBeInTheDocument()
+    expect(await screen.findByRole('columnheader', {  name: /image/i})).toBeInTheDocument()
+    expect(await screen.findByRole('columnheader', {  name: /action/i})).toBeInTheDocument()
 })
 
 it('renders admin gallery rows', async () => {

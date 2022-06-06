@@ -21,11 +21,11 @@ it('renders admin product category filter', () => {
     expect(screen.getByRole('heading', {  name: /filter by category:/i})).toBeInTheDocument()
 })
 
-it('renders admin product table column headers', () => {
-    expect(screen.getByRole('columnheader', {  name: /name/i})).toBeInTheDocument()
-    expect(screen.getByRole('columnheader', {  name: /price/i})).toBeInTheDocument()
-    expect(screen.getByRole('columnheader', {  name: /last modified/i})).toBeInTheDocument()
-    expect(screen.getByRole('columnheader', {  name: /action/i})).toBeInTheDocument()
+it('renders admin product table column headers', async () => {
+    expect(await screen.findByRole('columnheader', {  name: /name/i})).toBeInTheDocument()
+    expect(await screen.findByRole('columnheader', {  name: /price/i})).toBeInTheDocument()
+    expect(await screen.findByRole('columnheader', {  name: /last modified/i})).toBeInTheDocument()
+    expect(await screen.findByRole('columnheader', {  name: /action/i})).toBeInTheDocument()
 })
 
 it('renders admin product rows', async () => {
