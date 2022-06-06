@@ -56,7 +56,7 @@ export default function Reviews(){
             toast.error('Failed to post a review.', { autoClose: 2000, hideProgressBar: true });
           }
         })
-      }
+    }
 
     const findReview = id => featured.find(obj => obj.review_id === id).id
 
@@ -76,6 +76,33 @@ export default function Reviews(){
             } else {
               toast.error('Failed to unpost a review.', { autoClose: 2000, hideProgressBar: true });
             }
+        })
+    }
+
+    // delete review
+
+    const deleteCustomerReview = async (review_id) => {
+        const response = await api.delete('/api/testimonial/' + review_id + '/');
+        console.log(response);
+        return response;
+    }
+
+    async function delReview (review_id) {
+        deleteCustomerReview(review_id).then(response => {
+          if (response.status === 201) {
+            toast.success('Deleted a review!', { autoClose: 2000, hideProgressBar: true });
+            setRefreshData(!refreshData)
+          }
+        })
+        .catch(error => {
+         console.log(error);
+          if (error.request.status === 404) {
+            toast.error('Review not found!', { autoClose: 2000, hideProgressBar: true });
+          } else if (error.request.status === 400) {
+            toast.error(error.response.data.message, { autoClose: 2000, hideProgressBar: true });
+          } else {
+            toast.error('Failed to delete a review.', { autoClose: 2000, hideProgressBar: true });
+          }
         })
     }
 
@@ -141,7 +168,7 @@ export default function Reviews(){
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Message</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -153,13 +180,17 @@ export default function Reviews(){
                                             <td className=''> 
                                             {
                                                 (idsFeatured.includes(testimonial.id)) ?
-
+                                                
+                                                <>
                                                 <Button className="btn btn-post" variant="outline-danger" onClick={()=>unpostReview(findReview(testimonial.id))}>Unpost</Button>
-
+                                                <Button className="btn btn-post" variant="outline-success" disabled>Delete</Button>
+                                                </>
                                                 :
                                                 
+                                                <>
                                                 <Button className="btn btn-post" variant="outline-success" onClick={()=>postReview(testimonial.id)}>Post</Button>
-
+                                                <Button className="btn btn-post" variant="outline-success" onClick={()=>delReview(testimonial.id)}>Delete</Button>
+                                                </>
                                             }
                                             </td>
                                         </tr>
