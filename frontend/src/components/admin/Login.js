@@ -6,8 +6,8 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
 // images
-import logo from '../../images/tfcafe_logo.png'
-import cafeNameImg from '../../images/brand-name.svg'
+//import logo from '../../images/tfcafe_logo.png'
+//import cafeNameImg from '../../images/brand-name.svg'
 
 
 export default function Login() {

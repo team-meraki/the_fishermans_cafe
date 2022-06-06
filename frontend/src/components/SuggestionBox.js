@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row} from 'react-bootstrap'
+import PulseLoader from "react-spinners/PulseLoader";
 import '../styles/SuggestionBox.scss'
 import ReCAPTCHA from "react-google-recaptcha"
 import Reviews from './Reviews'
@@ -16,6 +17,8 @@ export default function SuggestionBox() {
 
     const [formData, setFormData] = useState(initialData)
     const [captchaResult, setCaptchaResult] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
+    const [clicked, setClicked] = useState(false)
 
     const handleChange = (e) => {
         setFormData({...formData,
@@ -25,15 +28,20 @@ export default function SuggestionBox() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setClicked(true)
         postApi("api/testimonial/", formData )
         .then(response => {
             if(response.status === 201){
                 setFormData(initialData)
                 toast.success('Successfully sent suggestion!', { autoClose: 2000, hideProgressBar: true });
+                setSubmitted(true)
             }
         })
         .catch(error => {
             toast.error('Failed to send suggestion.', { autoClose: 2000, hideProgressBar: true });
+        })
+        .finally(() => {
+            setClicked(false)
         })
         
     }
@@ -66,9 +74,24 @@ export default function SuggestionBox() {
                             onChange={handleRecaptcha}
                         />
                         <div className='submit-btn'>
-                            { captchaResult && <Button variant="primary" type="submit">
-                                    Submit
-                                </Button>
+                            { captchaResult && 
+                                (
+                                submitted ?
+                                    <Button variant="primary" disabled type="submit">
+                                        Submitted
+                                    </Button>
+                                    :
+                                    ( clicked ?
+                                        <Button variant="primary" type="submit" disabled className='loader-btn add-btn'>
+                                            Submitting <PulseLoader color="#FFFFFF" size={5} speedMultiplier={0.5} />
+                                        </Button>
+                                        :
+                                        <Button variant="primary" type="submit">
+                                            Submit
+                                        </Button>
+                                    )
+                                )
+
                             }
                         </div>
                     </Form>

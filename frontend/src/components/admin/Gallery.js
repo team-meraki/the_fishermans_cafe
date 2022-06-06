@@ -55,7 +55,7 @@ export default function Gallery() {
 
   // POST API
   async function addNewPhoto() {
-    if (clicked) {
+      setClicked(true)
       addPhoto(newPhoto)
       .then(response => {
         if (response.status === 201) {
@@ -76,8 +76,10 @@ export default function Gallery() {
         } else {
           toast.error('Failed to add a photo.', { autoClose: 2000, hideProgressBar: true });
         }
-      }).finally(setClicked(false))
-    }
+      }).finally(() => 
+        setClicked(false)
+      )
+    
   }
 
   const [selected, setSelected] = useState('') // for delete modals
@@ -95,9 +97,7 @@ export default function Gallery() {
 
     // DELETE API
     async function delPhoto() {
-      if (clicked===false) {
-        setClicked(true);
-        setDelShow(false)
+        setClicked(true)
         deletePhoto(selected)
         .then(response => {
           if (response.status === 204) {
@@ -112,10 +112,11 @@ export default function Gallery() {
           } else {
             toast.error('Failed to delete a photo.', { autoClose: 2000, hideProgressBar: true }); 
           }
-        }).finally(
-          ()=>setClicked(false)
-        )
-      } 
+        })
+        .finally(()=>{
+          setClicked(false)
+          setDelShow(false)
+        })
   }
 
     // ADD MODAL HANDLER
@@ -140,9 +141,10 @@ export default function Gallery() {
       let mounted = true
       fetchAllPhotos()
       .then(response => {
-        if(mounted && loading) {
+        if(mounted) {
           setGalleryPhotos(response.data);
-          setLoading(false);
+          if(loading)
+            setLoading(false)
         }
       })
       .catch(error => {
