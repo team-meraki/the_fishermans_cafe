@@ -89,7 +89,7 @@ export default function Reviews(){
 
     async function delReview (review_id) {
         deleteCustomerReview(review_id).then(response => {
-          if (response.status === 201) {
+          if (response.status === 204) {
             toast.success('Deleted a review!', { autoClose: 2000, hideProgressBar: true });
             setRefreshData(!refreshData)
           }
