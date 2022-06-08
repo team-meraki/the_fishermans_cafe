@@ -39,19 +39,20 @@ function Footer(){
 
                     <Row className="cafe_info">
                         <Col className="cafe_hours">
-                            <h3>Cafe Hours <FontAwesomeIcon icon={ faClock }/></h3>
+                            <h3><b>Cafe Hours</b></h3>
                             <p>{cafeInfo?.schedule}</p>
                         </Col>
 
                         <Col className="cafe_loc">
-                            <h3>Location <FontAwesomeIcon icon={ faLocationPin }/></h3>
+                            <h3><b>Location</b></h3>
                             <p>{cafeInfo?.location}</p>
                         </Col>
 
                         <Col id='contact' className="cafe_contact">
-                            <h3>Contact us</h3>
-                            <p><a className="navigation-link" target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
-                            href={cafeInfo?.facebook}><FontAwesomeIcon icon={ faFacebook }/></a></p>
+                            <h3><b>Contact Us</b></h3>
+                            <p><a className="navigation-link" 
+                            target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
+                            href={cafeInfo?.facebook}><FontAwesomeIcon icon={ faFacebook }/></a>The Fisherman's Cafe</p>
                             <p><FontAwesomeIcon icon={ faPhone }/> {cafeInfo?.contact_number}</p>
                         </Col>
                     </Row>
