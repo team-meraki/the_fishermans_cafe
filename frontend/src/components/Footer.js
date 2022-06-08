@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-import { faClock, faLocationPin, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { Container, Row, Col } from 'react-bootstrap'
 import '../styles/Footer.scss';
 import BrandName from "../images/brand-name.svg"
@@ -50,9 +50,8 @@ function Footer(){
 
                         <Col id='contact' className="cafe_contact">
                             <h3><b>Contact Us</b></h3>
-                            <p><a className="navigation-link" 
-                            target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
-                            href={cafeInfo?.facebook}><FontAwesomeIcon icon={ faFacebook }/></a>The Fisherman's Cafe</p>
+                            <p><FontAwesomeIcon icon={ faFacebook }/><a target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
+                            href={cafeInfo?.facebook}> The Fisherman's Cafe</a></p>
                             <p><FontAwesomeIcon icon={ faPhone }/> {cafeInfo?.contact_number}</p>
                         </Col>
                     </Row>
