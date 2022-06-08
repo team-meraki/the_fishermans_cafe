@@ -45,7 +45,7 @@ export default function Reviews() {
                                         />
                                 </Row>
                                 <Row className="review-section-content">
-                                    <p>{featured.review?.message}</p>
+                                    <p className='d-flex justify-content-center'>{featured.review?.message}</p>
                                 </Row>  
                             </Container>
                         </Carousel.Item>
