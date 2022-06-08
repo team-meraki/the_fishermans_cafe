@@ -3,7 +3,16 @@
 .featured-products {
     background-color: $colorCream;
     padding: 60px 30px;
-    height: 100vh;
+    height: 205vh;
+
+    @media (min-width: 576px) { 
+        height: 85vh;
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        height: 90vh;;
+    }
 }
 .featured-products-title {
     text-align: center;

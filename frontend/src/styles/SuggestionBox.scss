@@ -1,53 +1,23 @@
 @import "./variables.scss";
 .suggestion-box-wrapper {
     background-color: rgba(38, 44, 54, 0.907);
-    padding-top: 60rem;
-
-    @media (min-width: 576px) { 
-        padding-top: 1rem;
-     }
-
-    // Medium devices (tablets, 768px and up)
-    @media (min-width: 768px) { 
-        padding-top: 1rem;
-    }
 }
+
 .suggestion-box {
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
 
-
-.suggestion-form {
-
-    .submit-btn {
-        justify-content: center;
-    }
-}
 .suggestion-box-row {
 
-    padding-left: 1rem;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
 
     .suggestion-box-title {
         font-size: 20px;
         font-weight: bold;
     }
-
-    @media (min-width: 576px) { 
-        padding-left: 5rem;
-     }
-
-    // Medium devices (tablets, 768px and up)
-    @media (min-width: 768px) { 
-        padding-left: 6rem;
-        padding-top: 2.5rem;
-    }
-
-    @media (min-width: 900px) { 
-        padding-left: 7rem;
-        padding-top: 2.5rem;
-    }
-
 
     h4 {
         font-size: 18px;
@@ -55,6 +25,15 @@
         text-align: center;
         color: $colorWhite;
         margin-bottom: 20px;
+    }
+
+    @media (min-width: 576px) { 
+        padding-top: 2.6rem;
+    }
+    
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        padding-top: 2.7rem;
     }
 }
 

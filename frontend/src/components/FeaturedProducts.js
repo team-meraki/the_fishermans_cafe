@@ -31,7 +31,7 @@ export default function FeaturedProducts() {
             <Row>   
                 {products.map((featured,index) => (
                     <Col xs={12} md={6} lg={3} key={index}>
-                        <Card>
+                        <Card className='mb-3'>
                         <div className='cardImgWrapper'>
                             <Card.Img className='img-content' variant="top" src={featured.product?.image} />
                         </div>

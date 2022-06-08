@@ -73,7 +73,7 @@ export default function SuggestionBox() {
                             sitekey={"6Le6R_YeAAAAAGYCegFq7rj-KX0iFThcV6Bsg8LI"}
                             onChange={handleRecaptcha}
                         />
-                        <div className='submit-btn'>
+                        <div className='submit-btn d-flex justify-content-center mt-2'>
                             { captchaResult && 
                                 (
                                 submitted ?
