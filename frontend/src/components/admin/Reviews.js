@@ -85,7 +85,6 @@ export default function Reviews(){
 
     const deleteCustomerReview = async (review_id) => {
         const response = await api.delete('/api/testimonial/' + review_id + '/');
-        console.log(response);
         return response;
     }
 
@@ -97,7 +96,6 @@ export default function Reviews(){
           }
         })
         .catch(error => {
-         console.log(error);
           if (error.request.status === 404) {
             toast.error('Review not found!', { autoClose: 2000, hideProgressBar: true });
           } else if (error.request.status === 400) {
@@ -114,7 +112,7 @@ export default function Reviews(){
         // all reviews
         fetchAllReviews()
         .then(response => {
-            if(mounted && loading) {
+            if(mounted) {
                 setTestimonial(response.data);
                 setLoading(false);
             }
@@ -156,7 +154,7 @@ export default function Reviews(){
                 loading===false ?
                 <>
                     <div className='content-wrapper'>
-                        <h6>You have <b>{Object.keys(featured).length}</b> customer reviews currently posted on the cafe website.</h6>
+                        <h6>You have <b>{featured.length}</b> customer reviews currently posted on the cafe website.</h6>
                     </div>
 
                 {/* TABLE */}
@@ -189,13 +187,13 @@ export default function Reviews(){
                                                     delay={{ show: 50, hide: 50 }}
                                                     overlay={renderTooltip("Unpost review")}
                                                     >
-                                                        <label class="switch">
-                                                            <input checked={true} type="checkbox" onClick={()=>unpostReview(testimonial.id)}/>
-                                                            <span class="slider"></span>
+                                                        <label className="switch">
+                                                            <input defaultChecked type="checkbox" onClick={()=>unpostReview(findReview(testimonial.id))}/>
+                                                            <span className="slider"></span>
                                                         </label>
                                                     </OverlayTrigger>
                                                 <Button className='not-allowed' variant="primary" type="button" disabled>
-                                                    <img src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
+                                                    <img alt="Delete Icon" src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
                                                 </Button>
                                                 </div>
                                                 :
@@ -206,9 +204,9 @@ export default function Reviews(){
                                                     delay={{ show: 50, hide: 50 }}
                                                     overlay={renderTooltip("Post review")}
                                                     >
-                                                        <label class="switch">
-                                                            <input checked={false} type="checkbox" onClick={()=>postReview(testimonial.id)}/>
-                                                            <span class="slider"></span>
+                                                        <label className="switch">
+                                                            <input type="checkbox" onChange={()=>postReview(testimonial.id)}/>
+                                                            <span className="slider"></span>
                                                         </label>
                                                     </OverlayTrigger>
                                                     <OverlayTrigger
@@ -217,7 +215,7 @@ export default function Reviews(){
                                                         overlay={renderTooltip("Remove forever")}
                                                     >
                                                         <Button variant="primary" type="button" onClick={()=>delReview(testimonial.id)}>
-                                                        <img src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
+                                                        <img alt="Delete Icon" src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
                                                         </Button>
                                                     </OverlayTrigger>
                                                 </div>

@@ -100,7 +100,7 @@ export default function AboutTheCafe() {
   let mounted = true
   fetchCafeInfo()
   .then(response => {
-    if (mounted && loading){
+    if (mounted){
       setEditedCafeInfo({
         schedule: response.data.schedule,
         location: response.data.location,
@@ -111,11 +111,12 @@ export default function AboutTheCafe() {
         table_accommodation: response.data.table_accommodation,
         delivery_info: response.data.delivery_info
       });
-      setLoading(false);
+      if(loading)
+        setLoading(false)
     }
   })
   .catch(error => {
-    toast.error('Failed to fetch Cafe Info.');
+    toast.error('Failed to fetch Cafe Info.', { autoClose: 2000, hideProgressBar: true });
   })
   return () => mounted = false
  },[refreshData])

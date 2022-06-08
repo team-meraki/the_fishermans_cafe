@@ -118,6 +118,7 @@ export default function AdminSettings() {
         toast.error("The two password fields didn't match.", { autoClose: 2000, hideProgressBar: true });
         setClicked(false);
       }
+      setPasswordChange(initialPasswordChange)
     }
   }
 
