@@ -1,14 +1,15 @@
 import React from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, OverlayTrigger } from 'react-bootstrap';
 import { useState, useEffect } from 'react'
 import SideNavbar from "./SideNavbar";
 import { ToastContainer, toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
-
+import { renderTooltip } from '../common'; 
 // css
 import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
-
+// icons
+import removeIcon from '../../icons/removeIcon.png'
 import useAxios from './utils/useAxios';
 import { getApi } from '../../adminAxios';
 
@@ -16,6 +17,7 @@ export default function Reviews(){
     const[testimonial, setTestimonial] = useState([]);
     const[featured, setFeatured] = useState([]);
     const[idsFeatured, setIdsFeatured] = useState([]);
+    
     
 
     // Getting all reviews
@@ -162,36 +164,65 @@ export default function Reviews(){
                 
                         <div className='tablewrapper'>
                             
-                            <Table responsive>
+                            <Table responsive id='reviews-tbl'>
                                 <thead>
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Message</th>
-                                        <th>Actions</th>
+                                        <th className='actions'>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {testimonial.map(testimonial => (
                                         <tr key = {testimonial.id}>
-                                            <td>{testimonial.name || '(Anonymous)' }</td>
+                                            <td >{testimonial.name || '(Anonymous)' }</td>
                                             <td>{testimonial.email}</td>
                                             <td>{testimonial.message}</td>
-                                            <td className=''> 
+                                            <td> 
                                             {
                                                 (idsFeatured.includes(testimonial.id)) ?
                                                 
-                                                <>
-                                                <Button className="btn btn-post" variant="outline-danger" onClick={()=>unpostReview(findReview(testimonial.id))}>Unpost</Button>
-                                                <Button className="btn btn-post" variant="outline-success" disabled>Delete</Button>
-                                                </>
+                                                <div className="btn-wrapper">
+                                                     <OverlayTrigger
+                                                    placement="bottom"
+                                                    delay={{ show: 50, hide: 50 }}
+                                                    overlay={renderTooltip("Unpost review")}
+                                                    >
+                                                        <label class="switch">
+                                                            <input checked={true} type="checkbox" onClick={()=>unpostReview(testimonial.id)}/>
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </OverlayTrigger>
+                                                <Button className='not-allowed' variant="primary" type="button" disabled>
+                                                    <img src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
+                                                </Button>
+                                                </div>
                                                 :
                                                 
-                                                <>
-                                                <Button className="btn btn-post" variant="outline-success" onClick={()=>postReview(testimonial.id)}>Post</Button>
-                                                <Button className="btn btn-post" variant="outline-success" onClick={()=>delReview(testimonial.id)}>Delete</Button>
-                                                </>
+                                                <div className="btn-wrapper">
+                                                    <OverlayTrigger
+                                                    placement="bottom"
+                                                    delay={{ show: 50, hide: 50 }}
+                                                    overlay={renderTooltip("Post review")}
+                                                    >
+                                                        <label class="switch">
+                                                            <input checked={false} type="checkbox" onClick={()=>postReview(testimonial.id)}/>
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </OverlayTrigger>
+                                                    <OverlayTrigger
+                                                        placement="bottom"
+                                                        delay={{ show: 50, hide: 200 }}
+                                                        overlay={renderTooltip("Remove forever")}
+                                                    >
+                                                        <Button variant="primary" type="button" onClick={()=>delReview(testimonial.id)}>
+                                                        <img src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
+                                                        </Button>
+                                                    </OverlayTrigger>
+                                                </div>
                                             }
+                                            
                                             </td>
                                         </tr>
                                     ))}
@@ -208,7 +239,7 @@ export default function Reviews(){
                       <ClipLoader color="#274B5F" size={80} />
                     </div>
                 }
-                 
+                
                    
                 
             </div>
