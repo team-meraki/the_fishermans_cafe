@@ -3,6 +3,8 @@
 a {
     text-decoration: none;
     color: $colorBrown;
+    display: flex;
+    justify-content: left;
 }
 
 h3 {
@@ -13,6 +15,7 @@ h3 {
 }
 
 p {
+    display: flex;
     font-size: 14px;
     color: $colorBrown;
     white-space: pre-wrap;
