@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Form, Modal, Table } from 'react-bootstrap';
+import { Button, Form, Modal, OverlayTrigger, Table } from 'react-bootstrap';
 import '../../styles/admin/Common.scss';
 import {formatDate} from '../common.js'
 import { toast } from 'react-toastify';
 import useAxios from './utils/useAxios';
 import PulseLoader from "react-spinners/PulseLoader";
-
+import { renderTooltip } from '../common'; 
 // icons & css
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -190,7 +190,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                         <th>Name</th>
                         <th>Price</th>
                         <th>Last Modified</th>
-                        <th>Action</th>
+                        <th className='actions'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -201,12 +201,31 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                             <td>{"Php " + product.price}</td>
                             <td>{formatDate(product.last_modified)}</td>
                             <td>
-                                <Button variant="primary "type="btn" 
-                                onClick={() => onClickDelBtn(product.id)}>
-                                <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> {" "}
+                                <OverlayTrigger
+                                    placement="bottom"
+                                    delay={{ show: 50, hide: 50 }}
+                                    overlay={renderTooltip("Edit")}
+                                >
+                                    <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product)}>
+                                     <img src= {editIcon} alt="Edit Icon" height="20"/>
+                                    </Button> 
+                                </OverlayTrigger>
+                                
+                                 {" "}
 
-                                <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product)}>
-                                <img src= {editIcon} alt="Edit Icon" height="20"/></Button> {" "}
+                                <OverlayTrigger
+                                    placement="bottom"
+                                    delay={{ show: 50, hide: 50 }}
+                                    overlay={renderTooltip("Delete")}
+                                >
+                                    <Button variant="primary "type="btn" 
+                                    onClick={() => onClickDelBtn(product.id)}>
+                                    <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
+                                </OverlayTrigger>
+                                
+                                {" "}
+
+                                
                             </td>
                         </tr>
                     ))}

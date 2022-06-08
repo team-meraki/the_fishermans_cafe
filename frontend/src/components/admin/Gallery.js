@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import SideNavbar from "./SideNavbar";
-import { Modal, Table } from 'react-bootstrap';
+import { Modal, OverlayTrigger, Table } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import {formatDate} from '../common.js'
+import {formatDate, renderTooltip} from '../common.js'
 import PulseLoader from "react-spinners/PulseLoader";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -190,9 +190,16 @@ export default function Gallery() {
                                 <td><img alt='galleryimg' className="img-content" src={gallery.image}/></td>
                                 <td>{formatDate(gallery.last_modified)}</td>
                                 <td>
-                                    <Button variant="primary "type="btn" 
-                                    onClick={() => onClickDelBtn(gallery.id)}>
-                                    <img src={deleteIcon} alt="Delete Icon" height="20"/></Button> {" "}
+                                  <OverlayTrigger
+                                      placement="bottom"
+                                      delay={{ show: 50, hide: 50 }}
+                                      overlay={renderTooltip("Delete")}
+                                  >
+                                      <Button variant="primary "type="btn" onClick={() => onClickDelBtn(gallery.id)}>
+                                        <img src={deleteIcon} alt="Delete Icon" height="20"/>
+                                      </Button> 
+                                  </OverlayTrigger>
+                                     {" "}
                                 </td>
                             </tr>
                     
