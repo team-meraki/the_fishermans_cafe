@@ -51,8 +51,8 @@ function Footer(){
                         <Col id='contact' className="cafe_contact">
                             <h3><b>Contact Us</b></h3>
                             <p><FontAwesomeIcon icon={ faFacebook }/><a target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
-                            href={cafeInfo?.facebook}> The Fisherman's Cafe</a></p>
-                            <p><FontAwesomeIcon icon={ faPhone }/> {cafeInfo?.contact_number}</p>
+                            href={cafeInfo?.facebook}><span>The Fisherman's Cafe</span></a></p>
+                            <p><FontAwesomeIcon icon={ faPhone }/><span>{cafeInfo?.contact_number}</span></p>
                         </Col>
                     </Row>
                 </Col>
