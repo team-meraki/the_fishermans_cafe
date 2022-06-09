@@ -9,7 +9,6 @@ import { renderTooltip } from '../common';
 import '../../styles/admin/Common.scss';
 import 'react-toastify/dist/ReactToastify.css';
 // icons
-import removeIcon from '../../icons/removeIcon.png'
 import useAxios from './utils/useAxios';
 import { getApi } from '../../adminAxios';
 
