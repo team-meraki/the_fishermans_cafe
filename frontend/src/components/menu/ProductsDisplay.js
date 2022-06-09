@@ -19,9 +19,9 @@ export default class ProductsDisplay extends Component {
                   <div className='menu-card-img-wrapper'>
                       <Card.Img className='menu-img' variant="top" src={product.image} />
                   </div>
-                  <div className='d-flex align-items-center'>
+                  <div>
                       <Card.Body>
-                          <Card.Text>
+                          <Card.Text className='mt-4 d-block align-items-center'>
                               <span className='product-name'>{product?.name}</span>
                               <br/>
                               <span className='product-price'>Php {product?.price}</span>
