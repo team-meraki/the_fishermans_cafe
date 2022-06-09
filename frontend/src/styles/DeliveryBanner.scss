@@ -1,23 +1,12 @@
 @import "./variables.scss";
 
 .deliverybanner-section {
-    width: 100%;
-    height: 25vh;
     
+    background-color: $colorOrange;
 
-    background-image: url(../images/banner-resized-foxcity-meraki.png);
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 100% 75%;
-
-    // Small screens (landscape phones)
-    @media (min-width: 576px) { 
-        height: 50vh;
-     }
-
-    // Medium devices (tablets, 768px and up)
-    @media (min-width: 768px) { 
-        height: 70vh;
+    .deliverybanner-img{
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 }
