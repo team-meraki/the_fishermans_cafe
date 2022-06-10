@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .about {
-  height: 50vh;
+  height: 80vh;
   background-image: url(../images/about-bg-img.jpg); /* fallback */
   background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.60)), url(../images/about-bg-img.jpg);
   background-size:cover;
@@ -10,12 +10,12 @@
 
   // Small screens (landscape phones)
   @media (min-width: 576px) { 
-    height: 80vh;
+    height: 100vh;
  }
 
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) { 
-    height: 100vh;
+    height: 120vh;
   }
 }
 
