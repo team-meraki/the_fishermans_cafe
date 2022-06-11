@@ -21,7 +21,7 @@ export default class ProductsDisplay extends Component {
                   </div>
                   <div>
                       <Card.Body>
-                          <Card.Text className='pt-1 d-block align-items-center'>
+                          <Card.Text className='d-flex flex-column align-items-center'>
                               <span className='product-name'>{product?.name}</span>
                               <br/>
                               <span className='product-price'>Php {product?.price}</span>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
 import '../styles/FeaturedProducts.scss';
 import { getApi } from '../adminAxios';
 
