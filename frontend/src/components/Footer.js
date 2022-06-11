@@ -28,7 +28,7 @@ function Footer(){
     return(
         <Container fluid className="mainfooter">
             <Row className="topfooter">
-                <Col sm={12} md={6} className="footer-col">
+                <Col sm={12} md={7} className="footer-col">
                     <Row className="cafe_name">   
                         <img
                             alt=""
@@ -58,7 +58,7 @@ function Footer(){
                 </Col>
                 
                 
-                <Col sm={12} md={6} className="footer-col-map">
+                <Col sm={12} md={5} className="footer-col-map">
                     <iframe className="map" allowFullScreen 
                     title="Map of The Fisherman's Cafe"
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA6KFP8N5jSy6JfjxYXPL2t5iZCqSqx2yw&q=place_id:ChIJYxm5QKGJqDMRLdh_A0crcdI&zoom=17&region=ph">

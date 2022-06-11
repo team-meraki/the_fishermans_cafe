@@ -24,6 +24,7 @@ import { AuthProvider } from './components/admin/context/AuthContext';
 import AdminSettings from './components/admin/Settings';
 import ForgotPassword from './components/admin/ForgotPassword';
 import ScrollToTop from './components/ScrolltoTop';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   return (
@@ -48,8 +49,7 @@ function App() {
                   <Route exact path="/admin/cafe" element={<AboutTheCafe/>}/>
                   <Route exact path="/admin/settings" element={<AdminSettings/>}></Route>
                   <Route exact path="/admin/reviews" element={<Reviews/>}></Route>
-              {/*<Route exact path="/admin/all-products" element={<><AllProducts/></>}/>
-              <Route exact path="/admin/all-gallery" element={<><AllGallery/></>}/>*/}
+                  <Route path="*" element={<PageNotFound/>} />
                 </Route>
               </Route>
           </Routes>

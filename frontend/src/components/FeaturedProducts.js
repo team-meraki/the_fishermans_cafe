@@ -35,11 +35,11 @@ export default function FeaturedProducts() {
                         <div>
                             <Card.Img className='featured-img' variant="top" src={featured.product?.image} />
                         </div>
-                            <Card.Body>
-                                <Card.Text className='featured-text'>{featured.product?.name}<br/>Php {featured.product?.price}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                        <Card.Body className="mt-2 d-block">
+                            <Card.Text className="mb-1">{featured.product?.name}</Card.Text>
+                            <Card.Text>Php {featured.product?.price}</Card.Text>
+                        </Card.Body>
+                    </Card>
 
                     </Col>
                 ))}

@@ -157,7 +157,7 @@ export default function Featured() {
         
         {/* FIRST FEATURED PRODUCT */}
         <Row>
-          <Col>
+          <Col xs={8} md={6}>
             <Form.Select
               className='featured-select'
               value={first ? first : ''}
@@ -170,7 +170,7 @@ export default function Featured() {
                 {!first && <option key={-1} value=''>----</option>}
               </Form.Select>
           </Col>
-          <Col>
+          <Col xs={4} md={6}>
           {
             clicked[1] ?
             <Button className='add-btn px-0' variant='warning' type="button" disabled>
@@ -185,7 +185,7 @@ export default function Featured() {
 
         {/* SECOND FEATURED PRODUCT */}
         <Row>
-          <Col>
+          <Col xs={8} md={6}>
             <Form.Select
               className='featured-select'
               value={second ? second : ''}
@@ -198,7 +198,7 @@ export default function Featured() {
               {!second && <option key={-1} value=''>----</option>}
             </Form.Select>
             </Col>
-          <Col>
+          <Col xs={4} md={6}>
           {
             clicked[2] ? 
                 <Button className='add-btn px-0' variant='warning' type="button" disabled>
@@ -213,7 +213,7 @@ export default function Featured() {
 
         {/* THIRD FEATURED PRODUCT */}
           <Row>
-          <Col>
+          <Col xs={8} md={6}>
             <Form.Select
               className='featured-select'
               value={third ? third : ''}
@@ -226,7 +226,7 @@ export default function Featured() {
               {!third && <option key={-1} value=''>----</option>}
             </Form.Select>
             </Col>
-          <Col>
+          <Col xs={4} md={6}>
           {
             clicked[3] ?
                 <Button className='add-btn px-0' variant='warning' type="button" disabled>
@@ -242,7 +242,7 @@ export default function Featured() {
 
         {/* FOURTH FEATURED PRODUCT */}
         <Row>
-          <Col>
+          <Col xs={8} md={6}>
             <Form.Select
               className='featured-select'
               value={fourth ? fourth : ''}
@@ -255,7 +255,7 @@ export default function Featured() {
               {!fourth && <option key={-1} value=''>----</option>}
             </Form.Select>
           </Col>
-          <Col>
+          <Col xs={4} md={6}>
             {
               clicked[4] ?
               <Button className='add-btn px-0' variant='warning' type="button" disabled>

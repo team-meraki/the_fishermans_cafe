@@ -149,10 +149,10 @@ export default function AllProducts() {
       <ToastContainer />
         {/* HEADER  */}
         <div className='d-flex justify-content-between header'>
-            <h2>All Products</h2>
+            <h2>Products</h2>
             <Button className='add-btn' type="button" variant='warning' onClick={handleAddShow}>
                 <span><img src={addIcon} alt="add icon"></img></span>
-                Add a new product
+                New product
             </Button>
         </div>
         <div className='content-wrapper'>

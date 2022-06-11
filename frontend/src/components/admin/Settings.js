@@ -147,7 +147,7 @@ export default function AdminSettings() {
      
       <div className='content-wrapper mt-5'>
         <Row>
-          <Col className='admin-col'>
+          <Col sm={12} md={6} className='admin-col mb-5'>
             <Row className='d-flex justify-content-center mb-1'>
               <h4 className='settings-header'>Admin Information</h4>
             </Row>

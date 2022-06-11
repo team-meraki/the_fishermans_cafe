@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link } from "react-router-dom";
-
+import { useLocation, NavLink, Link } from "react-router-dom";
 // styles 
 import '../../styles/admin/SideNavbar.scss';
 
@@ -18,7 +17,10 @@ import AuthContext from './context/AuthContext'
 
 // main 
 export default function SideNavbar() {
-  let { logoutUser } = useContext(AuthContext)
+  let { logoutUser } = useContext(AuthContext);
+  const location = useLocation();
+  const { pathname } = location;
+  const loc = pathname.split("/");
 
   const [isActive, setIsActive] = useState(false);
   const handleActive = () => {
@@ -36,30 +38,51 @@ export default function SideNavbar() {
           />{' '}
         </div>
         <hr className='h-line'></hr>
-        <ul>
-            <li>
-              <Link to="/admin/all-products" href="#">
-              <span><img src={productsIcon} alt="Products Icon"></img></span>
-               All Products</Link>
+        <ul id="options">
+            <li className={loc[1] === "admin/all-products" ? "active" : ""} id="products-tab">
+              <NavLink exact activeClassName="active" to="/admin/all-products" href="#">
+                <span><img src={productsIcon} alt="Products Icon"></img></span>
+                <span className='sidenav-name'>Products</span>
+              </NavLink>
             </li>
-            <li>
-              <Link to="/admin/featured"><span><img src={featuredIcon} alt="Featured Icon"></img></span>Featured Products</Link>
+            <li className={loc[1] === "admin/featured" ? "active" : ""} id="feat-prod-tab">
+              <NavLink activeClassName="active" to="/admin/featured">
+                <span><img src={featuredIcon} alt="Featured Icon"></img></span>
+                <span className='sidenav-name'>Featured Products</span>
+              </NavLink>
             </li>
-            <li>
-              <Link to="/admin/all-gallery"><span><img src={galleryIcon} alt="Gallery Icon"></img></span>Gallery</Link>
+            <li className={loc[1] === "admin/all-gallery" ? "active" : ""} id="gallery-tab">
+              <NavLink activeClassName="active" to="/admin/all-gallery">
+                <span><img src={galleryIcon} alt="Gallery Icon"></img></span>
+                <span className='sidenav-name'>Gallery</span>
+              </NavLink>
             </li>
-            <li>
-              <Link to="/admin/reviews"><span><img src={reviewsIcon} alt="Reviews Icon"></img></span>Reviews</Link>
+            <li className={loc[1] === "admin/reviews" ? "active" : ""} id="reviews-tab">
+              <NavLink activeClassName="active" to="/admin/reviews">
+                <span><img src={reviewsIcon} alt="Reviews Icon"></img></span>
+                <span className='sidenav-name'>Reviews</span>
+              </NavLink>
             </li>
-            <li>
-              <Link to="/admin/cafe"><span><img src={cafeIcon} alt="Cafe Icon"></img></span>About the cafe</Link>
+            <li className={loc[1] === "admin/cafe" ? "active" : ""} id="cafe-tab">
+              <NavLink activeClassName="active" to="/admin/cafe">
+                <span><img src={cafeIcon} alt="Cafe Icon"></img></span>
+                <span className='sidenav-name'>About the cafe</span>
+              </NavLink>
             </li>
+            <li className={loc[1] === "admin/settings" ? "active" : ""} id="settings-tab">
+              <NavLink activeClassName="active" to="/admin/settings">
+                <span><img src={settingsIcon} alt="Settings Icon"></img></span>
+                <span className='sidenav-name'>Settings</span>
+                </NavLink>
+            </li>
+            <li className="logout-btn">
+              <Link to="/admin" replace onClick={logoutUser}>
+                <span><img src={logoutIcon} alt="Logout Icon"></img></span>
+                <span className='sidenav-name'>Log out</span>
+              </Link>
+            </li>
+            
         </ul>
-        <ul className='mt-5'>
-          <li><Link to="/admin/settings"><span><img src={settingsIcon} alt="Settings Icon"></img></span>Settings</Link></li>
-          <li><Link to="/admin" replace onClick={logoutUser}><span><img src={logoutIcon} alt="Logout Icon"></img></span>Log out</Link></li>
-        </ul>
-
       </div>
     </div>
   )

@@ -7,15 +7,14 @@
 
 .main_content{
   width: auto;
-  margin-right: 15px;
-  margin-left: 110px;
-  
-
-  @media (min-width: 576px) { 
-    margin-left: 210px;
-  }
+  margin-right: 5px;
+  margin-left: 73px;
 
   // Medium devices (tablets, 768px and up)
+  @media (min-width: 576px) { 
+    margin-left: 90px;
+  }
+
   @media (min-width: 768px) { 
     margin-left: 260px;
     margin-right: 25px;
@@ -92,10 +91,10 @@
     background: rgb(255, 255, 255);
     table-layout: fixed;
     border-collapse: collapse;
+    overflow:hidden;
 }
 
 .table {
-
     display: flex;
     flex-flow: column;
     width: 100%;
@@ -132,16 +131,15 @@
       max-height: 65vh;
       word-break: break-word;
     }
-
 }
 
 .table tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: rgba(215, 215, 215, 0.298) !important;
+  background-color: rgba(226, 227, 227, 0.298) !important;
 }
 
 .admin-btn {
     color:rgba(0, 0, 0, 0.9) !important;
-  }
+}
   
 .admin-custom-btn {
   border: none !important;
@@ -194,7 +192,7 @@
 
 /* scroll bars */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 8px !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -326,8 +324,32 @@
     width: 18%;
 }
 
+
+#products-tbl tbody td:nth-child(1),
+#products-tbl thead>tr>th:nth-child(1){
+   width: 15%;
+}
+#products-tbl tbody td:nth-child(2),
+#products-tbl thead>tr>th:nth-child(2){
+   width: 30%;
+}
+#products-tbl tbody td:nth-child(3),
+#products-tbl thead>tr>th:nth-child(3){
+   width: 20%;
+}
+#products-tbl tbody td:nth-child(4),
+#products-tbl thead>tr>th:nth-child(4){
+   width: 20%;
+}
+#products-tbl tbody td:nth-child(5),
+#products-tbl thead>tr>th:nth-child(5){
+   width: 15%;
+}
+
+
+
 .actions{
-  padding-left: 25px !important;
+  padding-left: 60px !important;
 }
 
 // all ables
@@ -345,4 +367,37 @@ thead>tr>th {
 .not-allowed {
   cursor: not-allowed;
   pointer-events: all !important;
+}
+
+//logout
+.logout-btn{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+//page not found page
+.page-not-found{
+  height: 100vh;
+  margin-top: 8%;
+}
+
+.oops{
+  font-size: 3.5rem;
+}
+
+.page-not-found-img {
+  width: 30%;
+  height: 30%;
+}
+
+.category-dropdown .btn-info {
+  background-color: #66bb86 !important;
+  border: none !important;
+}
+
+.category-dropdown a.dropdown-item:visited,
+.category-dropdown a.dropdown-item:focus,
+.category-dropdown a.dropdown-item:active{
+  background-color: #407052 !important;
 }
