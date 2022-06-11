@@ -56,25 +56,33 @@
 }
 
 .login-wrapper {
- width: 500px;
  height: 100vh;
- margin-top: 6%;
  font-family: "Source Sans Pro", sans-serif;
 }
 
 .login-box {
+  padding: 20px;
   margin-top: 15%;
-  background-color: #e8e8e8;
-  box-shadow: 3px 3px 9px #c5c5c5,
-              -3px -3px 9px #ffffff !important;
-  padding: 50px;
+
+
+  @media (min-width: 576px) {
+    width: 500px;
+    padding: 50px;
+    margin-top: 15%;
+    background-color: #e8e8e8;
+    box-shadow: 3px 3px 9px #c5c5c5,
+                -3px -3px 9px #ffffff !important;
+  
+  }
+
+
+
 }
 
 .login-header {
   text-align: center;
-  
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .tablewrapper {
@@ -92,6 +100,7 @@
     flex-flow: column;
     width: 100%;
     border-collapse: collapse;
+    height: 70vh;
     
     .img-content {
         height: 45px;
@@ -126,8 +135,16 @@
 
 }
 
+.table tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgba(215, 215, 215, 0.298) !important;
+}
+
 .admin-btn {
     color:rgba(0, 0, 0, 0.9) !important;
+  }
+  
+.admin-custom-btn {
+  border: none !important;
 }
 
 .form-label {
@@ -210,6 +227,7 @@
  .btn-warning:active {
   background: #2f5e7b !important;
  }
+ 
  
  // login button
  .login-btn {

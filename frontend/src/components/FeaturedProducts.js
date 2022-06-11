@@ -35,7 +35,7 @@ export default function FeaturedProducts() {
                     <Col xs={12} md={6} lg={3} key={index}>
                         <Card className='mb-3'>
                         <div>
-                            <Card.Img className='img-content' variant="top" src={featured.product?.image} />
+                            <Card.Img className='featured-img' variant="top" src={featured.product?.image} />
                         </div>
                             <Card.Body>
                                 <Card.Text className='featured-text'>{featured.product?.name}<br/>Php {featured.product?.price}

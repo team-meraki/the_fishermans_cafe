@@ -59,7 +59,7 @@ export default function Login() {
       <Container className='login-wrapper d-flex flex-column align-items-center'>
 
       <Row className='login-box'>
-        <Row>
+        <Row classNamee="d-flex justify-content-center">
           <h5 className='login-header'>ADMIN LOGIN</h5>
         </Row>
         
@@ -81,15 +81,15 @@ export default function Login() {
             </Col>
           </Row>
 
-          <div className='d-flex justify-content-center'>
-            <Button variant="warning" className='mt-4 login-btn' type="submit" disabled={loading} >
+          <Row sm={12} className='d-flex justify-content-center px-5'>
+            <Button variant="warning" className='mt-4 login-btn d-flex justify-content-center align-items-center' type="submit" disabled={loading} >
               {  loading &&
-                      <Spinner className='mr-5' animation="border" size="sm" role="status">
+                      <Spinner className='mr-2' animation="border" size="sm" role="status">
                       </Spinner>
               }
-               Login
+              <span className={loading ? "" : "mr-3"}>{loading? "Signing in" : "Sign in"}</span>
             </Button>
-          </div>
+          </Row>
         
           
 

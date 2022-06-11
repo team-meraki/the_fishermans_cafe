@@ -203,7 +203,7 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                             <td>
                                 <OverlayTrigger
                                     placement="bottom"
-                                    delay={{ show: 50, hide: 50 }}
+                                    delay={{ show: 0, hide: 0 }}
                                     overlay={renderTooltip("Edit")}
                                 >
                                     <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product)}>
@@ -215,10 +215,10 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
 
                                 <OverlayTrigger
                                     placement="bottom"
-                                    delay={{ show: 50, hide: 50 }}
+                                    delay={{ show: 0, hide: 0 }}
                                     overlay={renderTooltip("Delete")}
                                 >
-                                    <Button variant="primary "type="btn" 
+                                    <Button className="admin-custom-btn" variant="primary "type="btn" 
                                     onClick={() => onClickDelBtn(product.id)}>
                                     <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
                                 </OverlayTrigger>

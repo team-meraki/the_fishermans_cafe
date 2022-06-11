@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { DropdownButton, Dropdown, Button, Modal, Form } from 'react-bootstrap'
+import { DropdownButton, Dropdown, Button, Modal, Form, Row, ButtonGroup } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
 import PulseLoader from "react-spinners/PulseLoader";
@@ -158,9 +158,11 @@ export default function AllProducts() {
         <div className='content-wrapper'>
           <div className='d-flex align-items-center mb-3'>
               <h6>Filter by Category: </h6>
-              <div>
+              {/* <Row fluid className='filter-wrapper'> */}
+              <ButtonGroup justified>
                 <DropdownButton 
-                  id="dropdown-basic-button" 
+                  id="dropdown-basic-button"
+                  className="category-dropdown"
                   title={value} 
                   variant='info'
                   size="sm"
@@ -171,7 +173,8 @@ export default function AllProducts() {
                   <Dropdown.Item eventKey="Desserts">Desserts</Dropdown.Item>
                   <Dropdown.Item eventKey="Drinks">Drinks</Dropdown.Item>
                 </DropdownButton>
-              </div>
+              {/* </Row> */}
+              </ButtonGroup>
             </div>
 
             {
