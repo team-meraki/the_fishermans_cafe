@@ -182,15 +182,15 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
     
 
       return (
-        <div className='tablewrapper'>
-            <Table responsive>
+        <div className="tablewrapper">
+            <Table id='products-tbl'>
                 <thead>
                     <tr>
                         <th>Image</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Last Modified</th>
-                        <th className='actions'>Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -203,10 +203,10 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                             <td>
                                 <OverlayTrigger
                                     placement="bottom"
-                                    delay={{ show: 50, hide: 50 }}
+                                    delay={{ show: 0, hide: 0 }}
                                     overlay={renderTooltip("Edit")}
                                 >
-                                    <Button variant="primary "type="btn" onClick={() => onClickEditBtn(product)}>
+                                    <Button className="admin-custom-btn" variant="primary "type="btn" onClick={() => onClickEditBtn(product)}>
                                      <img src= {editIcon} alt="Edit Icon" height="20"/>
                                     </Button> 
                                 </OverlayTrigger>
@@ -215,10 +215,10 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
 
                                 <OverlayTrigger
                                     placement="bottom"
-                                    delay={{ show: 50, hide: 50 }}
+                                    delay={{ show: 0, hide: 0 }}
                                     overlay={renderTooltip("Delete")}
                                 >
-                                    <Button variant="primary "type="btn" 
+                                    <Button className="admin-custom-btn" variant="primary "type="btn" 
                                     onClick={() => onClickDelBtn(product.id)}>
                                     <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
                                 </OverlayTrigger>

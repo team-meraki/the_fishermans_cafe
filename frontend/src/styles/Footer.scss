@@ -23,9 +23,14 @@ p {
 }
 
 .mainfooter {
-    padding: 3rem 5rem;
+    padding: 2rem 2rem;
     background-color: #fff;
     bottom:0;
+
+    @media (min-width: 576px) { 
+        padding: 3rem 5rem;
+    }
+
 }
 
 .topfooter .cafe_name {

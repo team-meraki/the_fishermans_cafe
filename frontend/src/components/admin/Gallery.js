@@ -164,7 +164,7 @@ export default function Gallery() {
             <h2>Gallery</h2>
             <Button className='add-btn' type="button" variant='warning' onClick={handleAddShow}>
                 <span><img src={addIcon} alt="Add Icon"></img></span>
-                Add a Photo
+                New photo
             </Button>
         </div>
 
@@ -195,7 +195,7 @@ export default function Gallery() {
                                       delay={{ show: 50, hide: 50 }}
                                       overlay={renderTooltip("Delete")}
                                   >
-                                      <Button variant="primary "type="btn" onClick={() => onClickDelBtn(gallery.id)}>
+                                      <Button className="admin-custom-btn" variant="primary "type="btn" onClick={() => onClickDelBtn(gallery.id)}>
                                         <img src={deleteIcon} alt="Delete Icon" height="20"/>
                                       </Button> 
                                   </OverlayTrigger>

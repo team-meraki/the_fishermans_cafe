@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // icons
 import useAxios from './utils/useAxios';
 import { getApi } from '../../adminAxios';
+import deleteIcon from '../../icons/delete.svg'
 
 export default function Reviews(){
     const[testimonial, setTestimonial] = useState([]);
@@ -161,7 +162,7 @@ export default function Reviews(){
                 
                         <div className='tablewrapper'>
                             
-                            <Table responsive id='reviews-tbl'>
+                            <Table id='reviews-tbl'>
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -191,9 +192,10 @@ export default function Reviews(){
                                                             <span className="slider"></span>
                                                         </label>
                                                     </OverlayTrigger>
-                                                <Button className='not-allowed' variant="primary" type="button" disabled>
-                                                    <img alt="Delete Icon" src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
-                                                </Button>
+                                                
+                                                    <Button className="not-allowed admin-custom-btn" variant="primary "type="btn" disabled>
+                                                        <img src={deleteIcon} alt="Delete Icon" height="20"/>
+                                                    </Button> 
                                                 </div>
                                                 :
                                                 
@@ -213,9 +215,13 @@ export default function Reviews(){
                                                         delay={{ show: 50, hide: 200 }}
                                                         overlay={renderTooltip("Remove forever")}
                                                     >
-                                                        <Button variant="primary" type="button" onClick={()=>delReview(testimonial.id)}>
+                                                        {/* <Button variant="primary" type="button" onClick={()=>delReview(testimonial.id)}>
                                                         <img alt="Delete Icon" src="https://img.icons8.com/glyph-neue/30/undefined/delete-forever.png"/>
-                                                        </Button>
+                                                        </Button> */}
+
+                                                        <Button className="admin-custom-btn" variant="primary "type="btn" onClick={()=>delReview(testimonial.id)}>
+                                                            <img src={deleteIcon} alt="Delete Icon" height="20"/>
+                                                        </Button> 
                                                     </OverlayTrigger>
                                                 </div>
                                             }

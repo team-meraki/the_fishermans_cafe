@@ -51,6 +51,10 @@ export default function Login() {
     navigate('/forgot-password')
   }
 
+  function onClickBack() {
+    navigate('/')
+  }
+
   return (
     user ? <Navigate to={from} replace/> :
     <div>
@@ -59,7 +63,7 @@ export default function Login() {
       <Container className='login-wrapper d-flex flex-column align-items-center'>
 
       <Row className='login-box'>
-        <Row>
+        <Row classNamee="d-flex justify-content-center">
           <h5 className='login-header'>ADMIN LOGIN</h5>
         </Row>
         
@@ -80,17 +84,22 @@ export default function Login() {
               <Button className='forgot-pass-title' variant="link" onClick={() => onClickToForgotPass()}>Forgot password?</Button>
             </Col>
           </Row>
-
-          <div className='d-flex justify-content-center'>
-            <Button variant="warning" className='mt-4 login-btn' type="submit" disabled={loading} >
-              {  loading &&
-                      <Spinner className='mr-5' animation="border" size="sm" role="status">
-                      </Spinner>
-              }
-               Login
-            </Button>
-          </div>
         
+
+          <Row sm={12} className='d-flex justify-content-center px-5'>
+            <Button variant="warning" className='mt-4 login-btn d-flex justify-content-center align-items-center' type="submit" disabled={loading} >
+              {  loading &&
+                  <Spinner className='mr-2' animation="border" size="sm" role="status">
+                  </Spinner>
+              }
+              <span className={loading ? "" : "mr-3"}>{loading? "Signing in" : "Sign in"}</span>
+            </Button>
+          </Row>
+            
+          
+          <Row className='mt-2 d-flex justify-content-center'>
+              <Button className='forgot-pass-title' variant="link" onClick={() => onClickBack()}>Back to the website</Button>
+          </Row>
           
 
         </Form>

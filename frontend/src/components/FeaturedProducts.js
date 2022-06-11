@@ -32,18 +32,20 @@ export default function FeaturedProducts() {
                 {products.map((featured,index) => (
                     <Col xs={12} md={6} lg={3} key={index}>
                         <Card className='mb-3'>
-                        <div className='cardImgWrapper'>
-                            <Card.Img className='img-content' variant="top" src={featured.product?.image} />
+                        <div>
+                            <Card.Img className='featured-img' variant="top" src={featured.product?.image} />
                         </div>
-                            <Card.Body>
-                                <Card.Text className='featured-text'>{featured.product?.name}<br/>Php {featured.product?.price}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                        <Card.Body className="mt-2 d-block">
+                            <Card.Text className="mb-1">{featured.product?.name}</Card.Text>
+                            <Card.Text>Php {featured.product?.price}</Card.Text>
+                        </Card.Body>
+                    </Card>
 
                     </Col>
                 ))}
             </Row>
+
+           
             
         </Container>
         </div>

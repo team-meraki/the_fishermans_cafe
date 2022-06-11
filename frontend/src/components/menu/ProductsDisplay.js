@@ -16,16 +16,17 @@ export default class ProductsDisplay extends Component {
             <Col md={6} xs={12} xxl={4} key={product?.id}>
               <Card className='menu-card-wrapper' data-testid='product-card'>
                 <div className='d-flex menu-product-card'>
+
                   <div className='menu-card-img-wrapper'>
                       <Card.Img className='menu-img' variant="top" src={product.image} />
                   </div>
+                  
                   <div>
                       <Card.Body>
-                          <Card.Text className='pt-1 d-block align-items-center'>
-                              <span className='product-name'>{product?.name}</span>
-                              <br/>
-                              <span className='product-price'>Php {product?.price}</span>
-                          </Card.Text>
+                        <div className='d-flex flex-column'>
+                          <Card.Text className='product-name'>{product?.name}</Card.Text>
+                          <Card.Text className='product-price'>Php {product?.price}</Card.Text>
+                        </div>
                       </Card.Body>
                   </div>
               

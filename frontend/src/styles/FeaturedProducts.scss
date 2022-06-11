@@ -22,9 +22,12 @@
     margin-top: 10px;
 }
 
-.cardImgWrapper .img-content {
-    height: 200px;
-    min-width: 200px;
-    width: 100%;
-    object-fit: cover;
+.featured-img {
+    height: 200px !important;
+    min-width: 100px !important;
+    object-fit: cover !important;
+}
+
+.cursive {
+    font-style: $Cursive;
 }
