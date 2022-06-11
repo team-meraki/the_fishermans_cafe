@@ -32,7 +32,7 @@ export default function Gallery() {
             {galleryImgs.map(img => (
                 <Col md={4} sm={6} xs={12} key={img?.id}>
                     <Card className='cardImgWrapper' data-testid='gallery-img'>
-                        <Card.Img className='img-content' variant="top" src={img.image} />
+                        <Card.Img className='gallery-img-cont' variant="top" src={img.image} />
                     </Card>
                     <br/>
                 </Col>

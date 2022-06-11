@@ -28,7 +28,7 @@ function Footer(){
     return(
         <Container fluid className="mainfooter">
             <Row className="topfooter">
-                <Col className="footer-col">
+                <Col sm={12} md={6} className="footer-col">
                     <Row className="cafe_name">   
                         <img
                             alt=""
@@ -38,7 +38,7 @@ function Footer(){
                     </Row>
 
                     <Row className="cafe_info">
-                        <Col className="cafe_hours">
+                        <Col xs={12} sm={4} className="cafe_hours">
                             <h3><b>Cafe Hours</b></h3>
                             <p>{cafeInfo?.schedule}</p>
                         </Col>
@@ -48,7 +48,7 @@ function Footer(){
                             <p>{cafeInfo?.location}</p>
                         </Col>
 
-                        <Col id='contact' className="cafe_contact">
+                        <Col xs={12} sm={4} id='contact' className="cafe_contact">
                             <h3><b>Contact Us</b></h3>
                             <p><FontAwesomeIcon icon={ faFacebook }/><a target={"_blank"} rel={"noreferrer"} data-testid='fb-link'
                             href={cafeInfo?.facebook}><span>The Fisherman's Cafe</span></a></p>
@@ -58,7 +58,7 @@ function Footer(){
                 </Col>
                 
                 
-                <Col className="footer-col-map">
+                <Col sm={12} md={6} className="footer-col-map">
                     <iframe className="map" allowFullScreen 
                     title="Map of The Fisherman's Cafe"
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA6KFP8N5jSy6JfjxYXPL2t5iZCqSqx2yw&q=place_id:ChIJYxm5QKGJqDMRLdh_A0crcdI&zoom=17&region=ph">

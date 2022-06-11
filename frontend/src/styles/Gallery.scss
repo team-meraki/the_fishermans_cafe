@@ -21,7 +21,7 @@
     overflow: hidden;
 }
 
-.cardImgWrapper .img-content {
+.cardImgWrapper .gallery-img-cont {
     height: 350px;
     min-width: 200px;
     width: 100%;
@@ -30,7 +30,7 @@
     transition: all .3s ease-in-out;
 }
 
-.cardImgWrapper:hover .img-content {
+.cardImgWrapper:hover .gallery-img-cont {
     --ms-transform: scale(1.2);
     --webkit-transform: scale(1.2);
     transform: scale(1.2);

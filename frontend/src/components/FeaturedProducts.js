@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 import '../styles/FeaturedProducts.scss';
 import { getApi } from '../adminAxios';
 
@@ -32,7 +34,7 @@ export default function FeaturedProducts() {
                 {products.map((featured,index) => (
                     <Col xs={12} md={6} lg={3} key={index}>
                         <Card className='mb-3'>
-                        <div className='cardImgWrapper'>
+                        <div>
                             <Card.Img className='img-content' variant="top" src={featured.product?.image} />
                         </div>
                             <Card.Body>
@@ -44,6 +46,8 @@ export default function FeaturedProducts() {
                     </Col>
                 ))}
             </Row>
+
+           
             
         </Container>
         </div>

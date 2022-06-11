@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Tab, Tabs, Button } from 'react-bootstrap'
+import { Container, Tab, Tabs, Button, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import ProductsDisplay from './ProductsDisplay'
@@ -54,7 +54,10 @@ export default function Menu() {
             </Tab>
           </Tabs>
           <div className="d-flex justify-content-center">
-            <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" data-testid='order-button' variant='light'><FontAwesomeIcon icon={ faCartShopping }/></Button>
+            <Row className="mb-2"><h2>Order here</h2></Row>
+            <Row>
+              <Button target={"_blank"} rel={"noreferrer"} href="https://play.google.com/store/apps/details?id=com.foxcity.foxcitycustomer&hl=en&gl=US" data-testid='order-button' variant='light'><FontAwesomeIcon icon={ faCartShopping }/></Button>
+            </Row>
           </div>
         </Container>
       </Container>
