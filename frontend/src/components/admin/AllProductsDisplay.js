@@ -215,11 +215,7 @@ export default function AllProductsDisplay ({products, IdsFeatured, refreshData,
 
                                 
 
-                                    <OverlayTrigger
-                                    placement="bottom"
-                                    delay={{ show: 0, hide: 0 }}
-                                    overlay={renderTooltip("Delete")}
-                                >   
+                                    
                                 {
                                     (IdsFeatured.includes(product.id)) ?
                                     <Button className="not-allowed admin-custom-btn" variant="primary "type="btn" disabled>
@@ -227,13 +223,17 @@ export default function AllProductsDisplay ({products, IdsFeatured, refreshData,
                                     </Button> 
 
                                     :
-
-                                    <Button className="admin-custom-btn" variant="primary "type="btn" 
-                                    onClick={() => onClickDelBtn(product.id)}>
-                                    <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
+                                    <OverlayTrigger
+                                        placement="bottom"
+                                        delay={{ show: 0, hide: 0 }}
+                                        overlay={renderTooltip("Delete")}
+                                    >  
+                                        <Button className="admin-custom-btn" variant="primary "type="btn" 
+                                        onClick={() => onClickDelBtn(product.id)}>
+                                        <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
                                     
+                                    </OverlayTrigger>
                                 }
-                                </OverlayTrigger>
                                 
                                 {" "}
 
