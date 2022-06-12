@@ -13,10 +13,6 @@ beforeEach( () => {
     )
 })
 
-it('renders admin products heading', () => {
-    expect(screen.getByRole('heading', {  name: /all products/i})).toBeInTheDocument()
-})
-
 it('renders admin product category filter', () => {
     expect(screen.getByRole('heading', {  name: /filter by category:/i})).toBeInTheDocument()
 })
@@ -41,5 +37,4 @@ it('renders admin product rows', async () => {
     expect(screen.getAllByRole('img', {  name: /product-img/i}).length).toBe(5)
     expect(screen.getAllByRole('button', {  name: /delete icon/i}).length).toBe(5) 
     expect(screen.getAllByRole('button', {  name: /edit icon/i}).length).toBe(5)
-    expect(screen.getByRole('button', {  name: /add icon add a new product/i})).toBeInTheDocument()
 })

@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start && npm run lite",
-    "build": "react-scripts build ",
+    "build": "CI=false && react-scripts build ",
     "cy:run": "cypress run",
     "test-e2e": "start-server-and-test start http://localhost:3000 cy:run",
     "test-ci": "npm test && npm run test-e2e",

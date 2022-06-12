@@ -49,8 +49,8 @@ function App() {
                   <Route exact path="/admin/cafe" element={<AboutTheCafe/>}/>
                   <Route exact path="/admin/settings" element={<AdminSettings/>}></Route>
                   <Route exact path="/admin/reviews" element={<Reviews/>}></Route>
-                  <Route path="*" element={<PageNotFound/>} />
                 </Route>
+                <Route path="*" element={<PageNotFound/>} />
               </Route>
           </Routes>
         </Router>

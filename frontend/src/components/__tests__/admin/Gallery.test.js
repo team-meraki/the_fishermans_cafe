@@ -30,5 +30,4 @@ it('renders admin gallery rows', async () => {
     expect(await screen.findByRole('cell', {  name: /4/i})).toBeInTheDocument()
     expect(screen.getAllByRole('img', {  name: /galleryimg/i}).length).toBe(4)
     expect(screen.getAllByRole('button', {  name: /delete icon/i}).length).toBe(4)
-    expect(screen.getByRole('button', {  name: /add icon add a photo/i})).toBeInTheDocument()
 })
