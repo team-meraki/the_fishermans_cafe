@@ -217,6 +217,9 @@ export default function AllProducts() {
 
             }
            
+           <div>
+              <small>Note: You cannot delete featured products. Replace the product first with another one, then try deleting again.</small>
+          </div>
 
         </div>
 

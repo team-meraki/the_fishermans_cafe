@@ -218,17 +218,18 @@ export default function AllProductsDisplay ({products, IdsFeatured, refreshData,
                                     
                                 {
                                     (IdsFeatured.includes(product.id)) ?
-                                    <Button className="not-allowed admin-custom-btn" variant="primary "type="btn" disabled>
+                                    <Button className="not-allowed admin-custom-btn" variant="primary" type="btn" disabled>
                                         <img src={deleteIcon} alt="Delete Icon" height="20"/>
-                                    </Button> 
+                                    </Button>
 
                                     :
+                                    
                                     <OverlayTrigger
                                         placement="bottom"
                                         delay={{ show: 0, hide: 0 }}
                                         overlay={renderTooltip("Delete")}
                                     >  
-                                        <Button className="admin-custom-btn" variant="primary "type="btn" 
+                                        <Button className="admin-custom-btn" variant="primary" type="btn" 
                                         onClick={() => onClickDelBtn(product.id)}>
                                         <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
                                     
