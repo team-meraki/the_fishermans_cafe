@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import deleteIcon from '../../icons/delete.svg'
 import editIcon from '../../icons/edit.svg'
 
-export default function AllProductsDisplay ({products, refreshData, setRefreshData}) {
+export default function AllProductsDisplay ({products, IdsFeatured, refreshData, setRefreshData}) {
     const [clicked, setClicked] = useState(false);
     const initialData = Object.freeze({
         id: "",
@@ -213,14 +213,26 @@ export default function AllProductsDisplay ({products, refreshData, setRefreshDa
                                 
                                  {" "}
 
-                                <OverlayTrigger
+                                
+
+                                    <OverlayTrigger
                                     placement="bottom"
                                     delay={{ show: 0, hide: 0 }}
                                     overlay={renderTooltip("Delete")}
-                                >
+                                >   
+                                {
+                                    (IdsFeatured.includes(product.id)) ?
+                                    <Button className="not-allowed admin-custom-btn" variant="primary "type="btn" disabled>
+                                        <img src={deleteIcon} alt="Delete Icon" height="20"/>
+                                    </Button> 
+
+                                    :
+
                                     <Button className="admin-custom-btn" variant="primary "type="btn" 
                                     onClick={() => onClickDelBtn(product.id)}>
                                     <img src= {deleteIcon} alt="Delete Icon" height="20"/></Button> 
+                                    
+                                }
                                 </OverlayTrigger>
                                 
                                 {" "}

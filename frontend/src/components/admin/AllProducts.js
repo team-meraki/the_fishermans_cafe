@@ -39,6 +39,12 @@ export default function AllProducts() {
     return response
   }
 
+  const [IdsFeatured, setIdsFeatured] = useState([])
+  async function fetchAllFeaturedProducts() {
+    const response = await getApi('api/featured-product/')
+    return response
+  }
+
   // ADD MODAL HANDLER
   const [addShow, setAddShow] = useState(false);
   const handleAddClose = () => {
@@ -74,7 +80,8 @@ export default function AllProducts() {
     const addProduct = async (product) => {
       
       let form_data = new FormData();
-        form_data.append("image", product.image, product.image.name);
+        if(product.image)
+          form_data.append("image", product.image, product.image.name);
         form_data.append("name", product.name);
         form_data.append("price", product.price);
         form_data.append("category", product.category);
@@ -91,7 +98,6 @@ export default function AllProducts() {
     
     // POST API
     async function addNewProduct() {
-      //console.log(clicked)
       if (clicked===false) {
         setClicked(true);
         addProduct(newProduct)
@@ -139,6 +145,18 @@ export default function AllProducts() {
         toast.error('Failed to fetch all Products.', { autoClose: 2000, hideProgressBar: true });
       })
 
+      fetchAllFeaturedProducts()
+      .then(response => {
+        if(mounted) {
+          setIdsFeatured(response.data.map(featured => featured.product_id));
+          if(loading)
+            setLoading(false)
+        }
+    })
+    .catch(error => {
+      toast.error('Failed to fetch all Featured Products.', { autoClose: 2000, hideProgressBar: true });
+    })
+
       return () => mounted = false
     }, [refreshData])
 
@@ -159,7 +177,7 @@ export default function AllProducts() {
           <div className='d-flex align-items-center mb-3'>
               <h6>Filter by Category: </h6>
               {/* <Row fluid className='filter-wrapper'> */}
-              <ButtonGroup justified>
+              <ButtonGroup>
                 <DropdownButton 
                   id="dropdown-basic-button"
                   className="category-dropdown"
@@ -192,6 +210,7 @@ export default function AllProducts() {
                 (value === 'Meals' ? meals : 
                 (value === 'Desserts' ? desserts : drinks))
               }
+              IdsFeatured={IdsFeatured}
               refreshData={refreshData} 
               setRefreshData={setRefreshData}
               />

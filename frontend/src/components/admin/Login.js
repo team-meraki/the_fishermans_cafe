@@ -63,7 +63,7 @@ export default function Login() {
       <Container className='login-wrapper d-flex flex-column align-items-center'>
 
       <Row className='login-box'>
-        <Row classNamee="d-flex justify-content-center">
+        <Row className="d-flex justify-content-center">
           <h5 className='login-header'>ADMIN LOGIN</h5>
         </Row>
         
