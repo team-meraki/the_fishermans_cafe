@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useLocation, NavLink, Link } from "react-router-dom";
 // styles 
 import '../../styles/admin/SideNavbar.scss';
@@ -22,11 +22,6 @@ export default function SideNavbar() {
   const { pathname } = location;
   const loc = pathname.split("/");
 
-  const [isActive, setIsActive] = useState(false);
-  const handleActive = () => {
-    setIsActive(true);
-  }
-
   return (
     <div className="wrapper">
       <div className="sidebar">
@@ -40,37 +35,37 @@ export default function SideNavbar() {
         <hr className='h-line'></hr>
         <ul id="options">
             <li className={loc[1] === "admin/all-products" ? "active" : ""} id="products-tab">
-              <NavLink exact activeClassName="active" to="/admin/all-products" href="#">
+              <NavLink className="isActive" to="/admin/all-products">
                 <span><img src={productsIcon} alt="Products Icon"></img></span>
                 <span className='sidenav-name'>Products</span>
               </NavLink>
             </li>
             <li className={loc[1] === "admin/featured" ? "active" : ""} id="feat-prod-tab">
-              <NavLink activeClassName="active" to="/admin/featured">
+              <NavLink className="isActive" to="/admin/featured">
                 <span><img src={featuredIcon} alt="Featured Icon"></img></span>
                 <span className='sidenav-name'>Featured Products</span>
               </NavLink>
             </li>
             <li className={loc[1] === "admin/all-gallery" ? "active" : ""} id="gallery-tab">
-              <NavLink activeClassName="active" to="/admin/all-gallery">
+              <NavLink className="isActive" to="/admin/all-gallery">
                 <span><img src={galleryIcon} alt="Gallery Icon"></img></span>
                 <span className='sidenav-name'>Gallery</span>
               </NavLink>
             </li>
             <li className={loc[1] === "admin/reviews" ? "active" : ""} id="reviews-tab">
-              <NavLink activeClassName="active" to="/admin/reviews">
+              <NavLink className="isActive" to="/admin/reviews">
                 <span><img src={reviewsIcon} alt="Reviews Icon"></img></span>
                 <span className='sidenav-name'>Reviews</span>
               </NavLink>
             </li>
             <li className={loc[1] === "admin/cafe" ? "active" : ""} id="cafe-tab">
-              <NavLink activeClassName="active" to="/admin/cafe">
+              <NavLink className="isActive" to="/admin/cafe">
                 <span><img src={cafeIcon} alt="Cafe Icon"></img></span>
                 <span className='sidenav-name'>About the cafe</span>
               </NavLink>
             </li>
             <li className={loc[1] === "admin/settings" ? "active" : ""} id="settings-tab">
-              <NavLink activeClassName="active" to="/admin/settings">
+              <NavLink className="isActive" to="/admin/settings">
                 <span><img src={settingsIcon} alt="Settings Icon"></img></span>
                 <span className='sidenav-name'>Settings</span>
                 </NavLink>
