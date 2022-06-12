@@ -95,7 +95,7 @@ export default function AdminSettings() {
           })
           .then(response => {
             if (response.status === 200){
-              setCredentials(initialPasswordChange);
+              setCredentials(initialCredentials);
               toast.success('Successfully changed Password!', { autoClose: 2000, hideProgressBar: true });
             }
           })

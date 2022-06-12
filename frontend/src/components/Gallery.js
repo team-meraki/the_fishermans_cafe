@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Carousel, Col, Container, Row } from 'react-bootstrap'
+import { Carousel, Container, Row } from 'react-bootstrap'
 import '../styles/Gallery.scss';
 import { getApi } from '../adminAxios';
 
@@ -34,7 +34,7 @@ export default function Gallery() {
                     key={img?.id}
                     interval={5000}>
                         <img
-                            alt="the fishermasn cafe photo"
+                            alt="the fishermans cafe"
                             src={img.image}
                         />
                     </Carousel.Item>

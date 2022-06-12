@@ -10,6 +10,6 @@ it('renders gallery heading', () => {
 })
 
 it('renders review instances from customers', async () => {
-    const images = await screen.findAllByTestId('gallery-img')
+    const images = await screen.findAllByAltText(/the fishermans cafe/i)
     expect(images.length).toBe(4)
 })
