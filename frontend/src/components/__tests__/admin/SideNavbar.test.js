@@ -19,15 +19,10 @@ it('renders admin sidenavbar header', () => {
 
 it('renders admin sidenavbar links', () => {
     expect(screen.getByRole('img', {  name: /products icon/i})).toBeInTheDocument()
-    expect(screen.getByRole('link', {  name: /products icon all products/i})).toBeInTheDocument()
     expect(screen.getByRole('img', {  name: /featured icon/i})).toBeInTheDocument()
-    expect(screen.getByRole('link', {  name: /featured icon featured/i})).toBeInTheDocument()
     expect(screen.getByRole('img', {  name: /gallery icon/i})).toBeInTheDocument()
-    expect(screen.getByRole('link', {  name: /gallery icon gallery/i})).toBeInTheDocument()
     expect(screen.getByRole('img', {  name: /cafe icon/i})).toBeInTheDocument()
-    expect(screen.getByRole('link', {  name: /cafe icon about the cafe/i})).toBeInTheDocument()
     expect(screen.getByRole('img', {  name: /settings icon/i})).toBeInTheDocument()
-    expect(screen.getByRole('link', {  name: /reviews icon reviews/i})).toBeInTheDocument()
 })
 
 it('renders admin sidenavbar footer', () => {
