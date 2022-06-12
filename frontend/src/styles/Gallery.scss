@@ -35,3 +35,22 @@
     --webkit-transform: scale(1.2);
     transform: scale(1.2);
 }
+
+.gallery-carousel{
+    overflow: hidden;
+    img {
+        height: 30vh;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    @media (min-width: 764px){
+        img {
+            height: 80vh;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+}
+
