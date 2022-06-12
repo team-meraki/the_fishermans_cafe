@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Container, Row } from 'react-bootstrap'
+import { Card, Carousel, Col, Container, Row } from 'react-bootstrap'
 import '../styles/Gallery.scss';
 import { getApi } from '../adminAxios';
 
@@ -24,19 +24,23 @@ export default function Gallery() {
 
     return (
 
-    <Container fluid className='gallery-wrapper'>
+    <Container fluid className='gallery-wrapper mb-5'>
         <Container className='justify-content-center'>
             <h1 className='gallery-title'>Explore our space</h1>
-            <Row>
 
-            {galleryImgs.map(img => (
-                <Col md={4} sm={6} xs={12} key={img?.id}>
-                    <Card className='cardImgWrapper' data-testid='gallery-img'>
-                        <Card.Img className='gallery-img-cont' variant="top" src={img.image} />
-                    </Card>
-                    <br/>
-                </Col>
-            ))}
+            <Carousel className='gallery-carousel'>
+                {galleryImgs.map(img => (   
+                    <Carousel.Item 
+                    key={img?.id}
+                    interval={5000}>
+                        <img
+                            alt="the fishermasn cafe photo"
+                            src={img.image}
+                        />
+                    </Carousel.Item>
+                ))}
+            </Carousel>
+            <Row>
 
             </Row>
         </Container>
